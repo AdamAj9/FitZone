@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "FitZone",
+    "tagline": "Your gym, online"
+  },
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "coaches": "Coaches",
+    "plans": "Plans",
+    "login": "Login",
+    "register": "Sign up",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": "Welcome to FitZone",
+    "subtitle": "Book your classes, track your progress, and enjoy all our facilities."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred"
+  }
+}

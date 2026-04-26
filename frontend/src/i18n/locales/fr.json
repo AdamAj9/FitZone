@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "FitZone",
+    "tagline": "Votre salle de sport, en ligne"
+  },
+  "nav": {
+    "home": "Accueil",
+    "courses": "Cours",
+    "coaches": "Coachs",
+    "plans": "Abonnements",
+    "login": "Connexion",
+    "register": "Inscription",
+    "dashboard": "Tableau de bord",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "hero": "Bienvenue chez FitZone",
+    "subtitle": "Réservez vos cours, suivez votre progression, et profitez de toutes nos installations."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue"
+  }
+}
