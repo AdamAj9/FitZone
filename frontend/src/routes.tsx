@@ -4,7 +4,10 @@ import { AppLayout } from "./components/layout/AppLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
+import { CheckoutCancelPage } from "./pages/member/CheckoutCancelPage";
+import { CheckoutSuccessPage } from "./pages/member/CheckoutSuccessPage";
 import { DashboardPage } from "./pages/member/DashboardPage";
+import { MyPaymentsPage } from "./pages/member/MyPaymentsPage";
 import { MySubscriptionPage } from "./pages/member/MySubscriptionPage";
 import { ProfilePage } from "./pages/member/ProfilePage";
 import { CoachDetailPage } from "./pages/public/CoachDetailPage";
@@ -35,6 +38,9 @@ export const router = createBrowserRouter([
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/profile", element: <ProfilePage /> },
           { path: "/my-subscription", element: <MySubscriptionPage /> },
+          { path: "/my-payments", element: <MyPaymentsPage /> },
+          { path: "/checkout/success", element: <CheckoutSuccessPage /> },
+          { path: "/checkout/cancel", element: <CheckoutCancelPage /> },
         ],
       },
       { path: "*", element: <NotFoundPage /> },

@@ -39,10 +39,15 @@ export function DashboardPage() {
             Gérer mes informations personnelles
           </p>
         </Link>
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
-          <h2 className="font-semibold text-slate-900">Mes cours</h2>
-          <p className="mt-1 text-sm text-slate-500">À venir (Phase 6)</p>
-        </div>
+        <Link
+          to="/my-payments"
+          className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+        >
+          <h2 className="font-semibold text-slate-900">Mes paiements</h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Historique des transactions Stripe
+          </p>
+        </Link>
         <Link
           to="/my-subscription"
           className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
