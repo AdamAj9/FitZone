@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
 import { DashboardPage } from "./pages/member/DashboardPage";
+import { MySubscriptionPage } from "./pages/member/MySubscriptionPage";
 import { ProfilePage } from "./pages/member/ProfilePage";
 import { CoachDetailPage } from "./pages/public/CoachDetailPage";
 import { CoachesListPage } from "./pages/public/CoachesListPage";
@@ -12,8 +13,8 @@ import { CourseDetailPage } from "./pages/public/CourseDetailPage";
 import { CoursesListPage } from "./pages/public/CoursesListPage";
 import { HomePage } from "./pages/public/HomePage";
 import { NotFoundPage } from "./pages/public/NotFoundPage";
-import { Placeholder } from "./pages/public/Placeholder";
 import { PlanningPage } from "./pages/public/PlanningPage";
+import { PlansPage } from "./pages/public/PlansPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
       { path: "/planning", element: <PlanningPage /> },
       { path: "/coaches", element: <CoachesListPage /> },
       { path: "/coaches/:id", element: <CoachDetailPage /> },
-      { path: "/plans", element: <Placeholder title="Abonnements / Plans" /> },
+      { path: "/plans", element: <PlansPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/profile", element: <ProfilePage /> },
+          { path: "/my-subscription", element: <MySubscriptionPage /> },
         ],
       },
       { path: "*", element: <NotFoundPage /> },

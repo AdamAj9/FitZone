@@ -14,6 +14,7 @@ api_patterns = [
     path("auth/", include("apps.users.urls")),
     path("", include("apps.courses.urls")),
     path("", include("apps.sessions_app.urls")),
+    path("", include("apps.subscriptions.urls")),
 ]
 
 urlpatterns = [

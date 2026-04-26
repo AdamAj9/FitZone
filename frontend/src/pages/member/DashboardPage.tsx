@@ -1,13 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
+import { subscriptionsApi } from "../../api/subscriptions";
 import { useMe } from "../../hooks/useAuth";
 
 export function DashboardPage() {
   const { data: user, isLoading } = useMe();
+  const subQuery = useQuery({
+    queryKey: ["subscription-current"],
+    queryFn: () => subscriptionsApi.current(),
+    enabled: Boolean(user),
+  });
 
   if (isLoading || !user) {
     return <p className="text-slate-500">Chargement...</p>;
   }
+
+  const sub = subQuery.data?.subscription ?? null;
 
   return (
     <div className="space-y-6">
@@ -34,10 +43,21 @@ export function DashboardPage() {
           <h2 className="font-semibold text-slate-900">Mes cours</h2>
           <p className="mt-1 text-sm text-slate-500">À venir (Phase 6)</p>
         </div>
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
+        <Link
+          to="/my-subscription"
+          className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+        >
           <h2 className="font-semibold text-slate-900">Mon abonnement</h2>
-          <p className="mt-1 text-sm text-slate-500">À venir (Phase 4)</p>
-        </div>
+          {sub ? (
+            <p className="mt-1 text-sm text-slate-500">
+              {sub.plan.name} · {sub.days_remaining} jours restants
+            </p>
+          ) : (
+            <p className="mt-1 text-sm text-slate-500">
+              Aucun abonnement actif
+            </p>
+          )}
+        </Link>
       </div>
     </div>
   );
