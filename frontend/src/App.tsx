@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 
+import { AuthHydrator } from "./components/AuthHydrator";
 import "./i18n";
 import { router } from "./routes";
 
@@ -17,6 +18,7 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <AuthHydrator />
       <RouterProvider router={router} />
     </QueryClientProvider>
   );

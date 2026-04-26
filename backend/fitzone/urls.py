@@ -11,8 +11,7 @@ from drf_spectacular.views import (
 )
 
 api_patterns = [
-    # Auth and per-app routers will be wired up in Phase 1+
-    # path("auth/", include("apps.users.urls")),
+    path("auth/", include("apps.users.urls")),
     # path("courses/", include("apps.courses.urls")),
 ]
 

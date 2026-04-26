@@ -1,20 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Role = "member" | "coach" | "admin";
+import type { User } from "../types/auth";
 
-export interface AuthUser {
-  id: number;
-  email: string;
-  username: string;
-  role: Role;
-}
+export type { Role } from "../types/auth";
 
 interface AuthState {
-  user: AuthUser | null;
+  user: User | null;
   accessToken: string | null;
   refreshToken: string | null;
-  setUser: (user: AuthUser | null) => void;
+  setUser: (user: User | null) => void;
+  setAuth: (user: User, access: string, refresh: string) => void;
   setTokens: (access: string, refresh: string) => void;
   logout: () => void;
 }
@@ -26,6 +22,8 @@ export const useAuthStore = create<AuthState>()(
       accessToken: null,
       refreshToken: null,
       setUser: (user) => set({ user }),
+      setAuth: (user, access, refresh) =>
+        set({ user, accessToken: access, refreshToken: refresh }),
       setTokens: (access, refresh) =>
         set({ accessToken: access, refreshToken: refresh }),
       logout: () =>

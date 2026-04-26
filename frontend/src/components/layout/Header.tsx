@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
+import { useLogout } from "../../hooks/useAuth";
 import { useAuthStore } from "../../store/auth";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -12,11 +13,18 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function Header() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
-  const logout = useAuthStore((s) => s.logout);
+  const logoutMutation = useLogout();
 
   const toggleLang = () => {
     void i18n.changeLanguage(i18n.language.startsWith("fr") ? "en" : "fr");
+  };
+
+  const handleLogout = () => {
+    logoutMutation.mutate(undefined, {
+      onSettled: () => navigate("/", { replace: true }),
+    });
   };
 
   return (
@@ -56,8 +64,9 @@ export function Header() {
               </NavLink>
               <button
                 type="button"
-                onClick={logout}
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+                onClick={handleLogout}
+                disabled={logoutMutation.isPending}
+                className="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 disabled:opacity-50"
               >
                 {t("nav.logout")}
               </button>
