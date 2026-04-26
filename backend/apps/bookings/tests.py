@@ -284,6 +284,135 @@ class BookingApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class StatsAndRecommendationsTests(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.cat_yoga = Category.objects.create(name="Yoga")
+        cls.cat_tennis = Category.objects.create(name="Tennis")
+        cls.cat_fitness = Category.objects.create(name="Fitness")
+        cls.course_yoga = Course.objects.create(
+            title="Yoga Vinyasa",
+            category=cls.cat_yoga,
+            level=Course.Level.BEGINNER,
+            capacity=10,
+        )
+        cls.course_tennis = Course.objects.create(
+            title="Tennis", category=cls.cat_tennis, capacity=4
+        )
+        cls.course_fitness = Course.objects.create(
+            title="Fitness", category=cls.cat_fitness, capacity=10
+        )
+        cls.room = Room.objects.create(name="A")
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email=f"u{self.id()}@e.com", password="Strong-Pass-123!"
+        )
+        _make_premium_sub_for(self.user)
+
+    _room_counter = 0
+
+    def _make_past_booking(self, course):
+        type(self)._room_counter += 1
+        starts = timezone.now() - timedelta(days=3)
+        session = CourseSession.objects.create(
+            course=course,
+            room=Room.objects.create(
+                name=f"R-past-{course.id}-{type(self)._room_counter}"
+            ),
+            starts_at=starts,
+            ends_at=starts + timedelta(hours=1),
+            capacity=10,
+        )
+        return Booking.objects.create(
+            user=self.user,
+            course_session=session,
+            channel=Booking.Channel.SUBSCRIPTION,
+            status=Booking.Status.CONFIRMED,
+        )
+
+    def test_stats_with_no_history(self):
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("me-stats"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["total_attended"], 0)
+        self.assertIsNone(response.data["favorite_category"])
+        self.assertIsNone(response.data["next_booking"])
+
+    def test_stats_aggregates_history(self):
+        self._make_past_booking(self.course_yoga)
+        self._make_past_booking(self.course_yoga)
+        self._make_past_booking(self.course_tennis)
+        future_session = _future_session(self.course_fitness, self.room)
+        services.book(user=self.user, course_session_id=future_session.id)
+
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("me-stats"))
+        self.assertEqual(response.data["total_attended"], 3)
+        self.assertEqual(response.data["upcoming_count"], 1)
+        self.assertEqual(response.data["favorite_category"], "Yoga")
+        self.assertEqual(
+            response.data["category_breakdown"][0]["category"], "Yoga"
+        )
+        self.assertEqual(response.data["next_booking"]["course_id"], self.course_fitness.id)
+
+    def test_recommendations_use_history_categories(self):
+        self._make_past_booking(self.course_yoga)
+        future = _future_session(self.course_yoga, self.room)
+        _future_session(self.course_tennis, Room.objects.create(name="B"))
+
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("me-recommendations"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        slugs = [r["course_slug"] for r in response.data["results"]]
+        self.assertIn(self.course_yoga.slug, slugs)
+        self.assertIn("yoga", response.data["based_on"]["history_categories"])
+
+    def test_recommendations_excludes_already_booked(self):
+        future = _future_session(self.course_yoga, self.room)
+        services.book(user=self.user, course_session_id=future.id)
+        _future_session(self.course_tennis, Room.objects.create(name="B"))
+
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("me-recommendations"))
+        ids = [r["id"] for r in response.data["results"]]
+        self.assertNotIn(future.id, ids)
+
+    def test_recommendations_fallback_when_no_history(self):
+        _future_session(self.course_yoga, self.room)
+        _future_session(self.course_tennis, Room.objects.create(name="B"))
+
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("me-recommendations"))
+        self.assertGreater(len(response.data["results"]), 0)
+        self.assertEqual(response.data["based_on"]["history_categories"], [])
+
+
+class QuestionnaireTests(APITestCase):
+    def test_questionnaire_marks_profile_completed(self):
+        user = User.objects.create_user(
+            email="q@e.com", password="Strong-Pass-123!"
+        )
+        Category.objects.create(name="Yoga")
+        Category.objects.create(name="Tennis")
+        self.client.force_authenticate(user)
+        response = self.client.patch(
+            reverse("auth-questionnaire"),
+            {
+                "level": "intermediate",
+                "goals": "Lose weight, improve flexibility",
+                "favorite_categories": ["yoga", "tennis"],
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["level"], "intermediate")
+        self.assertTrue(response.data["questionnaire_completed"])
+        self.assertEqual(
+            response.data["preferences"]["categories"], ["yoga", "tennis"]
+        )
+
+
 class SessionsSeatsAnnotationTests(APITestCase):
     """Confirm the Phase 3 placeholder is now wired: seats_taken on the
     public sessions endpoint reflects confirmed bookings."""

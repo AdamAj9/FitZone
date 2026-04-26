@@ -11,6 +11,7 @@ import { MyBookingsPage } from "./pages/member/MyBookingsPage";
 import { MyPaymentsPage } from "./pages/member/MyPaymentsPage";
 import { MySubscriptionPage } from "./pages/member/MySubscriptionPage";
 import { ProfilePage } from "./pages/member/ProfilePage";
+import { QuestionnairePage } from "./pages/member/QuestionnairePage";
 import { CoachDetailPage } from "./pages/public/CoachDetailPage";
 import { CoachesListPage } from "./pages/public/CoachesListPage";
 import { CourseDetailPage } from "./pages/public/CourseDetailPage";
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/profile", element: <ProfilePage /> },
+          { path: "/questionnaire", element: <QuestionnairePage /> },
           { path: "/my-subscription", element: <MySubscriptionPage /> },
           { path: "/my-bookings", element: <MyBookingsPage /> },
           { path: "/my-payments", element: <MyPaymentsPage /> },

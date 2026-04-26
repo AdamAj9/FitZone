@@ -20,6 +20,43 @@ class MemberProfileSerializer(serializers.ModelSerializer):
         )
 
 
+class QuestionnaireSerializer(serializers.ModelSerializer):
+    """Onboarding questionnaire — sets level, goals, preferred categories.
+
+    Marks the profile as completed. `preferences.categories` is a list of
+    category slugs the member is interested in; the recommender uses it
+    as a fallback when the user has no booking history yet."""
+
+    favorite_categories = serializers.ListField(
+        child=serializers.SlugField(),
+        required=False,
+        allow_empty=True,
+        write_only=True,
+    )
+
+    class Meta:
+        model = MemberProfile
+        fields = (
+            "level",
+            "goals",
+            "favorite_categories",
+            "questionnaire_completed",
+        )
+        read_only_fields = ("questionnaire_completed",)
+
+    def update(self, instance: MemberProfile, validated_data):
+        favorites = validated_data.pop("favorite_categories", None)
+        for field, value in validated_data.items():
+            setattr(instance, field, value)
+        if favorites is not None:
+            preferences = dict(instance.preferences or {})
+            preferences["categories"] = favorites
+            instance.preferences = preferences
+        instance.questionnaire_completed = True
+        instance.save()
+        return instance
+
+
 class CoachProfileSerializer(serializers.ModelSerializer):
     specialties_list = serializers.ListField(read_only=True)
 

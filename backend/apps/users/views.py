@@ -11,6 +11,7 @@ from .serializers import (
     CoachProfileSerializer,
     FitZoneTokenObtainPairSerializer,
     MemberProfileSerializer,
+    QuestionnaireSerializer,
     RegisterSerializer,
     UserSerializer,
     UserUpdateSerializer,
@@ -97,6 +98,21 @@ class MemberProfileView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         profile, _ = MemberProfile.objects.get_or_create(user=self.request.user)
         return profile
+
+
+class QuestionnaireView(generics.UpdateAPIView):
+    """PATCH/PUT /api/auth/me/questionnaire/ — onboarding flow."""
+
+    permission_classes = (IsAuthenticated,)
+    serializer_class = QuestionnaireSerializer
+
+    def get_object(self):
+        profile, _ = MemberProfile.objects.get_or_create(user=self.request.user)
+        return profile
+
+    def update(self, request, *args, **kwargs):
+        super().update(request, *args, **kwargs)
+        return Response(MemberProfileSerializer(self.get_object()).data)
 
 
 class CoachProfileView(generics.RetrieveUpdateAPIView):

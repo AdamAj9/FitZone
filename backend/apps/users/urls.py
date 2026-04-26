@@ -7,6 +7,7 @@ from .views import (
     LogoutView,
     MeView,
     MemberProfileView,
+    QuestionnaireView,
     RegisterView,
 )
 
@@ -25,5 +26,10 @@ urlpatterns = [
         "me/coach-profile/",
         CoachProfileView.as_view(),
         name="auth-coach-profile",
+    ),
+    path(
+        "me/questionnaire/",
+        QuestionnaireView.as_view(),
+        name="auth-questionnaire",
     ),
 ]
