@@ -146,11 +146,19 @@ class CheckoutCourseView(APIView):
         )
 
 
-def _activate_subscription_for(payment: Payment):
+def _post_success_for(payment: Payment):
+    """Hook called once a Payment flips to SUCCEEDED — activates the
+    subscription or creates the booking depending on payment kind."""
     if payment.kind == Payment.Kind.SUBSCRIPTION and payment.subscription:
         sub = payment.subscription
         if sub.status == Subscription.Status.PENDING:
             sub.activate(when=timezone.now())
+        return
+
+    if payment.kind == Payment.Kind.COURSE:
+        from apps.bookings.services import book_for_payment
+
+        book_for_payment(payment)
 
 
 class CheckoutVerifyView(APIView):
@@ -194,7 +202,7 @@ class CheckoutVerifyView(APIView):
             payment.mark_succeeded(
                 payment_intent=session.get("payment_intent", "") or "",
             )
-            _activate_subscription_for(payment)
+            _post_success_for(payment)
             return Response({"status": payment.status})
 
         if payment_status in ("unpaid", "no_payment_required"):
@@ -262,7 +270,7 @@ class StripeWebhookView(APIView):
             payment_intent=session.get("payment_intent", "") or "",
             event_id=event_id,
         )
-        _activate_subscription_for(payment)
+        _post_success_for(payment)
         return Response({"received": True})
 
     def _handle_payment_failed(self, intent: dict, event_id: str):

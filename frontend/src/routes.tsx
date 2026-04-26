@@ -7,6 +7,7 @@ import { RegisterPage } from "./pages/auth/RegisterPage";
 import { CheckoutCancelPage } from "./pages/member/CheckoutCancelPage";
 import { CheckoutSuccessPage } from "./pages/member/CheckoutSuccessPage";
 import { DashboardPage } from "./pages/member/DashboardPage";
+import { MyBookingsPage } from "./pages/member/MyBookingsPage";
 import { MyPaymentsPage } from "./pages/member/MyPaymentsPage";
 import { MySubscriptionPage } from "./pages/member/MySubscriptionPage";
 import { ProfilePage } from "./pages/member/ProfilePage";
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/profile", element: <ProfilePage /> },
           { path: "/my-subscription", element: <MySubscriptionPage /> },
+          { path: "/my-bookings", element: <MyBookingsPage /> },
           { path: "/my-payments", element: <MyPaymentsPage /> },
           { path: "/checkout/success", element: <CheckoutSuccessPage /> },
           { path: "/checkout/cancel", element: <CheckoutCancelPage /> },

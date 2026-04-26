@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.db.models import Count, Q
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django_filters.rest_framework import DjangoFilterBackend
@@ -43,9 +44,17 @@ class CourseSessionViewSet(viewsets.ModelViewSet):
     ordering = ("starts_at",)
 
     def get_queryset(self):
-        qs = CourseSession.objects.select_related(
-            "course", "course__category", "coach", "room"
-        ).all()
+        qs = (
+            CourseSession.objects.select_related(
+                "course", "course__category", "coach", "room"
+            )
+            .annotate(
+                _seats_taken=Count(
+                    "bookings", filter=Q(bookings__status="confirmed")
+                )
+            )
+            .all()
+        )
 
         params = self.request.query_params
 

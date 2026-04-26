@@ -23,6 +23,7 @@ export function CheckoutSuccessPage() {
       void queryClient.invalidateQueries({ queryKey: ["subscription-current"] });
       void queryClient.invalidateQueries({ queryKey: ["my-subscriptions"] });
       void queryClient.invalidateQueries({ queryKey: ["my-payments"] });
+      void queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
     }
   }, [verifyQuery.data?.status, queryClient]);
 
