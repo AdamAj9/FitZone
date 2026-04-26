@@ -13,6 +13,7 @@ import { CoursesListPage } from "./pages/public/CoursesListPage";
 import { HomePage } from "./pages/public/HomePage";
 import { NotFoundPage } from "./pages/public/NotFoundPage";
 import { Placeholder } from "./pages/public/Placeholder";
+import { PlanningPage } from "./pages/public/PlanningPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/courses", element: <CoursesListPage /> },
       { path: "/courses/:slug", element: <CourseDetailPage /> },
+      { path: "/planning", element: <PlanningPage /> },
       { path: "/coaches", element: <CoachesListPage /> },
       { path: "/coaches/:id", element: <CoachDetailPage /> },
       { path: "/plans", element: <Placeholder title="Abonnements / Plans" /> },

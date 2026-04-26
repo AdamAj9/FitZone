@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
+import { sessionsApi } from "../../api/sessions";
+import { formatDateTime } from "../../lib/date";
 
 const levelLabel: Record<string, string> = {
   beginner: "Débutant",
@@ -15,6 +17,13 @@ export function CourseDetailPage() {
   const { data: course, isLoading, isError } = useQuery({
     queryKey: ["course", slug],
     queryFn: () => coursesApi.getCourse(slug),
+    enabled: Boolean(slug),
+  });
+
+  const sessionsQuery = useQuery({
+    queryKey: ["course-sessions", slug],
+    queryFn: () =>
+      sessionsApi.listSessions({ course__slug: slug, upcoming: true }),
     enabled: Boolean(slug),
   });
 
@@ -61,6 +70,40 @@ export function CourseDetailPage() {
               {course.description}
             </p>
           </div>
+        </div>
+
+        <div className="rounded-2xl bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-900">
+            Prochaines séances
+          </h2>
+          {sessionsQuery.isLoading ? (
+            <p className="mt-3 text-sm text-slate-500">Chargement...</p>
+          ) : (sessionsQuery.data?.results.length ?? 0) === 0 ? (
+            <p className="mt-3 text-sm text-slate-500">
+              Aucune séance planifiée pour le moment.
+            </p>
+          ) : (
+            <ul className="mt-3 divide-y divide-slate-100">
+              {sessionsQuery.data?.results.slice(0, 8).map((s) => (
+                <li
+                  key={s.id}
+                  className="flex items-center justify-between py-3 text-sm"
+                >
+                  <div>
+                    <p className="font-medium text-slate-900">
+                      {formatDateTime(s.starts_at)}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {s.room_name} · {s.coach_name ?? "—"}
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-700">
+                    {s.seats_available}/{s.capacity} places
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 
