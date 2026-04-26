@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     CheckoutCourseView,
     CheckoutSubscriptionView,
+    CheckoutVerifyView,
     PaymentViewSet,
     StripeWebhookView,
 )
@@ -21,6 +22,11 @@ urlpatterns = router.urls + [
         "payments/checkout/course/",
         CheckoutCourseView.as_view(),
         name="checkout-course",
+    ),
+    path(
+        "payments/checkout/verify/",
+        CheckoutVerifyView.as_view(),
+        name="checkout-verify",
     ),
     path(
         "payments/webhook/stripe/",

@@ -26,6 +26,11 @@ def _session_create(**kwargs):
     return stripe.checkout.Session.create(**kwargs)
 
 
+def _session_retrieve(session_id: str):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    return stripe.checkout.Session.retrieve(session_id)
+
+
 def _build_metadata(payment: "Payment") -> dict[str, str]:
     return {
         "payment_id": str(payment.id),

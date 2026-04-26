@@ -19,7 +19,7 @@ from .serializers import (
     CheckoutSubscriptionSerializer,
     PaymentSerializer,
 )
-from .services import create_checkout_session
+from .services import _session_retrieve, create_checkout_session
 
 logger = logging.getLogger(__name__)
 
@@ -146,6 +146,63 @@ class CheckoutCourseView(APIView):
         )
 
 
+def _activate_subscription_for(payment: Payment):
+    if payment.kind == Payment.Kind.SUBSCRIPTION and payment.subscription:
+        sub = payment.subscription
+        if sub.status == Subscription.Status.PENDING:
+            sub.activate(when=timezone.now())
+
+
+class CheckoutVerifyView(APIView):
+    """GET /api/payments/checkout/verify/?session_id=cs_xxx
+
+    Active fallback when no Stripe webhook listener is running (typical
+    in localhost dev without Stripe CLI). Looks up the Payment by
+    stripe_session_id, calls Stripe to check the session's payment_status,
+    and activates the subscription if paid. Idempotent on repeat calls.
+    """
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        session_id = request.query_params.get("session_id", "").strip()
+        if not session_id:
+            raise ValidationError({"session_id": "Missing query parameter."})
+
+        payment = Payment.objects.filter(
+            stripe_session_id=session_id, user=request.user
+        ).first()
+        if not payment:
+            return Response(
+                {"detail": "Payment not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        if payment.status == Payment.Status.SUCCEEDED:
+            return Response(
+                {"status": payment.status, "already_activated": True}
+            )
+
+        try:
+            session = _session_retrieve(session_id)
+        except stripe.error.StripeError as exc:
+            logger.exception("Stripe session retrieve failed")
+            raise ValidationError({"detail": str(exc)}) from exc
+
+        payment_status = session.get("payment_status")
+        if payment_status == "paid":
+            payment.mark_succeeded(
+                payment_intent=session.get("payment_intent", "") or "",
+            )
+            _activate_subscription_for(payment)
+            return Response({"status": payment.status})
+
+        if payment_status in ("unpaid", "no_payment_required"):
+            return Response({"status": payment.status, "stripe_status": payment_status})
+
+        return Response({"status": payment.status, "stripe_status": payment_status})
+
+
 class StripeWebhookView(APIView):
     """POST /api/payments/webhook/stripe/ — receives Stripe events.
 
@@ -205,12 +262,7 @@ class StripeWebhookView(APIView):
             payment_intent=session.get("payment_intent", "") or "",
             event_id=event_id,
         )
-
-        if payment.kind == Payment.Kind.SUBSCRIPTION and payment.subscription:
-            sub = payment.subscription
-            if sub.status == Subscription.Status.PENDING:
-                sub.activate(when=timezone.now())
-
+        _activate_subscription_for(payment)
         return Response({"received": True})
 
     def _handle_payment_failed(self, intent: dict, event_id: str):

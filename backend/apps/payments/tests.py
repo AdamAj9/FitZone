@@ -217,6 +217,99 @@ class WebhookTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
+class VerifyTests(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="m@example.com", password="Strong-Pass-123!"
+        )
+        cls.plan = SubscriptionPlan.objects.create(
+            slug="basic-monthly",
+            name="Basic Mensuel",
+            tier="basic",
+            period="monthly",
+            price="29.99",
+        )
+
+    def _make_pending_payment(self, session_id="cs_test_x"):
+        sub = Subscription.objects.create(
+            user=self.user, plan=self.plan, price_paid="29.99"
+        )
+        return Payment.objects.create(
+            user=self.user,
+            kind=Payment.Kind.SUBSCRIPTION,
+            subscription=sub,
+            amount="29.99",
+            stripe_session_id=session_id,
+        )
+
+    def test_verify_paid_session_activates_subscription(self):
+        payment = self._make_pending_payment()
+        self.client.force_authenticate(self.user)
+        with patch(
+            "apps.payments.views._session_retrieve",
+            return_value={"payment_status": "paid", "payment_intent": "pi_v1"},
+        ):
+            response = self.client.get(
+                reverse("checkout-verify"),
+                {"session_id": payment.stripe_session_id},
+            )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["status"], "succeeded")
+        payment.refresh_from_db()
+        payment.subscription.refresh_from_db()
+        self.assertEqual(payment.status, Payment.Status.SUCCEEDED)
+        self.assertEqual(
+            payment.subscription.status, Subscription.Status.ACTIVE
+        )
+
+    def test_verify_unpaid_returns_pending(self):
+        payment = self._make_pending_payment(session_id="cs_test_y")
+        self.client.force_authenticate(self.user)
+        with patch(
+            "apps.payments.views._session_retrieve",
+            return_value={"payment_status": "unpaid"},
+        ):
+            response = self.client.get(
+                reverse("checkout-verify"),
+                {"session_id": payment.stripe_session_id},
+            )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["status"], "pending")
+        payment.refresh_from_db()
+        self.assertEqual(payment.status, Payment.Status.PENDING)
+
+    def test_verify_already_succeeded_is_idempotent(self):
+        payment = self._make_pending_payment(session_id="cs_test_z")
+        payment.mark_succeeded(payment_intent="pi_old")
+        self.client.force_authenticate(self.user)
+        with patch("apps.payments.views._session_retrieve") as mock_retrieve:
+            response = self.client.get(
+                reverse("checkout-verify"),
+                {"session_id": payment.stripe_session_id},
+            )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(response.data.get("already_activated"))
+        mock_retrieve.assert_not_called()
+
+    def test_verify_other_users_session_returns_404(self):
+        payment = self._make_pending_payment(session_id="cs_test_a")
+        intruder = User.objects.create_user(
+            email="x@e.com", password="Strong-Pass-123!"
+        )
+        self.client.force_authenticate(intruder)
+        response = self.client.get(
+            reverse("checkout-verify"),
+            {"session_id": payment.stripe_session_id},
+        )
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_verify_missing_session_id(self):
+        self.client.force_authenticate(self.user)
+        response = self.client.get(reverse("checkout-verify"))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
 class PaymentListTests(APITestCase):
     def test_list_only_returns_my_payments(self):
         plan = SubscriptionPlan.objects.create(

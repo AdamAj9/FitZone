@@ -27,4 +27,15 @@ export const paymentsApi = {
     const { data } = await apiClient.get<PaymentsPage>("/payments/");
     return data;
   },
+
+  async verifyCheckout(sessionId: string): Promise<{
+    status: "pending" | "succeeded" | "failed" | "refunded";
+    already_activated?: boolean;
+    stripe_status?: string;
+  }> {
+    const { data } = await apiClient.get("/payments/checkout/verify/", {
+      params: { session_id: sessionId },
+    });
+    return data;
+  },
 };
