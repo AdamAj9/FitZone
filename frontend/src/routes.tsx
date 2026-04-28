@@ -2,10 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { AdminLayout } from "./components/layout/AdminLayout";
 import { AppLayout } from "./components/layout/AppLayout";
+import { CoachLayout } from "./components/layout/CoachLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage";
 import { AdminLogsPage } from "./pages/admin/AdminLogsPage";
 import { AdminUsersPage } from "./pages/admin/AdminUsersPage";
+import { CoachBookingsPage } from "./pages/coach/CoachBookingsPage";
+import { CoachCoursesPage } from "./pages/coach/CoachCoursesPage";
+import { CoachDashboardPage } from "./pages/coach/CoachDashboardPage";
+import { CoachSessionsPage } from "./pages/coach/CoachSessionsPage";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
 import { CheckoutCancelPage } from "./pages/member/CheckoutCancelPage";
@@ -63,6 +68,20 @@ export const router = createBrowserRouter([
           { path: "/admin", element: <AdminDashboardPage /> },
           { path: "/admin/users", element: <AdminUsersPage /> },
           { path: "/admin/logs", element: <AdminLogsPage /> },
+        ],
+      },
+    ],
+  },
+  {
+    element: <ProtectedRoute roles={["coach"]} />,
+    children: [
+      {
+        element: <CoachLayout />,
+        children: [
+          { path: "/coach", element: <CoachDashboardPage /> },
+          { path: "/coach/courses", element: <CoachCoursesPage /> },
+          { path: "/coach/sessions", element: <CoachSessionsPage /> },
+          { path: "/coach/bookings", element: <CoachBookingsPage /> },
         ],
       },
     ],

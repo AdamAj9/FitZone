@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from django.db.models import Count, Q
+from django.db.models import Avg, Count, Q
 from django.utils import timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -12,6 +12,8 @@ from rest_framework.views import APIView
 from apps.courses.models import Course
 from apps.sessions_app.models import CourseSession
 from apps.sessions_app.serializers import SessionListSerializer
+from apps.users.models import User as UserModel
+from apps.users.permissions import IsCoach
 
 from . import services
 from .models import Booking
@@ -226,3 +228,115 @@ class RecommendationsView(APIView):
                 "results": SessionListSerializer(recommended, many=True).data,
             }
         )
+
+
+class CoachDashboardView(APIView):
+    """GET /api/coach/dashboard/ — KPIs for the coach's own activity."""
+
+    permission_classes = (IsAuthenticated, IsCoach)
+
+    def get(self, request):
+        coach = request.user
+        now = timezone.now()
+        start_30d = now - timedelta(days=30)
+
+        my_courses = Course.objects.filter(coach=coach, is_active=True).count()
+        upcoming_sessions = CourseSession.objects.filter(
+            course__coach=coach,
+            status=CourseSession.Status.SCHEDULED,
+            starts_at__gte=now,
+        ).count()
+        bookings_30d = Booking.objects.filter(
+            course_session__course__coach=coach,
+            status=Booking.Status.CONFIRMED,
+            created_at__gte=start_30d,
+        ).count()
+
+        next_session = (
+            CourseSession.objects.filter(
+                course__coach=coach,
+                status=CourseSession.Status.SCHEDULED,
+                starts_at__gte=now,
+            )
+            .annotate(
+                _seats_taken=Count(
+                    "bookings", filter=Q(bookings__status="confirmed")
+                )
+            )
+            .select_related("course", "course__category", "coach", "room")
+            .order_by("starts_at")
+            .first()
+        )
+
+        avg_rating = (
+            UserModel.objects.filter(id=coach.id)
+            .annotate(_avg=Avg("ratings_received__score"))
+            .values_list("_avg", flat=True)
+            .first()
+        )
+
+        return Response(
+            {
+                "courses_count": my_courses,
+                "upcoming_sessions_count": upcoming_sessions,
+                "bookings_last_30_days": bookings_30d,
+                "rating_average": (
+                    round(float(avg_rating), 2) if avg_rating is not None else None
+                ),
+                "next_session": (
+                    SessionListSerializer(next_session).data if next_session else None
+                ),
+            }
+        )
+
+
+class CoachBookingsView(APIView):
+    """GET /api/coach/bookings/ — confirmed bookings on this coach's sessions.
+
+    Optional ?session=<id> filter to drill down into one specific session."""
+
+    permission_classes = (IsAuthenticated, IsCoach)
+
+    def get(self, request):
+        coach = request.user
+        qs = (
+            Booking.objects.filter(
+                course_session__course__coach=coach,
+                status=Booking.Status.CONFIRMED,
+            )
+            .select_related(
+                "user",
+                "course_session",
+                "course_session__course",
+                "course_session__room",
+            )
+            .order_by("course_session__starts_at")
+        )
+        session_id = request.query_params.get("session")
+        if session_id:
+            qs = qs.filter(course_session_id=session_id)
+
+        return Response(
+            [
+                {
+                    "id": b.id,
+                    "user_id": b.user_id,
+                    "user_email": b.user.email,
+                    "user_name": (
+                        f"{b.user.first_name} {b.user.last_name}".strip()
+                        or b.user.email.split("@")[0]
+                    ),
+                    "course_session_id": b.course_session_id,
+                    "course_title": b.course_session.course.title,
+                    "course_slug": b.course_session.course.slug,
+                    "starts_at": b.course_session.starts_at,
+                    "room_name": b.course_session.room.name,
+                    "channel": b.channel,
+                    "channel_display": b.get_channel_display(),
+                    "created_at": b.created_at,
+                }
+                for b in qs
+            ]
+        )
+
+

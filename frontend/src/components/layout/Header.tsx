@@ -70,6 +70,14 @@ export function Header() {
                   Admin
                 </NavLink>
               )}
+              {user.role === "coach" && (
+                <NavLink
+                  to="/coach"
+                  className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+                >
+                  Coach
+                </NavLink>
+              )}
               <NavLink to="/dashboard" className={navLinkClass}>
                 {t("nav.dashboard")}
               </NavLink>

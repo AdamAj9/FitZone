@@ -413,6 +413,91 @@ class QuestionnaireTests(APITestCase):
         )
 
 
+class CoachSpaceTests(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.cat = Category.objects.create(name="Fitness")
+        cls.coach = User.objects.create_user(
+            email="coach@e.com",
+            password="Strong-Pass-123!",
+            role=User.Role.COACH,
+            first_name="Coach",
+            last_name="One",
+        )
+        cls.other_coach = User.objects.create_user(
+            email="other@e.com",
+            password="Strong-Pass-123!",
+            role=User.Role.COACH,
+        )
+        cls.member = User.objects.create_user(
+            email="m@e.com", password="Strong-Pass-123!"
+        )
+        cls.course = Course.objects.create(
+            title="X", category=cls.cat, coach=cls.coach
+        )
+        cls.other_course = Course.objects.create(
+            title="Y", category=cls.cat, coach=cls.other_coach
+        )
+
+    def test_member_blocked_from_coach_dashboard(self):
+        self.client.force_authenticate(self.member)
+        response = self.client.get(reverse("coach-dashboard"))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_coach_dashboard_returns_kpis(self):
+        room = Room.objects.create(name="Acoach")
+        future = _future_session(self.course, room)
+        booker = User.objects.create_user(
+            email="b@e.com", password="Strong-Pass-123!"
+        )
+        _make_premium_sub_for(booker)
+        services.book(user=booker, course_session_id=future.id)
+
+        self.client.force_authenticate(self.coach)
+        response = self.client.get(reverse("coach-dashboard"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["courses_count"], 1)
+        self.assertEqual(response.data["upcoming_sessions_count"], 1)
+        self.assertEqual(response.data["bookings_last_30_days"], 1)
+        self.assertIsNotNone(response.data["next_session"])
+
+    def test_coach_bookings_only_returns_own(self):
+        own_room = Room.objects.create(name="Aown")
+        other_room = Room.objects.create(name="Bother")
+        own_session = _future_session(self.course, own_room)
+        other_session = _future_session(self.other_course, other_room)
+
+        booker = User.objects.create_user(
+            email="bk@e.com", password="Strong-Pass-123!"
+        )
+        _make_premium_sub_for(booker)
+        services.book(user=booker, course_session_id=own_session.id)
+        services.book(user=booker, course_session_id=other_session.id)
+
+        self.client.force_authenticate(self.coach)
+        response = self.client.get(reverse("coach-bookings"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]["course_session_id"], own_session.id)
+
+    def test_coach_bookings_filter_by_session(self):
+        room1 = Room.objects.create(name="Acb1")
+        room2 = Room.objects.create(name="Bcb2")
+        s1 = _future_session(self.course, room1)
+        s2 = _future_session(self.course, room2)
+        booker = User.objects.create_user(
+            email="b2@e.com", password="Strong-Pass-123!"
+        )
+        _make_premium_sub_for(booker)
+        services.book(user=booker, course_session_id=s1.id)
+        services.book(user=booker, course_session_id=s2.id)
+
+        self.client.force_authenticate(self.coach)
+        response = self.client.get(reverse("coach-bookings"), {"session": s1.id})
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]["course_session_id"], s1.id)
+
+
 class SessionsSeatsAnnotationTests(APITestCase):
     """Confirm the Phase 3 placeholder is now wired: seats_taken on the
     public sessions endpoint reflects confirmed bookings."""
