@@ -18,14 +18,18 @@ export default {
           950: "#3b0764",
         },
         ink: {
-          50: "#f8fafc",
-          100: "#f1f5f9",
-          200: "#e2e8f0",
+          50: "#b8bcc4",
+          100: "#aeb3bc",
+          200: "#9aa0aa",
           500: "#64748b",
           700: "#334155",
           800: "#1e293b",
           900: "#0f172a",
           950: "#020617",
+        },
+        surface: {
+          DEFAULT: "#d4d7dd",
+          hover: "#cacdd4",
         },
       },
       backgroundImage: {

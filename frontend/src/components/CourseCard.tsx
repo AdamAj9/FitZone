@@ -20,7 +20,7 @@ export function CourseCard({ course }: { course: CourseListItem }) {
   return (
     <Link
       to={`/courses/${course.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition hover:shadow-md"
+      className="group flex flex-col overflow-hidden rounded-2xl bg-surface shadow-sm transition hover:shadow-md"
     >
       <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
         {course.image && (

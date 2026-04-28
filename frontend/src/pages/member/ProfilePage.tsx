@@ -47,7 +47,7 @@ export function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">Mon profil</h1>
         <p className="mt-1 text-sm text-slate-500">
           {user.email} · <span className="font-medium">{user.role}</span>
@@ -56,7 +56,7 @@ export function ProfilePage() {
 
       <form
         onSubmit={handleSubmit((v) => updateMutation.mutate(v))}
-        className="space-y-4 rounded-2xl bg-white p-6 shadow-sm"
+        className="space-y-4 rounded-2xl bg-surface p-6 shadow-sm"
       >
         <div className="grid grid-cols-2 gap-4">
           <div>

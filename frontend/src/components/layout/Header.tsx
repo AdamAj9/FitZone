@@ -45,7 +45,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-ink-200 bg-surface/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
         <Link
           to="/"
@@ -87,7 +87,7 @@ export function Header() {
               </svg>
             </button>
             <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              <div className="w-[860px] rounded-2xl border border-ink-200 bg-white p-6 shadow-2xl">
+              <div className="w-[860px] rounded-2xl border border-ink-200 bg-surface p-6 shadow-2xl">
                 <div className="grid grid-cols-3 gap-6">
                   {OFFERINGS.map((group) => (
                     <div key={group.title}>
@@ -236,7 +236,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-ink-200 bg-white px-3 py-3 lg:hidden">
+        <div className="border-t border-ink-200 bg-surface px-3 py-3 lg:hidden">
           <nav className="space-y-1">
             <NavLink to="/" end onClick={closeMenu} className={mobileNavLinkClass}>
               {t("nav.home")}
@@ -269,7 +269,7 @@ export function Header() {
                           <Link
                             to={item.href}
                             onClick={closeMenu}
-                            className="block rounded-md px-2 py-1.5 text-sm text-ink-700 hover:bg-white"
+                            className="block rounded-md px-2 py-1.5 text-sm text-ink-700 hover:bg-surface"
                           >
                             {item.label}
                           </Link>

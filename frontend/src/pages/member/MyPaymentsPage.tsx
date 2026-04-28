@@ -18,14 +18,14 @@ export function MyPaymentsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">Mes paiements</h1>
         <p className="mt-1 text-sm text-slate-500">
           Historique de toutes vos transactions Stripe.
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
           <p className="p-8 text-center text-slate-500">Chargement...</p>
         ) : (data?.results.length ?? 0) === 0 ? (

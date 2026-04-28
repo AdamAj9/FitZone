@@ -77,7 +77,7 @@ export function HomePage() {
       <section className="relative overflow-hidden bg-hero-gradient text-white">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-24 lg:grid-cols-2 lg:py-32">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-surface/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
               Nouvelle salle ouverte 7j/7
             </span>
@@ -101,7 +101,7 @@ export function HomePage() {
               </Link>
               <Link
                 to="/plans"
-                className="rounded-lg border border-white/30 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white/10"
+                className="rounded-lg border border-white/30 px-6 py-3 font-semibold backdrop-blur transition hover:bg-surface/10"
               >
                 Voir les abonnements
               </Link>
@@ -118,7 +118,7 @@ export function HomePage() {
             <div className="absolute -left-10 top-0 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"></div>
             <div className="relative grid grid-cols-2 gap-4">
-              <div className="rounded-3xl bg-white/10 p-6 backdrop-blur-md">
+              <div className="rounded-3xl bg-surface/10 p-6 backdrop-blur-md">
                 <p className="text-5xl">🏋️</p>
                 <p className="mt-3 text-sm text-ink-200">Salle fitness</p>
                 <p className="font-semibold">2 000 m² équipés</p>
@@ -133,7 +133,7 @@ export function HomePage() {
                 <p className="mt-3 text-sm text-ink-200">Tennis & padel</p>
                 <p className="font-semibold">5 courts indoor</p>
               </div>
-              <div className="mt-10 rounded-3xl bg-white/10 p-6 backdrop-blur-md">
+              <div className="mt-10 rounded-3xl bg-surface/10 p-6 backdrop-blur-md">
                 <p className="text-5xl">💼</p>
                 <p className="mt-3 text-sm text-ink-200">Coworking</p>
                 <p className="font-semibold">Lounge & meeting</p>
@@ -145,7 +145,7 @@ export function HomePage() {
 
       {/* === TRUST STATS === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="grid gap-4 rounded-2xl bg-white p-8 shadow-sm md:grid-cols-4">
+        <div className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-bold text-brand-700 md:text-4xl">
@@ -179,7 +179,7 @@ export function HomePage() {
           {OFFERINGS.map((group) => (
             <div
               key={group.title}
-              className="group relative overflow-hidden rounded-2xl border border-ink-200 bg-white p-6 transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
+              className="group relative overflow-hidden rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
             >
               <div className="text-4xl">{group.icon}</div>
               <h3 className="mt-3 text-lg font-semibold text-ink-900">
@@ -214,7 +214,7 @@ export function HomePage() {
             {STEPS.map((s) => (
               <div
                 key={s.n}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur"
+                className="rounded-2xl border border-white/10 bg-surface/5 p-8 backdrop-blur"
               >
                 <p className="bg-gradient-to-r from-brand-400 to-brand-200 bg-clip-text text-5xl font-bold text-transparent">
                   {s.n}
@@ -245,7 +245,7 @@ export function HomePage() {
               onClick={() => setPeriod("monthly")}
               className={`rounded-full px-5 py-2 text-sm font-medium transition ${
                 period === "monthly"
-                  ? "bg-white text-ink-900 shadow-sm"
+                  ? "bg-surface text-ink-900 shadow-sm"
                   : "text-ink-500"
               }`}
             >
@@ -256,7 +256,7 @@ export function HomePage() {
               onClick={() => setPeriod("yearly")}
               className={`rounded-full px-5 py-2 text-sm font-medium transition ${
                 period === "yearly"
-                  ? "bg-white text-ink-900 shadow-sm"
+                  ? "bg-surface text-ink-900 shadow-sm"
                   : "text-ink-500"
               }`}
             >
@@ -271,7 +271,7 @@ export function HomePage() {
             return (
               <div
                 key={plan.id}
-                className={`relative rounded-2xl bg-white p-8 shadow-sm ring-1 transition hover:-translate-y-1 ${
+                className={`relative rounded-2xl bg-surface p-8 shadow-sm ring-1 transition hover:-translate-y-1 ${
                   isPremium
                     ? "ring-brand-500 shadow-brand-glow"
                     : "ring-ink-200"
@@ -347,7 +347,7 @@ export function HomePage() {
             <Link
               key={coach.id}
               to={`/coaches/${coach.id}`}
-              className="group rounded-2xl border border-ink-200 bg-white p-6 transition hover:border-brand-400 hover:shadow-brand-glow"
+              className="group rounded-2xl border border-ink-200 bg-surface p-6 transition hover:border-brand-400 hover:shadow-brand-glow"
             >
               <div className="flex items-center gap-4">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-2xl font-bold text-white">
@@ -400,7 +400,7 @@ export function HomePage() {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.name}
-              className="rounded-2xl border border-ink-200 bg-white p-6"
+              className="rounded-2xl border border-ink-200 bg-surface p-6"
             >
               <p className="text-amber-500">★★★★★</p>
               <p className="mt-3 text-sm text-ink-700">"{t.quote}"</p>
@@ -426,13 +426,13 @@ export function HomePage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               to="/register"
-              className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:bg-brand-50"
+              className="rounded-lg bg-surface px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:bg-brand-50"
             >
               Créer mon compte →
             </Link>
             <Link
               to="/coaches"
-              className="rounded-lg border border-white/30 px-8 py-3 font-semibold backdrop-blur transition hover:bg-white/10"
+              className="rounded-lg border border-white/30 px-8 py-3 font-semibold backdrop-blur transition hover:bg-surface/10"
             >
               Rencontrer les coachs
             </Link>

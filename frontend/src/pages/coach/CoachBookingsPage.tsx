@@ -39,7 +39,7 @@ export function CoachBookingsPage() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {bookingsQuery.isLoading ? (
           <p className="p-8 text-center text-slate-500">Chargement...</p>
         ) : (bookingsQuery.data?.length ?? 0) === 0 ? (

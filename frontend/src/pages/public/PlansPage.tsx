@@ -40,7 +40,7 @@ export function PlansPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">Nos abonnements</h1>
         <p className="mt-2 text-slate-600">
           Choisissez la formule qui vous correspond.
@@ -52,7 +52,7 @@ export function PlansPage() {
             onClick={() => setPeriod("monthly")}
             className={`rounded-full px-5 py-2 text-sm font-medium transition ${
               period === "monthly"
-                ? "bg-white text-slate-900 shadow-sm"
+                ? "bg-surface text-slate-900 shadow-sm"
                 : "text-slate-600"
             }`}
           >
@@ -63,7 +63,7 @@ export function PlansPage() {
             onClick={() => setPeriod("yearly")}
             className={`rounded-full px-5 py-2 text-sm font-medium transition ${
               period === "yearly"
-                ? "bg-white text-slate-900 shadow-sm"
+                ? "bg-surface text-slate-900 shadow-sm"
                 : "text-slate-600"
             }`}
           >
@@ -95,7 +95,7 @@ export function PlansPage() {
             return (
               <div
                 key={plan.id}
-                className={`rounded-2xl bg-white p-6 shadow-sm ring-1 ${
+                className={`rounded-2xl bg-surface p-6 shadow-sm ring-1 ${
                   isPremium ? "ring-brand-500" : "ring-slate-200"
                 }`}
               >

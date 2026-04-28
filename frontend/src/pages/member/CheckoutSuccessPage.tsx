@@ -32,7 +32,7 @@ export function CheckoutSuccessPage() {
   const isFailed = status === "failed";
 
   return (
-    <div className="mx-auto max-w-xl rounded-2xl bg-white p-8 text-center shadow-sm">
+    <div className="mx-auto max-w-xl rounded-2xl bg-surface p-8 text-center shadow-sm">
       <div
         className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full text-2xl ${
           isFailed

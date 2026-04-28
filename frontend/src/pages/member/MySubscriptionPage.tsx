@@ -45,14 +45,14 @@ export function MySubscriptionPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">Mon abonnement</h1>
       </div>
 
       {currentQuery.isLoading ? (
         <p className="text-slate-500">Chargement...</p>
       ) : current ? (
-        <div className="rounded-2xl border-2 border-brand-200 bg-white p-6 shadow-sm">
+        <div className="rounded-2xl border-2 border-brand-200 bg-surface p-6 shadow-sm">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-wide text-brand-600">
@@ -104,7 +104,7 @@ export function MySubscriptionPage() {
           </button>
         </div>
       ) : (
-        <div className="rounded-2xl bg-white p-8 text-center shadow-sm">
+        <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
           <p className="text-slate-600">Vous n'avez aucun abonnement actif.</p>
           <Link
             to="/plans"
@@ -115,7 +115,7 @@ export function MySubscriptionPage() {
         </div>
       )}
 
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">Historique</h2>
         {historyQuery.isLoading ? (
           <p className="mt-3 text-sm text-slate-500">Chargement...</p>

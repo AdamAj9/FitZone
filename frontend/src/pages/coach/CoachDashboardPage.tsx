@@ -21,7 +21,7 @@ export function CoachDashboardPage() {
         <Kpi label="Mes cours" value={data.courses_count} />
         <Kpi label="Séances à venir" value={data.upcoming_sessions_count} />
         <Kpi label="Réservations 30 jours" value={data.bookings_last_30_days} />
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface p-5 shadow-sm">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
             Note moyenne
           </p>
@@ -31,7 +31,7 @@ export function CoachDashboardPage() {
         </div>
       </section>
 
-      <section className="rounded-2xl bg-white p-6 shadow-sm">
+      <section className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">
           Ma prochaine séance
         </h2>
@@ -85,7 +85,7 @@ export function CoachDashboardPage() {
 
 function Kpi({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-2xl bg-white p-5 shadow-sm">
+    <div className="rounded-2xl bg-surface p-5 shadow-sm">
       <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
         {label}
       </p>
@@ -106,7 +106,7 @@ function QuickLink({
   return (
     <Link
       to={to}
-      className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+      className="rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
     >
       <h3 className="font-semibold text-slate-900">{title}</h3>
       <p className="mt-1 text-sm text-slate-500">{subtitle}</p>

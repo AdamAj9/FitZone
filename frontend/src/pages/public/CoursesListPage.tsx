@@ -28,7 +28,7 @@ export function CoursesListPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">Nos cours</h1>
         <p className="mt-1 text-slate-600">
           Trouvez le cours qui correspond à votre niveau et vos envies.

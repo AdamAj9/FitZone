@@ -137,7 +137,7 @@ export function CoachCoursesPage() {
       {showForm && (
         <form
           onSubmit={onSubmit}
-          className="space-y-4 rounded-2xl bg-white p-6 shadow-sm"
+          className="space-y-4 rounded-2xl bg-surface p-6 shadow-sm"
         >
           <div className="grid gap-3 md:grid-cols-2">
             <div>
@@ -291,7 +291,7 @@ export function CoachCoursesPage() {
         </form>
       )}
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {coursesQuery.isLoading ? (
           <p className="p-8 text-center text-slate-500">Chargement...</p>
         ) : (coursesQuery.data?.results.length ?? 0) === 0 ? (

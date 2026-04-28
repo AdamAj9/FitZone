@@ -38,7 +38,7 @@ export function LoginPage() {
     | null;
 
   return (
-    <div className="mx-auto max-w-md rounded-2xl bg-white p-8 shadow-sm">
+    <div className="mx-auto max-w-md rounded-2xl bg-surface p-8 shadow-sm">
       <h1 className="text-2xl font-bold text-slate-900">{t("nav.login")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div>

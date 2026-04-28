@@ -8,7 +8,7 @@ export function Skeleton({ className = "" }: SkeletonProps) {
 
 export function SkeletonCard() {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm">
+    <div className="rounded-2xl bg-surface p-6 shadow-sm">
       <Skeleton className="h-4 w-24" />
       <Skeleton className="mt-3 h-8 w-32" />
       <Skeleton className="mt-2 h-3 w-full" />

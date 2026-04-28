@@ -92,7 +92,7 @@ export function CoachDetailPage() {
   if (coachQuery.isLoading) return <p className="text-slate-500">Chargement...</p>;
   if (coachQuery.isError || !coachQuery.data) {
     return (
-      <div className="rounded-2xl bg-white p-12 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface p-12 text-center shadow-sm">
         <p className="text-slate-500">Coach introuvable.</p>
         <Link to="/coaches" className="mt-4 inline-block text-brand-600 hover:underline">
           ← Retour à la liste
@@ -113,7 +113,7 @@ export function CoachDetailPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <aside className="space-y-4">
-        <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+        <div className="rounded-2xl bg-surface p-6 text-center shadow-sm">
           <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-brand-100 text-3xl font-bold text-brand-700">
             {coach.first_name.charAt(0)}
             {coach.last_name.charAt(0)}
@@ -139,7 +139,7 @@ export function CoachDetailPage() {
         </div>
 
         {profile?.bio && (
-          <div className="rounded-2xl bg-white p-6 shadow-sm">
+          <div className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="font-semibold text-slate-900">Biographie</h2>
             <p className="mt-2 whitespace-pre-line text-sm text-slate-600">
               {profile.bio}
@@ -154,7 +154,7 @@ export function CoachDetailPage() {
             Cours de {coach.first_name}
           </h2>
           {coachCourses.length === 0 ? (
-            <div className="rounded-2xl bg-white p-8 text-center text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-surface p-8 text-center text-slate-500 shadow-sm">
               Aucun cours pour le moment.
             </div>
           ) : (
@@ -163,7 +163,7 @@ export function CoachDetailPage() {
                 <Link
                   key={c.id}
                   to={`/courses/${c.slug}`}
-                  className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition hover:shadow-md"
+                  className="flex items-center justify-between rounded-xl bg-surface p-4 shadow-sm transition hover:shadow-md"
                 >
                   <div>
                     <p className="font-medium text-slate-900">{c.title}</p>
@@ -183,7 +183,7 @@ export function CoachDetailPage() {
         </section>
 
         {user && (
-          <section className="rounded-2xl bg-white p-6 shadow-sm">
+          <section className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-slate-900">
               {editingId ? "Mon avis" : "Laisser un avis"}
             </h2>
@@ -241,13 +241,13 @@ export function CoachDetailPage() {
             Avis ({coach.rating_count})
           </h2>
           {ratings.length === 0 ? (
-            <div className="rounded-2xl bg-white p-8 text-center text-slate-500 shadow-sm">
+            <div className="rounded-2xl bg-surface p-8 text-center text-slate-500 shadow-sm">
               Aucun avis pour le moment.
             </div>
           ) : (
             <ul className="space-y-3">
               {ratings.map((r) => (
-                <li key={r.id} className="rounded-xl bg-white p-4 shadow-sm">
+                <li key={r.id} className="rounded-xl bg-surface p-4 shadow-sm">
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-slate-900">{r.member_name}</p>
                     <StarRating value={r.score} size="sm" />

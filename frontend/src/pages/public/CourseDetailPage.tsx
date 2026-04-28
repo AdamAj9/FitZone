@@ -134,7 +134,7 @@ export function CourseDetailPage() {
   }
   if (courseQuery.isError || !courseQuery.data) {
     return (
-      <div className="rounded-2xl bg-white p-12 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface p-12 text-center shadow-sm">
         <p className="text-slate-500">Cours introuvable.</p>
         <Link to="/courses" className="mt-4 inline-block text-brand-600 hover:underline">
           ← Retour au catalogue
@@ -173,7 +173,7 @@ export function CourseDetailPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <div className="lg:col-span-2 space-y-6">
-        <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+        <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
           <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
             {course.image && (
               <img
@@ -203,7 +203,7 @@ export function CourseDetailPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
+        <div className="rounded-2xl bg-surface p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-900">
             Prochaines séances
           </h2>
@@ -237,7 +237,7 @@ export function CourseDetailPage() {
       </div>
 
       <aside className="space-y-4">
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
+        <div className="rounded-2xl bg-surface p-6 shadow-sm">
           <p className="text-sm text-slate-500">Prix unitaire</p>
           <p className="mt-1 text-3xl font-bold text-slate-900">
             {unitPrice > 0
@@ -270,7 +270,7 @@ export function CourseDetailPage() {
         </div>
 
         {course.coach && (
-          <div className="rounded-2xl bg-white p-6 shadow-sm">
+          <div className="rounded-2xl bg-surface p-6 shadow-sm">
             <p className="text-sm text-slate-500">Coach</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">
               {course.coach.full_name}

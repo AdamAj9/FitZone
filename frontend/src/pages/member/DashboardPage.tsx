@@ -36,7 +36,7 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-8 shadow-sm">
+      <div className="rounded-2xl bg-surface p-8 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">
           Bonjour {user.first_name || user.email} 👋
         </h1>
@@ -73,7 +73,7 @@ export function DashboardPage() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-4">
-          <section className="rounded-2xl bg-white p-6 shadow-sm">
+          <section className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900">
               Ma prochaine séance
             </h2>
@@ -100,7 +100,7 @@ export function DashboardPage() {
             )}
           </section>
 
-          <section className="rounded-2xl bg-white p-6 shadow-sm">
+          <section className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900">
               Recommandé pour vous
             </h2>
@@ -130,7 +130,7 @@ export function DashboardPage() {
         <aside className="space-y-4">
           <Link
             to="/my-subscription"
-            className="block rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+            className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
               Abonnement
@@ -156,7 +156,7 @@ export function DashboardPage() {
 
           <Link
             to="/my-bookings"
-            className="block rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+            className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
               Réservations
@@ -168,7 +168,7 @@ export function DashboardPage() {
 
           <Link
             to="/profile"
-            className="block rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+            className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
               Profil
@@ -178,7 +178,7 @@ export function DashboardPage() {
 
           <Link
             to="/my-payments"
-            className="block rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+            className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
               Paiements
@@ -201,7 +201,7 @@ function StatCard({
   smallValue?: boolean;
 }) {
   return (
-    <div className="rounded-2xl bg-white p-5 shadow-sm">
+    <div className="rounded-2xl bg-surface p-5 shadow-sm">
       <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
         {label}
       </p>

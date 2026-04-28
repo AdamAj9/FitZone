@@ -14,7 +14,7 @@ export function EmptyState({
   action,
 }: EmptyStateProps) {
   return (
-    <div className="rounded-2xl bg-white p-12 text-center shadow-sm">
+    <div className="rounded-2xl bg-surface p-12 text-center shadow-sm">
       <div className="text-5xl">{icon}</div>
       <h3 className="mt-3 text-lg font-semibold text-slate-900">{title}</h3>
       {description && (

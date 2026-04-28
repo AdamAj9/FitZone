@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function CheckoutCancelPage() {
   return (
-    <div className="mx-auto max-w-xl rounded-2xl bg-white p-8 text-center shadow-sm">
+    <div className="mx-auto max-w-xl rounded-2xl bg-surface p-8 text-center shadow-sm">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl">
         ⚠
       </div>

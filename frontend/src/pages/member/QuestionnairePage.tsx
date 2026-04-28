@@ -67,7 +67,7 @@ export function QuestionnairePage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">
           Questionnaire sportif
         </h1>
@@ -78,7 +78,7 @@ export function QuestionnairePage() {
 
       <form
         onSubmit={handleSubmit((v) => submitMutation.mutate(v))}
-        className="space-y-6 rounded-2xl bg-white p-6 shadow-sm"
+        className="space-y-6 rounded-2xl bg-surface p-6 shadow-sm"
       >
         <fieldset>
           <legend className="text-sm font-medium text-slate-700">

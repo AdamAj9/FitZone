@@ -30,7 +30,7 @@ export function AdminDashboardPage() {
         <Kpi label="Réservations 30 jours" value={data.bookings_last_30_days} />
       </section>
 
-      <section className="rounded-2xl bg-white p-6 shadow-sm">
+      <section className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">
           Top 5 actions auditées
         </h2>
@@ -64,7 +64,7 @@ function Kpi({
   smallValue?: boolean;
 }) {
   return (
-    <div className="rounded-2xl bg-white p-5 shadow-sm">
+    <div className="rounded-2xl bg-surface p-5 shadow-sm">
       <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
         {label}
       </p>

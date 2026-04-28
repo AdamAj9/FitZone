@@ -21,7 +21,7 @@ export function SessionCard({ session, compact = false }: Props) {
   return (
     <Link
       to={`/courses/${session.course_slug}`}
-      className="block rounded-lg border border-slate-200 bg-white p-3 transition hover:border-brand-300 hover:shadow-sm"
+      className="block rounded-lg border border-slate-200 bg-surface p-3 transition hover:border-brand-300 hover:shadow-sm"
     >
       <div className="flex items-start justify-between gap-2">
         <p className="font-mono text-xs font-semibold text-brand-600">

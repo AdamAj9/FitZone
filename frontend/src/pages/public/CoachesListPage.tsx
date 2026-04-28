@@ -14,7 +14,7 @@ export function CoachesListPage() {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
+        <div className="rounded-2xl bg-surface p-6 shadow-sm">
           <h1 className="text-3xl font-bold text-slate-900">Nos coachs</h1>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,7 +37,7 @@ export function CoachesListPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">Nos coachs</h1>
         <p className="mt-1 text-slate-600">
           Une équipe expérimentée pour vous accompagner.
@@ -49,7 +49,7 @@ export function CoachesListPage() {
           <Link
             key={coach.id}
             to={`/coaches/${coach.id}`}
-            className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+            className="rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
               {coach.first_name.charAt(0)}

@@ -62,7 +62,7 @@ export function AdminUsersPage() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
           <p className="p-8 text-center text-slate-500">Chargement...</p>
         ) : (data?.results.length ?? 0) === 0 ? (

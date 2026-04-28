@@ -43,11 +43,11 @@ export function MyBookingsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">Mes réservations</h1>
       </div>
 
-      <section className="rounded-2xl bg-white p-6 shadow-sm">
+      <section className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">À venir</h2>
         {isLoading ? (
           <p className="mt-3 text-sm text-slate-500">Chargement...</p>
@@ -103,7 +103,7 @@ export function MyBookingsPage() {
       </section>
 
       {past.length > 0 && (
-        <section className="rounded-2xl bg-white p-6 shadow-sm">
+        <section className="rounded-2xl bg-surface p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-slate-900">Historique</h2>
           <ul className="mt-3 divide-y divide-slate-100">
             {past.map((b) => (

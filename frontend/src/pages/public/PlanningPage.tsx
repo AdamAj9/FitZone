@@ -53,7 +53,7 @@ export function PlanningPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">Planning</h1>
@@ -116,7 +116,7 @@ export function PlanningPage() {
             return (
               <div
                 key={key}
-                className={`rounded-xl border bg-white p-3 shadow-sm ${
+                className={`rounded-xl border bg-surface p-3 shadow-sm ${
                   isToday ? "border-brand-400" : "border-transparent"
                 }`}
               >
