@@ -5,12 +5,35 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: "#eef7ff",
-          100: "#d9ecff",
-          500: "#2563eb",
-          600: "#1d4ed8",
-          700: "#1e40af",
+          50: "#faf5ff",
+          100: "#f3e8ff",
+          200: "#e9d5ff",
+          300: "#d8b4fe",
+          400: "#c084fc",
+          500: "#a855f7",
+          600: "#9333ea",
+          700: "#7e22ce",
+          800: "#6b21a8",
+          900: "#581c87",
+          950: "#3b0764",
         },
+        ink: {
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          500: "#64748b",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        },
+      },
+      backgroundImage: {
+        "hero-gradient":
+          "radial-gradient(circle at 20% 0%, rgba(168, 85, 247, 0.45), transparent 50%), radial-gradient(circle at 80% 100%, rgba(192, 132, 252, 0.3), transparent 55%), linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #312e81 100%)",
+      },
+      boxShadow: {
+        "brand-glow": "0 10px 40px -10px rgba(168, 85, 247, 0.5)",
       },
     },
   },

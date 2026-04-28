@@ -2,21 +2,22 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
+import { OFFERINGS } from "../../data/offerings";
 import { useLogout } from "../../hooks/useAuth";
 import { useAuthStore } from "../../store/auth";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
     isActive
-      ? "text-brand-600 bg-brand-50"
-      : "text-slate-600 hover:text-brand-600 hover:bg-slate-100"
+      ? "text-brand-700 bg-brand-50"
+      : "text-ink-700 hover:text-brand-700 hover:bg-ink-100"
   }`;
 
 const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   `block px-4 py-2 text-base font-medium rounded-md ${
     isActive
-      ? "text-brand-600 bg-brand-50"
-      : "text-slate-700 hover:bg-slate-100"
+      ? "text-brand-700 bg-brand-50"
+      : "text-ink-700 hover:bg-ink-100"
   }`;
 
 export function Header() {
@@ -25,8 +26,12 @@ export function Header() {
   const user = useAuthStore((s) => s.user);
   const logoutMutation = useLogout();
   const [open, setOpen] = useState(false);
+  const [mobileOfferOpen, setMobileOfferOpen] = useState(false);
 
-  const closeMenu = () => setOpen(false);
+  const closeMenu = () => {
+    setOpen(false);
+    setMobileOfferOpen(false);
+  };
 
   const toggleLang = () => {
     void i18n.changeLanguage(i18n.language.startsWith("fr") ? "en" : "fr");
@@ -40,16 +45,96 @@ export function Header() {
   };
 
   return (
-    <header className="border-b bg-white shadow-sm">
+    <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
-        <Link to="/" className="text-xl font-bold text-brand-600" onClick={closeMenu}>
-          {t("app.name")}
+        <Link
+          to="/"
+          className="flex items-center gap-2 text-xl font-bold"
+          onClick={closeMenu}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white">
+            F
+          </span>
+          <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">
+            FitZone
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
           <NavLink to="/" end className={navLinkClass}>
             {t("nav.home")}
           </NavLink>
+
+          <div className="group relative">
+            <button
+              type="button"
+              className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 hover:text-brand-700"
+            >
+              Notre offre
+              <svg
+                className="h-4 w-4 transition-transform group-hover:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+              <div className="w-[860px] rounded-2xl border border-ink-200 bg-white p-6 shadow-2xl">
+                <div className="grid grid-cols-3 gap-6">
+                  {OFFERINGS.map((group) => (
+                    <div key={group.title}>
+                      <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink-500">
+                        <span className="text-base">{group.icon}</span>
+                        {group.title}
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {group.items.map((item) => (
+                          <li key={item.label}>
+                            <Link
+                              to={item.href}
+                              className="block rounded-md p-2 transition hover:bg-brand-50"
+                            >
+                              <p className="text-sm font-medium text-ink-900">
+                                {item.label}
+                              </p>
+                              <p className="mt-0.5 text-xs text-ink-500">
+                                {item.description}
+                              </p>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 flex items-center justify-between rounded-xl bg-ink-900 p-4 text-white">
+                  <div>
+                    <p className="text-sm font-semibold">
+                      Découvrez tout l'univers FitZone
+                    </p>
+                    <p className="text-xs text-ink-200">
+                      Plus de 200 séances par semaine, 7 espaces dédiés.
+                    </p>
+                  </div>
+                  <Link
+                    to="/plans"
+                    className="rounded-md bg-brand-500 px-4 py-2 text-sm font-medium hover:bg-brand-600"
+                  >
+                    Voir les abonnements →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <NavLink to="/courses" className={navLinkClass}>
             {t("nav.courses")}
           </NavLink>
@@ -68,7 +153,7 @@ export function Header() {
           <button
             type="button"
             onClick={toggleLang}
-            className="rounded-md border border-slate-200 px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100"
+            className="rounded-md border border-ink-200 px-2 py-1 text-xs font-medium text-ink-700 hover:bg-ink-100"
           >
             {i18n.language.startsWith("fr") ? "EN" : "FR"}
           </button>
@@ -97,7 +182,7 @@ export function Header() {
                 type="button"
                 onClick={handleLogout}
                 disabled={logoutMutation.isPending}
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 disabled:opacity-50"
+                className="rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 disabled:opacity-50"
               >
                 {t("nav.logout")}
               </button>
@@ -109,7 +194,7 @@ export function Header() {
               </NavLink>
               <NavLink
                 to="/register"
-                className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700"
+                className="rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-sm font-medium text-white shadow-brand-glow transition hover:opacity-90"
               >
                 {t("nav.register")}
               </NavLink>
@@ -122,7 +207,7 @@ export function Header() {
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 lg:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-ink-700 hover:bg-ink-100 lg:hidden"
         >
           <svg
             className="h-6 w-6"
@@ -151,11 +236,51 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t bg-white px-3 py-3 lg:hidden">
+        <div className="border-t border-ink-200 bg-white px-3 py-3 lg:hidden">
           <nav className="space-y-1">
             <NavLink to="/" end onClick={closeMenu} className={mobileNavLinkClass}>
               {t("nav.home")}
             </NavLink>
+
+            <button
+              type="button"
+              onClick={() => setMobileOfferOpen((v) => !v)}
+              className="flex w-full items-center justify-between rounded-md px-4 py-2 text-base font-medium text-ink-700 hover:bg-ink-100"
+            >
+              Notre offre
+              <span
+                className={`transition-transform ${
+                  mobileOfferOpen ? "rotate-180" : ""
+                }`}
+              >
+                ▾
+              </span>
+            </button>
+            {mobileOfferOpen && (
+              <div className="rounded-md bg-ink-50 p-3">
+                {OFFERINGS.map((group) => (
+                  <div key={group.title} className="mb-4 last:mb-0">
+                    <p className="px-2 text-xs font-bold uppercase tracking-wider text-ink-500">
+                      {group.icon} {group.title}
+                    </p>
+                    <ul className="mt-2 space-y-1">
+                      {group.items.map((item) => (
+                        <li key={item.label}>
+                          <Link
+                            to={item.href}
+                            onClick={closeMenu}
+                            className="block rounded-md px-2 py-1.5 text-sm text-ink-700 hover:bg-white"
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <NavLink to="/courses" onClick={closeMenu} className={mobileNavLinkClass}>
               {t("nav.courses")}
             </NavLink>
@@ -169,7 +294,7 @@ export function Header() {
               {t("nav.plans")}
             </NavLink>
           </nav>
-          <div className="mt-3 space-y-1 border-t pt-3">
+          <div className="mt-3 space-y-1 border-t border-ink-200 pt-3">
             {user ? (
               <>
                 {user.role === "admin" && (
@@ -200,7 +325,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="block w-full rounded-md px-4 py-2 text-left text-base font-medium text-slate-700 hover:bg-slate-100"
+                  className="block w-full rounded-md px-4 py-2 text-left text-base font-medium text-ink-700 hover:bg-ink-100"
                 >
                   {t("nav.logout")}
                 </button>
@@ -217,7 +342,7 @@ export function Header() {
                 <NavLink
                   to="/register"
                   onClick={closeMenu}
-                  className="block rounded-md bg-brand-600 px-4 py-2 text-base font-medium text-white"
+                  className="block rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-base font-medium text-white"
                 >
                   {t("nav.register")}
                 </NavLink>
@@ -229,7 +354,7 @@ export function Header() {
                 toggleLang();
                 closeMenu();
               }}
-              className="block w-full rounded-md border border-slate-200 px-4 py-2 text-left text-sm text-slate-600 hover:bg-slate-100"
+              className="block w-full rounded-md border border-ink-200 px-4 py-2 text-left text-sm text-ink-700 hover:bg-ink-100"
             >
               Langue : {i18n.language.startsWith("fr") ? "FR" : "EN"} →{" "}
               {i18n.language.startsWith("fr") ? "EN" : "FR"}

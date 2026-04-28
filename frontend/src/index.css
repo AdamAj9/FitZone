@@ -7,6 +7,9 @@
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-ink-50 text-ink-800 antialiased;
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
   }
 }
