@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
+import { StarRating } from "../../components/StarRating";
 
 export function CoachesListPage() {
   const { data, isLoading, isError } = useQuery({
@@ -43,6 +44,13 @@ export function CoachesListPage() {
                 {coach.coach_profile.years_of_experience} ans d'expérience
               </p>
             ) : null}
+            <div className="mt-3">
+              <StarRating
+                value={coach.rating_average}
+                count={coach.rating_count}
+                size="sm"
+              />
+            </div>
           </Link>
         ))}
       </div>

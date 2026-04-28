@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.db.models import Count, Q
+from django.db.models import Avg, Count, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
 from rest_framework.permissions import AllowAny
@@ -90,10 +90,16 @@ class CoachViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = CoachPublicSerializer
     permission_classes = (AllowAny,)
-    queryset = (
-        User.objects.filter(role=UserModel.Role.COACH, is_active=True)
-        .select_related("coach_profile")
-        .order_by("first_name", "last_name")
-    )
     filter_backends = (filters.SearchFilter,)
     search_fields = ("first_name", "last_name", "coach_profile__specialties")
+
+    def get_queryset(self):
+        return (
+            User.objects.filter(role=UserModel.Role.COACH, is_active=True)
+            .select_related("coach_profile")
+            .annotate(
+                _rating_avg=Avg("ratings_received__score"),
+                _rating_count=Count("ratings_received"),
+            )
+            .order_by("first_name", "last_name")
+        )

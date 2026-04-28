@@ -30,14 +30,33 @@ class CoachPublicSerializer(serializers.ModelSerializer):
 
     coach_profile = CoachProfileSerializer(read_only=True)
     full_name = serializers.SerializerMethodField()
+    rating_average = serializers.SerializerMethodField()
+    rating_count = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ("id", "first_name", "last_name", "full_name", "coach_profile")
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "full_name",
+            "coach_profile",
+            "rating_average",
+            "rating_count",
+        )
 
     def get_full_name(self, obj: User) -> str:
         name = f"{obj.first_name} {obj.last_name}".strip()
         return name or obj.email.split("@")[0]
+
+    def get_rating_average(self, obj: User) -> float | None:
+        avg = getattr(obj, "_rating_avg", None)
+        if avg is None:
+            return None
+        return round(float(avg), 2)
+
+    def get_rating_count(self, obj: User) -> int:
+        return getattr(obj, "_rating_count", 0) or 0
 
 
 class CourseListSerializer(serializers.ModelSerializer):

@@ -33,6 +33,8 @@ export interface CoachPublic {
   last_name: string;
   full_name: string;
   coach_profile: CoachProfile | null;
+  rating_average: number | null;
+  rating_count: number;
 }
 
 export interface CourseDetail {
