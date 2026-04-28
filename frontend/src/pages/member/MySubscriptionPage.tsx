@@ -1,8 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { subscriptionsApi } from "../../api/subscriptions";
+import { ConfirmDialog } from "../../components/ui";
 import { formatDateTime } from "../../lib/date";
+import { apiErrorMessage } from "../../lib/errors";
 
 const statusColor: Record<string, string> = {
   active: "bg-green-100 text-green-800",
@@ -13,6 +17,7 @@ const statusColor: Record<string, string> = {
 
 export function MySubscriptionPage() {
   const queryClient = useQueryClient();
+  const [confirmCancel, setConfirmCancel] = useState(false);
 
   const currentQuery = useQuery({
     queryKey: ["subscription-current"],
@@ -27,9 +32,12 @@ export function MySubscriptionPage() {
   const cancelMutation = useMutation({
     mutationFn: (id: number) => subscriptionsApi.cancel(id),
     onSuccess: () => {
+      toast.success("Abonnement annulé");
+      setConfirmCancel(false);
       void queryClient.invalidateQueries({ queryKey: ["subscription-current"] });
       void queryClient.invalidateQueries({ queryKey: ["my-subscriptions"] });
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Annulation impossible")),
   });
 
   const current = currentQuery.data?.subscription ?? null;
@@ -89,11 +97,10 @@ export function MySubscriptionPage() {
 
           <button
             type="button"
-            onClick={() => cancelMutation.mutate(current.id)}
-            disabled={cancelMutation.isPending}
-            className="mt-6 rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50 disabled:opacity-50"
+            onClick={() => setConfirmCancel(true)}
+            className="mt-6 rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
           >
-            {cancelMutation.isPending ? "Annulation..." : "Annuler l'abonnement"}
+            Annuler l'abonnement
           </button>
         </div>
       ) : (
@@ -145,6 +152,16 @@ export function MySubscriptionPage() {
           </ul>
         )}
       </div>
+
+      <ConfirmDialog
+        open={confirmCancel}
+        title="Annuler l'abonnement ?"
+        description="Vous perdrez immédiatement l'accès aux services Premium. Cette action est irréversible."
+        confirmLabel="Oui, annuler"
+        onConfirm={() => current && cancelMutation.mutate(current.id)}
+        onCancel={() => setConfirmCancel(false)}
+        loading={cancelMutation.isPending}
+      />
     </div>
   );
 }

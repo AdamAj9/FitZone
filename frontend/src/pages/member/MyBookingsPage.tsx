@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { bookingsApi } from "../../api/bookings";
+import { ConfirmDialog } from "../../components/ui";
+import { apiErrorMessage } from "../../lib/errors";
 import { formatDateTime } from "../../lib/date";
 import type { Booking } from "../../types/bookings";
 
@@ -18,6 +22,7 @@ function isUpcoming(b: Booking) {
 
 export function MyBookingsPage() {
   const queryClient = useQueryClient();
+  const [pendingCancelId, setPendingCancelId] = useState<number | null>(null);
   const { data, isLoading } = useQuery({
     queryKey: ["my-bookings"],
     queryFn: () => bookingsApi.listMine(),
@@ -26,8 +31,11 @@ export function MyBookingsPage() {
   const cancelMutation = useMutation({
     mutationFn: (id: number) => bookingsApi.cancel(id),
     onSuccess: () => {
+      toast.success("Réservation annulée");
+      setPendingCancelId(null);
       void queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Annulation impossible")),
   });
 
   const upcoming = data?.results.filter(isUpcoming) ?? [];
@@ -80,9 +88,8 @@ export function MyBookingsPage() {
                     {b.status === "confirmed" && (
                       <button
                         type="button"
-                        onClick={() => cancelMutation.mutate(b.id)}
-                        disabled={cancelMutation.isPending}
-                        className="rounded-md border border-red-300 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-50 disabled:opacity-50"
+                        onClick={() => setPendingCancelId(b.id)}
+                        className="rounded-md border border-red-300 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-50"
                       >
                         Annuler
                       </button>
@@ -122,6 +129,18 @@ export function MyBookingsPage() {
           </ul>
         </section>
       )}
+
+      <ConfirmDialog
+        open={pendingCancelId !== null}
+        title="Annuler cette réservation ?"
+        description="La place sera libérée pour d'autres membres."
+        confirmLabel="Oui, annuler"
+        onConfirm={() => {
+          if (pendingCancelId) cancelMutation.mutate(pendingCancelId);
+        }}
+        onCancel={() => setPendingCancelId(null)}
+        loading={cancelMutation.isPending}
+      />
     </div>
   );
 }

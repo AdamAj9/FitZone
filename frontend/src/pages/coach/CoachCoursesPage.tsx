@@ -1,8 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
+import toast from "react-hot-toast";
+
 import { coachApi } from "../../api/coach";
 import { coursesApi } from "../../api/courses";
+import { ConfirmDialog } from "../../components/ui";
+import { apiErrorMessage } from "../../lib/errors";
+import { useAuthStore } from "../../store/auth";
 import type { CoachCourseWritePayload } from "../../types/coach";
 import type { CourseListItem } from "../../types/courses";
 
@@ -19,13 +24,16 @@ const emptyForm: CoachCourseWritePayload = {
 
 export function CoachCoursesPage() {
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const [editing, setEditing] = useState<CourseListItem | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState<CoachCourseWritePayload>(emptyForm);
+  const [pendingDelete, setPendingDelete] = useState<CourseListItem | null>(null);
 
   const coursesQuery = useQuery({
-    queryKey: ["coach-courses"],
-    queryFn: () => coachApi.myCourses(),
+    queryKey: ["coach-courses", user?.id],
+    queryFn: () => coachApi.myCourses(user!.id),
+    enabled: Boolean(user?.id),
   });
 
   const categoriesQuery = useQuery({
@@ -42,10 +50,12 @@ export function CoachCoursesPage() {
     mutationFn: (payload: CoachCourseWritePayload) =>
       coachApi.createCourse(payload),
     onSuccess: () => {
+      toast.success("Cours créé");
       setShowForm(false);
       setForm(emptyForm);
       invalidate();
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Création impossible")),
   });
 
   const updateMutation = useMutation({
@@ -57,15 +67,23 @@ export function CoachCoursesPage() {
       payload: Partial<CoachCourseWritePayload>;
     }) => coachApi.updateCourse(slug, payload),
     onSuccess: () => {
+      toast.success("Cours mis à jour");
       setEditing(null);
       setForm(emptyForm);
+      setShowForm(false);
       invalidate();
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Mise à jour impossible")),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (slug: string) => coachApi.deleteCourse(slug),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      toast.success("Cours supprimé");
+      setPendingDelete(null);
+      invalidate();
+    },
+    onError: (e) => toast.error(apiErrorMessage(e, "Suppression impossible")),
   });
 
   const startEdit = (c: CourseListItem) => {
@@ -329,11 +347,7 @@ export function CoachCoursesPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => {
-                          if (confirm(`Supprimer "${c.title}" ?`)) {
-                            deleteMutation.mutate(c.slug);
-                          }
-                        }}
+                        onClick={() => setPendingDelete(c)}
                         className="rounded-md border border-red-300 px-3 py-1 text-xs text-red-700 hover:bg-red-50"
                       >
                         Supprimer
@@ -346,6 +360,20 @@ export function CoachCoursesPage() {
           </table>
         )}
       </div>
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title="Supprimer ce cours ?"
+        description={
+          pendingDelete
+            ? `« ${pendingDelete.title} » sera retiré du catalogue. Les séances déjà planifiées seront aussi supprimées.`
+            : ""
+        }
+        confirmLabel="Supprimer"
+        onConfirm={() => pendingDelete && deleteMutation.mutate(pendingDelete.slug)}
+        onCancel={() => setPendingDelete(null)}
+        loading={deleteMutation.isPending}
+      />
     </div>
   );
 }

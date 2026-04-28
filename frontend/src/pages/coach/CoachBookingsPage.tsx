@@ -2,13 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { coachApi } from "../../api/coach";
+import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 
 export function CoachBookingsPage() {
+  const user = useAuthStore((s) => s.user);
   const [sessionId, setSessionId] = useState<number | "">("");
   const sessionsQuery = useQuery({
-    queryKey: ["coach-sessions"],
-    queryFn: () => coachApi.mySessions(),
+    queryKey: ["coach-sessions", user?.id],
+    queryFn: () => coachApi.mySessions(user!.id),
+    enabled: Boolean(user?.id),
   });
   const bookingsQuery = useQuery({
     queryKey: ["coach-bookings", sessionId],

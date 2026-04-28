@@ -21,9 +21,10 @@ export const coachApi = {
     return data;
   },
 
-  async myCourses(): Promise<Paginated<CourseListItem>> {
+  async myCourses(coachId: number): Promise<Paginated<CourseListItem>> {
     const { data } = await apiClient.get<Paginated<CourseListItem>>(
       "/courses/",
+      { params: { coach: coachId } },
     );
     return data;
   },
@@ -48,9 +49,10 @@ export const coachApi = {
     await apiClient.delete(`/courses/${slug}/`);
   },
 
-  async mySessions(): Promise<Paginated<CourseSessionItem>> {
+  async mySessions(coachId: number): Promise<Paginated<CourseSessionItem>> {
     const { data } = await apiClient.get<Paginated<CourseSessionItem>>(
       "/sessions/",
+      { params: { coach: coachId, ordering: "starts_at" } },
     );
     return data;
   },

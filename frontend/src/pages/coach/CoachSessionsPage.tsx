@@ -1,8 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { coachApi } from "../../api/coach";
 import { sessionsApi } from "../../api/sessions";
+import { ConfirmDialog } from "../../components/ui";
+import { apiErrorMessage } from "../../lib/errors";
+import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 import type { CoachSessionWritePayload } from "../../types/coach";
 
@@ -15,21 +19,25 @@ const emptyForm: CoachSessionWritePayload = {
 
 export function CoachSessionsPage() {
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState<CoachSessionWritePayload>(emptyForm);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<number | null>(null);
 
   const coursesQuery = useQuery({
-    queryKey: ["coach-courses"],
-    queryFn: () => coachApi.myCourses(),
+    queryKey: ["coach-courses", user?.id],
+    queryFn: () => coachApi.myCourses(user!.id),
+    enabled: Boolean(user?.id),
   });
   const roomsQuery = useQuery({
     queryKey: ["rooms"],
     queryFn: () => sessionsApi.listRooms(),
   });
   const sessionsQuery = useQuery({
-    queryKey: ["coach-sessions"],
-    queryFn: () => coachApi.mySessions(),
+    queryKey: ["coach-sessions", user?.id],
+    queryFn: () => coachApi.mySessions(user!.id),
+    enabled: Boolean(user?.id),
   });
 
   const invalidate = () => {
@@ -41,11 +49,13 @@ export function CoachSessionsPage() {
     mutationFn: (payload: CoachSessionWritePayload) =>
       coachApi.createSession(payload),
     onSuccess: () => {
+      toast.success("Séance planifiée");
       setShowForm(false);
       setForm(emptyForm);
       setEditingId(null);
       invalidate();
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Planification impossible")),
   });
 
   const updateMutation = useMutation({
@@ -57,16 +67,23 @@ export function CoachSessionsPage() {
       payload: Partial<CoachSessionWritePayload>;
     }) => coachApi.updateSession(id, payload),
     onSuccess: () => {
+      toast.success("Séance mise à jour");
       setShowForm(false);
       setForm(emptyForm);
       setEditingId(null);
       invalidate();
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Mise à jour impossible")),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => coachApi.deleteSession(id),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      toast.success("Séance supprimée");
+      setPendingDelete(null);
+      invalidate();
+    },
+    onError: (e) => toast.error(apiErrorMessage(e, "Suppression impossible")),
   });
 
   const onSubmit = (e: React.FormEvent) => {
@@ -142,9 +159,7 @@ export function CoachSessionsPage() {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700">
-                Début
-              </label>
+              <label className="text-sm font-medium text-slate-700">Début</label>
               <input
                 type="datetime-local"
                 value={form.starts_at}
@@ -260,11 +275,7 @@ export function CoachSessionsPage() {
                   <td className="px-4 py-3">
                     <button
                       type="button"
-                      onClick={() => {
-                        if (confirm("Supprimer cette séance ?")) {
-                          deleteMutation.mutate(s.id);
-                        }
-                      }}
+                      onClick={() => setPendingDelete(s.id)}
                       className="rounded-md border border-red-300 px-3 py-1 text-xs text-red-700 hover:bg-red-50"
                     >
                       Supprimer
@@ -276,6 +287,16 @@ export function CoachSessionsPage() {
           </table>
         )}
       </div>
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        title="Supprimer cette séance ?"
+        description="Les éventuelles réservations associées seront aussi annulées."
+        confirmLabel="Supprimer"
+        onConfirm={() => pendingDelete && deleteMutation.mutate(pendingDelete)}
+        onCancel={() => setPendingDelete(null)}
+        loading={deleteMutation.isPending}
+      />
     </div>
   );
 }

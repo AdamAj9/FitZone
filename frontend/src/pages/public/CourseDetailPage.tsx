@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { bookingsApi } from "../../api/bookings";
@@ -7,6 +8,7 @@ import { paymentsApi } from "../../api/payments";
 import { sessionsApi } from "../../api/sessions";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { formatDateTime } from "../../lib/date";
+import { apiErrorMessage } from "../../lib/errors";
 import { useAuthStore } from "../../store/auth";
 import type { CourseSessionItem } from "../../types/sessions";
 
@@ -110,10 +112,12 @@ export function CourseDetailPage() {
   const bookMutation = useMutation({
     mutationFn: (sessionId: number) => bookingsApi.book(sessionId),
     onSuccess: () => {
+      toast.success("Réservation confirmée");
       void queryClient.invalidateQueries({ queryKey: ["course-sessions", slug] });
       void queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
       navigate("/my-bookings");
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Réservation impossible")),
   });
 
   const payMutation = useMutation({
@@ -122,6 +126,7 @@ export function CourseDetailPage() {
     onSuccess: ({ checkout_url }) => {
       window.location.href = checkout_url;
     },
+    onError: (e) => toast.error(apiErrorMessage(e, "Paiement impossible")),
   });
 
   if (courseQuery.isLoading) {

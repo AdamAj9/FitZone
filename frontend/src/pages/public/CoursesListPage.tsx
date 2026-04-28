@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { coursesApi } from "../../api/courses";
 import { CourseCard } from "../../components/CourseCard";
+import { EmptyState, SkeletonCard } from "../../components/ui";
 import type { CourseLevel } from "../../types/courses";
 
 export function CoursesListPage() {
@@ -68,13 +69,19 @@ export function CoursesListPage() {
       </div>
 
       {coursesQuery.isLoading ? (
-        <p className="text-slate-500">Chargement...</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
       ) : coursesQuery.isError ? (
         <p className="text-red-600">Erreur lors du chargement.</p>
       ) : coursesQuery.data && coursesQuery.data.results.length === 0 ? (
-        <div className="rounded-2xl bg-white p-12 text-center shadow-sm">
-          <p className="text-slate-500">Aucun cours ne correspond aux filtres.</p>
-        </div>
+        <EmptyState
+          icon="🔍"
+          title="Aucun cours ne correspond"
+          description="Essayez de modifier ou retirer un filtre."
+        />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {coursesQuery.data?.results.map((course) => (

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { StarRating } from "../../components/StarRating";
+import { EmptyState, SkeletonCard } from "../../components/ui";
 
 export function CoachesListPage() {
   const { data, isLoading, isError } = useQuery({
@@ -10,8 +11,29 @@ export function CoachesListPage() {
     queryFn: () => coursesApi.listCoaches(),
   });
 
-  if (isLoading) return <p className="text-slate-500">Chargement...</p>;
-  if (isError) return <p className="text-red-600">Erreur de chargement.</p>;
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="rounded-2xl bg-white p-6 shadow-sm">
+          <h1 className="text-3xl font-bold text-slate-900">Nos coachs</h1>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <EmptyState
+        icon="⚠️"
+        title="Erreur de chargement"
+        description="Impossible de récupérer la liste des coachs."
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
