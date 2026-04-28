@@ -62,6 +62,14 @@ export function Header() {
           </button>
           {user ? (
             <>
+              {user.role === "admin" && (
+                <NavLink
+                  to="/admin"
+                  className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
+                >
+                  Admin
+                </NavLink>
+              )}
               <NavLink to="/dashboard" className={navLinkClass}>
                 {t("nav.dashboard")}
               </NavLink>

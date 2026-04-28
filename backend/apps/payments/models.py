@@ -95,9 +95,25 @@ class Payment(models.Model):
                 "updated_at",
             ]
         )
+        from apps.core.audit import record as audit
+
+        audit(
+            "pay_succeeded",
+            actor=self.user,
+            target=self,
+            metadata={"kind": self.kind, "amount": str(self.amount)},
+        )
 
     def mark_failed(self, *, event_id: str = ""):
         self.status = self.Status.FAILED
         if event_id:
             self.stripe_event_id = event_id
         self.save(update_fields=["status", "stripe_event_id", "updated_at"])
+        from apps.core.audit import record as audit
+
+        audit(
+            "pay_failed",
+            actor=self.user,
+            target=self,
+            metadata={"kind": self.kind, "amount": str(self.amount)},
+        )

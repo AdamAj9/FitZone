@@ -109,6 +109,15 @@ class Subscription(models.Model):
         self.ends_at = when + timedelta(days=self.plan.duration_days)
         self.save(update_fields=["status", "starts_at", "ends_at", "updated_at"])
 
+        from apps.core.audit import record as audit
+
+        audit(
+            "sub_activated",
+            actor=self.user,
+            target=self,
+            metadata={"plan": self.plan.slug},
+        )
+
     def cancel(self):
         if self.status not in (self.Status.PENDING, self.Status.ACTIVE):
             raise ValidationError(
@@ -117,6 +126,15 @@ class Subscription(models.Model):
         self.status = self.Status.CANCELLED
         self.cancelled_at = timezone.now()
         self.save(update_fields=["status", "cancelled_at", "updated_at"])
+
+        from apps.core.audit import record as audit
+
+        audit(
+            "sub_cancelled",
+            actor=self.user,
+            target=self,
+            metadata={"plan": self.plan.slug},
+        )
 
     @property
     def is_currently_active(self) -> bool:

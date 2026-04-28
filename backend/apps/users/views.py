@@ -48,6 +48,19 @@ class LoginView(TokenObtainPairView):
     serializer_class = FitZoneTokenObtainPairSerializer
     permission_classes = (AllowAny,)
 
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 200:
+            from apps.core.audit import record as audit
+
+            email = response.data.get("user", {}).get("email")
+            if email:
+                user = User.objects.filter(email=email).first()
+                ip = request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0].strip()
+                ip = ip or request.META.get("REMOTE_ADDR")
+                audit("login", actor=user, target=user, ip_address=ip or None)
+        return response
+
 
 class LogoutView(APIView):
     """POST /api/auth/logout/ — blacklist the supplied refresh token."""

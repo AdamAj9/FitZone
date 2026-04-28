@@ -93,12 +93,25 @@ def book(*, user, course_session_id: int, payment=None) -> Booking:
             "Active Premium subscription or per-class payment required."
         )
 
-    return Booking.objects.create(
+    booking = Booking.objects.create(
         user=user,
         course_session=session,
         channel=channel,
         payment=payment,
     )
+    from apps.core.audit import record as audit
+
+    audit(
+        "book_created",
+        actor=user,
+        target=booking,
+        metadata={
+            "course_session_id": session.id,
+            "course": session.course.title,
+            "channel": channel,
+        },
+    )
+    return booking
 
 
 def cancel(*, user, booking_id: int) -> Booking:
@@ -110,6 +123,14 @@ def cancel(*, user, booking_id: int) -> Booking:
     if booking.course_session.starts_at < timezone.now():
         raise BookingError("Cannot cancel a session that has already started.")
     booking.cancel()
+    from apps.core.audit import record as audit
+
+    audit(
+        "book_cancelled",
+        actor=user,
+        target=booking,
+        metadata={"course_session_id": booking.course_session_id},
+    )
     return booking
 
 

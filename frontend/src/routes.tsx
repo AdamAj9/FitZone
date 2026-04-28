@@ -1,7 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { AdminLayout } from "./components/layout/AdminLayout";
 import { AppLayout } from "./components/layout/AppLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage";
+import { AdminLogsPage } from "./pages/admin/AdminLogsPage";
+import { AdminUsersPage } from "./pages/admin/AdminUsersPage";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
 import { CheckoutCancelPage } from "./pages/member/CheckoutCancelPage";
@@ -48,6 +52,19 @@ export const router = createBrowserRouter([
         ],
       },
       { path: "*", element: <NotFoundPage /> },
+    ],
+  },
+  {
+    element: <ProtectedRoute roles={["admin"]} />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: "/admin", element: <AdminDashboardPage /> },
+          { path: "/admin/users", element: <AdminUsersPage /> },
+          { path: "/admin/logs", element: <AdminLogsPage /> },
+        ],
+      },
     ],
   },
 ]);
