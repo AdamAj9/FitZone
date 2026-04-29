@@ -87,35 +87,36 @@ export function Header() {
               </svg>
             </button>
             <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              <div className="w-[860px] rounded-2xl border border-ink-200 bg-surface p-6 shadow-2xl">
-                <div className="grid grid-cols-3 gap-6">
+              <div className="w-[920px] overflow-hidden rounded-2xl border border-ink-200 bg-surface shadow-2xl">
+                <div className="grid grid-cols-3 gap-6 p-6">
                   {OFFERINGS.map((group) => (
-                    <div key={group.title}>
-                      <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink-500">
-                        <span className="text-base">{group.icon}</span>
-                        {group.title}
-                      </p>
-                      <ul className="mt-3 space-y-2">
-                        {group.items.map((item) => (
-                          <li key={item.label}>
-                            <Link
-                              to={item.href}
-                              className="block rounded-md p-2 transition hover:bg-brand-50"
-                            >
-                              <p className="text-sm font-medium text-ink-900">
-                                {item.label}
-                              </p>
-                              <p className="mt-0.5 text-xs text-ink-500">
-                                {item.description}
-                              </p>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <Link
+                      key={group.title}
+                      to={group.items[0]?.href ?? "/courses"}
+                      className="group/item relative overflow-hidden rounded-xl border border-ink-200 bg-ink-100 transition hover:border-brand-400 hover:shadow-brand-glow"
+                    >
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <img
+                          src={group.image}
+                          alt={group.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-110"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/30 to-transparent" />
+                      </div>
+                      <div className="absolute inset-x-0 bottom-0 p-3 text-white">
+                        <p className="flex items-center gap-1.5 text-sm font-semibold">
+                          <span>{group.icon}</span>
+                          {group.title}
+                        </p>
+                        <p className="mt-1 line-clamp-1 text-xs text-ink-100">
+                          {group.items.map((i) => i.label).join(" · ")}
+                        </p>
+                      </div>
+                    </Link>
                   ))}
                 </div>
-                <div className="mt-6 flex items-center justify-between rounded-xl bg-ink-900 p-4 text-white">
+                <div className="flex items-center justify-between bg-ink-900 px-6 py-4 text-white">
                   <div>
                     <p className="text-sm font-semibold">
                       Découvrez tout l'univers FitZone

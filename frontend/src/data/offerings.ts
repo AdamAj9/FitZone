@@ -8,6 +8,7 @@
 export type OfferingGroup = {
   title: string;
   icon: string;
+  image: string;
   items: OfferingItem[];
 };
 
@@ -21,6 +22,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     title: "Salles de fitness",
     icon: "🏋️",
+    image: "/images/facilities/Salle%20de%20musculation.png",
     items: [
       {
         label: "Salle mixte",
@@ -40,14 +42,32 @@ export const OFFERINGS: OfferingGroup[] = [
     ],
   },
   {
-    title: "Aquatique & bien-être",
+    title: "Piscine 25 m",
     icon: "🏊",
+    image: "/images/facilities/Piscine.png",
     items: [
       {
-        label: "Piscine 25 m",
+        label: "Nage libre",
         description: "4 lignes d'eau chauffées + couloir nage libre.",
         href: "/courses?category=piscine",
       },
+      {
+        label: "Aquagym",
+        description: "Cours collectifs encadrés, plusieurs niveaux.",
+        href: "/courses?category=piscine",
+      },
+      {
+        label: "Cours de natation",
+        description: "Apprentissage individuel ou en groupe.",
+        href: "/courses?category=piscine",
+      },
+    ],
+  },
+  {
+    title: "Spa & bien-être",
+    icon: "♨️",
+    image: "/images/facilities/Spa-hammam.png",
+    items: [
       {
         label: "Hammam",
         description: "Vapeur eucalyptus, accès illimité aux abonnés Premium.",
@@ -58,11 +78,17 @@ export const OFFERINGS: OfferingGroup[] = [
         description: "Cabines bois nordique, sessions de 15 min.",
         href: "/plans",
       },
+      {
+        label: "Espace détente",
+        description: "Tisanes, lecture, après chaque séance.",
+        href: "/plans",
+      },
     ],
   },
   {
-    title: "Sports de raquette",
+    title: "Tennis & raquette",
     icon: "🎾",
+    image: "/images/facilities/Tennins%20indoor.png",
     items: [
       {
         label: "Tennis",
@@ -84,6 +110,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     title: "Cours collectifs",
     icon: "🧘",
+    image: "/images/facilities/Salle%20Yoga.png",
     items: [
       {
         label: "Yoga & Pilates",
@@ -105,6 +132,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     title: "Pro & coworking",
     icon: "💼",
+    image: "/images/facilities/Lounge-coworking.png",
     items: [
       {
         label: "Espaces coworking",
@@ -120,27 +148,6 @@ export const OFFERINGS: OfferingGroup[] = [
         label: "Casiers premium",
         description: "Casiers personnels avec serrure connectée.",
         href: "/plans",
-      },
-    ],
-  },
-  {
-    title: "Outdoor & golf",
-    icon: "🏌️",
-    items: [
-      {
-        label: "Simulateur de golf",
-        description: "TrackMan dernière génération, parcours mondiaux.",
-        href: "/plans",
-      },
-      {
-        label: "Zone running",
-        description: "Piste extérieure 400 m éclairée, vestiaires dédiés.",
-        href: "/courses",
-      },
-      {
-        label: "Stretching outdoor",
-        description: "Cours en plein air les jours de beau temps.",
-        href: "/courses?category=yoga",
       },
     ],
   },

@@ -7,6 +7,9 @@ import { subscriptionsApi } from "../../api/subscriptions";
 import { OFFERINGS } from "../../data/offerings";
 import type { Period } from "../../types/subscriptions";
 
+const HERO_IMAGE = "/images/hero/Hero%20principal.png";
+const CTA_IMAGE = "/images/hero/Hero%20secondaire.png";
+
 const STATS = [
   { value: "200+", label: "Séances par semaine" },
   { value: "10+", label: "Cours collectifs" },
@@ -74,20 +77,32 @@ export function HomePage() {
   return (
     <div className="space-y-24 pb-24">
       {/* === HERO === */}
-      <section className="relative overflow-hidden bg-hero-gradient text-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-24 lg:grid-cols-2 lg:py-32">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-surface/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
+      <section className="relative isolate overflow-hidden text-white">
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center"
+          style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-gradient-to-br from-ink-950/85 via-ink-900/75 to-brand-900/70"
+          aria-hidden
+        />
+        <div className="absolute -left-24 top-32 -z-10 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl" aria-hidden />
+        <div className="absolute -right-20 bottom-20 -z-10 h-96 w-96 rounded-full bg-brand-700/30 blur-3xl" aria-hidden />
+
+        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-40">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
               Nouvelle salle ouverte 7j/7
             </span>
-            <h1 className="mt-6 text-4xl font-bold leading-tight md:text-6xl">
+            <h1 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
               Le sport,<br />
               <span className="bg-gradient-to-r from-brand-300 to-brand-100 bg-clip-text text-transparent">
                 ré-imaginé.
               </span>
             </h1>
-            <p className="mt-5 max-w-lg text-lg text-ink-200">
+            <p className="mt-5 max-w-lg text-lg text-ink-100 md:text-xl">
               Salles de fitness, piscine, tennis, padel, hammam, coworking…
               tout sous un même toit. Réservation en ligne, paiement sécurisé,
               progression suivie.
@@ -95,49 +110,24 @@ export function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/register"
-                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-6 py-3 font-semibold text-white shadow-brand-glow transition hover:opacity-90"
+                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:opacity-90"
               >
                 Commencer gratuitement →
               </Link>
               <Link
                 to="/plans"
-                className="rounded-lg border border-white/30 px-6 py-3 font-semibold backdrop-blur transition hover:bg-surface/10"
+                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:bg-white/10"
               >
                 Voir les abonnements
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-ink-300">
+            <div className="mt-10 flex items-center gap-6 text-sm text-ink-200">
               <div className="flex items-center gap-2">
-                <span className="text-brand-300">★★★★★</span>
+                <span className="text-amber-400">★★★★★</span>
                 <span>4,8 / 5 sur 200+ avis</span>
               </div>
-            </div>
-          </div>
-
-          <div className="relative hidden lg:block">
-            <div className="absolute -left-10 top-0 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"></div>
-            <div className="relative grid grid-cols-2 gap-4">
-              <div className="rounded-3xl bg-surface/10 p-6 backdrop-blur-md">
-                <p className="text-5xl">🏋️</p>
-                <p className="mt-3 text-sm text-ink-200">Salle fitness</p>
-                <p className="font-semibold">2 000 m² équipés</p>
-              </div>
-              <div className="mt-10 rounded-3xl bg-brand-500/30 p-6 backdrop-blur-md">
-                <p className="text-5xl">🏊</p>
-                <p className="mt-3 text-sm text-ink-200">Piscine 25 m</p>
-                <p className="font-semibold">+ hammam, sauna</p>
-              </div>
-              <div className="rounded-3xl bg-brand-700/30 p-6 backdrop-blur-md">
-                <p className="text-5xl">🎾</p>
-                <p className="mt-3 text-sm text-ink-200">Tennis & padel</p>
-                <p className="font-semibold">5 courts indoor</p>
-              </div>
-              <div className="mt-10 rounded-3xl bg-surface/10 p-6 backdrop-blur-md">
-                <p className="text-5xl">💼</p>
-                <p className="mt-3 text-sm text-ink-200">Coworking</p>
-                <p className="font-semibold">Lounge & meeting</p>
-              </div>
+              <span className="hidden h-4 w-px bg-white/20 md:block" />
+              <span className="hidden md:inline">Sans engagement · Annulable à tout moment</span>
             </div>
           </div>
         </div>
@@ -157,7 +147,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* === NOTRE OFFRE === */}
+      {/* === NOTRE OFFRE — cards photo full-bleed === */}
       <section className="mx-auto max-w-7xl px-4">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -179,21 +169,32 @@ export function HomePage() {
           {OFFERINGS.map((group) => (
             <div
               key={group.title}
-              className="group relative overflow-hidden rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
+              className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
             >
-              <div className="text-4xl">{group.icon}</div>
-              <h3 className="mt-3 text-lg font-semibold text-ink-900">
-                {group.title}
-              </h3>
-              <ul className="mt-3 space-y-1 text-sm text-ink-600">
-                {group.items.map((it) => (
-                  <li key={it.label} className="flex items-start gap-2">
-                    <span className="mt-1 h-1 w-1 rounded-full bg-brand-500"></span>
-                    {it.label}
-                  </li>
-                ))}
-              </ul>
-              <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-brand-400 to-brand-700 transition-transform group-hover:scale-x-100"></div>
+              <img
+                src={group.image}
+                alt={group.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl drop-shadow">{group.icon}</span>
+                  <h3 className="text-xl font-bold">{group.title}</h3>
+                </div>
+                <ul className="mt-3 space-y-1 text-sm text-ink-100">
+                  {group.items.map((it) => (
+                    <li key={it.label} className="flex items-start gap-2">
+                      <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
+                      {it.label}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
+                  Découvrir →
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -214,7 +215,7 @@ export function HomePage() {
             {STEPS.map((s) => (
               <div
                 key={s.n}
-                className="rounded-2xl border border-white/10 bg-surface/5 p-8 backdrop-blur"
+                className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur"
               >
                 <p className="bg-gradient-to-r from-brand-400 to-brand-200 bg-clip-text text-5xl font-bold text-transparent">
                   {s.n}
@@ -236,7 +237,7 @@ export function HomePage() {
           <h2 className="mt-2 text-4xl font-bold text-ink-900">
             Des formules pour tous les rythmes
           </h2>
-          <p className="mt-3 text-ink-600">
+          <p className="mt-3 text-ink-700">
             Sans engagement, annulable à tout moment.
           </p>
           <div className="mt-6 inline-flex rounded-full bg-ink-100 p-1">
@@ -246,7 +247,7 @@ export function HomePage() {
               className={`rounded-full px-5 py-2 text-sm font-medium transition ${
                 period === "monthly"
                   ? "bg-surface text-ink-900 shadow-sm"
-                  : "text-ink-500"
+                  : "text-ink-700"
               }`}
             >
               Mensuel
@@ -257,7 +258,7 @@ export function HomePage() {
               className={`rounded-full px-5 py-2 text-sm font-medium transition ${
                 period === "yearly"
                   ? "bg-surface text-ink-900 shadow-sm"
-                  : "text-ink-500"
+                  : "text-ink-700"
               }`}
             >
               Annuel <span className="ml-1 text-xs text-brand-600">−2 mois</span>
@@ -300,7 +301,7 @@ export function HomePage() {
                     {" €"} / {plan.period === "monthly" ? "mois" : "an"}
                   </span>
                 </p>
-                <p className="mt-2 text-sm text-ink-600">{plan.description}</p>
+                <p className="mt-2 text-sm text-ink-700">{plan.description}</p>
                 <ul className="mt-5 space-y-2 text-sm">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-ink-700">
@@ -364,7 +365,7 @@ export function HomePage() {
                 </div>
               </div>
               {coach.coach_profile?.bio && (
-                <p className="mt-4 line-clamp-3 text-sm text-ink-600">
+                <p className="mt-4 line-clamp-3 text-sm text-ink-700">
                   {coach.coach_profile.bio}
                 </p>
               )}
@@ -403,8 +404,8 @@ export function HomePage() {
               className="rounded-2xl border border-ink-200 bg-surface p-6"
             >
               <p className="text-amber-500">★★★★★</p>
-              <p className="mt-3 text-sm text-ink-700">"{t.quote}"</p>
-              <div className="mt-4 border-t border-ink-100 pt-4">
+              <p className="mt-3 text-sm text-ink-800">"{t.quote}"</p>
+              <div className="mt-4 border-t border-ink-200 pt-4">
                 <p className="font-semibold text-ink-900">{t.name}</p>
                 <p className="text-xs text-ink-500">{t.role}</p>
               </div>
@@ -413,29 +414,40 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* === CTA FINAL === */}
+      {/* === CTA FINAL avec photo en background === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 via-brand-800 to-ink-900 p-12 text-center text-white md:p-16">
-          <h2 className="text-3xl font-bold md:text-5xl">
-            Prêt à passer la porte ?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-ink-200">
-            Inscription gratuite. Choisis ta formule, réserve ta première
-            séance, c'est parti.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/register"
-              className="rounded-lg bg-surface px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:bg-brand-50"
-            >
-              Créer mon compte →
-            </Link>
-            <Link
-              to="/coaches"
-              className="rounded-lg border border-white/30 px-8 py-3 font-semibold backdrop-blur transition hover:bg-surface/10"
-            >
-              Rencontrer les coachs
-            </Link>
+        <div className="relative isolate overflow-hidden rounded-3xl shadow-xl">
+          <div
+            className="absolute inset-0 -z-10 bg-cover bg-center"
+            style={{ backgroundImage: `url('${CTA_IMAGE}')` }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-700/90 via-ink-900/85 to-ink-950/90"
+            aria-hidden
+          />
+          <div className="px-8 py-16 text-center text-white md:px-12 md:py-20">
+            <h2 className="text-3xl font-bold md:text-5xl">
+              Prêt à passer la porte ?
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-ink-100">
+              Inscription gratuite. Choisis ta formule, réserve ta première
+              séance, c'est parti.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                to="/register"
+                className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:bg-brand-50"
+              >
+                Créer mon compte →
+              </Link>
+              <Link
+                to="/coaches"
+                className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:bg-white/10"
+              >
+                Rencontrer les coachs
+              </Link>
+            </div>
           </div>
         </div>
       </section>
