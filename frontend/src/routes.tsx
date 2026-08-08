@@ -44,16 +44,21 @@ export const router = createBrowserRouter([
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       {
-        element: <ProtectedRoute />,
+        element: <ProtectedRoute roles={["member"]} />,
         children: [
           { path: "/dashboard", element: <DashboardPage /> },
-          { path: "/profile", element: <ProfilePage /> },
           { path: "/questionnaire", element: <QuestionnairePage /> },
           { path: "/my-subscription", element: <MySubscriptionPage /> },
           { path: "/my-bookings", element: <MyBookingsPage /> },
           { path: "/my-payments", element: <MyPaymentsPage /> },
           { path: "/checkout/success", element: <CheckoutSuccessPage /> },
           { path: "/checkout/cancel", element: <CheckoutCancelPage /> },
+        ],
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/profile", element: <ProfilePage /> },
         ],
       },
       { path: "*", element: <NotFoundPage /> },

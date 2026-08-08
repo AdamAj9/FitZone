@@ -176,9 +176,11 @@ export function Header() {
                   Coach
                 </NavLink>
               )}
-              <NavLink to="/dashboard" className={navLinkClass}>
-                {t("nav.dashboard")}
-              </NavLink>
+              {user.role === "member" && (
+                <NavLink to="/dashboard" className={navLinkClass}>
+                  {t("nav.dashboard")}
+                </NavLink>
+              )}
               <button
                 type="button"
                 onClick={handleLogout}
@@ -316,13 +318,15 @@ export function Header() {
                     Coach
                   </NavLink>
                 )}
-                <NavLink
-                  to="/dashboard"
-                  onClick={closeMenu}
-                  className={mobileNavLinkClass}
-                >
-                  {t("nav.dashboard")}
-                </NavLink>
+                {user.role === "member" && (
+                  <NavLink
+                    to="/dashboard"
+                    onClick={closeMenu}
+                    className={mobileNavLinkClass}
+                  >
+                    {t("nav.dashboard")}
+                  </NavLink>
+                )}
                 <button
                   type="button"
                   onClick={handleLogout}
