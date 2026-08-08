@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { paymentsApi } from "../../api/payments";
+
 import { subscriptionsApi } from "../../api/subscriptions";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
@@ -11,6 +11,7 @@ export function PlansPage() {
   const [period, setPeriod] = useState<Period>("monthly");
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
+  const queryClient = useQueryClient();
 
   const plansQuery = useQuery({
     queryKey: ["plans"],
@@ -23,10 +24,12 @@ export function PlansPage() {
     enabled: Boolean(user),
   });
 
-  const checkoutMutation = useMutation({
-    mutationFn: (planId: number) => paymentsApi.checkoutSubscription(planId),
-    onSuccess: ({ checkout_url }) => {
-      window.location.href = checkout_url;
+const subscribeMutation = useMutation({
+    mutationFn: (planId: number) => subscriptionsApi.subscribe(planId),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["subscription-current"] });
+      void queryClient.invalidateQueries({ queryKey: ["my-subscriptions"] });
+      navigate("/my-subscription");
     },
   });
 
@@ -34,7 +37,7 @@ export function PlansPage() {
     plansQuery.data?.results.filter((p) => p.period === period) ?? [];
 
   const currentSub = currentQuery.data?.subscription ?? null;
-  const apiError = checkoutMutation.error as
+ const apiError = subscribeMutation.error as
     | { response?: { data?: { detail?: string } } }
     | null;
 
@@ -145,9 +148,9 @@ export function PlansPage() {
                       navigate("/login");
                       return;
                     }
-                    checkoutMutation.mutate(plan.id);
+                    subscribeMutation.mutate(plan.id);
                   }}
-                  disabled={checkoutMutation.isPending || Boolean(currentSub)}
+                  disabled={subscribeMutation.isPending || Boolean(currentSub)}
                   className={`mt-6 w-full rounded-md px-4 py-3 font-medium transition ${
                     isPremium
                       ? "bg-brand-600 text-white hover:bg-brand-700"
@@ -156,11 +159,11 @@ export function PlansPage() {
                 >
                   {currentSub
                     ? "Abonnement déjà actif"
-                    : checkoutMutation.isPending &&
-                        checkoutMutation.variables === plan.id
-                      ? "Redirection vers le paiement..."
+                    : subscribeMutation.isPending &&
+                        subscribeMutation.variables === plan.id
+                      ? "Souscription en cours..."
                       : user
-                        ? "Souscrire avec Stripe"
+                        ? "Souscrire"
                         : "Se connecter pour souscrire"}
                 </button>
               </div>
