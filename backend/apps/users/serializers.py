@@ -145,6 +145,9 @@ class FitZoneTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
     def validate(self, attrs):
+        field = self.username_field
+        if attrs.get(field):
+            attrs[field] = attrs[field].strip().lower()
         data = super().validate(attrs)
         data["user"] = UserSerializer(self.user).data
         return data
