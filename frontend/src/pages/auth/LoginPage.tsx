@@ -27,8 +27,14 @@ export function LoginPage() {
 
   const onSubmit = (values: FormValues) => {
     login.mutate(values, {
-      onSuccess: () => {
-        navigate(location.state?.from?.pathname ?? "/dashboard", { replace: true });
+      onSuccess: (data) => {
+        const roleHome =
+          data.user.role === "admin"
+            ? "/admin"
+            : data.user.role === "coach"
+              ? "/coach"
+              : "/dashboard";
+        navigate(location.state?.from?.pathname ?? roleHome, { replace: true });
       },
     });
   };
