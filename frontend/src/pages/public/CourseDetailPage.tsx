@@ -11,6 +11,7 @@ import { formatDateTime } from "../../lib/date";
 import { apiErrorMessage } from "../../lib/errors";
 import { useAuthStore } from "../../store/auth";
 import type { CourseSessionItem } from "../../types/sessions";
+import { CourseCard } from "../../components/CourseCard";
 
 const levelLabel: Record<string, string> = {
   beginner: "Débutant",
@@ -107,6 +108,13 @@ export function CourseDetailPage() {
     queryKey: ["subscription-current"],
     queryFn: () => subscriptionsApi.current(),
     enabled: Boolean(user),
+  });
+
+  const similarQuery = useQuery({
+    queryKey: ["similar-courses", courseQuery.data?.category.slug],
+    queryFn: () =>
+      coursesApi.listCourses({ category__slug: courseQuery.data!.category.slug }),
+    enabled: Boolean(courseQuery.data),
   });
 
   const bookMutation = useMutation({
@@ -293,7 +301,42 @@ export function CourseDetailPage() {
             </Link>
           </div>
         )}
+      {course.coach &&
+          (course.coach.rating_count ?? 0) > 0 && (
+            <div className="rounded-2xl bg-surface p-6 shadow-sm">
+              <p className="text-sm text-slate-500">Avis sur le coach</p>
+              <p className="mt-1 flex items-center gap-2 text-lg font-semibold text-slate-900">
+                ⭐ {course.coach.rating_average?.toFixed(1)}
+                <span className="text-sm font-normal text-slate-500">
+                  ({course.coach.rating_count} avis)
+                </span>
+              </p>
+              <Link
+                to={`/coaches/${course.coach.id}`}
+                className="mt-2 inline-block text-sm text-brand-600 hover:underline"
+              >
+                Voir tous les avis →
+              </Link>
+            </div>
+          )}
       </aside>
+
+      {(similarQuery.data?.results.filter((c) => c.slug !== course.slug)
+        .length ?? 0) > 0 && (
+        <div className="lg:col-span-3">
+          <h2 className="text-xl font-semibold text-slate-900">
+            Cours similaires
+          </h2>
+          <div className="mt-3 grid gap-4 md:grid-cols-3">
+            {similarQuery.data?.results
+              .filter((c) => c.slug !== course.slug)
+              .slice(0, 3)
+              .map((c) => (
+                <CourseCard key={c.id} course={c} />
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
