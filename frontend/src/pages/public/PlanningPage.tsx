@@ -12,6 +12,7 @@ const WEEK_LENGTH = 7;
 export function PlanningPage() {
   const [weekStart, setWeekStart] = useState<Date>(() => startOfWeek(new Date()));
   const [categorySlug, setCategorySlug] = useState("");
+  const [search, setSearch] = useState("");
 
   const days = useMemo(
     () => Array.from({ length: WEEK_LENGTH }, (_, i) => addDays(weekStart, i)),
@@ -39,7 +40,9 @@ export function PlanningPage() {
   const sessionsByDay = useMemo(() => {
     const map = new Map<string, CourseSessionItem[]>();
     for (const day of days) map.set(isoDate(day), []);
+    const query = search.trim().toLowerCase();
     for (const s of sessionsQuery.data?.results ?? []) {
+      if (query && !s.course_title.toLowerCase().includes(query)) continue;
       const key = isoDate(new Date(s.starts_at));
       map.get(key)?.push(s);
     }
@@ -47,7 +50,7 @@ export function PlanningPage() {
       arr.sort((a, b) => a.starts_at.localeCompare(b.starts_at));
     }
     return map;
-  }, [days, sessionsQuery.data]);
+  }, [days, sessionsQuery.data, search]);
 
   const today = isoDate(new Date());
 
@@ -64,6 +67,23 @@ export function PlanningPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Rechercher un cours..."
+              className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+            />
+            <input
+              type="date"
+              value={isoDate(weekStart)}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setWeekStart(startOfWeek(new Date(e.target.value)));
+                }
+              }}
+              className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+            />
             <select
               value={categorySlug}
               onChange={(e) => setCategorySlug(e.target.value)}
