@@ -167,8 +167,9 @@ export function HomePage() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {OFFERINGS.map((group) => (
-            <div
+            <Link
               key={group.title}
+              to={group.items[0].href}
               className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
             >
               <img
@@ -194,8 +195,8 @@ export function HomePage() {
                 <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
                   Découvrir →
                 </div>
-              </div>
-            </div>
+             </div>
+            </Link>
           ))}
         </div>
       </section>

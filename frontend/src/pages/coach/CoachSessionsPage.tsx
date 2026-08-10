@@ -10,6 +10,15 @@ import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 import type { CoachSessionWritePayload } from "../../types/coach";
 
+function addDaysToDatetimeLocal(value: string, days: number): string {
+  const d = new Date(value);
+  d.setDate(d.getDate() + days);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
+    d.getHours(),
+  )}:${pad(d.getMinutes())}`;
+}
+
 const emptyForm: CoachSessionWritePayload = {
   course: 0,
   room: 0,
@@ -24,6 +33,7 @@ export function CoachSessionsPage() {
   const [form, setForm] = useState<CoachSessionWritePayload>(emptyForm);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [pendingDelete, setPendingDelete] = useState<number | null>(null);
+  const [repeatWeeks, setRepeatWeeks] = useState(1);
 
   const coursesQuery = useQuery({
     queryKey: ["coach-courses", user?.id],
@@ -86,10 +96,31 @@ export function CoachSessionsPage() {
     onError: (e) => toast.error(apiErrorMessage(e, "Suppression impossible")),
   });
 
-  const onSubmit = (e: React.FormEvent) => {
+ const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingId) {
       updateMutation.mutate({ id: editingId, payload: form });
+      return;
+    }
+    if (repeatWeeks > 1) {
+      void (async () => {
+        try {
+          for (let i = 0; i < repeatWeeks; i++) {
+            await coachApi.createSession({
+              ...form,
+              starts_at: addDaysToDatetimeLocal(form.starts_at, i * 7),
+              ends_at: addDaysToDatetimeLocal(form.ends_at, i * 7),
+            });
+          }
+          toast.success(`${repeatWeeks} séances planifiées`);
+          setShowForm(false);
+          setForm(emptyForm);
+          setRepeatWeeks(1);
+          invalidate();
+        } catch (err) {
+          toast.error(apiErrorMessage(err, "Planification impossible"));
+        }
+      })();
     } else {
       createMutation.mutate(form);
     }
@@ -182,7 +213,7 @@ export function CoachSessionsPage() {
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               />
             </div>
-            <div>
+           <div>
               <label className="text-sm font-medium text-slate-700">
                 Capacité (optionnel)
               </label>
@@ -200,6 +231,25 @@ export function CoachSessionsPage() {
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               />
             </div>
+            {!editingId && (
+              <div>
+                <label className="text-sm font-medium text-slate-700">
+                  Répéter chaque semaine, pendant
+                </label>
+                <select
+                  value={repeatWeeks}
+                  onChange={(e) => setRepeatWeeks(Number(e.target.value))}
+                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                >
+                  <option value={1}>Une seule fois</option>
+                  {[4, 8, 12].map((w) => (
+                    <option key={w} value={w}>
+                      {w} semaines
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
           {apiError?.response?.data && (
             <pre className="overflow-auto rounded-md bg-red-50 p-3 text-xs text-red-700">
