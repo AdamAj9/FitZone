@@ -31,11 +31,12 @@ class PaymentViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return (
-            Payment.objects.filter(user=self.request.user)
-            .select_related("subscription__plan", "course")
-            .order_by("-created_at")
-        )
+        qs = Payment.objects.select_related(
+            "subscription__plan", "course", "user"
+        ).order_by("-created_at")
+        if self.request.user.role != "admin":
+            qs = qs.filter(user=self.request.user)
+        return qs
 
 
 class CheckoutSubscriptionView(APIView):

@@ -29,6 +29,7 @@ class SubscriptionPlanSerializer(serializers.ModelSerializer):
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     plan = SubscriptionPlanSerializer(read_only=True)
+    user_email = serializers.CharField(source="user.email", read_only=True)
     is_currently_active = serializers.BooleanField(read_only=True)
     days_remaining = serializers.IntegerField(read_only=True, allow_null=True)
     status_display = serializers.CharField(source="get_status_display", read_only=True)
@@ -37,6 +38,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         model = Subscription
         fields = (
             "id",
+            "user_email",
             "plan",
             "status",
             "status_display",

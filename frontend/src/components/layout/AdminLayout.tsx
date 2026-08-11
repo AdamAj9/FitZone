@@ -31,6 +31,12 @@ export function AdminLayout() {
           <NavLink to="/admin/logs" className={navItem}>
             Journal d'audit
           </NavLink>
+          <NavLink to="/admin/payments" className={navItem}>
+            Paiements
+          </NavLink>
+          <NavLink to="/admin/subscriptions" className={navItem}>
+            Abonnements
+          </NavLink>
           <div className="mt-6 rounded-md bg-slate-100 p-3 text-xs text-slate-600">
             <p className="font-medium text-slate-900">Connecté en admin</p>
             <p className="mt-1 truncate">{user?.email}</p>

@@ -32,11 +32,12 @@ class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         Subscription.expire_lapsed()
-        return (
-            Subscription.objects.filter(user=self.request.user)
-            .select_related("plan")
-            .order_by("-created_at")
+        qs = Subscription.objects.select_related("plan", "user").order_by(
+            "-created_at"
         )
+        if self.request.user.role != "admin":
+            qs = qs.filter(user=self.request.user)
+        return qs
 
     @action(detail=False, methods=["get"], url_path="current")
     def current(self, request):

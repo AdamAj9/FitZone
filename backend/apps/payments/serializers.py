@@ -5,6 +5,7 @@ from .models import Payment
 
 class PaymentSerializer(serializers.ModelSerializer):
     kind_display = serializers.CharField(source="get_kind_display", read_only=True)
+    user_email = serializers.CharField(source="user.email", read_only=True)
     status_display = serializers.CharField(source="get_status_display", read_only=True)
     subscription_plan = serializers.CharField(
         source="subscription.plan.name", read_only=True, default=None
@@ -17,6 +18,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         model = Payment
         fields = (
             "id",
+            "user_email",
             "kind",
             "kind_display",
             "status",

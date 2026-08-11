@@ -22,6 +22,7 @@ export interface SubscriptionPlan {
 
 export interface Subscription {
   id: number;
+  user_email: string;
   plan: SubscriptionPlan;
   status: SubscriptionStatus;
   status_display: string;

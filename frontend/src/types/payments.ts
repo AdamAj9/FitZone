@@ -5,6 +5,7 @@ export type PaymentStatus = "pending" | "succeeded" | "failed" | "refunded";
 
 export interface Payment {
   id: number;
+  user_email: string;
   kind: PaymentKind;
   kind_display: string;
   status: PaymentStatus;

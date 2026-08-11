@@ -6,6 +6,8 @@ import { CoachLayout } from "./components/layout/CoachLayout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage";
 import { AdminLogsPage } from "./pages/admin/AdminLogsPage";
+import { AdminPaymentsPage } from "./pages/admin/AdminPaymentsPage";
+import { AdminSubscriptionsPage } from "./pages/admin/AdminSubscriptionsPage";
 import { AdminUsersPage } from "./pages/admin/AdminUsersPage";
 import { CoachBookingsPage } from "./pages/coach/CoachBookingsPage";
 import { CoachCoursesPage } from "./pages/coach/CoachCoursesPage";
@@ -73,6 +75,8 @@ export const router = createBrowserRouter([
           { path: "/admin", element: <AdminDashboardPage /> },
           { path: "/admin/users", element: <AdminUsersPage /> },
           { path: "/admin/logs", element: <AdminLogsPage /> },
+          { path: "/admin/payments", element: <AdminPaymentsPage /> },
+          { path: "/admin/subscriptions", element: <AdminSubscriptionsPage /> },
         ],
       },
     ],
