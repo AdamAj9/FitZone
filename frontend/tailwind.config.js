@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: "#faf5ff",
+          50: "#ede4f7",
           100: "#f3e8ff",
           200: "#e9d5ff",
           300: "#d8b4fe",
@@ -17,19 +17,19 @@ export default {
           900: "#581c87",
           950: "#3b0764",
         },
-        ink: {
-          50: "#b8bcc4",
-          100: "#aeb3bc",
-          200: "#9aa0aa",
-          500: "#64748b",
-          700: "#334155",
-          800: "#1e293b",
-          900: "#0f172a",
-          950: "#020617",
+       ink: {
+          50: "#ede4f7",
+          100: "#bdb7c8",
+          200: "#a89fb5",
+          500: "#6b6478",
+          700: "#3f3a4d",
+          800: "#282435",
+          900: "#18151f",
+          950: "#0c0a10",
         },
         surface: {
-          DEFAULT: "#d4d7dd",
-          hover: "#cacdd4",
+          DEFAULT: "#f5f2fa",
+          hover: "#ece5f5",
         },
       },
       backgroundImage: {

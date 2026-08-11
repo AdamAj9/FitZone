@@ -45,19 +45,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink-200 bg-surface/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
+    <header className="sticky top-0 z-40 border-b border-brand-200 bg-brand-100/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 overflow-hidden px-4">
         <Link
           to="/"
           className="flex items-center gap-2 text-xl font-bold"
           onClick={closeMenu}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white">
-            F
-          </span>
-          <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">
-            FitZone
-          </span>
+          <img src="/images/logo.png" alt="FitZone" className="h-16 w-auto object-contain" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

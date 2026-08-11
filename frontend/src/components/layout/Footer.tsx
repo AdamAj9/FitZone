@@ -36,14 +36,15 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-10 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link
+          <Link
               to="/"
               className="flex items-center gap-2 text-xl font-bold text-white"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700">
-                F
-              </span>
-              FitZone
+              <img
+                src="/images/logo1.png"
+                alt="FitZone"
+                className="h-16 w-auto object-contain"
+              />
             </Link>
             <p className="mt-4 max-w-sm text-sm text-ink-300">
               Votre salle de sport généraliste : fitness, piscine, tennis,
