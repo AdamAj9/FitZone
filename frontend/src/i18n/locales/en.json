@@ -3,6 +3,16 @@
     "name": "FitZone",
     "tagline": "Your gym, online"
   },
+  "header": {
+    "ourOffer": "Our offer",
+    "discoverFitZone": "Discover the whole FitZone world",
+    "discoverFitZoneSubtitle": "200+ sessions a week, 7 dedicated spaces.",
+    "adminBadge": "Admin",
+    "coachBadge": "Coach",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "language": "Language"
+  },
   "nav": {
     "home": "Home",
     "courses": "Courses",
@@ -15,11 +25,552 @@
     "logout": "Logout"
   },
   "home": {
-    "hero": "Welcome to FitZone",
-    "subtitle": "Book your classes, track your progress, and enjoy all our facilities."
+    "badge": "New gym open 7 days a week",
+    "titleLine1": "Fitness,",
+    "titleLine2": "reimagined.",
+    "subtitle": "Fitness studios, pool, tennis, padel, spa, coworking... all under one roof. Online booking, secure payment, progress tracking.",
+    "ctaStart": "Start for free",
+    "ctaPlans": "View plans",
+    "ratingValue": "4.8 / 5",
+    "ratingText": "from 200+ reviews",
+    "noCommitment": "No commitment · Cancel anytime",
+    "stats": [
+      { "value": "200+", "label": "Sessions per week" },
+      { "value": "10+", "label": "Group classes" },
+      { "value": "7", "label": "Dedicated spaces" },
+      { "value": "24/7", "label": "Open non-stop" }
+    ],
+    "offerLabel": "Our offer",
+    "offerTitle": "A complete world, under one roof",
+    "offerSeeAll": "All plans",
+    "discoverMore": "Discover",
+    "teamLabel": "Our team",
+    "teamTitle": "Coaches who listen to you",
+    "teamSeeAll": "All coaches",
+    "teamBadgeNew": "New",
+    "coachFallback": "FitZone coach",
+    "howItWorksLabel": "How it works",
+    "howItWorksTitle": "Three steps to get started",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Create your account",
+        "description": "Free sign-up in 30 seconds, no card required."
+      },
+      {
+        "n": "02",
+        "title": "Choose your plan",
+        "description": "Basic or Premium, monthly or yearly — change anytime."
+      },
+      {
+        "n": "03",
+        "title": "Book & enjoy",
+        "description": "Real-time schedule, 200+ sessions a week, all over the gym."
+      }
+    ],
+    "pricingLabel": "Pricing",
+    "pricingTitle": "Plans for every rhythm",
+    "pricingSubtitle": "No commitment, cancel anytime.",
+    "periodMonthly": "Monthly",
+    "periodYearly": "Yearly",
+    "yearlyDiscount": "−2 months",
+    "recommended": "Recommended",
+    "perMonth": "month",
+    "perYear": "year",
+    "subscribe": "Subscribe",
+    "testimonialsLabel": "Testimonials",
+    "testimonialsTitle": "Our members say it best",
+    "testimonials": {
+      "items": [
+        {
+          "name": "Marie L.",
+          "role": "Premium member for 2 years",
+          "quote": "The app is super intuitive. I book my yoga and swimming classes in two clicks, and my coach can see who's coming — it changes everything."
+        },
+        {
+          "name": "Karim B.",
+          "role": "Basic member",
+          "quote": "Unbeatable value for money. Clean gym, brand-new equipment, and I can grab a tennis session whenever I feel like it."
+        },
+        {
+          "name": "Sophie M.",
+          "role": "Yoga coach",
+          "quote": "As a coach, the dashboard is super clear. I see my upcoming sessions, who's booked in, my notes — all in one place."
+        }
+      ]
+    },
+    "ctaBottomTitle": "Ready to walk through the door?",
+    "ctaBottomSubtitle": "Free sign-up. Pick your plan, book your first session, let's go.",
+    "ctaCreateAccount": "Create my account",
+    "ctaMeetCoaches": "Meet the coaches"
+  },
+  "footer": {
+    "description": "Your all-in-one gym: fitness, pool, tennis, padel, spa, coworking — all under one roof.",
+    "discoverTitle": "Discover",
+    "accountTitle": "My account",
+    "legalTitle": "Legal",
+    "legalNotice": "Legal notice",
+    "terms": "Terms of service",
+    "privacy": "Privacy policy",
+    "cookies": "Cookies",
+    "myBookings": "My bookings",
+    "rights": "All rights reserved.",
+    "madeIn": "Designed and built in Belgium",
+    "address": "42 rue de la Forme, 1000 Brussels"
+  },
+  "notFound": {
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home",
+    "viewCourses": "View courses"
   },
   "common": {
     "loading": "Loading...",
-    "error": "An error occurred"
+    "error": "An error occurred",
+    "comingSoon": "Coming soon",
+    "confirm": "Confirm",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "all": "All levels"
+    },
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "courses": {
+    "title": "Our courses",
+    "subtitle": "Find the course that matches your level and your goals.",
+    "searchPlaceholder": "Search...",
+    "allCategories": "All categories",
+    "loadError": "Something went wrong while loading.",
+    "emptyTitle": "No courses match",
+    "emptyDescription": "Try changing or removing a filter."
+  },
+  "adminSubscriptions": {
+    "empty": "No subscriptions.",
+    "colPlan": "Plan",
+    "colPricePaid": "Price paid"
+  },
+  "adminUsers": {
+    "title": "Users",
+    "searchPlaceholder": "Search by email or name...",
+    "allRoles": "All roles",
+    "roleMember": "Member",
+    "roleCoach": "Coach",
+    "roleAdmin": "Admin",
+    "empty": "No users.",
+    "colEmail": "Email",
+    "colName": "Name",
+    "colRole": "Role",
+    "colUser": "User",
+    "colJoined": "Joined",
+    "deactivated": "Deactivated",
+    "deactivate": "Deactivate",
+    "reactivate": "Reactivate"
+  },
+  "adminLogs": {
+    "title": "Audit log",
+    "allActions": "All actions",
+    "empty": "No events.",
+    "colActor": "Actor",
+    "colAction": "Action",
+    "colTarget": "Target",
+    "colMetadata": "Metadata",
+    "colIp": "IP",
+    "system": "system"
+  },
+  "offerings": {
+    "fitness": {
+      "title": "Fitness rooms",
+      "items": {
+        "mixedRoom": {
+          "label": "Mixed gym floor",
+          "description": "80+ machines, cardio area + free weights."
+        },
+        "womenOnlyRoom": {
+          "label": "Women-only room",
+          "description": "Dedicated space, female staff available on request."
+        },
+        "weightTraining": {
+          "label": "Weight training",
+          "description": "Power platforms, racks and Olympic benches."
+        }
+      }
+    },
+    "pool": {
+      "title": "25m pool",
+      "items": {
+        "freeSwim": {
+          "label": "Free swim",
+          "description": "4 heated lanes + dedicated free-swim lane."
+        },
+        "aquagym": {
+          "label": "Aquagym",
+          "description": "Coached group classes, multiple levels."
+        },
+        "swimmingLessons": {
+          "label": "Swimming lessons",
+          "description": "Individual or group lessons."
+        }
+      }
+    },
+    "spa": {
+      "title": "Spa & wellness",
+      "items": {
+        "hammam": {
+          "label": "Steam room",
+          "description": "Eucalyptus steam, unlimited access for Premium members."
+        },
+        "sauna": {
+          "label": "Sauna",
+          "description": "Nordic wood cabins, 15-minute sessions."
+        },
+        "relaxArea": {
+          "label": "Relaxation area",
+          "description": "Herbal teas and reading, after every session."
+        }
+      }
+    },
+    "tennis": {
+      "title": "Tennis & racket sports",
+      "items": {
+        "tennis": {
+          "label": "Tennis",
+          "description": "Indoor resin courts, individual and group lessons."
+        },
+        "padel": {
+          "label": "Padel",
+          "description": "2 panoramic courts, equipment provided."
+        },
+        "squash": {
+          "label": "Squash",
+          "description": "Certified courts, slots available 7 days a week."
+        }
+      }
+    },
+    "groupClasses": {
+      "title": "Group classes",
+      "items": {
+        "yogaPilates": {
+          "label": "Yoga & Pilates",
+          "description": "Vinyasa, Hatha, Pilates Reformer."
+        },
+        "cycling": {
+          "label": "Cycling",
+          "description": "Immersive studio, sessions set to music."
+        },
+        "hiit": {
+          "label": "HIIT & Cross Training",
+          "description": "Short format, maximum intensity, coach-led."
+        }
+      }
+    },
+    "coworking": {
+      "title": "Pro & coworking",
+      "items": {
+        "coworkingSpaces": {
+          "label": "Coworking spaces",
+          "description": "High-speed WiFi, unlimited coffee, sports lounge."
+        },
+        "meetingRooms": {
+          "label": "Meeting rooms",
+          "description": "Book by the hour, 4K screen + Zoom video."
+        },
+        "premiumLockers": {
+          "label": "Premium lockers",
+          "description": "Personal lockers with smart lock."
+        }
+      }
+    }
+  },
+  "courseCard": {
+    "noCoach": "No assigned coach"
+  },
+  "sessionCard": {
+    "seatsTitle": "{{taken}}/{{capacity}} seats"
+  },
+  "starRating": {
+    "noReviews": "no reviews",
+    "starsCount_one": "{{count}} star",
+    "starsCount_other": "{{count}} stars"
+  },
+  "adminLayout": {
+    "title": "Administration",
+    "loggedInAs": "Logged in as admin"
+  },
+  "coachLayout": {
+    "title": "Coach area",
+    "loggedInAs": "Logged in as coach"
+  },
+  "adminDashboard": {
+    "members": "Members",
+    "coaches": "Coaches",
+    "totalUsers": "Total users",
+    "activeSubscriptions": "Active subscriptions",
+    "revenue30Days": "Revenue, last 30 days",
+    "topActions": "Top 5 audited actions",
+    "noActivity": "No activity."
+  },
+  "coachBookings": {
+    "allMySessions": "All my sessions",
+    "empty": "No bookings.",
+    "colMember": "Member",
+    "colCourse": "Course",
+    "colRoom": "Room",
+    "colBookedOn": "Booked on"
+  },
+  "coachCourses": {
+    "created": "Course created",
+    "createError": "Creation failed",
+    "updated": "Course updated",
+    "updateError": "Update failed",
+    "deleted": "Course deleted",
+    "deleteError": "Deletion failed",
+    "newCourse": "New course",
+    "fieldTitle": "Title",
+    "fieldCategory": "Category",
+    "choose": "Choose",
+    "fieldDescription": "Description",
+    "fieldLevel": "Level",
+    "fieldDuration": "Duration (min)",
+    "fieldCapacity": "Capacity",
+    "fieldUnitPrice": "Unit price (€)",
+    "active": "Active",
+    "inactive": "Inactive",
+    "empty": "No courses at the moment.",
+    "colDuration": "Duration",
+    "colPrice": "Price",
+    "colStatus": "Status",
+    "colActions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDeleteTitle": "Delete this course?",
+    "confirmDeleteDescription": "\"{{title}}\" will be removed from the catalog. Any already-scheduled sessions will also be deleted."
+  },
+  "coachSessions": {
+    "created": "Session scheduled",
+    "createError": "Scheduling failed",
+    "updated": "Session updated",
+    "deleted": "Session deleted",
+    "multipleCreated": "{{count}} sessions scheduled",
+    "newSession": "Schedule a session",
+    "fieldCourse": "Course",
+    "fieldRoom": "Room",
+    "fieldStart": "Start",
+    "fieldEnd": "End",
+    "fieldCapacity": "Capacity (optional)",
+    "capacityPlaceholder": "Defaults to the course's capacity",
+    "repeatWeekly": "Repeat weekly, for",
+    "onceOnly": "Once only",
+    "weeksCount": "{{count}} weeks",
+    "schedule": "Schedule",
+    "empty": "No sessions scheduled.",
+    "colSeats": "Seats",
+    "confirmDeleteTitle": "Delete this session?",
+    "confirmDeleteDescription": "Any related bookings will also be cancelled.",
+    "statusScheduled": "Scheduled",
+    "statusCancelled": "Cancelled",
+    "statusCompleted": "Completed"
+  },
+  "coachDashboard": {
+    "title": "Dashboard",
+    "myCourses": "My courses",
+    "upcomingSessions": "Upcoming sessions",
+    "bookings30Days": "Bookings, last 30 days",
+    "averageRating": "Average rating",
+    "nextSession": "My next session",
+    "seatsBooked": "{{taken}}/{{capacity}} seats booked",
+    "noSessionPlanned": "No session scheduled.",
+    "planSession": "Schedule a session",
+    "createOrEditCourse": "Create or edit a course",
+    "mySessions": "My sessions",
+    "planSlots": "Schedule time slots",
+    "bookings": "Bookings",
+    "seeWhoBooked": "See who's booked in"
+  },
+  "profile": {
+    "title": "My profile",
+    "phone": "Phone",
+    "preferredLanguage": "Preferred language",
+    "langFrench": "French",
+    "langEnglish": "English",
+    "saving": "Saving...",
+    "save": "Save",
+    "updated": "Profile updated"
+  },
+  "questionnaire": {
+    "title": "Fitness questionnaire",
+    "subtitle": "Help us recommend the right courses for you.",
+    "hintBeginner": "I'm just getting started or getting back into it.",
+    "hintIntermediate": "I train regularly.",
+    "hintAdvanced": "I train intensely.",
+    "levelQuestion": "What's your level?",
+    "goalsLabel": "Your goals (optional)",
+    "goalsPlaceholder": "Lose weight, improve endurance, etc.",
+    "categoriesLabel": "Categories you're interested in",
+    "saved": "Preferences saved",
+    "submit": "Submit"
+  },
+  "checkout": {
+    "failedTitle": "Payment failed",
+    "successTitle": "Payment confirmed",
+    "verifyingTitle": "Verifying payment…",
+    "failedDescription": "The payment couldn't be validated. You can try again.",
+    "successDescription": "Your subscription is now active.",
+    "verifyingDescription": "We're checking with Stripe — one moment…",
+    "session": "Session",
+    "retry": "Retry",
+    "cancelledTitle": "Payment cancelled",
+    "cancelledDescription": "Your payment wasn't completed. You can start again anytime.",
+    "backToPlans": "Back to plans"
+  },
+  "myBookings": {
+    "title": "My bookings",
+    "cancelled": "Booking cancelled",
+    "cancelError": "Cancellation failed",
+    "noUpcoming": "No upcoming sessions.",
+    "cancel": "Cancel",
+    "history": "History",
+    "confirmCancelTitle": "Cancel this booking?",
+    "confirmCancelDescription": "The spot will be freed up for other members.",
+    "confirmCancelLabel": "Yes, cancel"
+  },
+  "myPayments": {
+    "title": "My payments",
+    "subtitle": "History of all your Stripe transactions.",
+    "empty": "No payments.",
+    "colDate": "Date",
+    "colType": "Type",
+    "colDetail": "Detail",
+    "colAmount": "Amount",
+    "colStatus": "Status"
+  },
+  "mySubscription": {
+    "title": "My subscription",
+    "cancelled": "Subscription cancelled",
+    "pricePaid": "{{amount}} € paid",
+    "startDate": "Start",
+    "endDate": "End",
+    "daysRemaining": "Days remaining",
+    "cancelSubscription": "Cancel subscription",
+    "noActiveSubscription": "You don't have an active plan.",
+    "viewPlans": "View plans",
+    "noHistory": "No history.",
+    "confirmCancelTitle": "Cancel your subscription?",
+    "confirmCancelDescription": "You'll immediately lose access to Premium services. This action cannot be undone."
+  },
+  "memberDashboard": {
+    "greeting": "Hi {{name}}",
+    "welcome": "Welcome to your FitZone dashboard.",
+    "personalizeTitle": "Personalize your recommendations",
+    "personalizeText": "Answer a quick 1-minute questionnaire so we can suggest the right courses for you",
+    "statAttended": "Sessions attended",
+    "statLast30Days": "Last 30 days",
+    "statUpcoming": "Upcoming",
+    "statFavoriteCategory": "Favorite category",
+    "nextSession": "My next session",
+    "noBookedSession": "No session booked.",
+    "viewPlanning": "View the schedule",
+    "recommendedForYou": "Recommended for you",
+    "basedOnHistory": "Based on your history ({{categories}})",
+    "basedOnPreferences": "Based on your preferences ({{categories}})",
+    "popularComingSoon": "Popular picks coming soon",
+    "noRecommendations": "No recommendations available at the moment.",
+    "subscription": "Subscription",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "noSubscription": "No active plan",
+    "bookings": "Bookings",
+    "upcomingCount": "{{count}} upcoming",
+    "profile": "Profile",
+    "payments": "Payments",
+    "stripeHistory": "Stripe history"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name"
+    },
+    "validation": {
+      "emailInvalid": "Invalid email",
+      "passwordRequired": "Password required",
+      "firstNameRequired": "First name required",
+      "lastNameRequired": "Last name required",
+      "passwordMinLength": "8 characters minimum",
+      "passwordMismatch": "Passwords do not match"
+    }
+  },
+  "plans": {
+    "title": "Our plans",
+    "subtitle": "Choose the plan that fits you.",
+    "activeSubscription": "You already have an active plan:",
+    "daysRemaining_one": "{{count}} day left.",
+    "daysRemaining_other": "{{count}} days left.",
+    "alreadyActive": "Plan already active",
+    "subscribing": "Subscribing...",
+    "loginToSubscribe": "Log in to subscribe"
+  },
+  "coaches": {
+    "title": "Our coaches",
+    "subtitle": "An experienced team here to support you.",
+    "loadErrorTitle": "Loading error",
+    "loadErrorDescription": "We couldn't retrieve the list of coaches.",
+    "yearsExperience_one": "{{count}} year of experience",
+    "yearsExperience_other": "{{count}} years of experience"
+  },
+  "coachDetail": {
+    "notFound": "Coach not found.",
+    "backToList": "Back to the list",
+    "biography": "Biography",
+    "coursesBy": "Courses by {{name}}",
+    "noCourses": "No courses at the moment.",
+    "included": "Included",
+    "myReview": "My review",
+    "leaveReview": "Leave a review",
+    "reviewRequirement": "You must have attended at least one session with this coach.",
+    "commentPlaceholder": "Your comment (optional)",
+    "update": "Update",
+    "publishReview": "Publish review",
+    "deleteReview": "Delete my review",
+    "reviewsCount": "Reviews ({{count}})",
+    "noReviews": "No reviews at the moment."
+  },
+  "planning": {
+    "title": "Schedule",
+    "weekOf": "Week of",
+    "weekTo": "to",
+    "searchPlaceholder": "Search for a course...",
+    "previousWeek": "Previous week",
+    "thisWeek": "This week",
+    "nextWeek": "Next week"
+  },
+  "courseDetail": {
+    "notFound": "Course not found.",
+    "backToCatalog": "Back to the catalog",
+    "capacity": "Capacity",
+    "upcomingSessions": "Upcoming sessions",
+    "noSessions": "No sessions scheduled at the moment.",
+    "unitPrice": "Unit price",
+    "includedInSubscription": "Included in your plan",
+    "loginToBook": "Log in to book",
+    "includedInPremium": "Included in your Premium plan",
+    "payHint": "Click \"Pay\" on a session to book it individually.",
+    "subscribePremium": "Subscribe to a Premium plan",
+    "coach": "Coach",
+    "viewProfile": "View profile",
+    "coachReviews": "Coach reviews",
+    "reviewsCount": "reviews",
+    "viewAllReviews": "View all reviews",
+    "similarCourses": "Similar courses",
+    "full": "Full",
+    "book": "Book",
+    "pay": "Pay",
+    "unavailable": "Unavailable",
+    "bookingConfirmed": "Booking confirmed",
+    "bookingError": "Booking failed",
+    "paymentError": "Payment failed"
   }
 }

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import { coachApi } from "../../api/coach";
 import { coursesApi } from "../../api/courses";
@@ -23,6 +24,13 @@ const emptyForm: CoachCourseWritePayload = {
 };
 
 export function CoachCoursesPage() {
+  const { t } = useTranslation();
+  const levelLabel: Record<string, string> = {
+    beginner: t("common.levels.beginner"),
+    intermediate: t("common.levels.intermediate"),
+    advanced: t("common.levels.advanced"),
+    all: t("common.levels.all"),
+  };
   const queryClient = useQueryClient();
   const user = useAuthStore((s) => s.user);
   const [editing, setEditing] = useState<CourseListItem | null>(null);
@@ -50,12 +58,12 @@ export function CoachCoursesPage() {
     mutationFn: (payload: CoachCourseWritePayload) =>
       coachApi.createCourse(payload),
     onSuccess: () => {
-      toast.success("Cours créé");
+      toast.success(t("coachCourses.created"));
       setShowForm(false);
       setForm(emptyForm);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Création impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachCourses.createError"))),
   });
 
   const updateMutation = useMutation({
@@ -67,23 +75,23 @@ export function CoachCoursesPage() {
       payload: Partial<CoachCourseWritePayload>;
     }) => coachApi.updateCourse(slug, payload),
     onSuccess: () => {
-      toast.success("Cours mis à jour");
+      toast.success(t("coachCourses.updated"));
       setEditing(null);
       setForm(emptyForm);
       setShowForm(false);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Mise à jour impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachCourses.updateError"))),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (slug: string) => coachApi.deleteCourse(slug),
     onSuccess: () => {
-      toast.success("Cours supprimé");
+      toast.success(t("coachCourses.deleted"));
       setPendingDelete(null);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Suppression impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachCourses.deleteError"))),
   });
 
   const startEdit = (c: CourseListItem) => {
@@ -120,7 +128,7 @@ export function CoachCoursesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Mes cours</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.myCourses")}</h1>
         <button
           type="button"
           onClick={() => {
@@ -130,7 +138,7 @@ export function CoachCoursesPage() {
           }}
           className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
         >
-          + Nouveau cours
+          + {t("coachCourses.newCourse")}
         </button>
       </div>
 
@@ -141,7 +149,7 @@ export function CoachCoursesPage() {
         >
           <div className="grid gap-3 md:grid-cols-2">
             <div>
-              <label className="text-sm font-medium text-slate-700">Titre</label>
+              <label className="text-sm font-medium text-slate-700">{t("coachCourses.fieldTitle")}</label>
               <input
                 value={form.title}
                 onChange={(e) =>
@@ -153,7 +161,7 @@ export function CoachCoursesPage() {
             </div>
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Catégorie
+                {t("coachCourses.fieldCategory")}
               </label>
               <select
                 value={form.category}
@@ -163,7 +171,7 @@ export function CoachCoursesPage() {
                 required
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               >
-                <option value="">— Choisir —</option>
+                <option value="">— {t("coachCourses.choose")} —</option>
                 {categoriesQuery.data?.results.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -174,7 +182,7 @@ export function CoachCoursesPage() {
           </div>
           <div>
             <label className="text-sm font-medium text-slate-700">
-              Description
+              {t("coachCourses.fieldDescription")}
             </label>
             <textarea
               rows={3}
@@ -188,7 +196,7 @@ export function CoachCoursesPage() {
           <div className="grid gap-3 md:grid-cols-4">
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Niveau
+                {t("coachCourses.fieldLevel")}
               </label>
               <select
                 value={form.level}
@@ -200,15 +208,15 @@ export function CoachCoursesPage() {
                 }
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               >
-                <option value="all">Tous niveaux</option>
-                <option value="beginner">Débutant</option>
-                <option value="intermediate">Intermédiaire</option>
-                <option value="advanced">Avancé</option>
+                <option value="all">{t("common.levels.all")}</option>
+                <option value="beginner">{t("common.levels.beginner")}</option>
+                <option value="intermediate">{t("common.levels.intermediate")}</option>
+                <option value="advanced">{t("common.levels.advanced")}</option>
               </select>
             </div>
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Durée (min)
+                {t("coachCourses.fieldDuration")}
               </label>
               <input
                 type="number"
@@ -223,7 +231,7 @@ export function CoachCoursesPage() {
             </div>
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Capacité
+                {t("coachCourses.fieldCapacity")}
               </label>
               <input
                 type="number"
@@ -237,7 +245,7 @@ export function CoachCoursesPage() {
             </div>
             <div>
               <label className="text-sm font-medium text-slate-700">
-                Prix unitaire (€)
+                {t("coachCourses.fieldUnitPrice")}
               </label>
               <input
                 type="number"
@@ -260,7 +268,7 @@ export function CoachCoursesPage() {
                   setForm({ ...form, is_active: e.target.checked })
                 }
               />
-              Actif
+              {t("coachCourses.active")}
             </label>
           </div>
           {apiError?.response?.data && (
@@ -278,14 +286,14 @@ export function CoachCoursesPage() {
               }}
               className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
             >
-              Annuler
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending || updateMutation.isPending}
               className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
             >
-              {editing ? "Enregistrer" : "Créer"}
+              {editing ? t("profile.save") : t("common.create")}
             </button>
           </div>
         </form>
@@ -293,22 +301,22 @@ export function CoachCoursesPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {coursesQuery.isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (coursesQuery.data?.results.length ?? 0) === 0 ? (
           <p className="p-8 text-center text-slate-500">
-            Aucun cours pour le moment.
+            {t("coachCourses.empty")}
           </p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Titre</th>
-                <th className="px-4 py-3 font-medium">Catégorie</th>
-                <th className="px-4 py-3 font-medium">Niveau</th>
-                <th className="px-4 py-3 font-medium">Durée</th>
-                <th className="px-4 py-3 font-medium">Prix</th>
-                <th className="px-4 py-3 font-medium">Statut</th>
-                <th className="px-4 py-3 font-medium">Actions</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.fieldTitle")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.fieldCategory")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.fieldLevel")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colDuration")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colPrice")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colStatus")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -318,7 +326,7 @@ export function CoachCoursesPage() {
                     {c.title}
                   </td>
                   <td className="px-4 py-3 text-slate-700">{c.category}</td>
-                  <td className="px-4 py-3 text-slate-700">{c.level}</td>
+                  <td className="px-4 py-3 text-slate-700">{levelLabel[c.level] ?? c.level}</td>
                   <td className="px-4 py-3 text-slate-700">
                     {c.duration_minutes} min
                   </td>
@@ -333,7 +341,7 @@ export function CoachCoursesPage() {
                           : "bg-slate-100 text-slate-700"
                       }`}
                     >
-                      {c.is_active ? "Actif" : "Inactif"}
+                      {c.is_active ? t("coachCourses.active") : t("coachCourses.inactive")}
                     </span>
                   </td>
                   <td className="px-4 py-3">
@@ -343,14 +351,14 @@ export function CoachCoursesPage() {
                         onClick={() => startEdit(c)}
                         className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
                       >
-                        Modifier
+                        {t("coachCourses.edit")}
                       </button>
                       <button
                         type="button"
                         onClick={() => setPendingDelete(c)}
                         className="rounded-md border border-red-300 px-3 py-1 text-xs text-red-700 hover:bg-red-50"
                       >
-                        Supprimer
+                        {t("coachCourses.delete")}
                       </button>
                     </div>
                   </td>
@@ -363,13 +371,13 @@ export function CoachCoursesPage() {
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        title="Supprimer ce cours ?"
+        title={t("coachCourses.confirmDeleteTitle")}
         description={
           pendingDelete
-            ? `« ${pendingDelete.title} » sera retiré du catalogue. Les séances déjà planifiées seront aussi supprimées.`
+            ? t("coachCourses.confirmDeleteDescription", { title: pendingDelete.title })
             : ""
         }
-        confirmLabel="Supprimer"
+        confirmLabel={t("coachCourses.delete")}
         onConfirm={() => pendingDelete && deleteMutation.mutate(pendingDelete.slug)}
         onCancel={() => setPendingDelete(null)}
         loading={deleteMutation.isPending}

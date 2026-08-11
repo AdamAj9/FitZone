@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { formatTime } from "../lib/date";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function SessionCard({ session, compact = false }: Props) {
+  const { t } = useTranslation();
   const ratio =
     session.capacity > 0 ? session.seats_taken / session.capacity : 0;
   const fullnessColor =
@@ -29,7 +31,7 @@ export function SessionCard({ session, compact = false }: Props) {
         </p>
         <span
           className={`rounded-full px-2 py-0.5 text-xs ${fullnessColor}`}
-          title={`${session.seats_taken}/${session.capacity} places`}
+          title={t("sessionCard.seatsTitle", { taken: session.seats_taken, capacity: session.capacity })}
         >
           {session.seats_available}/{session.capacity}
         </span>

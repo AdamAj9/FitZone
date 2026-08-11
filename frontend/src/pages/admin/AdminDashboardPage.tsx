@@ -1,41 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { adminApi } from "../../api/admin";
 
 export function AdminDashboardPage() {
+  const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryKey: ["admin-dashboard"],
     queryFn: () => adminApi.dashboard(),
   });
 
-  if (isLoading || !data) return <p className="text-slate-500">Chargement...</p>;
+  if (isLoading || !data) return <p className="text-slate-500">{t("common.loading")}</p>;
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Tableau de bord</h1>
+      <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.title")}</h1>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <Kpi label="Membres" value={data.users.members} />
-        <Kpi label="Coachs" value={data.users.coaches} />
-        <Kpi label="Total utilisateurs" value={data.users.total} />
+        <Kpi label={t("adminDashboard.members")} value={data.users.members} />
+        <Kpi label={t("adminDashboard.coaches")} value={data.users.coaches} />
+        <Kpi label={t("adminDashboard.totalUsers")} value={data.users.total} />
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <Kpi label="Abonnements actifs" value={data.active_subscriptions} />
+        <Kpi label={t("adminDashboard.activeSubscriptions")} value={data.active_subscriptions} />
         <Kpi
-          label="Revenus 30 jours"
+          label={t("adminDashboard.revenue30Days")}
           value={`${Number(data.revenue_last_30_days).toFixed(2)} €`}
           smallValue
         />
-        <Kpi label="Réservations 30 jours" value={data.bookings_last_30_days} />
+        <Kpi label={t("coachDashboard.bookings30Days")} value={data.bookings_last_30_days} />
       </section>
 
       <section className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">
-          Top 5 actions auditées
+          {t("adminDashboard.topActions")}
         </h2>
         {data.top_actions.length === 0 ? (
-          <p className="mt-3 text-sm text-slate-500">Aucune activité.</p>
+          <p className="mt-3 text-sm text-slate-500">{t("adminDashboard.noActivity")}</p>
         ) : (
           <ul className="mt-3 divide-y divide-slate-100">
             {data.top_actions.map((a) => (

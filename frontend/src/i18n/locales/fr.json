@@ -3,6 +3,16 @@
     "name": "FitZone",
     "tagline": "Votre salle de sport, en ligne"
   },
+  "header": {
+    "ourOffer": "Notre offre",
+    "discoverFitZone": "Découvrez tout l'univers FitZone",
+    "discoverFitZoneSubtitle": "Plus de 200 séances par semaine, 7 espaces dédiés.",
+    "adminBadge": "Admin",
+    "coachBadge": "Coach",
+    "closeMenu": "Fermer le menu",
+    "openMenu": "Ouvrir le menu",
+    "language": "Langue"
+  },
   "nav": {
     "home": "Accueil",
     "courses": "Cours",
@@ -15,11 +25,552 @@
     "logout": "Déconnexion"
   },
   "home": {
-    "hero": "Bienvenue chez FitZone",
-    "subtitle": "Réservez vos cours, suivez votre progression, et profitez de toutes nos installations."
+    "badge": "Nouvelle salle ouverte 7j/7",
+    "titleLine1": "Le sport,",
+    "titleLine2": "ré-imaginé.",
+    "subtitle": "Salles de fitness, piscine, tennis, padel, hammam, coworking... tout sous un même toit. Réservation en ligne, paiement sécurisé, progression suivie.",
+    "ctaStart": "Commencer gratuitement",
+    "ctaPlans": "Voir les abonnements",
+    "ratingValue": "4,8 / 5",
+    "ratingText": "sur 200+ avis",
+    "noCommitment": "Sans engagement · Annulable à tout moment",
+    "stats": [
+      { "value": "200+", "label": "Séances par semaine" },
+      { "value": "10+", "label": "Cours collectifs" },
+      { "value": "7", "label": "Espaces dédiés" },
+      { "value": "7j/7", "label": "Ouvert non-stop" }
+    ],
+    "offerLabel": "Notre offre",
+    "offerTitle": "Un univers complet, sous un même toit",
+    "offerSeeAll": "Tous les abonnements",
+    "discoverMore": "Découvrir",
+    "teamLabel": "Notre équipe",
+    "teamTitle": "Des coachs à votre écoute",
+    "teamSeeAll": "Tous les coachs",
+    "teamBadgeNew": "Nouveau",
+    "coachFallback": "Coach FitZone",
+    "howItWorksLabel": "Comment ça marche ?",
+    "howItWorksTitle": "Trois étapes pour démarrer",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Crée ton compte",
+        "description": "Inscription gratuite en 30 secondes, aucune carte requise."
+      },
+      {
+        "n": "02",
+        "title": "Choisis ta formule",
+        "description": "Basic ou Premium, mensuel ou annuel — change à tout moment."
+      },
+      {
+        "n": "03",
+        "title": "Réserve & profite",
+        "description": "Planning en temps réel, plus de 200 séances par semaine, partout dans la salle."
+      }
+    ],
+    "pricingLabel": "Tarifs",
+    "pricingTitle": "Des formules pour tous les rythmes",
+    "pricingSubtitle": "Sans engagement, annulable à tout moment.",
+    "periodMonthly": "Mensuel",
+    "periodYearly": "Annuel",
+    "yearlyDiscount": "−2 mois",
+    "recommended": "Recommandé",
+    "perMonth": "mois",
+    "perYear": "an",
+    "subscribe": "Souscrire",
+    "testimonialsLabel": "Témoignages",
+    "testimonialsTitle": "Ils en parlent mieux que nous",
+    "testimonials": {
+      "items": [
+        {
+          "name": "Marie L.",
+          "role": "Membre Premium depuis 2 ans",
+          "quote": "L'appli est super intuitive. Je réserve mes cours de yoga et de natation en deux clics, et le coach voit qui vient — ça change tout."
+        },
+        {
+          "name": "Karim B.",
+          "role": "Membre Basic",
+          "quote": "Le rapport qualité-prix imbattable. Salle propre, équipement neuf, et je peux acheter une séance de tennis quand l'envie me prend."
+        },
+        {
+          "name": "Sophie M.",
+          "role": "Coach yoga",
+          "quote": "Côté coach, le tableau de bord est ultra clair. Je vois mes prochaines séances, qui s'inscrit, mes notes — tout au même endroit."
+        }
+      ]
+    },
+    "ctaBottomTitle": "Prêt à passer la porte ?",
+    "ctaBottomSubtitle": "Inscription gratuite. Choisis ta formule, réserve ta première séance, c'est parti.",
+    "ctaCreateAccount": "Créer mon compte",
+    "ctaMeetCoaches": "Rencontrer les coachs"
+  },
+  "footer": {
+    "description": "Votre salle de sport généraliste : fitness, piscine, tennis, padel, hammam, coworking — tout sous un même toit.",
+    "discoverTitle": "Découvrir",
+    "accountTitle": "Mon compte",
+    "legalTitle": "Légal",
+    "legalNotice": "Mentions légales",
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité",
+    "cookies": "Cookies",
+    "myBookings": "Mes réservations",
+    "rights": "Tous droits réservés.",
+    "madeIn": "Conçu et développé en Belgique",
+    "address": "42 rue de la Forme, 1000 Bruxelles"
+  },
+  "notFound": {
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil",
+    "viewCourses": "Voir les cours"
   },
   "common": {
     "loading": "Chargement...",
-    "error": "Une erreur est survenue"
+    "error": "Une erreur est survenue",
+    "comingSoon": "À venir / Coming soon",
+    "confirm": "Confirmer",
+    "levels": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé",
+      "all": "Tous niveaux"
+    },
+    "cancel": "Annuler",
+    "create": "Créer"
+  },
+  "courses": {
+    "title": "Nos cours",
+    "subtitle": "Trouvez le cours qui correspond à votre niveau et vos envies.",
+    "searchPlaceholder": "Rechercher...",
+    "allCategories": "Toutes catégories",
+    "loadError": "Erreur lors du chargement.",
+    "emptyTitle": "Aucun cours ne correspond",
+    "emptyDescription": "Essayez de modifier ou retirer un filtre."
+  },
+  "adminSubscriptions": {
+    "empty": "Aucun abonnement.",
+    "colPlan": "Formule",
+    "colPricePaid": "Prix payé"
+  },
+  "adminUsers": {
+    "title": "Utilisateurs",
+    "searchPlaceholder": "Rechercher email ou nom...",
+    "allRoles": "Tous rôles",
+    "roleMember": "Membre",
+    "roleCoach": "Coach",
+    "roleAdmin": "Admin",
+    "empty": "Aucun utilisateur.",
+    "colEmail": "Email",
+    "colName": "Nom",
+    "colRole": "Rôle",
+    "colUser": "Utilisateur",
+    "colJoined": "Inscription",
+    "deactivated": "Désactivé",
+    "deactivate": "Désactiver",
+    "reactivate": "Réactiver"
+  },
+  "adminLogs": {
+    "title": "Journal d'audit",
+    "allActions": "Toutes actions",
+    "empty": "Aucun événement.",
+    "colActor": "Acteur",
+    "colAction": "Action",
+    "colTarget": "Cible",
+    "colMetadata": "Métadonnées",
+    "colIp": "IP",
+    "system": "système"
+  },
+  "offerings": {
+    "fitness": {
+      "title": "Salles de fitness",
+      "items": {
+        "mixedRoom": {
+          "label": "Salle mixte",
+          "description": "Plus de 80 machines, espace cardio + free weights."
+        },
+        "womenOnlyRoom": {
+          "label": "Salle femmes only",
+          "description": "Espace dédié, encadrement féminin sur demande."
+        },
+        "weightTraining": {
+          "label": "Musculation",
+          "description": "Plateaux de force, racks et bancs olympiques."
+        }
+      }
+    },
+    "pool": {
+      "title": "Piscine 25 m",
+      "items": {
+        "freeSwim": {
+          "label": "Nage libre",
+          "description": "4 lignes d'eau chauffées + couloir nage libre."
+        },
+        "aquagym": {
+          "label": "Aquagym",
+          "description": "Cours collectifs encadrés, plusieurs niveaux."
+        },
+        "swimmingLessons": {
+          "label": "Cours de natation",
+          "description": "Apprentissage individuel ou en groupe."
+        }
+      }
+    },
+    "spa": {
+      "title": "Spa & bien-être",
+      "items": {
+        "hammam": {
+          "label": "Hammam",
+          "description": "Vapeur eucalyptus, accès illimité aux abonnés Premium."
+        },
+        "sauna": {
+          "label": "Sauna",
+          "description": "Cabines bois nordique, sessions de 15 min."
+        },
+        "relaxArea": {
+          "label": "Espace détente",
+          "description": "Tisanes, lecture, après chaque séance."
+        }
+      }
+    },
+    "tennis": {
+      "title": "Tennis & raquette",
+      "items": {
+        "tennis": {
+          "label": "Tennis",
+          "description": "Courts intérieurs en résine, cours individuels et groupes."
+        },
+        "padel": {
+          "label": "Padel",
+          "description": "2 pistes panoramiques, équipement fourni."
+        },
+        "squash": {
+          "label": "Squash",
+          "description": "Courts homologués, créneaux disponibles 7j/7."
+        }
+      }
+    },
+    "groupClasses": {
+      "title": "Cours collectifs",
+      "items": {
+        "yogaPilates": {
+          "label": "Yoga & Pilates",
+          "description": "Vinyasa, Hatha, Pilates Reformer."
+        },
+        "cycling": {
+          "label": "Cycling",
+          "description": "Studio immersif, sessions rythmées en musique."
+        },
+        "hiit": {
+          "label": "HIIT & Cross Training",
+          "description": "Format court, intensité maximale, encadré par un coach."
+        }
+      }
+    },
+    "coworking": {
+      "title": "Pro & coworking",
+      "items": {
+        "coworkingSpaces": {
+          "label": "Espaces coworking",
+          "description": "WiFi haut débit, café à volonté, lounge sportif."
+        },
+        "meetingRooms": {
+          "label": "Salles de meeting",
+          "description": "Réservez à l'heure, écran 4K + visio Zoom."
+        },
+        "premiumLockers": {
+          "label": "Casiers premium",
+          "description": "Casiers personnels avec serrure connectée."
+        }
+      }
+    }
+  },
+  "courseCard": {
+    "noCoach": "Sans coach attitré"
+  },
+  "sessionCard": {
+    "seatsTitle": "{{taken}}/{{capacity}} places"
+  },
+  "starRating": {
+    "noReviews": "aucun avis",
+    "starsCount_one": "{{count}} étoile",
+    "starsCount_other": "{{count}} étoiles"
+  },
+  "adminLayout": {
+    "title": "Administration",
+    "loggedInAs": "Connecté en admin"
+  },
+  "coachLayout": {
+    "title": "Espace Coach",
+    "loggedInAs": "Connecté en coach"
+  },
+  "adminDashboard": {
+    "members": "Membres",
+    "coaches": "Coachs",
+    "totalUsers": "Total utilisateurs",
+    "activeSubscriptions": "Abonnements actifs",
+    "revenue30Days": "Revenus 30 jours",
+    "topActions": "Top 5 actions auditées",
+    "noActivity": "Aucune activité."
+  },
+  "coachBookings": {
+    "allMySessions": "Toutes mes séances",
+    "empty": "Aucune réservation.",
+    "colMember": "Membre",
+    "colCourse": "Cours",
+    "colRoom": "Salle",
+    "colBookedOn": "Réservé le"
+  },
+  "coachCourses": {
+    "created": "Cours créé",
+    "createError": "Création impossible",
+    "updated": "Cours mis à jour",
+    "updateError": "Mise à jour impossible",
+    "deleted": "Cours supprimé",
+    "deleteError": "Suppression impossible",
+    "newCourse": "Nouveau cours",
+    "fieldTitle": "Titre",
+    "fieldCategory": "Catégorie",
+    "choose": "Choisir",
+    "fieldDescription": "Description",
+    "fieldLevel": "Niveau",
+    "fieldDuration": "Durée (min)",
+    "fieldCapacity": "Capacité",
+    "fieldUnitPrice": "Prix unitaire (€)",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "empty": "Aucun cours pour le moment.",
+    "colDuration": "Durée",
+    "colPrice": "Prix",
+    "colStatus": "Statut",
+    "colActions": "Actions",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDeleteTitle": "Supprimer ce cours ?",
+    "confirmDeleteDescription": "« {{title}} » sera retiré du catalogue. Les séances déjà planifiées seront aussi supprimées."
+  },
+  "coachSessions": {
+    "created": "Séance planifiée",
+    "createError": "Planification impossible",
+    "updated": "Séance mise à jour",
+    "deleted": "Séance supprimée",
+    "multipleCreated": "{{count}} séances planifiées",
+    "newSession": "Planifier une séance",
+    "fieldCourse": "Cours",
+    "fieldRoom": "Salle",
+    "fieldStart": "Début",
+    "fieldEnd": "Fin",
+    "fieldCapacity": "Capacité (optionnel)",
+    "capacityPlaceholder": "Reprend la capacité du cours",
+    "repeatWeekly": "Répéter chaque semaine, pendant",
+    "onceOnly": "Une seule fois",
+    "weeksCount": "{{count}} semaines",
+    "schedule": "Planifier",
+    "empty": "Aucune séance planifiée.",
+    "colSeats": "Places",
+    "confirmDeleteTitle": "Supprimer cette séance ?",
+    "confirmDeleteDescription": "Les éventuelles réservations associées seront aussi annulées.",
+    "statusScheduled": "Planifiée",
+    "statusCancelled": "Annulée",
+    "statusCompleted": "Terminée"
+  },
+  "coachDashboard": {
+    "title": "Tableau de bord",
+    "myCourses": "Mes cours",
+    "upcomingSessions": "Séances à venir",
+    "bookings30Days": "Réservations 30 jours",
+    "averageRating": "Note moyenne",
+    "nextSession": "Ma prochaine séance",
+    "seatsBooked": "{{taken}}/{{capacity}} places réservées",
+    "noSessionPlanned": "Aucune séance planifiée.",
+    "planSession": "Planifier une séance",
+    "createOrEditCourse": "Créer ou modifier un cours",
+    "mySessions": "Mes séances",
+    "planSlots": "Planifier les créneaux",
+    "bookings": "Réservations",
+    "seeWhoBooked": "Voir qui s'inscrit"
+  },
+  "profile": {
+    "title": "Mon profil",
+    "phone": "Téléphone",
+    "preferredLanguage": "Langue préférée",
+    "langFrench": "Français",
+    "langEnglish": "English",
+    "saving": "Enregistrement...",
+    "save": "Enregistrer",
+    "updated": "Profil mis à jour"
+  },
+  "questionnaire": {
+    "title": "Questionnaire sportif",
+    "subtitle": "Aide-nous à te recommander les bons cours.",
+    "hintBeginner": "Je découvre / je reprends.",
+    "hintIntermediate": "Je m'entraîne régulièrement.",
+    "hintAdvanced": "Je m'entraîne intensément.",
+    "levelQuestion": "Quel est ton niveau ?",
+    "goalsLabel": "Tes objectifs (facultatif)",
+    "goalsPlaceholder": "Perdre du poids, améliorer mon endurance, etc.",
+    "categoriesLabel": "Catégories qui t'intéressent",
+    "saved": "Préférences enregistrées",
+    "submit": "Valider"
+  },
+  "checkout": {
+    "failedTitle": "Paiement échoué",
+    "successTitle": "Paiement confirmé",
+    "verifyingTitle": "Vérification du paiement…",
+    "failedDescription": "Le paiement n'a pas pu être validé. Vous pouvez réessayer.",
+    "successDescription": "Votre abonnement est désormais actif.",
+    "verifyingDescription": "Nous interrogeons Stripe — un instant…",
+    "session": "Session",
+    "retry": "Réessayer",
+    "cancelledTitle": "Paiement annulé",
+    "cancelledDescription": "Votre paiement n'a pas été finalisé. Vous pouvez recommencer à tout moment.",
+    "backToPlans": "Retour aux abonnements"
+  },
+  "myBookings": {
+    "title": "Mes réservations",
+    "cancelled": "Réservation annulée",
+    "cancelError": "Annulation impossible",
+    "noUpcoming": "Aucune séance à venir.",
+    "cancel": "Annuler",
+    "history": "Historique",
+    "confirmCancelTitle": "Annuler cette réservation ?",
+    "confirmCancelDescription": "La place sera libérée pour d'autres membres.",
+    "confirmCancelLabel": "Oui, annuler"
+  },
+  "myPayments": {
+    "title": "Mes paiements",
+    "subtitle": "Historique de toutes vos transactions Stripe.",
+    "empty": "Aucun paiement.",
+    "colDate": "Date",
+    "colType": "Type",
+    "colDetail": "Détail",
+    "colAmount": "Montant",
+    "colStatus": "Statut"
+  },
+  "mySubscription": {
+    "title": "Mon abonnement",
+    "cancelled": "Abonnement annulé",
+    "pricePaid": "{{amount}} € payés",
+    "startDate": "Début",
+    "endDate": "Fin",
+    "daysRemaining": "Jours restants",
+    "cancelSubscription": "Annuler l'abonnement",
+    "noActiveSubscription": "Vous n'avez aucun abonnement actif.",
+    "viewPlans": "Voir les formules",
+    "noHistory": "Aucun historique.",
+    "confirmCancelTitle": "Annuler l'abonnement ?",
+    "confirmCancelDescription": "Vous perdrez immédiatement l'accès aux services Premium. Cette action est irréversible."
+  },
+  "memberDashboard": {
+    "greeting": "Bonjour {{name}}",
+    "welcome": "Bienvenue sur votre tableau de bord FitZone.",
+    "personalizeTitle": "Personnalisez vos recommandations",
+    "personalizeText": "Répondez à un court questionnaire (1 min) pour qu'on vous propose les bons cours",
+    "statAttended": "Séances suivies",
+    "statLast30Days": "30 derniers jours",
+    "statUpcoming": "À venir",
+    "statFavoriteCategory": "Catégorie favorite",
+    "nextSession": "Ma prochaine séance",
+    "noBookedSession": "Aucune séance réservée.",
+    "viewPlanning": "Voir le planning",
+    "recommendedForYou": "Recommandé pour vous",
+    "basedOnHistory": "Basé sur votre historique ({{categories}})",
+    "basedOnPreferences": "Basé sur vos préférences ({{categories}})",
+    "popularComingSoon": "Sélection populaire à venir",
+    "noRecommendations": "Aucune recommandation disponible pour le moment.",
+    "subscription": "Abonnement",
+    "daysLeft_one": "{{count}} jour restant",
+    "daysLeft_other": "{{count}} jours restants",
+    "noSubscription": "Aucun abonnement",
+    "bookings": "Réservations",
+    "upcomingCount": "{{count}} à venir",
+    "profile": "Profil",
+    "payments": "Paiements",
+    "stripeHistory": "Historique Stripe"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer",
+      "firstName": "Prénom",
+      "lastName": "Nom"
+    },
+    "validation": {
+      "emailInvalid": "Email invalide",
+      "passwordRequired": "Mot de passe requis",
+      "firstNameRequired": "Prénom requis",
+      "lastNameRequired": "Nom requis",
+      "passwordMinLength": "8 caractères minimum",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
+    }
+  },
+  "plans": {
+    "title": "Nos abonnements",
+    "subtitle": "Choisissez la formule qui vous correspond.",
+    "activeSubscription": "Vous avez déjà un abonnement actif :",
+    "daysRemaining_one": "il vous reste {{count}} jour.",
+    "daysRemaining_other": "il vous reste {{count}} jours.",
+    "alreadyActive": "Abonnement déjà actif",
+    "subscribing": "Souscription en cours...",
+    "loginToSubscribe": "Se connecter pour souscrire"
+  },
+  "coaches": {
+    "title": "Nos coachs",
+    "subtitle": "Une équipe expérimentée pour vous accompagner.",
+    "loadErrorTitle": "Erreur de chargement",
+    "loadErrorDescription": "Impossible de récupérer la liste des coachs.",
+    "yearsExperience_one": "{{count}} an d'expérience",
+    "yearsExperience_other": "{{count}} ans d'expérience"
+  },
+  "coachDetail": {
+    "notFound": "Coach introuvable.",
+    "backToList": "Retour à la liste",
+    "biography": "Biographie",
+    "coursesBy": "Cours de {{name}}",
+    "noCourses": "Aucun cours pour le moment.",
+    "included": "Inclus",
+    "myReview": "Mon avis",
+    "leaveReview": "Laisser un avis",
+    "reviewRequirement": "Vous devez avoir suivi au moins une séance avec ce coach.",
+    "commentPlaceholder": "Votre commentaire (facultatif)",
+    "update": "Mettre à jour",
+    "publishReview": "Publier l'avis",
+    "deleteReview": "Supprimer mon avis",
+    "reviewsCount": "Avis ({{count}})",
+    "noReviews": "Aucun avis pour le moment."
+  },
+  "planning": {
+    "title": "Planning",
+    "weekOf": "Semaine du",
+    "weekTo": "au",
+    "searchPlaceholder": "Rechercher un cours...",
+    "previousWeek": "Semaine précédente",
+    "thisWeek": "Cette semaine",
+    "nextWeek": "Semaine suivante"
+  },
+  "courseDetail": {
+    "notFound": "Cours introuvable.",
+    "backToCatalog": "Retour au catalogue",
+    "capacity": "Capacité",
+    "upcomingSessions": "Prochaines séances",
+    "noSessions": "Aucune séance planifiée pour le moment.",
+    "unitPrice": "Prix unitaire",
+    "includedInSubscription": "Inclus dans l'abonnement",
+    "loginToBook": "Se connecter pour réserver",
+    "includedInPremium": "Inclus dans votre abonnement Premium",
+    "payHint": "Cliquez « Payer » sur une séance pour réserver à l'unité.",
+    "subscribePremium": "Souscrire un abonnement Premium",
+    "coach": "Coach",
+    "viewProfile": "Voir le profil",
+    "coachReviews": "Avis sur le coach",
+    "reviewsCount": "avis",
+    "viewAllReviews": "Voir tous les avis",
+    "similarCourses": "Cours similaires",
+    "full": "Complet",
+    "book": "Réserver",
+    "pay": "Payer",
+    "unavailable": "Indisponible",
+    "bookingConfirmed": "Réservation confirmée",
+    "bookingError": "Réservation impossible",
+    "paymentError": "Paiement impossible"
   }
 }

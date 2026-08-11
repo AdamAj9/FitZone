@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { coursesApi } from "../../api/courses";
 import { CourseCard } from "../../components/CourseCard";
@@ -7,6 +8,7 @@ import { EmptyState, SkeletonCard } from "../../components/ui";
 import type { CourseLevel } from "../../types/courses";
 
 export function CoursesListPage() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [categorySlug, setCategorySlug] = useState("");
   const [level, setLevel] = useState<CourseLevel | "">("");
@@ -29,15 +31,15 @@ export function CoursesListPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">Nos cours</h1>
+        <h1 className="text-3xl font-bold text-slate-900">{t("courses.title")}</h1>
         <p className="mt-1 text-slate-600">
-          Trouvez le cours qui correspond à votre niveau et vos envies.
+          {t("courses.subtitle")}
         </p>
 
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           <input
             type="search"
-            placeholder="Rechercher..."
+            placeholder={t("courses.searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="rounded-md border border-slate-300 px-3 py-2"
@@ -47,7 +49,7 @@ export function CoursesListPage() {
             onChange={(e) => setCategorySlug(e.target.value)}
             className="rounded-md border border-slate-300 px-3 py-2"
           >
-            <option value="">Toutes catégories</option>
+            <option value="">{t("courses.allCategories")}</option>
             {categoriesQuery.data?.results.map((c) => (
               <option key={c.id} value={c.slug}>
                 {c.name} ({c.course_count})
@@ -59,11 +61,11 @@ export function CoursesListPage() {
             onChange={(e) => setLevel(e.target.value as CourseLevel | "")}
             className="rounded-md border border-slate-300 px-3 py-2"
           >
-            <option value="">Tous niveaux</option>
-            <option value="beginner">Débutant</option>
-            <option value="intermediate">Intermédiaire</option>
-            <option value="advanced">Avancé</option>
-            <option value="all">Tous niveaux</option>
+            <option value="">{t("common.levels.all")}</option>
+            <option value="beginner">{t("common.levels.beginner")}</option>
+            <option value="intermediate">{t("common.levels.intermediate")}</option>
+            <option value="advanced">{t("common.levels.advanced")}</option>
+            <option value="all">{t("common.levels.all")}</option>
           </select>
         </div>
       </div>
@@ -75,12 +77,12 @@ export function CoursesListPage() {
           ))}
         </div>
       ) : coursesQuery.isError ? (
-        <p className="text-red-600">Erreur lors du chargement.</p>
+        <p className="text-red-600">{t("courses.loadError")}</p>
       ) : coursesQuery.data && coursesQuery.data.results.length === 0 ? (
         <EmptyState
           icon="🔍"
-          title="Aucun cours ne correspond"
-          description="Essayez de modifier ou retirer un filtre."
+          title={t("courses.emptyTitle")}
+          description={t("courses.emptyDescription")}
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

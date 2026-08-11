@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { coursesApi } from "../../api/courses";
 import { sessionsApi } from "../../api/sessions";
@@ -10,6 +11,7 @@ import type { CourseSessionItem } from "../../types/sessions";
 const WEEK_LENGTH = 7;
 
 export function PlanningPage() {
+  const { t } = useTranslation();
   const [weekStart, setWeekStart] = useState<Date>(() => startOfWeek(new Date()));
   const [categorySlug, setCategorySlug] = useState("");
   const [search, setSearch] = useState("");
@@ -59,9 +61,9 @@ export function PlanningPage() {
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Planning</h1>
+            <h1 className="text-3xl font-bold text-slate-900">{t("planning.title")}</h1>
             <p className="mt-1 text-sm text-slate-500">
-              Semaine du {formatDayLabel(weekStart)} au{" "}
+              {t("planning.weekOf")} {formatDayLabel(weekStart)} {t("planning.weekTo")}{" "}
               {formatDayLabel(addDays(weekStart, 6))}
             </p>
           </div>
@@ -71,7 +73,7 @@ export function PlanningPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Rechercher un cours..."
+              placeholder={t("planning.searchPlaceholder")}
               className="rounded-md border border-slate-300 px-3 py-2 text-sm"
             />
             <input
@@ -89,7 +91,7 @@ export function PlanningPage() {
               onChange={(e) => setCategorySlug(e.target.value)}
               className="rounded-md border border-slate-300 px-3 py-2 text-sm"
             >
-              <option value="">Toutes catégories</option>
+              <option value="">{t("courses.allCategories")}</option>
               {categoriesQuery.data?.results.map((c) => (
                 <option key={c.id} value={c.slug}>
                   {c.name}
@@ -102,21 +104,21 @@ export function PlanningPage() {
                 onClick={() => setWeekStart(addDays(weekStart, -7))}
                 className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
               >
-                ← Semaine précédente
+                ← {t("planning.previousWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(startOfWeek(new Date()))}
                 className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
               >
-                Cette semaine
+                {t("planning.thisWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(addDays(weekStart, 7))}
                 className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
               >
-                Semaine suivante →
+                {t("planning.nextWeek")} →
               </button>
             </div>
           </div>
@@ -124,9 +126,9 @@ export function PlanningPage() {
       </div>
 
       {sessionsQuery.isLoading ? (
-        <p className="text-slate-500">Chargement...</p>
+        <p className="text-slate-500">{t("common.loading")}</p>
       ) : sessionsQuery.isError ? (
-        <p className="text-red-600">Erreur lors du chargement.</p>
+        <p className="text-red-600">{t("courses.loadError")}</p>
       ) : (
         <div className="grid gap-3 md:grid-cols-7">
           {days.map((day) => {

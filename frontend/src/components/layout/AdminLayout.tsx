@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { NavLink, Outlet } from "react-router-dom";
 
 import { useAuthStore } from "../../store/auth";
@@ -12,6 +13,7 @@ const navItem = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 export function AdminLayout() {
+  const { t } = useTranslation();
   const user = useAuthStore((s) => s.user);
 
   return (
@@ -20,25 +22,25 @@ export function AdminLayout() {
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-8">
         <aside className="w-56 shrink-0 space-y-1">
           <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wide text-slate-400">
-            Administration
+            {t("adminLayout.title")}
           </p>
           <NavLink to="/admin" end className={navItem}>
-            Tableau de bord
+            {t("coachDashboard.title")}
           </NavLink>
           <NavLink to="/admin/users" className={navItem}>
-            Utilisateurs
+            {t("adminUsers.title")}
           </NavLink>
           <NavLink to="/admin/logs" className={navItem}>
-            Journal d'audit
+            {t("adminLogs.title")}
           </NavLink>
           <NavLink to="/admin/payments" className={navItem}>
-            Paiements
+            {t("myPayments.title")}
           </NavLink>
           <NavLink to="/admin/subscriptions" className={navItem}>
-            Abonnements
+            {t("nav.plans")}
           </NavLink>
           <div className="mt-6 rounded-md bg-slate-100 p-3 text-xs text-slate-600">
-            <p className="font-medium text-slate-900">Connecté en admin</p>
+            <p className="font-medium text-slate-900">{t("adminLayout.loggedInAs")}</p>
             <p className="mt-1 truncate">{user?.email}</p>
           </div>
         </aside>

@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { coachApi } from "../../api/coach";
 import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 
 export function CoachBookingsPage() {
+  const { t } = useTranslation();
   const user = useAuthStore((s) => s.user);
   const [sessionId, setSessionId] = useState<number | "">("");
   const sessionsQuery = useQuery({
@@ -22,7 +24,7 @@ export function CoachBookingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Réservations</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.bookings")}</h1>
         <select
           value={sessionId}
           onChange={(e) =>
@@ -30,7 +32,7 @@ export function CoachBookingsPage() {
           }
           className="rounded-md border border-slate-300 px-3 py-2 text-sm"
         >
-          <option value="">Toutes mes séances</option>
+          <option value="">{t("coachBookings.allMySessions")}</option>
           {sessionsQuery.data?.results.map((s) => (
             <option key={s.id} value={s.id}>
               {formatDateTime(s.starts_at)} — {s.course_title}
@@ -41,21 +43,21 @@ export function CoachBookingsPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {bookingsQuery.isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (bookingsQuery.data?.length ?? 0) === 0 ? (
           <p className="p-8 text-center text-slate-500">
-            Aucune réservation.
+            {t("coachBookings.empty")}
           </p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Membre</th>
-                <th className="px-4 py-3 font-medium">Cours</th>
-                <th className="px-4 py-3 font-medium">Date</th>
-                <th className="px-4 py-3 font-medium">Salle</th>
-                <th className="px-4 py-3 font-medium">Type</th>
-                <th className="px-4 py-3 font-medium">Réservé le</th>
+                <th className="px-4 py-3 font-medium">{t("coachBookings.colMember")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachBookings.colCourse")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachBookings.colRoom")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colType")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachBookings.colBookedOn")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">

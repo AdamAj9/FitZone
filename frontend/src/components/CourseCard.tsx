@@ -1,13 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import type { CourseListItem } from "../types/courses";
-
-const levelLabel: Record<CourseListItem["level"], string> = {
-  beginner: "Débutant",
-  intermediate: "Intermédiaire",
-  advanced: "Avancé",
-  all: "Tous niveaux",
-};
 
 const levelColor: Record<CourseListItem["level"], string> = {
   beginner: "bg-green-100 text-green-800",
@@ -17,6 +11,13 @@ const levelColor: Record<CourseListItem["level"], string> = {
 };
 
 export function CourseCard({ course }: { course: CourseListItem }) {
+  const { t } = useTranslation();
+  const levelLabel: Record<CourseListItem["level"], string> = {
+    beginner: t("common.levels.beginner"),
+    intermediate: t("common.levels.intermediate"),
+    advanced: t("common.levels.advanced"),
+    all: t("common.levels.all"),
+  };
   return (
     <Link
       to={`/courses/${course.slug}`}
@@ -44,14 +45,14 @@ export function CourseCard({ course }: { course: CourseListItem }) {
           {course.title}
         </h3>
         <p className="mt-1 text-sm text-slate-500">
-          {course.coach_name ?? "Sans coach attitré"}
+          {course.coach_name ?? t("courseCard.noCoach")}
         </p>
         <div className="mt-auto flex items-center justify-between pt-3 text-sm">
           <span className="text-slate-600">{course.duration_minutes} min</span>
           <span className="font-semibold text-slate-900">
             {Number(course.price_unit) > 0
               ? `${Number(course.price_unit).toFixed(2)} €`
-              : "Inclus"}
+              : t("coachDetail.included")}
           </span>
         </div>
       </div>

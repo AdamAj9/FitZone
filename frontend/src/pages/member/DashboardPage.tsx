@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { meApi } from "../../api/me";
@@ -8,6 +9,7 @@ import { useMe } from "../../hooks/useAuth";
 import { formatDateTime } from "../../lib/date";
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const { data: user, isLoading: userLoading } = useMe();
   const subQuery = useQuery({
     queryKey: ["subscription-current"],
@@ -26,7 +28,7 @@ export function DashboardPage() {
   });
 
   if (userLoading || !user) {
-    return <p className="text-slate-500">Chargement...</p>;
+    return <p className="text-slate-500">{t("common.loading")}</p>;
   }
 
   const sub = subQuery.data?.subscription ?? null;
@@ -38,10 +40,10 @@ export function DashboardPage() {
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-8 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">
-          Bonjour {user.first_name || user.email} 👋
+          {t("memberDashboard.greeting", { name: user.first_name || user.email })} 👋
         </h1>
         <p className="mt-2 text-slate-600">
-          Bienvenue sur votre tableau de bord FitZone.
+          {t("memberDashboard.welcome")}
         </p>
       </div>
 
@@ -51,21 +53,20 @@ export function DashboardPage() {
           className="block rounded-2xl border-2 border-dashed border-brand-300 bg-brand-50 p-5 transition hover:bg-brand-100"
         >
           <p className="text-sm font-semibold text-brand-700">
-            Personnalisez vos recommandations
+            {t("memberDashboard.personalizeTitle")}
           </p>
           <p className="mt-1 text-sm text-brand-600">
-            Répondez à un court questionnaire (1 min) pour qu'on vous propose
-            les bons cours →
+            {t("memberDashboard.personalizeText")} →
           </p>
         </Link>
       )}
 
       <section className="grid gap-4 md:grid-cols-4">
-        <StatCard label="Séances suivies" value={stats?.total_attended ?? 0} />
-        <StatCard label="30 derniers jours" value={stats?.last_30_days ?? 0} />
-        <StatCard label="À venir" value={stats?.upcoming_count ?? 0} />
+        <StatCard label={t("memberDashboard.statAttended")} value={stats?.total_attended ?? 0} />
+        <StatCard label={t("memberDashboard.statLast30Days")} value={stats?.last_30_days ?? 0} />
+        <StatCard label={t("memberDashboard.statUpcoming")} value={stats?.upcoming_count ?? 0} />
         <StatCard
-          label="Catégorie favorite"
+          label={t("memberDashboard.statFavoriteCategory")}
           value={stats?.favorite_category ?? "—"}
           smallValue
         />
@@ -75,7 +76,7 @@ export function DashboardPage() {
         <div className="lg:col-span-2 space-y-4">
           <section className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900">
-              Ma prochaine séance
+              {t("memberDashboard.nextSession")}
             </h2>
             {stats?.next_booking ? (
               <Link
@@ -92,9 +93,9 @@ export function DashboardPage() {
               </Link>
             ) : (
               <p className="mt-3 text-sm text-slate-500">
-                Aucune séance réservée.{" "}
+                {t("memberDashboard.noBookedSession")}{" "}
                 <Link to="/planning" className="text-brand-600 hover:underline">
-                  Voir le planning →
+                  {t("memberDashboard.viewPlanning")} →
                 </Link>
               </p>
             )}
@@ -102,20 +103,20 @@ export function DashboardPage() {
 
           <section className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900">
-              Recommandé pour vous
+              {t("memberDashboard.recommendedForYou")}
             </h2>
             <p className="mt-1 text-xs text-slate-500">
               {reco?.based_on.history_categories.length
-                ? `Basé sur votre historique (${reco.based_on.history_categories.join(", ")})`
+                ? t("memberDashboard.basedOnHistory", { categories: reco.based_on.history_categories.join(", ") })
                 : reco?.based_on.questionnaire_categories.length
-                  ? `Basé sur vos préférences (${reco.based_on.questionnaire_categories.join(", ")})`
-                  : "Sélection populaire à venir"}
+                  ? t("memberDashboard.basedOnPreferences", { categories: reco.based_on.questionnaire_categories.join(", ") })
+                  : t("memberDashboard.popularComingSoon")}
             </p>
             {recoQuery.isLoading ? (
-              <p className="mt-3 text-sm text-slate-500">Chargement...</p>
+              <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
             ) : (reco?.results.length ?? 0) === 0 ? (
               <p className="mt-3 text-sm text-slate-500">
-                Aucune recommandation disponible pour le moment.
+                {t("memberDashboard.noRecommendations")}
               </p>
             ) : (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -133,7 +134,7 @@ export function DashboardPage() {
             className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-              Abonnement
+              {t("memberDashboard.subscription")}
             </p>
             {sub ? (
               <>
@@ -141,15 +142,15 @@ export function DashboardPage() {
                   {sub.plan.name}
                 </p>
                 <p className="mt-1 text-sm text-slate-500">
-                  {sub.days_remaining} jours restants
+                  {t("memberDashboard.daysLeft", { count: sub.days_remaining })}
                 </p>
               </>
             ) : (
               <>
                 <p className="mt-2 text-lg font-semibold text-slate-900">
-                  Aucun abonnement
+                  {t("memberDashboard.noSubscription")}
                 </p>
-                <p className="mt-1 text-sm text-brand-600">Souscrire →</p>
+                <p className="mt-1 text-sm text-brand-600">{t("home.subscribe")} →</p>
               </>
             )}
           </Link>
@@ -159,10 +160,10 @@ export function DashboardPage() {
             className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-              Réservations
+              {t("memberDashboard.bookings")}
             </p>
             <p className="mt-2 text-lg font-semibold text-slate-900">
-              {stats?.upcoming_count ?? 0} à venir
+              {t("memberDashboard.upcomingCount", { count: stats?.upcoming_count ?? 0 })}
             </p>
           </Link>
 
@@ -171,7 +172,7 @@ export function DashboardPage() {
             className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-              Profil
+              {t("memberDashboard.profile")}
             </p>
             <p className="mt-2 text-sm text-slate-700">{user.email}</p>
           </Link>
@@ -181,9 +182,9 @@ export function DashboardPage() {
             className="block rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-              Paiements
+              {t("memberDashboard.payments")}
             </p>
-            <p className="mt-2 text-sm text-slate-700">Historique Stripe</p>
+            <p className="mt-2 text-sm text-slate-700">{t("memberDashboard.stripeHistory")}</p>
           </Link>
         </aside>
       </div>

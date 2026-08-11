@@ -65,7 +65,7 @@ export function Header() {
               type="button"
               className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 hover:text-brand-700"
             >
-              Notre offre
+              {t("header.ourOffer")}
               <svg
                 className="h-4 w-4 transition-transform group-hover:rotate-180"
                 fill="none"
@@ -86,14 +86,14 @@ export function Header() {
                 <div className="grid grid-cols-3 gap-6 p-6">
                   {OFFERINGS.map((group) => (
                     <Link
-                      key={group.title}
+                      key={group.key}
                       to={group.items[0]?.href ?? "/courses"}
                       className="group/item relative overflow-hidden rounded-xl border border-ink-200 bg-ink-100 transition hover:border-brand-400 hover:shadow-brand-glow"
                     >
                       <div className="aspect-[16/10] overflow-hidden">
                         <img
                           src={group.image}
-                          alt={group.title}
+                          alt={t(`offerings.${group.key}.title`)}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-110"
                           loading="lazy"
                         />
@@ -102,10 +102,12 @@ export function Header() {
                       <div className="absolute inset-x-0 bottom-0 p-3 text-white">
                         <p className="flex items-center gap-1.5 text-sm font-semibold">
                           <span>{group.icon}</span>
-                          {group.title}
+                          {t(`offerings.${group.key}.title`)}
                         </p>
                         <p className="mt-1 line-clamp-1 text-xs text-ink-100">
-                          {group.items.map((i) => i.label).join(" · ")}
+                          {group.items
+                            .map((i) => t(`offerings.${group.key}.items.${i.key}.label`))
+                            .join(" · ")}
                         </p>
                       </div>
                     </Link>
@@ -114,17 +116,17 @@ export function Header() {
                 <div className="flex items-center justify-between bg-ink-900 px-6 py-4 text-white">
                   <div>
                     <p className="text-sm font-semibold">
-                      Découvrez tout l'univers FitZone
+                      {t("header.discoverFitZone")}
                     </p>
                     <p className="text-xs text-ink-200">
-                      Plus de 200 séances par semaine, 7 espaces dédiés.
+                      {t("header.discoverFitZoneSubtitle")}
                     </p>
                   </div>
                   <Link
                     to="/plans"
                     className="rounded-md bg-brand-500 px-4 py-2 text-sm font-medium hover:bg-brand-600"
                   >
-                    Voir les abonnements →
+                    {t("home.offerSeeAll")} →
                   </Link>
                 </div>
               </div>
@@ -160,7 +162,7 @@ export function Header() {
                   to="/admin"
                   className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                 >
-                  Admin
+                  {t("header.adminBadge")}
                 </NavLink>
               )}
               {user.role === "coach" && (
@@ -168,7 +170,7 @@ export function Header() {
                   to="/coach"
                   className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700"
                 >
-                  Coach
+                  {t("header.coachBadge")}
                 </NavLink>
               )}
               {user.role === "member" && (
@@ -202,7 +204,7 @@ export function Header() {
 
         <button
           type="button"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={open ? t("header.closeMenu") : t("header.openMenu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className="inline-flex items-center justify-center rounded-md p-2 text-ink-700 hover:bg-ink-100 lg:hidden"
@@ -245,7 +247,7 @@ export function Header() {
               onClick={() => setMobileOfferOpen((v) => !v)}
               className="flex w-full items-center justify-between rounded-md px-4 py-2 text-base font-medium text-ink-700 hover:bg-ink-100"
             >
-              Notre offre
+              {t("header.ourOffer")}
               <span
                 className={`transition-transform ${
                   mobileOfferOpen ? "rotate-180" : ""
@@ -257,19 +259,19 @@ export function Header() {
             {mobileOfferOpen && (
               <div className="rounded-md bg-ink-50 p-3">
                 {OFFERINGS.map((group) => (
-                  <div key={group.title} className="mb-4 last:mb-0">
+                  <div key={group.key} className="mb-4 last:mb-0">
                     <p className="px-2 text-xs font-bold uppercase tracking-wider text-ink-500">
-                      {group.icon} {group.title}
+                      {group.icon} {t(`offerings.${group.key}.title`)}
                     </p>
                     <ul className="mt-2 space-y-1">
                       {group.items.map((item) => (
-                        <li key={item.label}>
+                        <li key={item.key}>
                           <Link
                             to={item.href}
                             onClick={closeMenu}
                             className="block rounded-md px-2 py-1.5 text-sm text-ink-700 hover:bg-surface"
                           >
-                            {item.label}
+                            {t(`offerings.${group.key}.items.${item.key}.label`)}
                           </Link>
                         </li>
                       ))}
@@ -301,7 +303,7 @@ export function Header() {
                     onClick={closeMenu}
                     className="block rounded-md bg-red-600 px-4 py-2 text-base font-medium text-white"
                   >
-                    Admin
+                    {t("header.adminBadge")}
                   </NavLink>
                 )}
                 {user.role === "coach" && (
@@ -310,7 +312,7 @@ export function Header() {
                     onClick={closeMenu}
                     className="block rounded-md bg-emerald-600 px-4 py-2 text-base font-medium text-white"
                   >
-                    Coach
+                    {t("header.coachBadge")}
                   </NavLink>
                 )}
                 {user.role === "member" && (
@@ -356,7 +358,7 @@ export function Header() {
               }}
               className="block w-full rounded-md border border-ink-200 px-4 py-2 text-left text-sm text-ink-700 hover:bg-ink-100"
             >
-              Langue : {i18n.language.startsWith("fr") ? "FR" : "EN"} →{" "}
+              {t("header.language")} : {i18n.language.startsWith("fr") ? "FR" : "EN"} →{" "}
               {i18n.language.startsWith("fr") ? "EN" : "FR"}
             </button>
           </div>

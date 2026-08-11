@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { NavLink, Outlet } from "react-router-dom";
 
 import { useAuthStore } from "../../store/auth";
@@ -12,6 +13,7 @@ const navItem = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 export function CoachLayout() {
+  const { t } = useTranslation();
   const user = useAuthStore((s) => s.user);
 
   return (
@@ -20,22 +22,22 @@ export function CoachLayout() {
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-8">
         <aside className="w-56 shrink-0 space-y-1">
           <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wide text-slate-400">
-            Espace Coach
+            {t("coachLayout.title")}
           </p>
           <NavLink to="/coach" end className={navItem}>
-            Tableau de bord
+            {t("coachDashboard.title")}
           </NavLink>
           <NavLink to="/coach/courses" className={navItem}>
-            Mes cours
+            {t("coachDashboard.myCourses")}
           </NavLink>
           <NavLink to="/coach/sessions" className={navItem}>
-            Mes séances
+            {t("coachDashboard.mySessions")}
           </NavLink>
           <NavLink to="/coach/bookings" className={navItem}>
-            Réservations
+            {t("coachDashboard.bookings")}
           </NavLink>
           <div className="mt-6 rounded-md bg-slate-100 p-3 text-xs text-slate-600">
-            <p className="font-medium text-slate-900">Connecté en coach</p>
+            <p className="font-medium text-slate-900">{t("coachLayout.loggedInAs")}</p>
             <p className="mt-1 truncate">{user?.email}</p>
           </div>
         </aside>

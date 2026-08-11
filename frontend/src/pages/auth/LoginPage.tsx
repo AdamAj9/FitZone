@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,18 +7,25 @@ import { z } from "zod";
 
 import { useLogin } from "../../hooks/useAuth";
 
-const schema = z.object({
-  email: z.string().email("Email invalide"),
-  password: z.string().min(1, "Mot de passe requis"),
-});
-
-type FormValues = z.infer<typeof schema>;
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation() as { state?: { from?: { pathname: string } } };
   const login = useLogin();
+
+  const schema = useMemo(
+    () =>
+      z.object({
+        email: z.string().email(t("auth.validation.emailInvalid")),
+        password: z.string().min(1, t("auth.validation.passwordRequired")),
+      }),
+    [t],
+  );
 
   const {
     register,
@@ -48,7 +56,7 @@ export function LoginPage() {
       <h1 className="text-2xl font-bold text-slate-900">{t("nav.login")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700">Email</label>
+          <label className="block text-sm font-medium text-slate-700">{t("auth.fields.email")}</label>
           <input
             type="email"
             autoComplete="email"
@@ -62,7 +70,7 @@ export function LoginPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Mot de passe
+            {t("auth.fields.password")}
           </label>
           <input
             type="password"

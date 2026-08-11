@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import { coachApi } from "../../api/coach";
 import { sessionsApi } from "../../api/sessions";
@@ -27,6 +28,12 @@ const emptyForm: CoachSessionWritePayload = {
 };
 
 export function CoachSessionsPage() {
+  const { t } = useTranslation();
+  const sessionStatusLabel: Record<string, string> = {
+    scheduled: t("coachSessions.statusScheduled"),
+    cancelled: t("coachSessions.statusCancelled"),
+    completed: t("coachSessions.statusCompleted"),
+  };
   const queryClient = useQueryClient();
   const user = useAuthStore((s) => s.user);
   const [showForm, setShowForm] = useState(false);
@@ -59,13 +66,13 @@ export function CoachSessionsPage() {
     mutationFn: (payload: CoachSessionWritePayload) =>
       coachApi.createSession(payload),
     onSuccess: () => {
-      toast.success("Séance planifiée");
+      toast.success(t("coachSessions.created"));
       setShowForm(false);
       setForm(emptyForm);
       setEditingId(null);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Planification impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachSessions.createError"))),
   });
 
   const updateMutation = useMutation({
@@ -77,23 +84,23 @@ export function CoachSessionsPage() {
       payload: Partial<CoachSessionWritePayload>;
     }) => coachApi.updateSession(id, payload),
     onSuccess: () => {
-      toast.success("Séance mise à jour");
+      toast.success(t("coachSessions.updated"));
       setShowForm(false);
       setForm(emptyForm);
       setEditingId(null);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Mise à jour impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachCourses.updateError"))),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => coachApi.deleteSession(id),
     onSuccess: () => {
-      toast.success("Séance supprimée");
+      toast.success(t("coachSessions.deleted"));
       setPendingDelete(null);
       invalidate();
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Suppression impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("coachCourses.deleteError"))),
   });
 
  const onSubmit = (e: React.FormEvent) => {
@@ -112,13 +119,13 @@ export function CoachSessionsPage() {
               ends_at: addDaysToDatetimeLocal(form.ends_at, i * 7),
             });
           }
-          toast.success(`${repeatWeeks} séances planifiées`);
+          toast.success(t("coachSessions.multipleCreated", { count: repeatWeeks }));
           setShowForm(false);
           setForm(emptyForm);
           setRepeatWeeks(1);
           invalidate();
         } catch (err) {
-          toast.error(apiErrorMessage(err, "Planification impossible"));
+          toast.error(apiErrorMessage(err, t("coachSessions.createError")));
         }
       })();
     } else {
@@ -133,7 +140,7 @@ export function CoachSessionsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Mes séances</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.mySessions")}</h1>
         <button
           type="button"
           onClick={() => {
@@ -143,7 +150,7 @@ export function CoachSessionsPage() {
           }}
           className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
         >
-          + Planifier une séance
+          + {t("coachSessions.newSession")}
         </button>
       </div>
 
@@ -154,7 +161,7 @@ export function CoachSessionsPage() {
         >
           <div className="grid gap-3 md:grid-cols-2">
             <div>
-              <label className="text-sm font-medium text-slate-700">Cours</label>
+              <label className="text-sm font-medium text-slate-700">{t("coachSessions.fieldCourse")}</label>
               <select
                 value={form.course}
                 onChange={(e) =>
@@ -163,7 +170,7 @@ export function CoachSessionsPage() {
                 required
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               >
-                <option value="">— Choisir —</option>
+                <option value="">— {t("coachCourses.choose")} —</option>
                 {coursesQuery.data?.results.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.title}
@@ -172,7 +179,7 @@ export function CoachSessionsPage() {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700">Salle</label>
+              <label className="text-sm font-medium text-slate-700">{t("coachSessions.fieldRoom")}</label>
               <select
                 value={form.room}
                 onChange={(e) =>
@@ -181,7 +188,7 @@ export function CoachSessionsPage() {
                 required
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               >
-                <option value="">— Choisir —</option>
+                <option value="">— {t("coachCourses.choose")} —</option>
                 {roomsQuery.data?.results.map((r) => (
                   <option key={r.id} value={r.id}>
                     {r.name} ({r.building_display})
@@ -190,7 +197,7 @@ export function CoachSessionsPage() {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700">Début</label>
+              <label className="text-sm font-medium text-slate-700">{t("coachSessions.fieldStart")}</label>
               <input
                 type="datetime-local"
                 value={form.starts_at}
@@ -202,7 +209,7 @@ export function CoachSessionsPage() {
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-700">Fin</label>
+              <label className="text-sm font-medium text-slate-700">{t("coachSessions.fieldEnd")}</label>
               <input
                 type="datetime-local"
                 value={form.ends_at}
@@ -215,7 +222,7 @@ export function CoachSessionsPage() {
             </div>
            <div>
               <label className="text-sm font-medium text-slate-700">
-                Capacité (optionnel)
+                {t("coachSessions.fieldCapacity")}
               </label>
               <input
                 type="number"
@@ -227,24 +234,24 @@ export function CoachSessionsPage() {
                     capacity: e.target.value ? Number(e.target.value) : undefined,
                   })
                 }
-                placeholder="Reprend la capacité du cours"
+                placeholder={t("coachSessions.capacityPlaceholder")}
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
               />
             </div>
             {!editingId && (
               <div>
                 <label className="text-sm font-medium text-slate-700">
-                  Répéter chaque semaine, pendant
+                  {t("coachSessions.repeatWeekly")}
                 </label>
                 <select
                   value={repeatWeeks}
                   onChange={(e) => setRepeatWeeks(Number(e.target.value))}
                   className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
                 >
-                  <option value={1}>Une seule fois</option>
+                  <option value={1}>{t("coachSessions.onceOnly")}</option>
                   {[4, 8, 12].map((w) => (
                     <option key={w} value={w}>
-                      {w} semaines
+                      {t("coachSessions.weeksCount", { count: w })}
                     </option>
                   ))}
                 </select>
@@ -266,14 +273,14 @@ export function CoachSessionsPage() {
               }}
               className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
             >
-              Annuler
+              {t("common.cancel")}
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending || updateMutation.isPending}
               className="rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
             >
-              {editingId ? "Enregistrer" : "Planifier"}
+              {editingId ? t("profile.save") : t("coachSessions.schedule")}
             </button>
           </div>
         </form>
@@ -281,21 +288,21 @@ export function CoachSessionsPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {sessionsQuery.isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (sessionsQuery.data?.results.length ?? 0) === 0 ? (
           <p className="p-8 text-center text-slate-500">
-            Aucune séance planifiée.
+            {t("coachSessions.empty")}
           </p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Date</th>
-                <th className="px-4 py-3 font-medium">Cours</th>
-                <th className="px-4 py-3 font-medium">Salle</th>
-                <th className="px-4 py-3 font-medium">Places</th>
-                <th className="px-4 py-3 font-medium">Statut</th>
-                <th className="px-4 py-3 font-medium">Actions</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachSessions.fieldCourse")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachSessions.fieldRoom")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachSessions.colSeats")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colStatus")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -319,7 +326,7 @@ export function CoachSessionsPage() {
                             : "bg-slate-100 text-slate-700"
                       }`}
                     >
-                      {s.status}
+                      {sessionStatusLabel[s.status] ?? s.status}
                     </span>
                   </td>
                   <td className="px-4 py-3">
@@ -328,7 +335,7 @@ export function CoachSessionsPage() {
                       onClick={() => setPendingDelete(s.id)}
                       className="rounded-md border border-red-300 px-3 py-1 text-xs text-red-700 hover:bg-red-50"
                     >
-                      Supprimer
+                      {t("coachCourses.delete")}
                     </button>
                   </td>
                 </tr>
@@ -340,9 +347,9 @@ export function CoachSessionsPage() {
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        title="Supprimer cette séance ?"
-        description="Les éventuelles réservations associées seront aussi annulées."
-        confirmLabel="Supprimer"
+        title={t("coachSessions.confirmDeleteTitle")}
+        description={t("coachSessions.confirmDeleteDescription")}
+        confirmLabel={t("coachCourses.delete")}
         onConfirm={() => pendingDelete && deleteMutation.mutate(pendingDelete)}
         onCancel={() => setPendingDelete(null)}
         loading={deleteMutation.isPending}

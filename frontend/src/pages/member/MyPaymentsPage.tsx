@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { paymentsApi } from "../../api/payments";
 import { formatDateTime } from "../../lib/date";
@@ -11,6 +12,7 @@ const statusColor: Record<string, string> = {
 };
 
 export function MyPaymentsPage() {
+  const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryKey: ["my-payments"],
     queryFn: () => paymentsApi.listMine(),
@@ -19,26 +21,26 @@ export function MyPaymentsPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">Mes paiements</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("myPayments.title")}</h1>
         <p className="mt-1 text-sm text-slate-500">
-          Historique de toutes vos transactions Stripe.
+          {t("myPayments.subtitle")}
         </p>
       </div>
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">Aucun paiement.</p>
+          <p className="p-8 text-center text-slate-500">{t("myPayments.empty")}</p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Date</th>
-                <th className="px-4 py-3 font-medium">Type</th>
-                <th className="px-4 py-3 font-medium">Détail</th>
-                <th className="px-4 py-3 text-right font-medium">Montant</th>
-                <th className="px-4 py-3 font-medium">Statut</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colType")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colDetail")}</th>
+                <th className="px-4 py-3 text-right font-medium">{t("myPayments.colAmount")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colStatus")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">

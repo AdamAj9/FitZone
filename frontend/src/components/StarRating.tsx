@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface DisplayProps {
   value: number | null;
@@ -14,10 +15,11 @@ const sizeMap = {
 
 /** Read-only star display. value=null means "no ratings yet". */
 export function StarRating({ value, count, size = "md" }: DisplayProps) {
+  const { t } = useTranslation();
   if (value == null) {
     return (
       <span className={`text-slate-400 ${sizeMap[size]}`}>
-        ☆☆☆☆☆ <span className="text-xs">(aucun avis)</span>
+        ☆☆☆☆☆ <span className="text-xs">({t("starRating.noReviews")})</span>
       </span>
     );
   }
@@ -44,6 +46,7 @@ interface InputProps {
 
 /** Interactive star picker. */
 export function StarRatingInput({ value, onChange, size = "lg" }: InputProps) {
+  const { t } = useTranslation();
   const [hover, setHover] = useState<number | null>(null);
   const display = hover ?? value;
   return (
@@ -58,7 +61,7 @@ export function StarRatingInput({ value, onChange, size = "lg" }: InputProps) {
           className={`leading-none transition ${
             s <= display ? "text-amber-500" : "text-slate-300"
           }`}
-          aria-label={`${s} étoile${s > 1 ? "s" : ""}`}
+          aria-label={t("starRating.starsCount", { count: s })}
         >
           ★
         </button>

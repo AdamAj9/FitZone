@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
@@ -6,6 +7,7 @@ import { StarRating } from "../../components/StarRating";
 import { EmptyState, SkeletonCard } from "../../components/ui";
 
 export function CoachesListPage() {
+  const { t } = useTranslation();
   const { data, isLoading, isError } = useQuery({
     queryKey: ["coaches"],
     queryFn: () => coursesApi.listCoaches(),
@@ -15,7 +17,7 @@ export function CoachesListPage() {
     return (
       <div className="space-y-6">
         <div className="rounded-2xl bg-surface p-6 shadow-sm">
-          <h1 className="text-3xl font-bold text-slate-900">Nos coachs</h1>
+          <h1 className="text-3xl font-bold text-slate-900">{t("coaches.title")}</h1>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
@@ -29,8 +31,8 @@ export function CoachesListPage() {
     return (
       <EmptyState
         icon="⚠️"
-        title="Erreur de chargement"
-        description="Impossible de récupérer la liste des coachs."
+        title={t("coaches.loadErrorTitle")}
+        description={t("coaches.loadErrorDescription")}
       />
     );
   }
@@ -38,9 +40,9 @@ export function CoachesListPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">Nos coachs</h1>
+        <h1 className="text-3xl font-bold text-slate-900">{t("coaches.title")}</h1>
         <p className="mt-1 text-slate-600">
-          Une équipe expérimentée pour vous accompagner.
+          {t("coaches.subtitle")}
         </p>
       </div>
 
@@ -63,7 +65,7 @@ export function CoachesListPage() {
             )}
             {coach.coach_profile?.years_of_experience ? (
               <p className="mt-2 text-xs text-slate-400">
-                {coach.coach_profile.years_of_experience} ans d'expérience
+                {t("coaches.yearsExperience", { count: coach.coach_profile.years_of_experience })}
               </p>
             ) : null}
             <div className="mt-3">

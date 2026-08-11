@@ -1,10 +1,12 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { paymentsApi } from "../../api/payments";
 
 export function CheckoutSuccessPage() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const sessionId = params.get("session_id");
   const queryClient = useQueryClient();
@@ -46,21 +48,21 @@ export function CheckoutSuccessPage() {
       </div>
       <h1 className="mt-4 text-2xl font-bold text-slate-900">
         {isFailed
-          ? "Paiement échoué"
+          ? t("checkout.failedTitle")
           : isSuccess
-            ? "Paiement confirmé"
-            : "Vérification du paiement…"}
+            ? t("checkout.successTitle")
+            : t("checkout.verifyingTitle")}
       </h1>
       <p className="mt-2 text-sm text-slate-500">
         {isFailed
-          ? "Le paiement n'a pas pu être validé. Vous pouvez réessayer."
+          ? t("checkout.failedDescription")
           : isSuccess
-            ? "Votre abonnement est désormais actif."
-            : "Nous interrogeons Stripe — un instant…"}
+            ? t("checkout.successDescription")
+            : t("checkout.verifyingDescription")}
       </p>
       {sessionId && (
         <p className="mt-3 break-all rounded-md bg-slate-50 p-2 font-mono text-xs text-slate-500">
-          Session : {sessionId}
+          {t("checkout.session")} : {sessionId}
         </p>
       )}
       <div className="mt-6 flex justify-center gap-3">
@@ -69,7 +71,7 @@ export function CheckoutSuccessPage() {
             to="/plans"
             className="rounded-md bg-brand-600 px-5 py-2 font-medium text-white hover:bg-brand-700"
           >
-            Réessayer
+            {t("checkout.retry")}
           </Link>
         ) : (
           <>
@@ -77,13 +79,13 @@ export function CheckoutSuccessPage() {
               to="/my-subscription"
               className="rounded-md bg-brand-600 px-5 py-2 font-medium text-white hover:bg-brand-700"
             >
-              Mon abonnement
+              {t("mySubscription.title")}
             </Link>
             <Link
               to="/my-payments"
               className="rounded-md border border-slate-300 px-5 py-2 font-medium text-slate-700 hover:bg-slate-50"
             >
-              Mes paiements
+              {t("myPayments.title")}
             </Link>
           </>
         )}

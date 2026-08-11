@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 
@@ -8,6 +9,7 @@ import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
 
 export function PlansPage() {
+  const { t } = useTranslation();
   const [period, setPeriod] = useState<Period>("monthly");
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
@@ -44,9 +46,9 @@ const subscribeMutation = useMutation({
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">Nos abonnements</h1>
+        <h1 className="text-3xl font-bold text-slate-900">{t("plans.title")}</h1>
         <p className="mt-2 text-slate-600">
-          Choisissez la formule qui vous correspond.
+          {t("plans.subtitle")}
         </p>
 
         <div className="mt-6 inline-flex rounded-full bg-slate-100 p-1">
@@ -59,7 +61,7 @@ const subscribeMutation = useMutation({
                 : "text-slate-600"
             }`}
           >
-            Mensuel
+            {t("home.periodMonthly")}
           </button>
           <button
             type="button"
@@ -70,16 +72,16 @@ const subscribeMutation = useMutation({
                 : "text-slate-600"
             }`}
           >
-            Annuel <span className="ml-1 text-xs text-brand-600">−2 mois</span>
+            {t("home.periodYearly")} <span className="ml-1 text-xs text-brand-600">{t("home.yearlyDiscount")}</span>
           </button>
         </div>
       </div>
 
       {currentSub && (
         <div className="rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          Vous avez déjà un abonnement actif :{" "}
-          <strong>{currentSub.plan.name}</strong> — il vous reste{" "}
-          {currentSub.days_remaining} jours.
+          {t("plans.activeSubscription")}{" "}
+          <strong>{currentSub.plan.name}</strong> —{" "}
+          {t("plans.daysRemaining", { count: currentSub.days_remaining })}
         </div>
       )}
 
@@ -90,7 +92,7 @@ const subscribeMutation = useMutation({
       )}
 
       {plansQuery.isLoading ? (
-        <p className="text-slate-500">Chargement...</p>
+        <p className="text-slate-500">{t("common.loading")}</p>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {filteredPlans.map((plan) => {
@@ -117,7 +119,7 @@ const subscribeMutation = useMutation({
                   </div>
                   {isPremium && (
                     <span className="rounded-full bg-brand-100 px-2 py-1 text-xs font-medium text-brand-700">
-                      Recommandé
+                      {t("home.recommended")}
                     </span>
                   )}
                 </div>
@@ -127,7 +129,7 @@ const subscribeMutation = useMutation({
                     {Number(plan.price).toFixed(0)}
                   </span>
                   <span className="text-slate-500">
-                    {" €"} / {plan.period === "monthly" ? "mois" : "an"}
+                    {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
                   </span>
                 </p>
 
@@ -158,13 +160,13 @@ const subscribeMutation = useMutation({
                   } disabled:cursor-not-allowed disabled:opacity-50`}
                 >
                   {currentSub
-                    ? "Abonnement déjà actif"
+                    ? t("plans.alreadyActive")
                     : subscribeMutation.isPending &&
                         subscribeMutation.variables === plan.id
-                      ? "Souscription en cours..."
+                      ? t("plans.subscribing")
                       : user
-                        ? "Souscrire"
-                        : "Se connecter pour souscrire"}
+                        ? t("home.subscribe")
+                        : t("plans.loginToSubscribe")}
                 </button>
               </div>
             );

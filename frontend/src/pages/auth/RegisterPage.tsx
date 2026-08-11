@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,25 +7,35 @@ import { z } from "zod";
 
 import { useRegister } from "../../hooks/useAuth";
 
-const schema = z
-  .object({
-    email: z.string().email("Email invalide"),
-    first_name: z.string().min(1, "Prénom requis"),
-    last_name: z.string().min(1, "Nom requis"),
-    password: z.string().min(8, "8 caractères minimum"),
-    password_confirm: z.string(),
-  })
-  .refine((d) => d.password === d.password_confirm, {
-    message: "Les mots de passe ne correspondent pas",
-    path: ["password_confirm"],
-  });
-
-type FormValues = z.infer<typeof schema>;
+type FormValues = {
+  email: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  password_confirm: string;
+};
 
 export function RegisterPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const registerMutation = useRegister();
+
+  const schema = useMemo(
+    () =>
+      z
+        .object({
+          email: z.string().email(t("auth.validation.emailInvalid")),
+          first_name: z.string().min(1, t("auth.validation.firstNameRequired")),
+          last_name: z.string().min(1, t("auth.validation.lastNameRequired")),
+          password: z.string().min(8, t("auth.validation.passwordMinLength")),
+          password_confirm: z.string(),
+        })
+        .refine((d) => d.password === d.password_confirm, {
+          message: t("auth.validation.passwordMismatch"),
+          path: ["password_confirm"],
+        }),
+    [t],
+  );
 
   const {
     register,
@@ -53,7 +64,7 @@ export function RegisterPage() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-slate-700">
-              Prénom
+              {t("auth.fields.firstName")}
             </label>
             <input
               {...register("first_name")}
@@ -66,7 +77,7 @@ export function RegisterPage() {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Nom</label>
+            <label className="block text-sm font-medium text-slate-700">{t("auth.fields.lastName")}</label>
             <input
               {...register("last_name")}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
@@ -80,7 +91,7 @@ export function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700">Email</label>
+          <label className="block text-sm font-medium text-slate-700">{t("auth.fields.email")}</label>
           <input
             type="email"
             autoComplete="email"
@@ -94,7 +105,7 @@ export function RegisterPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Mot de passe
+            {t("auth.fields.password")}
           </label>
           <input
             type="password"
@@ -109,7 +120,7 @@ export function RegisterPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Confirmer
+            {t("auth.fields.confirmPassword")}
           </label>
           <input
             type="password"

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { adminApi } from "../../api/admin";
 import { formatDateTime } from "../../lib/date";
@@ -18,6 +19,7 @@ const ACTIONS = [
 ];
 
 export function AdminLogsPage() {
+  const { t } = useTranslation();
   const [action, setAction] = useState("");
   const { data, isLoading } = useQuery({
     queryKey: ["admin-logs", { action }],
@@ -27,13 +29,13 @@ export function AdminLogsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Journal d'audit</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("adminLogs.title")}</h1>
         <select
           value={action}
           onChange={(e) => setAction(e.target.value)}
           className="rounded-md border border-slate-300 px-3 py-2 text-sm"
         >
-          <option value="">Toutes actions</option>
+          <option value="">{t("adminLogs.allActions")}</option>
           {ACTIONS.map((a) => (
             <option key={a} value={a}>
               {a}
@@ -44,19 +46,19 @@ export function AdminLogsPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">Aucun événement.</p>
+          <p className="p-8 text-center text-slate-500">{t("adminLogs.empty")}</p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Date</th>
-                <th className="px-4 py-3 font-medium">Acteur</th>
-                <th className="px-4 py-3 font-medium">Action</th>
-                <th className="px-4 py-3 font-medium">Cible</th>
-                <th className="px-4 py-3 font-medium">Métadonnées</th>
-                <th className="px-4 py-3 font-medium">IP</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminLogs.colActor")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminLogs.colAction")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminLogs.colTarget")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminLogs.colMetadata")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminLogs.colIp")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -66,7 +68,7 @@ export function AdminLogsPage() {
                     {formatDateTime(l.created_at)}
                   </td>
                   <td className="px-4 py-3 text-slate-700">
-                    {l.actor_email ?? "system"}
+                    {l.actor_email ?? t("adminLogs.system")}
                   </td>
                   <td className="px-4 py-3">
                     <span className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-xs text-slate-700">

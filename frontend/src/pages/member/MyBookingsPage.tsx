@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { bookingsApi } from "../../api/bookings";
@@ -21,6 +22,7 @@ function isUpcoming(b: Booking) {
 }
 
 export function MyBookingsPage() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [pendingCancelId, setPendingCancelId] = useState<number | null>(null);
   const { data, isLoading } = useQuery({
@@ -31,11 +33,11 @@ export function MyBookingsPage() {
   const cancelMutation = useMutation({
     mutationFn: (id: number) => bookingsApi.cancel(id),
     onSuccess: () => {
-      toast.success("Réservation annulée");
+      toast.success(t("myBookings.cancelled"));
       setPendingCancelId(null);
       void queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Annulation impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("myBookings.cancelError"))),
   });
 
   const upcoming = data?.results.filter(isUpcoming) ?? [];
@@ -44,18 +46,18 @@ export function MyBookingsPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">Mes réservations</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("myBookings.title")}</h1>
       </div>
 
       <section className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">À venir</h2>
+        <h2 className="text-lg font-semibold text-slate-900">{t("memberDashboard.statUpcoming")}</h2>
         {isLoading ? (
-          <p className="mt-3 text-sm text-slate-500">Chargement...</p>
+          <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
         ) : upcoming.length === 0 ? (
           <p className="mt-3 text-sm text-slate-500">
-            Aucune séance à venir.{" "}
+            {t("myBookings.noUpcoming")}{" "}
             <Link to="/planning" className="text-brand-600 hover:underline">
-              Voir le planning →
+              {t("memberDashboard.viewPlanning")} →
             </Link>
           </p>
         ) : (
@@ -91,7 +93,7 @@ export function MyBookingsPage() {
                         onClick={() => setPendingCancelId(b.id)}
                         className="rounded-md border border-red-300 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-50"
                       >
-                        Annuler
+                        {t("myBookings.cancel")}
                       </button>
                     )}
                   </div>
@@ -104,7 +106,7 @@ export function MyBookingsPage() {
 
       {past.length > 0 && (
         <section className="rounded-2xl bg-surface p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-900">Historique</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{t("myBookings.history")}</h2>
           <ul className="mt-3 divide-y divide-slate-100">
             {past.map((b) => (
               <li
@@ -132,9 +134,9 @@ export function MyBookingsPage() {
 
       <ConfirmDialog
         open={pendingCancelId !== null}
-        title="Annuler cette réservation ?"
-        description="La place sera libérée pour d'autres membres."
-        confirmLabel="Oui, annuler"
+        title={t("myBookings.confirmCancelTitle")}
+        description={t("myBookings.confirmCancelDescription")}
+        confirmLabel={t("myBookings.confirmCancelLabel")}
         onConfirm={() => {
           if (pendingCancelId) cancelMutation.mutate(pendingCancelId);
         }}

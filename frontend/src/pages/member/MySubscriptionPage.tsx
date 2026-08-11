@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { subscriptionsApi } from "../../api/subscriptions";
@@ -16,6 +17,7 @@ const statusColor: Record<string, string> = {
 };
 
 export function MySubscriptionPage() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [confirmCancel, setConfirmCancel] = useState(false);
 
@@ -32,12 +34,12 @@ export function MySubscriptionPage() {
   const cancelMutation = useMutation({
     mutationFn: (id: number) => subscriptionsApi.cancel(id),
     onSuccess: () => {
-      toast.success("Abonnement annulé");
+      toast.success(t("mySubscription.cancelled"));
       setConfirmCancel(false);
       void queryClient.invalidateQueries({ queryKey: ["subscription-current"] });
       void queryClient.invalidateQueries({ queryKey: ["my-subscriptions"] });
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Annulation impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("myBookings.cancelError"))),
   });
 
   const current = currentQuery.data?.subscription ?? null;
@@ -46,11 +48,11 @@ export function MySubscriptionPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">Mon abonnement</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("mySubscription.title")}</h1>
       </div>
 
       {currentQuery.isLoading ? (
-        <p className="text-slate-500">Chargement...</p>
+        <p className="text-slate-500">{t("common.loading")}</p>
       ) : current ? (
         <div className="rounded-2xl border-2 border-brand-200 bg-surface p-6 shadow-sm">
           <div className="flex items-start justify-between">
@@ -62,7 +64,7 @@ export function MySubscriptionPage() {
                 {current.plan.name}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                {Number(current.price_paid).toFixed(2)} € payés
+                {t("mySubscription.pricePaid", { amount: Number(current.price_paid).toFixed(2) })}
               </p>
             </div>
             <span
@@ -76,19 +78,19 @@ export function MySubscriptionPage() {
 
           <div className="mt-6 grid gap-4 text-sm md:grid-cols-3">
             <div>
-              <p className="text-slate-500">Début</p>
+              <p className="text-slate-500">{t("mySubscription.startDate")}</p>
               <p className="font-medium text-slate-900">
                 {current.starts_at ? formatDateTime(current.starts_at) : "—"}
               </p>
             </div>
             <div>
-              <p className="text-slate-500">Fin</p>
+              <p className="text-slate-500">{t("mySubscription.endDate")}</p>
               <p className="font-medium text-slate-900">
                 {current.ends_at ? formatDateTime(current.ends_at) : "—"}
               </p>
             </div>
             <div>
-              <p className="text-slate-500">Jours restants</p>
+              <p className="text-slate-500">{t("mySubscription.daysRemaining")}</p>
               <p className="font-medium text-slate-900">
                 {current.days_remaining ?? "—"}
               </p>
@@ -100,27 +102,27 @@ export function MySubscriptionPage() {
             onClick={() => setConfirmCancel(true)}
             className="mt-6 rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
           >
-            Annuler l'abonnement
+            {t("mySubscription.cancelSubscription")}
           </button>
         </div>
       ) : (
         <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
-          <p className="text-slate-600">Vous n'avez aucun abonnement actif.</p>
+          <p className="text-slate-600">{t("mySubscription.noActiveSubscription")}</p>
           <Link
             to="/plans"
             className="mt-4 inline-block rounded-md bg-brand-600 px-5 py-2 font-medium text-white hover:bg-brand-700"
           >
-            Voir les formules
+            {t("mySubscription.viewPlans")}
           </Link>
         </div>
       )}
 
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Historique</h2>
+        <h2 className="text-lg font-semibold text-slate-900">{t("myBookings.history")}</h2>
         {historyQuery.isLoading ? (
-          <p className="mt-3 text-sm text-slate-500">Chargement...</p>
+          <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
         ) : history.length === 0 ? (
-          <p className="mt-3 text-sm text-slate-500">Aucun historique.</p>
+          <p className="mt-3 text-sm text-slate-500">{t("mySubscription.noHistory")}</p>
         ) : (
           <ul className="mt-3 divide-y divide-slate-100">
             {history.map((s) => (
@@ -155,9 +157,9 @@ export function MySubscriptionPage() {
 
       <ConfirmDialog
         open={confirmCancel}
-        title="Annuler l'abonnement ?"
-        description="Vous perdrez immédiatement l'accès aux services Premium. Cette action est irréversible."
-        confirmLabel="Oui, annuler"
+        title={t("mySubscription.confirmCancelTitle")}
+        description={t("mySubscription.confirmCancelDescription")}
+        confirmLabel={t("myBookings.confirmCancelLabel")}
         onConfirm={() => current && cancelMutation.mutate(current.id)}
         onCancel={() => setConfirmCancel(false)}
         loading={cancelMutation.isPending}

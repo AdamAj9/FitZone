@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { bookingsApi } from "../../api/bookings";
@@ -12,13 +13,6 @@ import { apiErrorMessage } from "../../lib/errors";
 import { useAuthStore } from "../../store/auth";
 import type { CourseSessionItem } from "../../types/sessions";
 import { CourseCard } from "../../components/CourseCard";
-
-const levelLabel: Record<string, string> = {
-  beginner: "Débutant",
-  intermediate: "Intermédiaire",
-  advanced: "Avancé",
-  all: "Tous niveaux",
-};
 
 interface SessionRowProps {
   session: CourseSessionItem;
@@ -37,6 +31,7 @@ function SessionRow({
   onPay,
   busy,
 }: SessionRowProps) {
+  const { t } = useTranslation();
   const isFull = session.seats_available <= 0;
 
   return (
@@ -55,7 +50,7 @@ function SessionRow({
         </span>
         {isFull ? (
           <span className="rounded-md bg-slate-100 px-3 py-1 text-xs text-slate-500">
-            Complet
+            {t("courseDetail.full")}
           </span>
         ) : premium ? (
           <button
@@ -64,7 +59,7 @@ function SessionRow({
             disabled={busy}
             className="rounded-md bg-brand-600 px-3 py-1 text-xs font-medium text-white hover:bg-brand-700 disabled:opacity-50"
           >
-            Réserver
+            {t("courseDetail.book")}
           </button>
         ) : unitPrice > 0 ? (
           <button
@@ -73,11 +68,11 @@ function SessionRow({
             disabled={busy}
             className="rounded-md border border-brand-600 px-3 py-1 text-xs font-medium text-brand-700 hover:bg-brand-50 disabled:opacity-50"
           >
-            Payer {unitPrice.toFixed(2)} €
+            {t("courseDetail.pay")} {unitPrice.toFixed(2)} €
           </button>
         ) : (
           <span className="rounded-md bg-slate-100 px-3 py-1 text-xs text-slate-500">
-            Indisponible
+            {t("courseDetail.unavailable")}
           </span>
         )}
       </div>
@@ -86,10 +81,18 @@ function SessionRow({
 }
 
 export function CourseDetailPage() {
+  const { t } = useTranslation();
   const { slug = "" } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
+
+  const levelLabel: Record<string, string> = {
+    beginner: t("common.levels.beginner"),
+    intermediate: t("common.levels.intermediate"),
+    advanced: t("common.levels.advanced"),
+    all: t("common.levels.all"),
+  };
 
   const courseQuery = useQuery({
     queryKey: ["course", slug],
@@ -120,12 +123,12 @@ export function CourseDetailPage() {
   const bookMutation = useMutation({
     mutationFn: (sessionId: number) => bookingsApi.book(sessionId),
     onSuccess: () => {
-      toast.success("Réservation confirmée");
+      toast.success(t("courseDetail.bookingConfirmed"));
       void queryClient.invalidateQueries({ queryKey: ["course-sessions", slug] });
       void queryClient.invalidateQueries({ queryKey: ["my-bookings"] });
       navigate("/my-bookings");
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Réservation impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("courseDetail.bookingError"))),
   });
 
   const payMutation = useMutation({
@@ -134,18 +137,18 @@ export function CourseDetailPage() {
     onSuccess: ({ checkout_url }) => {
       window.location.href = checkout_url;
     },
-    onError: (e) => toast.error(apiErrorMessage(e, "Paiement impossible")),
+    onError: (e) => toast.error(apiErrorMessage(e, t("courseDetail.paymentError"))),
   });
 
   if (courseQuery.isLoading) {
-    return <p className="text-slate-500">Chargement...</p>;
+    return <p className="text-slate-500">{t("common.loading")}</p>;
   }
   if (courseQuery.isError || !courseQuery.data) {
     return (
       <div className="rounded-2xl bg-surface p-12 text-center shadow-sm">
-        <p className="text-slate-500">Cours introuvable.</p>
+        <p className="text-slate-500">{t("courseDetail.notFound")}</p>
         <Link to="/courses" className="mt-4 inline-block text-brand-600 hover:underline">
-          ← Retour au catalogue
+          ← {t("courseDetail.backToCatalog")}
         </Link>
       </div>
     );
@@ -203,7 +206,7 @@ export function CourseDetailPage() {
               <span>·</span>
               <span>{course.duration_minutes} min</span>
               <span>·</span>
-              <span>Capacité {course.capacity}</span>
+              <span>{t("courseDetail.capacity")} {course.capacity}</span>
             </div>
             <p className="mt-4 whitespace-pre-line text-slate-700">
               {course.description}
@@ -213,7 +216,7 @@ export function CourseDetailPage() {
 
         <div className="rounded-2xl bg-surface p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-900">
-            Prochaines séances
+            {t("courseDetail.upcomingSessions")}
           </h2>
           {apiError?.response?.data?.detail && (
             <div className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-700">
@@ -221,10 +224,10 @@ export function CourseDetailPage() {
             </div>
           )}
           {sessionsQuery.isLoading ? (
-            <p className="mt-3 text-sm text-slate-500">Chargement...</p>
+            <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
           ) : (sessionsQuery.data?.results.length ?? 0) === 0 ? (
             <p className="mt-3 text-sm text-slate-500">
-              Aucune séance planifiée pour le moment.
+              {t("courseDetail.noSessions")}
             </p>
           ) : (
             <ul className="mt-3 divide-y divide-slate-100">
@@ -246,40 +249,40 @@ export function CourseDetailPage() {
 
       <aside className="space-y-4">
         <div className="rounded-2xl bg-surface p-6 shadow-sm">
-          <p className="text-sm text-slate-500">Prix unitaire</p>
+          <p className="text-sm text-slate-500">{t("courseDetail.unitPrice")}</p>
           <p className="mt-1 text-3xl font-bold text-slate-900">
             {unitPrice > 0
               ? `${unitPrice.toFixed(2)} €`
-              : "Inclus dans l'abonnement"}
+              : t("courseDetail.includedInSubscription")}
           </p>
           {!user ? (
             <Link
               to="/login"
               className="mt-4 block w-full rounded-md bg-brand-600 px-4 py-2 text-center font-medium text-white hover:bg-brand-700"
             >
-              Se connecter pour réserver
+              {t("courseDetail.loginToBook")}
             </Link>
           ) : isPremium ? (
             <p className="mt-4 rounded-md bg-green-50 p-3 text-sm text-green-700">
-              ✓ Inclus dans votre abonnement Premium
+              ✓ {t("courseDetail.includedInPremium")}
             </p>
           ) : unitPrice > 0 ? (
             <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-800">
-              Cliquez « Payer » sur une séance pour réserver à l'unité.
+              {t("courseDetail.payHint")}
             </p>
           ) : (
             <Link
               to="/plans"
               className="mt-4 block rounded-md border border-brand-600 px-4 py-2 text-center text-sm font-medium text-brand-700 hover:bg-brand-50"
             >
-              Souscrire un abonnement Premium
+              {t("courseDetail.subscribePremium")}
             </Link>
           )}
         </div>
 
         {course.coach && (
           <div className="rounded-2xl bg-surface p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Coach</p>
+            <p className="text-sm text-slate-500">{t("courseDetail.coach")}</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">
               {course.coach.full_name}
             </p>
@@ -297,25 +300,25 @@ export function CourseDetailPage() {
               to={`/coaches/${course.coach.id}`}
               className="mt-3 inline-block text-sm text-brand-600 hover:underline"
             >
-              Voir le profil →
+              {t("courseDetail.viewProfile")} →
             </Link>
           </div>
         )}
       {course.coach &&
           (course.coach.rating_count ?? 0) > 0 && (
             <div className="rounded-2xl bg-surface p-6 shadow-sm">
-              <p className="text-sm text-slate-500">Avis sur le coach</p>
+              <p className="text-sm text-slate-500">{t("courseDetail.coachReviews")}</p>
               <p className="mt-1 flex items-center gap-2 text-lg font-semibold text-slate-900">
                 ⭐ {course.coach.rating_average?.toFixed(1)}
                 <span className="text-sm font-normal text-slate-500">
-                  ({course.coach.rating_count} avis)
+                  ({course.coach.rating_count} {t("courseDetail.reviewsCount")})
                 </span>
               </p>
               <Link
                 to={`/coaches/${course.coach.id}`}
                 className="mt-2 inline-block text-sm text-brand-600 hover:underline"
               >
-                Voir tous les avis →
+                {t("courseDetail.viewAllReviews")} →
               </Link>
             </div>
           )}
@@ -325,7 +328,7 @@ export function CourseDetailPage() {
         .length ?? 0) > 0 && (
         <div className="lg:col-span-3">
           <h2 className="text-xl font-semibold text-slate-900">
-            Cours similaires
+            {t("courseDetail.similarCourses")}
           </h2>
           <div className="mt-3 grid gap-4 md:grid-cols-3">
             {similarQuery.data?.results

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { subscriptionsApi } from "../../api/subscriptions";
 import { formatDateTime } from "../../lib/date";
@@ -11,6 +12,7 @@ const statusColor: Record<string, string> = {
 };
 
 export function AdminSubscriptionsPage() {
+  const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryKey: ["admin-subscriptions"],
     queryFn: () => subscriptionsApi.listMine(),
@@ -18,23 +20,23 @@ export function AdminSubscriptionsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Abonnements</h1>
+      <h1 className="text-2xl font-bold text-slate-900">{t("nav.plans")}</h1>
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">Aucun abonnement.</p>
+          <p className="p-8 text-center text-slate-500">{t("adminSubscriptions.empty")}</p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Membre</th>
-                <th className="px-4 py-3 font-medium">Formule</th>
-                <th className="px-4 py-3 font-medium">Début</th>
-                <th className="px-4 py-3 font-medium">Fin</th>
-                <th className="px-4 py-3 font-medium">Prix payé</th>
-                <th className="px-4 py-3 font-medium">Statut</th>
+                <th className="px-4 py-3 font-medium">{t("coachBookings.colMember")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminSubscriptions.colPlan")}</th>
+                <th className="px-4 py-3 font-medium">{t("mySubscription.startDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("mySubscription.endDate")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminSubscriptions.colPricePaid")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colStatus")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">

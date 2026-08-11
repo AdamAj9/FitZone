@@ -1,36 +1,39 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const COLUMNS = [
-  {
-    title: "Découvrir",
-    links: [
-      { label: "Cours", to: "/courses" },
-      { label: "Planning", to: "/planning" },
-      { label: "Coachs", to: "/coaches" },
-      { label: "Abonnements", to: "/plans" },
-    ],
-  },
-  {
-    title: "Mon compte",
-    links: [
-      { label: "Connexion", to: "/login" },
-      { label: "Inscription", to: "/register" },
-      { label: "Tableau de bord", to: "/dashboard" },
-      { label: "Mes réservations", to: "/my-bookings" },
-    ],
-  },
-  {
-    title: "Légal",
-    links: [
-      { label: "Mentions légales", to: "/" },
-      { label: "Conditions générales", to: "/" },
-      { label: "Politique de confidentialité", to: "/" },
-      { label: "Cookies", to: "/" },
-    ],
-  },
-];
-
 export function Footer() {
+  const { t } = useTranslation();
+
+  const COLUMNS = [
+    {
+      title: t("footer.discoverTitle"),
+      links: [
+        { label: t("nav.courses"), to: "/courses" },
+        { label: t("nav.planning"), to: "/planning" },
+        { label: t("nav.coaches"), to: "/coaches" },
+        { label: t("nav.plans"), to: "/plans" },
+      ],
+    },
+    {
+      title: t("footer.accountTitle"),
+      links: [
+        { label: t("nav.login"), to: "/login" },
+        { label: t("nav.register"), to: "/register" },
+        { label: t("nav.dashboard"), to: "/dashboard" },
+        { label: t("footer.myBookings"), to: "/my-bookings" },
+      ],
+    },
+    {
+      title: t("footer.legalTitle"),
+      links: [
+        { label: t("footer.legalNotice"), to: "/" },
+        { label: t("footer.terms"), to: "/" },
+        { label: t("footer.privacy"), to: "/" },
+        { label: t("footer.cookies"), to: "/" },
+      ],
+    },
+  ];
+
   return (
     <footer className="mt-auto bg-ink-950 text-ink-300">
       <div className="mx-auto max-w-7xl px-4 py-16">
@@ -47,12 +50,11 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm text-ink-300">
-              Votre salle de sport généraliste : fitness, piscine, tennis,
-              padel, hammam, coworking — tout sous un même toit.
+              {t("footer.description")}
             </p>
             <div className="mt-6 space-y-2 text-sm">
               <p className="flex items-center gap-2">
-                <span>📍</span> 42 rue de la Forme, 1000 Bruxelles
+                <span>📍</span> {t("footer.address")}
               </p>
               <p className="flex items-center gap-2">
                 <span>📞</span> +32 2 555 12 34
@@ -86,9 +88,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-ink-800 pt-6 text-xs text-ink-500 md:flex-row">
           <p>
-            © {new Date().getFullYear()} FitZone — TFE — Tous droits réservés.
+            © {new Date().getFullYear()} FitZone — TFE — {t("footer.rights")}
           </p>
-          <p>Conçu et développé en Belgique 🇧🇪</p>
+          <p>{t("footer.madeIn")} 🇧🇪</p>
         </div>
       </div>
     </footer>

@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
@@ -17,21 +18,18 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const levelOptions = [
-  { value: "beginner", label: "Débutant", hint: "Je découvre / je reprends." },
-  {
-    value: "intermediate",
-    label: "Intermédiaire",
-    hint: "Je m'entraîne régulièrement.",
-  },
-  { value: "advanced", label: "Avancé", hint: "Je m'entraîne intensément." },
-] as const;
-
 export function QuestionnairePage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { data: user } = useMe();
   const [submitted, setSubmitted] = useState(false);
+
+  const levelOptions = [
+    { value: "beginner", label: t("common.levels.beginner"), hint: t("questionnaire.hintBeginner") },
+    { value: "intermediate", label: t("common.levels.intermediate"), hint: t("questionnaire.hintIntermediate") },
+    { value: "advanced", label: t("common.levels.advanced"), hint: t("questionnaire.hintAdvanced") },
+  ] as const;
 
   const categoriesQuery = useQuery({
     queryKey: ["categories"],
@@ -69,10 +67,10 @@ export function QuestionnairePage() {
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-2xl font-bold text-slate-900">
-          Questionnaire sportif
+          {t("questionnaire.title")}
         </h1>
         <p className="mt-1 text-sm text-slate-500">
-          Aide-nous à te recommander les bons cours.
+          {t("questionnaire.subtitle")}
         </p>
       </div>
 
@@ -82,7 +80,7 @@ export function QuestionnairePage() {
       >
         <fieldset>
           <legend className="text-sm font-medium text-slate-700">
-            Quel est ton niveau ?
+            {t("questionnaire.levelQuestion")}
           </legend>
           <div className="mt-3 grid gap-2 sm:grid-cols-3">
             {levelOptions.map((opt) => (
@@ -108,19 +106,19 @@ export function QuestionnairePage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Tes objectifs (facultatif)
+            {t("questionnaire.goalsLabel")}
           </label>
           <textarea
             {...register("goals")}
             rows={3}
-            placeholder="Perdre du poids, améliorer mon endurance, etc."
+            placeholder={t("questionnaire.goalsPlaceholder")}
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
           />
         </div>
 
         <fieldset>
           <legend className="text-sm font-medium text-slate-700">
-            Catégories qui t'intéressent
+            {t("questionnaire.categoriesLabel")}
           </legend>
           <Controller
             control={control}
@@ -158,7 +156,7 @@ export function QuestionnairePage() {
         <div className="flex items-center justify-end gap-3">
           {submitted && (
             <span className="text-sm text-green-600">
-              ✓ Préférences enregistrées
+              ✓ {t("questionnaire.saved")}
             </span>
           )}
           <button
@@ -166,7 +164,7 @@ export function QuestionnairePage() {
             disabled={submitMutation.isPending}
             className="rounded-md bg-brand-600 px-5 py-2 font-medium text-white hover:bg-brand-700 disabled:opacity-50"
           >
-            {submitMutation.isPending ? "Enregistrement..." : "Valider"}
+            {submitMutation.isPending ? t("profile.saving") : t("questionnaire.submit")}
           </button>
         </div>
       </form>

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { authApi } from "../../api/auth";
 import { useMe } from "../../hooks/useAuth";
@@ -13,6 +14,7 @@ interface FormValues {
 }
 
 export function ProfilePage() {
+  const { t } = useTranslation();
   const { data: user, isLoading } = useMe();
   const queryClient = useQueryClient();
 
@@ -42,13 +44,13 @@ export function ProfilePage() {
   });
 
   if (isLoading || !user) {
-    return <p className="text-slate-500">Chargement...</p>;
+    return <p className="text-slate-500">{t("common.loading")}</p>;
   }
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">Mon profil</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("profile.title")}</h1>
         <p className="mt-1 text-sm text-slate-500">
           {user.email} · <span className="font-medium">{user.role}</span>
         </p>
@@ -61,7 +63,7 @@ export function ProfilePage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700">
-              Prénom
+              {t("auth.fields.firstName")}
             </label>
             <input
               {...register("first_name")}
@@ -69,7 +71,7 @@ export function ProfilePage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Nom</label>
+            <label className="block text-sm font-medium text-slate-700">{t("auth.fields.lastName")}</label>
             <input
               {...register("last_name")}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
@@ -79,7 +81,7 @@ export function ProfilePage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Téléphone
+            {t("profile.phone")}
           </label>
           <input
             {...register("phone")}
@@ -89,14 +91,14 @@ export function ProfilePage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-700">
-            Langue préférée
+            {t("profile.preferredLanguage")}
           </label>
           <select
             {...register("preferred_language")}
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           >
-            <option value="fr">Français</option>
-            <option value="en">English</option>
+            <option value="fr">{t("profile.langFrench")}</option>
+            <option value="en">{t("profile.langEnglish")}</option>
           </select>
         </div>
 
@@ -106,10 +108,10 @@ export function ProfilePage() {
             disabled={!formState.isDirty || updateMutation.isPending}
             className="rounded-md bg-brand-600 px-4 py-2 font-medium text-white hover:bg-brand-700 disabled:opacity-50"
           >
-            {updateMutation.isPending ? "Enregistrement..." : "Enregistrer"}
+            {updateMutation.isPending ? t("profile.saving") : t("profile.save")}
           </button>
           {updateMutation.isSuccess && (
-            <span className="text-sm text-green-600">Profil mis à jour</span>
+            <span className="text-sm text-green-600">{t("profile.updated")}</span>
           )}
         </div>
       </form>

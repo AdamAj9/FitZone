@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { adminApi } from "../../api/admin";
 import type { AdminUser } from "../../types/admin";
@@ -12,6 +13,7 @@ const roleColor: Record<string, string> = {
 };
 
 export function AdminUsersPage() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
   const queryClient = useQueryClient();
@@ -39,13 +41,13 @@ export function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Utilisateurs</h1>
+        <h1 className="text-2xl font-bold text-slate-900">{t("adminUsers.title")}</h1>
       </div>
 
       <div className="flex gap-3">
         <input
           type="search"
-          placeholder="Rechercher email ou nom..."
+          placeholder={t("adminUsers.searchPlaceholder")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm"
@@ -55,28 +57,28 @@ export function AdminUsersPage() {
           onChange={(e) => setRole(e.target.value)}
           className="rounded-md border border-slate-300 px-3 py-2 text-sm"
         >
-          <option value="">Tous rôles</option>
-          <option value="member">Membre</option>
-          <option value="coach">Coach</option>
-          <option value="admin">Admin</option>
+          <option value="">{t("adminUsers.allRoles")}</option>
+          <option value="member">{t("adminUsers.roleMember")}</option>
+          <option value="coach">{t("adminUsers.roleCoach")}</option>
+          <option value="admin">{t("adminUsers.roleAdmin")}</option>
         </select>
       </div>
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">Chargement...</p>
+          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">Aucun utilisateur.</p>
+          <p className="p-8 text-center text-slate-500">{t("adminUsers.empty")}</p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
               <tr>
-                <th className="px-4 py-3 font-medium">Email</th>
-                <th className="px-4 py-3 font-medium">Nom</th>
-                <th className="px-4 py-3 font-medium">Rôle</th>
-                <th className="px-4 py-3 font-medium">Statut</th>
-                <th className="px-4 py-3 font-medium">Inscription</th>
-                <th className="px-4 py-3 font-medium">Actions</th>
+                <th className="px-4 py-3 font-medium">{t("adminUsers.colEmail")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminUsers.colName")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminUsers.colRole")}</th>
+                <th className="px-4 py-3 font-medium">{t("myPayments.colStatus")}</th>
+                <th className="px-4 py-3 font-medium">{t("adminUsers.colJoined")}</th>
+                <th className="px-4 py-3 font-medium">{t("coachCourses.colActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -100,9 +102,9 @@ export function AdminUsersPage() {
                         roleColor[u.role]
                       }`}
                     >
-                      <option value="member">Membre</option>
-                      <option value="coach">Coach</option>
-                      <option value="admin">Admin</option>
+                      <option value="member">{t("adminUsers.roleMember")}</option>
+                      <option value="coach">{t("adminUsers.roleCoach")}</option>
+                      <option value="admin">{t("adminUsers.roleAdmin")}</option>
                     </select>
                   </td>
                   <td className="px-4 py-3">
@@ -113,7 +115,7 @@ export function AdminUsersPage() {
                           : "bg-red-100 text-red-700"
                       }`}
                     >
-                      {u.is_active ? "Actif" : "Désactivé"}
+                      {u.is_active ? t("coachCourses.active") : t("adminUsers.deactivated")}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-xs text-slate-500">
@@ -126,7 +128,7 @@ export function AdminUsersPage() {
                       disabled={toggleMutation.isPending}
                       className="rounded-md border border-slate-300 px-3 py-1 text-xs font-medium hover:bg-slate-50 disabled:opacity-50"
                     >
-                      {u.is_active ? "Désactiver" : "Réactiver"}
+                      {u.is_active ? t("adminUsers.deactivate") : t("adminUsers.reactivate")}
                     </button>
                   </td>
                 </tr>
