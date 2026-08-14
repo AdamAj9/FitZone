@@ -23,14 +23,15 @@ export function CourseCard({ course }: { course: CourseListItem }) {
       to={`/courses/${course.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl bg-surface shadow-sm transition hover:shadow-md"
     >
-      <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
-        {course.image && (
-          <img
-            src={course.image}
-            alt={course.title}
-            className="h-full w-full object-cover"
-          />
-        )}
+    <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
+        <img
+          src={`/images/courses/${course.slug}.png`}
+          alt={course.title}
+          className="h-full w-full object-cover"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = "none";
+          }}
+        />
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="flex items-center justify-between text-xs">
