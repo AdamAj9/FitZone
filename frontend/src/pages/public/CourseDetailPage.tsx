@@ -185,14 +185,15 @@ export function CourseDetailPage() {
     <div className="grid gap-6 lg:grid-cols-3">
       <div className="lg:col-span-2 space-y-6">
         <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
-          <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
-            {course.image && (
-              <img
-                src={course.image}
-                alt={course.title}
-                className="h-full w-full object-cover"
-              />
-            )}
+         <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
+            <img
+              src={`/images/courses/${course.slug}.png`}
+              alt={course.title}
+              className="h-full w-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+              }}
+            />
           </div>
           <div className="p-6">
             <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
