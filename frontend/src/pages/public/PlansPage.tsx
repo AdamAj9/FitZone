@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 
+import { paymentsApi } from "../../api/payments";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
@@ -13,7 +14,7 @@ export function PlansPage() {
   const [period, setPeriod] = useState<Period>("monthly");
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
-  const queryClient = useQueryClient();
+
 
   const plansQuery = useQuery({
     queryKey: ["plans"],
@@ -26,12 +27,10 @@ export function PlansPage() {
     enabled: Boolean(user),
   });
 
-const subscribeMutation = useMutation({
-    mutationFn: (planId: number) => subscriptionsApi.subscribe(planId),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ["subscription-current"] });
-      void queryClient.invalidateQueries({ queryKey: ["my-subscriptions"] });
-      navigate("/my-subscription");
+const checkoutMutation = useMutation({
+    mutationFn: (planId: number) => paymentsApi.checkoutSubscription(planId),
+    onSuccess: ({ checkout_url }) => {
+      window.location.href = checkout_url;
     },
   });
 
@@ -39,7 +38,7 @@ const subscribeMutation = useMutation({
     plansQuery.data?.results.filter((p) => p.period === period) ?? [];
 
   const currentSub = currentQuery.data?.subscription ?? null;
- const apiError = subscribeMutation.error as
+ const apiError = checkoutMutation.error as
     | { response?: { data?: { detail?: string } } }
     | null;
 
@@ -143,16 +142,16 @@ const subscribeMutation = useMutation({
                   ))}
                 </ul>
 
-                <button
+                         <button
                   type="button"
                   onClick={() => {
                     if (!user) {
                       navigate("/login");
                       return;
                     }
-                    subscribeMutation.mutate(plan.id);
+                    checkoutMutation.mutate(plan.id);
                   }}
-                  disabled={subscribeMutation.isPending || Boolean(currentSub)}
+                  disabled={checkoutMutation.isPending || Boolean(currentSub)}
                   className={`mt-6 w-full rounded-md px-4 py-3 font-medium transition ${
                     isPremium
                       ? "bg-brand-600 text-white hover:bg-brand-700"
@@ -161,8 +160,8 @@ const subscribeMutation = useMutation({
                 >
                   {currentSub
                     ? t("plans.alreadyActive")
-                    : subscribeMutation.isPending &&
-                        subscribeMutation.variables === plan.id
+                    : checkoutMutation.isPending &&
+                        checkoutMutation.variables === plan.id
                       ? t("plans.subscribing")
                       : user
                         ? t("home.subscribe")
