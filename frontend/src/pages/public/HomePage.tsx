@@ -11,6 +11,7 @@ import { Marquee } from "../../components/ui/Marquee";
 import { Reveal } from "../../components/ui/Reveal";
 import { TiltCard } from "../../components/ui/TiltCard";
 import { OFFERINGS } from "../../data/offerings";
+import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
 
 const HERO_IMAGE = "/images/hero/Hero%20principal.png";
@@ -327,6 +328,7 @@ export function HomePage() {
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {filteredPlans.map((plan, index) => {
             const isPremium = plan.tier === "premium";
+            const { name, description, features } = localizedPlan(t, plan);
             return (
               <Reveal key={plan.id} delay={index * 100}>
                 <div
@@ -349,7 +351,7 @@ export function HomePage() {
                     {plan.tier_display}
                   </p>
                   <h3 className="mt-2 text-2xl font-bold text-ink-900">
-                    {plan.name}
+                    {name}
                   </h3>
                   <p className="mt-4">
                     <span className="text-5xl font-bold text-ink-900">
@@ -359,9 +361,9 @@ export function HomePage() {
                       {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
                     </span>
                   </p>
-                  <p className="mt-2 text-sm text-ink-700">{plan.description}</p>
+                  <p className="mt-2 text-sm text-ink-700">{description}</p>
                   <ul className="mt-5 space-y-2 text-sm">
-                    {plan.features.map((f) => (
+                    {features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-ink-700">
                         <span className="mt-0.5 text-accent-600">✓</span> {f}
                       </li>

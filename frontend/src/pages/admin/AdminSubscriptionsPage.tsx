@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { subscriptionsApi } from "../../api/subscriptions";
 import { formatDateTime } from "../../lib/date";
+import { localizedPlan } from "../../lib/planCatalog";
 
 const statusColor: Record<string, string> = {
   active: "bg-green-100 text-green-700",
@@ -43,7 +44,7 @@ export function AdminSubscriptionsPage() {
               {data?.results.map((s) => (
                 <tr key={s.id}>
                   <td className="px-4 py-3 text-slate-900">{s.user_email}</td>
-                  <td className="px-4 py-3 text-slate-700">{s.plan.name}</td>
+                  <td className="px-4 py-3 text-slate-700">{localizedPlan(t, s.plan).name}</td>
                   <td className="px-4 py-3 text-slate-700">
                     {s.starts_at ? formatDateTime(s.starts_at) : "—"}
                   </td>

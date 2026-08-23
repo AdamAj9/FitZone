@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { paymentsApi } from "../../api/payments";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { Reveal } from "../../components/ui/Reveal";
+import { localizedPlan } from "../../lib/planCatalog";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
 
@@ -80,7 +81,7 @@ const checkoutMutation = useMutation({
       {currentSub && (
         <Reveal className="rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
           {t("plans.activeSubscription")}{" "}
-          <strong>{currentSub.plan.name}</strong> —{" "}
+          <strong>{localizedPlan(t, currentSub.plan).name}</strong> —{" "}
           {t("plans.daysRemaining", { count: currentSub.days_remaining })}
         </Reveal>
       )}
@@ -97,6 +98,7 @@ const checkoutMutation = useMutation({
         <div className="grid gap-4 md:grid-cols-2">
           {filteredPlans.map((plan, index) => {
             const isPremium = plan.tier === "premium";
+            const { name, description, features } = localizedPlan(t, plan);
             return (
               <Reveal key={plan.id} delay={index * 100}>
               <div
@@ -114,7 +116,7 @@ const checkoutMutation = useMutation({
                       {plan.tier_display}
                     </p>
                     <h2 className="mt-1 text-2xl font-bold text-slate-900">
-                      {plan.name}
+                      {name}
                     </h2>
                   </div>
                   {isPremium && (
@@ -133,10 +135,10 @@ const checkoutMutation = useMutation({
                   </span>
                 </p>
 
-                <p className="mt-2 text-sm text-slate-600">{plan.description}</p>
+                <p className="mt-2 text-sm text-slate-600">{description}</p>
 
                 <ul className="mt-5 space-y-2 text-sm">
-                  {plan.features.map((f) => (
+                  {features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-slate-700">
                       <span className="mt-0.5 text-accent-600">✓</span> {f}
                     </li>

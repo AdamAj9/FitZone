@@ -1,0 +1,1219 @@
+{
+  "app": {
+    "name": "FitZone",
+    "tagline": "Uw fitnessclub, online"
+  },
+  "header": {
+    "ourOffer": "Ons aanbod",
+    "discoverFitZone": "Ontdek de hele FitZone-wereld",
+    "discoverFitZoneSubtitle": "Meer dan 200 sessies per week, 7 eigen ruimtes.",
+    "adminBadge": "Admin",
+    "coachBadge": "Coach",
+    "closeMenu": "Menu sluiten",
+    "openMenu": "Menu openen",
+    "language": "Taal"
+  },
+  "nav": {
+    "home": "Home",
+    "courses": "Lessen",
+    "planning": "Planning",
+    "coaches": "Coaches",
+    "plans": "Abonnementen",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "dashboard": "Dashboard",
+    "logout": "Uitloggen"
+  },
+  "home": {
+    "badge": "Nieuwe club 7 dagen per week open",
+    "titleLine1": "Sport,",
+    "titleLine2": "opnieuw uitgevonden.",
+    "subtitle": "Fitnesszalen, zwembad, tennis, padel, hamam, coworking... alles onder één dak. Online reserveren, veilig betalen, voortgang bijhouden.",
+    "ctaStart": "Gratis beginnen",
+    "ctaPlans": "Bekijk de abonnementen",
+    "ratingValue": "4,8 / 5",
+    "ratingText": "op basis van 200+ reviews",
+    "noCommitment": "Geen verplichtingen · Op elk moment opzegbaar",
+    "stats": [
+      {
+        "value": "200+",
+        "label": "Sessies per week"
+      },
+      {
+        "value": "10+",
+        "label": "Groepslessen"
+      },
+      {
+        "value": "7",
+        "label": "Eigen ruimtes"
+      },
+      {
+        "value": "7/7",
+        "label": "Non-stop open"
+      }
+    ],
+    "offerLabel": "Ons aanbod",
+    "offerTitle": "Een complete wereld, onder één dak",
+    "offerSeeAll": "Alle abonnementen",
+    "discoverMore": "Ontdekken",
+    "teamLabel": "Ons team",
+    "teamTitle": "Coaches die naar u luisteren",
+    "teamSeeAll": "Alle coaches",
+    "teamBadgeNew": "Nieuw",
+    "coachFallback": "FitZone-coach",
+    "howItWorksLabel": "Hoe werkt het?",
+    "howItWorksTitle": "Drie stappen om te starten",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Maak uw account aan",
+        "description": "Gratis registratie in 30 seconden, geen kaart vereist."
+      },
+      {
+        "n": "02",
+        "title": "Kies uw formule",
+        "description": "Basic of Premium, maandelijks of jaarlijks — wijzig op elk moment."
+      },
+      {
+        "n": "03",
+        "title": "Reserveer & geniet",
+        "description": "Planning in real time, meer dan 200 sessies per week, overal in de club."
+      }
+    ],
+    "pricingLabel": "Tarieven",
+    "pricingTitle": "Formules voor elk ritme",
+    "pricingSubtitle": "Geen verplichtingen, op elk moment opzegbaar.",
+    "periodMonthly": "Maandelijks",
+    "periodYearly": "Jaarlijks",
+    "yearlyDiscount": "−2 maanden",
+    "recommended": "Aanbevolen",
+    "perMonth": "maand",
+    "perYear": "jaar",
+    "subscribe": "Inschrijven",
+    "testimonialsLabel": "Getuigenissen",
+    "testimonialsTitle": "Zij praten er beter over dan wij",
+    "testimonials": {
+      "items": [
+        {
+          "name": "Marie L.",
+          "role": "Premium-lid sinds 2 jaar",
+          "quote": "De app is superintuïtief. Ik boek mijn yoga- en zwemlessen in twee klikken, en de coach ziet wie er komt — dat verandert alles."
+        },
+        {
+          "name": "Karim B.",
+          "role": "Basic-lid",
+          "quote": "Ongeslagen prijs-kwaliteitverhouding. Propere club, nieuw materiaal, en ik kan een tennissessie kopen wanneer ik zin heb."
+        },
+        {
+          "name": "Sophie M.",
+          "role": "Yogacoach",
+          "quote": "Als coach is het dashboard superduidelijk. Ik zie mijn volgende sessies, wie zich inschrijft, mijn notities — allemaal op één plek."
+        }
+      ]
+    },
+    "ctaBottomTitle": "Klaar om binnen te stappen?",
+    "ctaBottomSubtitle": "Gratis registratie. Kies uw formule, boek uw eerste sessie, en u kunt starten.",
+    "ctaCreateAccount": "Account aanmaken",
+    "ctaMeetCoaches": "Maak kennis met de coaches"
+  },
+  "footer": {
+    "description": "Uw allround fitnessclub: fitness, zwembad, tennis, padel, hamam, coworking — allemaal onder één dak.",
+    "discoverTitle": "Ontdekken",
+    "accountTitle": "Mijn account",
+    "legalTitle": "Juridisch",
+    "legalNotice": "Wettelijke vermeldingen",
+    "terms": "Algemene voorwaarden",
+    "privacy": "Privacybeleid",
+    "cookies": "Cookies",
+    "myBookings": "Mijn reserveringen",
+    "rights": "Alle rechten voorbehouden.",
+    "madeIn": "Ontworpen en ontwikkeld in België",
+    "address": "42 rue de la Forme, 1000 Brussel"
+  },
+  "legal": {
+    "sectionLabel": "Juridische informatie",
+    "lastUpdated": "Laatst bijgewerkt: 23 augustus 2026",
+    "tocTitle": "Inhoud",
+    "academicTitle": "Academisch project.",
+    "academicNotice": "FitZone is een fictieve sportclub, opgericht in het kader van een eindwerk aan het Institut des Carrières Commerciales (Brussel). De bedrijfsgegevens, identificatienummers en commerciële voorwaarden die hier worden getoond illustreren de verplichtingen die daadwerkelijk gelden voor een Belgische e-commerceonderneming, maar verbinden geen enkel bestaand bedrijf.",
+    "contactLine": "Een vraag over dit document? Schrijf ons op hello@fitzone.local of per post naar FitZone, 42 rue de la Forme, 1000 Brussel.",
+    "notice": {
+      "title": "Wettelijke vermeldingen",
+      "intro": "Informatie over de uitgever en de hosting van de FitZone-website, overeenkomstig artikel XII.6 van het Belgische Wetboek van economisch recht.",
+      "sections": [
+        {
+          "heading": "Uitgever van de website",
+          "paragraphs": [
+            "De website die toegankelijk is via myfitzone.be wordt uitgegeven door:"
+          ],
+          "table": {
+            "columns": [
+              "Informatie",
+              "Waarde"
+            ],
+            "rows": [
+              [
+                "Benaming",
+                "FitZone SRL"
+              ],
+              [
+                "Rechtsvorm",
+                "Besloten vennootschap met beperkte aansprakelijkheid (fictief)"
+              ],
+              [
+                "Maatschappelijke zetel",
+                "42 rue de la Forme, 1000 Brussel, België"
+              ],
+              [
+                "Ondernemingsnummer (KBO)",
+                "BE 0XXX.XXX.XXX — fictief nummer"
+              ],
+              [
+                "Btw-nummer",
+                "BE 0XXX.XXX.XXX — fictief nummer"
+              ],
+              [
+                "E-mailadres",
+                "hello@fitzone.local"
+              ],
+              [
+                "Telefoon",
+                "+32 2 555 12 34"
+              ],
+              [
+                "Verantwoordelijke uitgever",
+                "Adam Ajaray"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Hosting en technische dienstverleners",
+          "paragraphs": [
+            "De website en de bijhorende gegevens steunen op de volgende dienstverleners, elk gebonden door een verwerkersovereenkomst in de zin van artikel 28 AVG:"
+          ],
+          "table": {
+            "columns": [
+              "Rol",
+              "Dienstverlener",
+              "Locatie"
+            ],
+            "rows": [
+              [
+                "Verspreiding van de webinterface",
+                "Netlify, Inc.",
+                "Verenigde Staten (wereldwijd distributienetwerk)"
+              ],
+              [
+                "Hosting van de applicatie-API",
+                "Render Services, Inc.",
+                "Instantie gehost in Europa"
+              ],
+              [
+                "Database",
+                "Supabase (beheerde PostgreSQL)",
+                "Europese Unie — Ierland"
+              ],
+              [
+                "Betalingsverwerking",
+                "Stripe Payments Europe, Ltd.",
+                "Dublin, Ierland"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Intellectuele eigendom",
+          "paragraphs": [
+            "De structuur van de website, de teksten, de visuele identiteit en het merk zijn eigendom van hun auteur. Elke gehele of gedeeltelijke reproductie of weergave voor commerciële doeleinden is verboden zonder voorafgaande schriftelijke toestemming.",
+            "De broncode van de applicatie wordt voor educatieve doeleinden gepubliceerd op GitHub (github.com/AdamAj9/FitZone). De gebruikte bibliotheken van derden blijven onderworpen aan hun respectieve licenties: Django (BSD), React (MIT), Tailwind CSS (MIT), Django REST Framework (BSD).",
+            "De foto's en illustraties op de website werden specifiek voor dit project gemaakt en reproduceren geen enkel beschermd werk dat aan een derde toebehoort."
+          ]
+        },
+        {
+          "heading": "Prijzen en commerciële informatie",
+          "paragraphs": [
+            "De op de website getoonde prijzen zijn uitgedrukt in euro, inclusief alle belastingen. Ze omvatten de toepasselijke Belgische belasting over de toegevoegde waarde: 6% voor de toegang tot sportinfrastructuur, 21% voor afzonderlijke diensten.",
+            "De essentiële kenmerken van de diensten, hun prijzen en de betalingsvoorwaarden worden voorafgaand aan elke bestelling weergegeven, overeenkomstig artikel VI.45 van het Wetboek van economisch recht. De volledige contractuele voorwaarden staan in onze algemene voorwaarden."
+          ]
+        },
+        {
+          "heading": "Klachten, bemiddeling en geschillen",
+          "paragraphs": [
+            "Elke klacht moet eerst worden gericht aan hello@fitzone.local. Wij verbinden ons ertoe de ontvangst binnen vijf werkdagen te bevestigen en binnen de maand een gemotiveerd antwoord te geven.",
+            "Bij gebrek aan een minnelijke oplossing kan de consument gratis terecht bij de Consumentenombudsdienst, Koning Albert II-laan 8 bus 1, 1000 Brussel (consumentenombudsdienst.be).",
+            "Deze vermeldingen en de relaties die zij regelen, zijn onderworpen aan het Belgisch recht. Bij gebrek aan overeenstemming zijn de hoven en rechtbanken van het gerechtelijk arrondissement Brussel bevoegd, onverminderd de beschermende regels die van toepassing zijn op de consument."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Algemene verkoop- en gebruiksvoorwaarden",
+      "intro": "Deze voorwaarden regelen het gebruik van de FitZone-website, het afsluiten van abonnementen en het reserveren van lessessies.",
+      "sections": [
+        {
+          "heading": "Voorwerp en aanvaarding",
+          "paragraphs": [
+            "Deze voorwaarden zijn van toepassing op elk gebruik van de FitZone-website en op elke aankoop die daarop wordt gedaan. Het aanmaken van een account of het afsluiten van een abonnement geldt als volledige aanvaarding van deze voorwaarden, in de versie die van kracht is op de datum van de bestelling.",
+            "Ze vullen het interne reglement dat in onze installaties wordt getoond aan, zonder dit te vervangen."
+          ]
+        },
+        {
+          "heading": "Ledenaccount",
+          "paragraphs": [
+            "Het aanmaken van een account is gratis en vereist om een abonnement af te sluiten of een sessie te reserveren."
+          ],
+          "items": [
+            "U verbindt zich ertoe correcte informatie te verstrekken en deze up-to-date te houden vanuit uw profiel.",
+            "Uw wachtwoord moet minstens acht tekens bevatten en mag niet triviaal zijn; het wordt opgeslagen als cryptografische hash en blijft vertrouwelijk, ook ten opzichte van ons personeel.",
+            "U bent verantwoordelijk voor alle activiteit die vanaf uw account wordt uitgevoerd. Verwittig ons onmiddellijk bij niet-toegestaan gebruik.",
+            "Eén account komt overeen met één natuurlijke persoon: het delen van inloggegevens is verboden.",
+            "Bij ernstige inbreuk op deze voorwaarden kan het account worden gedeactiveerd nadat het lid hiervan op de hoogte werd gebracht."
+          ]
+        },
+        {
+          "heading": "Abonnementen",
+          "paragraphs": [
+            "Er zijn vier formules beschikbaar. Enkel de Premium-formules omvatten onbeperkte toegang tot begeleide groepslessen; de Essential-formules geven toegang tot de installaties met vrije toegang."
+          ],
+          "table": {
+            "columns": [
+              "Formule",
+              "Prijs",
+              "Inhoud"
+            ],
+            "rows": [
+              [
+                "Essential maandelijks",
+                "29,99 € / maand",
+                "Vrije toegang tot de installaties"
+              ],
+              [
+                "Essential jaarlijks",
+                "299 € / jaar",
+                "Vrije toegang tot de installaties"
+              ],
+              [
+                "Premium maandelijks",
+                "59,99 € / maand",
+                "Installaties + onbeperkte groepslessen"
+              ],
+              [
+                "Premium jaarlijks",
+                "599 € / jaar",
+                "Installaties + onbeperkte groepslessen"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Duur, verlenging en opzegging",
+          "items": [
+            "Het abonnement gaat in zodra de betaling is bevestigd en loopt dertig dagen (maandelijkse formule) of driehonderdvijfenzestig dagen (jaarlijkse formule).",
+            "De betaalde prijs ligt vast op het moment van aankoop: een latere wijziging van onze tarieven heeft geen invloed op een lopend abonnement.",
+            "Er is geen stilzwijgende verlenging: het abonnement eindigt automatisch op de vervaldatum en er wordt geen bedrag afgeschreven zonder een nieuwe inschrijving van uw kant.",
+            "U kunt op elk moment opzeggen, online en in één klik, vanaf de pagina « Mijn abonnement ». De opzegging beëindigt de verlenging maar geeft geen recht op terugbetaling van de reeds gestarte periode, onder voorbehoud van het hierna beschreven herroepingsrecht."
+          ]
+        },
+        {
+          "heading": "Reservering en annulering van sessies",
+          "items": [
+            "Elke sessie heeft een beperkt aantal plaatsen, toegewezen op volgorde van aankomst. Het aantal resterende plaatsen wordt in real time weergegeven in de planning.",
+            "De reservering wordt onmiddellijk bevestigd en verschijnt onder « Mijn reserveringen ». Er is slechts één actieve reservering per sessie en per lid mogelijk.",
+            "Annuleren is gratis en mogelijk tot het begin van de sessie; de plaats wordt dan onmiddellijk vrijgegeven voor andere leden. Een reeds gestarte sessie kan niet meer worden geannuleerd.",
+            "Leden zonder Premium-formule kunnen een plaats per stuk kopen wanneer de les dit voorziet; de prijs staat vermeld op de lesfiche.",
+            "FitZone kan een sessie annuleren bij een technisch incident, onbeschikbaarheid van de coach of onvoldoende deelnemers. Ingeschreven leden worden op de hoogte gebracht en de sessie wordt terugbetaald of verzet."
+          ]
+        },
+        {
+          "heading": "Prijs en betaling",
+          "paragraphs": [
+            "Betalingen worden verwerkt door Stripe op een beveiligde pagina die door deze dienstverlener wordt gehost. Er passeren of worden geen bankkaartgegevens bewaard op de servers van FitZone.",
+            "Overeenkomstig de Europese richtlijn betreffende betalingsdiensten (PSD2) kan uw bank tijdens de betaling sterke klantauthenticatie vragen, doorgaans via uw bankapp.",
+            "Een abonnement of een betaalde reservering wordt pas geactiveerd na daadwerkelijke bevestiging van de betaling door de dienstverlener. Bij mislukking ontstaat er geen recht en is er geen bedrag verschuldigd."
+          ]
+        },
+        {
+          "heading": "Herroepingsrecht en de uitzondering erop",
+          "paragraphs": [
+            "Overeenkomstig artikel VI.47 van het Wetboek van economisch recht beschikt u over een termijn van veertien kalenderdagen vanaf de sluiting van de overeenkomst om u terug te trekken uit een online afgesloten abonnement, zonder uw beslissing te moeten motiveren en zonder boete.",
+            "Om dit recht uit te oefenen, volstaat het ons een ondubbelzinnige verklaring te sturen naar hello@fitzone.local. De terugbetaling gebeurt binnen veertien dagen na ontvangst van uw aanvraag, via hetzelfde betaalmiddel.",
+            "Als u uitdrukkelijk hebt gevraagd dat het abonnement start vóór het einde van de herroepingstermijn en u er al gebruik van hebt gemaakt, blijft een bedrag verschuldigd in verhouding tot de reeds geleverde dienst (artikel VI.51, § 3).",
+            "Belangrijke uitzondering: overeenkomstig artikel VI.53, 12° van het Wetboek van economisch recht is het herroepingsrecht niet van toepassing op diensten in verband met vrijetijdsactiviteiten die op een bepaalde datum worden geleverd. Het reserveren van een lessessie op een precies tijdslot is dus niet herroepbaar; ze blijft echter wel gratis annuleerbaar tot het begin van de sessie, volgens de hierboven beschreven modaliteiten."
+          ]
+        },
+        {
+          "heading": "Regels voor het gebruik van de installaties",
+          "items": [
+            "Respect voor de andere leden, het personeel en het materiaal is te allen tijde vereist.",
+            "Sportbeoefening gebeurt op eigen verantwoordelijkheid. Wij raden ten zeerste een voorafgaand medisch advies aan, in het bijzonder bij een cardiale voorgeschiedenis, zwangerschap of hervatting na een lange onderbreking.",
+            "De veiligheidsinstructies die in elke ruimte worden getoond en de aanwijzingen van de coaches moeten worden gevolgd.",
+            "FitZone aanvaardt geen enkele aansprakelijkheid bij diefstal of verlies van persoonlijke bezittingen die zonder toezicht werden achtergelaten."
+          ]
+        },
+        {
+          "heading": "Beschikbaarheid van de dienst en aansprakelijkheid",
+          "paragraphs": [
+            "Wij spannen ons in om de toegankelijkheid van de website continu te verzekeren, zonder deze te kunnen garanderen: onderbrekingen kunnen zich voordoen wegens onderhoud, updates of overmacht.",
+            "Onze aansprakelijkheid is beperkt tot directe en voorzienbare schade die voortvloeit uit een aan ons toe te rekenen tekortkoming. Ze mag het bedrag van de daadwerkelijk betaalde sommen voor de betrokken overeenkomst niet overschrijden.",
+            "Geen enkele bepaling van deze voorwaarden beperkt de dwingende rechten waarover u als consument beschikt."
+          ]
+        },
+        {
+          "heading": "Persoonsgegevens",
+          "paragraphs": [
+            "De verwerking van uw persoonsgegevens wordt gedetailleerd beschreven in ons privacybeleid, dat integraal deel uitmaakt van deze voorwaarden."
+          ]
+        },
+        {
+          "heading": "Wijziging van de voorwaarden",
+          "paragraphs": [
+            "Deze voorwaarden kunnen evolueren. Elke wezenlijke wijziging wordt u meegedeeld vóór ze in werking treedt. De versie die van toepassing is op een bestelling is diegene die online staat op het moment van plaatsing."
+          ]
+        },
+        {
+          "heading": "Toepasselijk recht en bevoegdheid",
+          "paragraphs": [
+            "Deze voorwaarden worden beheerst door het Belgisch recht. Bij een geschil wordt bij voorrang naar een minnelijke oplossing gezocht, desgevallend via de bemiddeling beschreven in onze wettelijke vermeldingen. Bij gebrek daaraan zijn de hoven en rechtbanken van het gerechtelijk arrondissement Brussel bevoegd, onverminderd de beschermende regels voor de consument."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacybeleid",
+      "intro": "Hoe FitZone uw persoonsgegevens verzamelt, gebruikt, deelt en beschermt, overeenkomstig de Algemene Verordening Gegevensbescherming (Verordening EU 2016/679, “AVG”) en de Belgische wet van 30 juli 2018.",
+      "sections": [
+        {
+          "heading": "Verwerkingsverantwoordelijke",
+          "paragraphs": [
+            "De verwerkingsverantwoordelijke voor uw gegevens is FitZone SRL, 42 rue de la Forme, 1000 Brussel, bereikbaar op hello@fitzone.local.",
+            "Voor elke vraag over uw gegevens is dit adres uw enige contactpunt. Gezien de omvang van de organisatie werd geen functionaris voor gegevensbescherming aangesteld: de aanvraag wordt rechtstreeks behandeld door de verantwoordelijke uitgever."
+          ]
+        },
+        {
+          "heading": "Gegevens die wij verzamelen",
+          "paragraphs": [
+            "Wij passen het minimalisatiebeginsel toe: enkel de voor de dienst noodzakelijke gegevens worden verzameld."
+          ],
+          "table": {
+            "columns": [
+              "Categorie",
+              "Betrokken gegevens",
+              "Herkomst"
+            ],
+            "rows": [
+              [
+                "Identiteit en contact",
+                "Naam, voornaam, e-mailadres, telefoonnummer, voorkeurstaal",
+                "Door u verstrekt bij inschrijving"
+              ],
+              [
+                "Account",
+                "Wachtwoord als cryptografische hash, rol, datum van aanmaak en laatste login",
+                "Gegenereerd door de applicatie"
+              ],
+              [
+                "Sportprofiel",
+                "Geboortedatum, opgegeven niveau, doelen, voorkeurscategorieën lessen",
+                "Facultatieve vragenlijst"
+              ],
+              [
+                "Activiteit",
+                "Reserveringen, annuleringen, geschiedenis van gevolgde sessies",
+                "Gegenereerd door uw gebruik"
+              ],
+              [
+                "Abonnementen en betalingen",
+                "Gekozen formule, bedrag, status, data, Stripe-transactie-identificatoren",
+                "Gegenereerd bij aankoop"
+              ],
+              [
+                "Reviews",
+                "Score toegekend aan een coach (1 tot 5) en eventuele opmerking",
+                "Door u verstrekt"
+              ],
+              [
+                "Technische gegevens",
+                "IP-adres en tijdstempel van gevoelige acties (login, betaling, reservering)",
+                "Beveiligingsauditlogboek"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Wat wij niet verzamelen",
+          "items": [
+            "Geen enkel bankgegeven: uw kaartnummer wordt uitsluitend ingevoerd op de beveiligde pagina van Stripe en bereikt nooit onze servers.",
+            "Geen gezondheidsgegevens in de zin van artikel 9 AVG: de vragenlijst gaat over uw doelen en lesvoorkeuren, dat wil zeggen welzijnsgegevens. Er wordt geen medisch attest, diagnose of voorgeschiedenis gevraagd of opgeslagen in de applicatie.",
+            "Geen enkele advertentietracker, geen enkele publieksmeting, geen enkele profilering voor marketingdoeleinden.",
+            "Geen enkele doorverkoop, verhuur of overdracht van uw gegevens aan derden, voor welk doel dan ook."
+          ]
+        },
+        {
+          "heading": "Doeleinden en rechtsgronden",
+          "paragraphs": [
+            "Elke verwerking steunt op een rechtsgrond bepaald in artikel 6 AVG:"
+          ],
+          "table": {
+            "columns": [
+              "Doeleinde",
+              "Rechtsgrond",
+              "Voorbeeld"
+            ],
+            "rows": [
+              [
+                "Uw account aanmaken en beheren",
+                "Uitvoering van de overeenkomst (art. 6.1.b)",
+                "Login, profielupdate"
+              ],
+              [
+                "Abonnementen verkopen en reserveringen beheren",
+                "Uitvoering van de overeenkomst (art. 6.1.b)",
+                "Inschrijving, gereserveerde plaats, annulering"
+              ],
+              [
+                "Betalingen verwerken en het bewijs ervan bewaren",
+                "Uitvoering van de overeenkomst en wettelijke verplichting (art. 6.1.b en 6.1.c)",
+                "Inning, boekhoudkundig stuk"
+              ],
+              [
+                "Lessuggesties personaliseren",
+                "Gerechtvaardigd belang (art. 6.1.f)",
+                "Aanbevelingen op basis van uw reserveringen en voorkeuren; de vragenlijst blijft facultatief"
+              ],
+              [
+                "Beveiliging waarborgen en gevoelige acties traceren",
+                "Gerechtvaardigd belang en beveiligingsverplichting (art. 6.1.f en art. 32)",
+                "Auditlogboek, detectie van abnormale toegang"
+              ],
+              [
+                "Onze boekhoudkundige en fiscale verplichtingen naleven",
+                "Wettelijke verplichting (art. 6.1.c)",
+                "Bewaring van betalingsbewijzen"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Ontvangers en verwerkers",
+          "paragraphs": [
+            "Uw gegevens zijn toegankelijk voor bevoegd FitZone-personeel, strikt volgens hun rol: een coach ziet enkel de ingeschrevenen voor zijn eigen sessies, de beheerder beschikt over een beheersoverzicht.",
+            "Ze worden ook toevertrouwd aan de onderstaande technische dienstverleners, gebonden door een verwerkersovereenkomst conform artikel 28 AVG en die enkel op onze instructies handelen:"
+          ],
+          "table": {
+            "columns": [
+              "Dienstverlener",
+              "Rol",
+              "Locatie van de gegevens"
+            ],
+            "rows": [
+              [
+                "Stripe Payments Europe, Ltd.",
+                "Verwerking van betalingen",
+                "Europese Unie (Ierland)"
+              ],
+              [
+                "Supabase",
+                "Hosting van de database",
+                "Europese Unie (Ierland)"
+              ],
+              [
+                "Render Services, Inc.",
+                "Hosting van de applicatie-API",
+                "Europese instantie"
+              ],
+              [
+                "Netlify, Inc.",
+                "Verspreiding van de webinterface",
+                "Wereldwijd netwerk (Verenigde Staten)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Doorgiften buiten de Europese Unie",
+          "paragraphs": [
+            "De database en de verwerking van betalingen bevinden zich binnen de Europese Unie. Sommige verspreidingsdienstverleners zijn gevestigd in de Verenigde Staten: deze doorgiften worden omkaderd door de standaardcontractbepalingen aangenomen door de Europese Commissie, overeenkomstig artikel 46 AVG."
+          ]
+        },
+        {
+          "heading": "Bewaartermijnen",
+          "paragraphs": [
+            "Wij bewaren uw gegevens enkel zolang nodig voor de nagestreefde doeleinden:"
+          ],
+          "table": {
+            "columns": [
+              "Gegeven",
+              "Bewaartermijn"
+            ],
+            "rows": [
+              [
+                "Actief account",
+                "Zolang het account bestaat"
+              ],
+              [
+                "Gedeactiveerd account",
+                "Twaalf maanden, daarna anonimisering, behoudens andersluidende wettelijke verplichting"
+              ],
+              [
+                "Reserveringen en activiteitsgeschiedenis",
+                "Drie jaar vanaf de laatste gevolgde sessie"
+              ],
+              [
+                "Boekhoudkundige stukken (betalingen, abonnementen)",
+                "Zeven jaar, overeenkomstig de Belgische boekhoudwetgeving"
+              ],
+              [
+                "Auditlogboek (IP-adres, gevoelige acties)",
+                "Twaalf maanden"
+              ],
+              [
+                "Reviews gepubliceerd over een coach",
+                "Tot verwijdering door de auteur ervan"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Uw rechten",
+          "paragraphs": [
+            "De AVG kent u de volgende rechten toe, die u op elk moment en gratis kunt uitoefenen:"
+          ],
+          "items": [
+            "Recht van inzage (art. 15): bevestiging krijgen dat uw gegevens worden verwerkt en er een kopie van ontvangen.",
+            "Recht op rectificatie (art. 16): een onjuist of onvolledig gegeven corrigeren — de meeste rechtstreeks vanaf uw profiel.",
+            "Recht op wissing (art. 17), het ‘recht om vergeten te worden’: verwijdering van uw gegevens verkrijgen, binnen de grenzen beschreven in de volgende sectie.",
+            "Recht op beperking (art. 18): de tijdelijke bevriezing van een betwiste verwerking vragen.",
+            "Recht op overdraagbaarheid (art. 20): uw gegevens ontvangen in een gestructureerd, machineleesbaar formaat, of de overdracht ervan vragen.",
+            "Recht van bezwaar (art. 21): u verzetten tegen een verwerking gebaseerd op ons gerechtvaardigd belang, met name de gepersonaliseerde suggesties.",
+            "Recht om uw toestemming op elk moment in te trekken, wanneer de verwerking daarop steunt, zonder afbreuk te doen aan de rechtmatigheid van de eerdere verwerking.",
+            "Recht om een klacht in te dienen bij de toezichthoudende autoriteit (art. 77)."
+          ]
+        },
+        {
+          "heading": "Hoe uw rechten uitoefenen",
+          "paragraphs": [
+            "Stuur uw aanvraag naar hello@fitzone.local met vermelding van het ingeroepen recht. Wij antwoorden binnen een termijn van één maand, verlengbaar met twee maanden voor complexe aanvragen, in welk geval u hiervan op de hoogte wordt gebracht (art. 12.3).",
+            "Bij redelijke twijfel over uw identiteit kan een aanvullend bewijsstuk worden gevraagd, met als enig doel te voorkomen dat uw gegevens aan een derde worden meegedeeld."
+          ]
+        },
+        {
+          "heading": "Recht om vergeten te worden: wissing en grenzen",
+          "paragraphs": [
+            "De verwijdering van uw gegevens is op twee niveaus georganiseerd, om uw recht om vergeten te worden te verzoenen met onze wettelijke verplichtingen.",
+            "Deactivering van het account: uw toegang wordt onmiddellijk afgesloten en uw gegevens worden niet meer gebruikt voor de dienst. De geschiedenis van reeds uitgevoerde transacties wordt bewaard, aangezien ze een boekhoudkundig stuk vormt.",
+            "Volledige verwijdering: op aanvraag worden uw account, profiel, reserveringen en reviews definitief gewist uit onze systemen.",
+            "Grens voorzien door de AVG: reeds uitgereikte betalingsbewijzen kunnen niet worden verwijderd vóór de wettelijke termijn van zeven jaar (art. 17.3.b). Ze worden dan afzonderlijk bewaard, dienen enkel nog voor deze verplichting en worden niet meer voor andere doeleinden gebruikt. De identificatiegegevens die ze bevatten worden beperkt tot het strikt noodzakelijke."
+          ]
+        },
+        {
+          "heading": "Beveiliging van uw gegevens",
+          "paragraphs": [
+            "Overeenkomstig artikel 32 AVG passen wij passende technische en organisatorische maatregelen toe:"
+          ],
+          "items": [
+            "Encryptie van alle communicatie tussen uw browser en onze servers (HTTPS/TLS).",
+            "Wachtwoorden opgeslagen als cryptografische hash (PBKDF2-SHA256): ze zijn niet leesbaar en niet terug te vinden, ook niet door ons.",
+            "Authenticatie via kortlopend token, automatisch vernieuwd en ingetrokken bij het uitloggen.",
+            "Strikte toegangsscheiding volgens rol: een lid heeft enkel toegang tot zijn eigen gegevens, een coach enkel tot zijn eigen sessies.",
+            "Onveranderlijk auditlogboek van gevoelige acties, waarmee elke abnormale toegang kan worden gedetecteerd en gereconstrueerd.",
+            "Geen enkel bankkaartgegeven op onze servers: de PCI-DSS-conformiteit wordt gewaarborgd door Stripe, een gecertificeerde niveau-1-dienstverlener.",
+            "Database gehost binnen de Europese Unie, met regelmatige back-ups."
+          ]
+        },
+        {
+          "heading": "Geautomatiseerde besluitvorming en profilering",
+          "paragraphs": [
+            "De lessuggesties op uw dashboard vloeien voort uit een eenvoudige rangschikking, gebaseerd op de categorieën die u al hebt gereserveerd, die aangevinkt in de vragenlijst en uw opgegeven niveau.",
+            "Dit is geen geautomatiseerde besluitvorming die rechtsgevolgen heeft of u aanzienlijk treft in de zin van artikel 22 AVG: deze suggesties hebben geen enkele invloed op de gehanteerde prijzen, op de toegang tot de dienst of op uw rechten als lid. U kunt ze neutraliseren door de vragenlijst leeg te laten."
+          ]
+        },
+        {
+          "heading": "Minderjarigen",
+          "paragraphs": [
+            "De dienst is bestemd voor meerderjarigen. De inschrijving van een minderjarige van minstens zestien jaar vereist de schriftelijke toestemming van de houder van het ouderlijk gezag, over te maken aan de receptie van de club. Wij verzamelen niet bewust gegevens over kinderen jonger dan zestien jaar."
+          ]
+        },
+        {
+          "heading": "Klacht bij de toezichthoudende autoriteit",
+          "paragraphs": [
+            "Indien u van mening bent dat de verwerking van uw gegevens niet in overeenstemming is met de regelgeving, kunt u een klacht indienen bij de Gegevensbeschermingsautoriteit:",
+            "Gegevensbeschermingsautoriteit — Drukpersstraat 35, 1000 Brussel — contact@apd-gba.be — www.gegevensbeschermingsautoriteit.be"
+          ]
+        },
+        {
+          "heading": "Wijzigingen aan dit beleid",
+          "paragraphs": [
+            "Dit beleid kan worden aangepast om rekening te houden met juridische of technische ontwikkelingen. Elke wezenlijke wijziging wordt u gemeld vóór ze in werking treedt. De datum van de laatste update staat bovenaan deze pagina."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookies en lokale opslag",
+      "intro": "FitZone gebruikt geen enkele advertentiecookie en geen enkel publieksmeetinstrument. Deze pagina beschrijft precies wat de website in uw browser opslaat, en waarom.",
+      "sections": [
+        {
+          "heading": "Onze aanpak",
+          "paragraphs": [
+            "De website werkt zonder enige tracker. Wij gebruiken geen statistiekentool, geen advertentieregie en geen socialemediaknop die uw navigatie zou kunnen volgen.",
+            "Enkel twee gegevens, strikt noodzakelijk voor de werking van de dienst, worden opgeslagen in uw browser. Dit gebeurt via lokale opslag (localStorage) in plaats van via cookies: ze worden dus nooit automatisch meegestuurd bij elke aanvraag en maken geen enkele opvolging van de ene site naar de andere mogelijk."
+          ]
+        },
+        {
+          "heading": "Wat de website opslaat",
+          "table": {
+            "columns": [
+              "Naam",
+              "Type",
+              "Doel",
+              "Duur"
+            ],
+            "rows": [
+              [
+                "fitzone-auth",
+                "Lokale opslag",
+                "U ingelogd houden van pagina naar pagina (sessietoken en profielinformatie)",
+                "Tot uitloggen of het wissen van de browsergegevens"
+              ],
+              [
+                "i18nextLng",
+                "Lokale opslag",
+                "De gekozen taal onthouden (Frans, Engels of Nederlands)",
+                "Tot het wissen van de browsergegevens"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Cookies geplaatst door onze dienstverleners",
+          "paragraphs": [
+            "Bij een betaling wordt u doorverwezen naar een beveiligde pagina gehost door Stripe. Deze dienstverlener plaatst zijn eigen cookies, op zijn eigen domein, voor beveiligings- en fraudepreventiedoeleinden. Ze vallen onder zijn privacybeleid.",
+            "Geen enkele cookie van Stripe of een andere derde wordt geplaatst op de pagina's van de FitZone-website zelf."
+          ]
+        },
+        {
+          "heading": "Waarom er geen toestemmingsbanner is",
+          "paragraphs": [
+            "Voorafgaande toestemming is enkel vereist voor trackers die niet strikt noodzakelijk zijn voor de door de gebruiker gevraagde dienst.",
+            "De twee hierboven vermelde elementen zijn onmisbaar voor de werking van de website: zonder deze zou u bij elke paginawijziging worden uitgelogd en zou de taal niet worden bewaard. Ze vallen dus onder de uitzondering voorzien door de ePrivacy-regelgeving, zoals toegepast door de Belgische Gegevensbeschermingsautoriteit.",
+            "Mochten wij ooit een publieksmeet- of advertentietool toevoegen, dan zou vooraf een conforme toestemmingsbanner worden geplaatst, met een even eenvoudige weigering als aanvaarding."
+          ]
+        },
+        {
+          "heading": "Deze gegevens beheren of verwijderen",
+          "items": [
+            "Uitloggen vanaf de website verwijdert onmiddellijk uw sessietoken.",
+            "Chrome of Edge: Instellingen → Privacy en beveiliging → Cookies en andere sitegegevens.",
+            "Firefox: Instellingen → Privacy en beveiliging → Cookies en sitegegevens.",
+            "Safari: Voorkeuren → Privacy → Websitegegevens beheren.",
+            "Het verwijderen van deze gegevens logt u uit en herstelt de weergavetaal; het heeft geen invloed op uw account of uw reserveringen."
+          ]
+        },
+        {
+          "heading": "Nog vragen?",
+          "paragraphs": [
+            "Voor elke vraag over dit onderwerp kunt u ons schrijven op hello@fitzone.local. De verwerking van uw persoonsgegevens wordt overigens gedetailleerd beschreven in ons privacybeleid."
+          ]
+        }
+      ]
+    }
+  },
+  "notFound": {
+    "description": "De pagina die u zoekt bestaat niet of is verplaatst.",
+    "backHome": "Terug naar home",
+    "viewCourses": "Bekijk de lessen"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Er is een fout opgetreden",
+    "comingSoon": "Binnenkort beschikbaar / Coming soon",
+    "confirm": "Bevestigen",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "advanced": "Gevorderd",
+      "all": "Alle niveaus"
+    },
+    "cancel": "Annuleren",
+    "create": "Aanmaken"
+  },
+  "courses": {
+    "title": "Onze lessen",
+    "subtitle": "Vind de les die bij uw niveau en zin past.",
+    "searchPlaceholder": "Zoeken...",
+    "allCategories": "Alle categorieën",
+    "loadError": "Fout bij het laden.",
+    "emptyTitle": "Geen enkele les komt overeen",
+    "emptyDescription": "Probeer een filter te wijzigen of te verwijderen."
+  },
+  "adminSubscriptions": {
+    "empty": "Geen abonnementen.",
+    "colPlan": "Formule",
+    "colPricePaid": "Betaalde prijs"
+  },
+  "adminUsers": {
+    "title": "Gebruikers",
+    "searchPlaceholder": "Zoek e-mail of naam...",
+    "allRoles": "Alle rollen",
+    "roleMember": "Lid",
+    "roleCoach": "Coach",
+    "roleAdmin": "Admin",
+    "empty": "Geen gebruikers.",
+    "colEmail": "E-mail",
+    "colName": "Naam",
+    "colRole": "Rol",
+    "colUser": "Gebruiker",
+    "colJoined": "Inschrijving",
+    "deactivated": "Gedeactiveerd",
+    "deactivate": "Deactiveren",
+    "reactivate": "Heractiveren"
+  },
+  "adminLogs": {
+    "title": "Auditlogboek",
+    "allActions": "Alle acties",
+    "empty": "Geen gebeurtenissen.",
+    "colActor": "Actor",
+    "colAction": "Actie",
+    "colTarget": "Doel",
+    "colMetadata": "Metadata",
+    "colIp": "IP",
+    "system": "systeem"
+  },
+  "offerings": {
+    "fitness": {
+      "title": "Fitnesszalen",
+      "items": {
+        "mixedRoom": {
+          "label": "Gemengde zaal",
+          "description": "Meer dan 80 toestellen, cardioruimte + vrije gewichten."
+        },
+        "womenOnlyRoom": {
+          "label": "Vrouwenzaal",
+          "description": "Eigen ruimte, vrouwelijke begeleiding op aanvraag."
+        },
+        "weightTraining": {
+          "label": "Krachttraining",
+          "description": "Krachtplatforms, rekken en olympische banken."
+        }
+      }
+    },
+    "pool": {
+      "title": "Zwembad 25 m",
+      "items": {
+        "freeSwim": {
+          "label": "Vrij zwemmen",
+          "description": "4 verwarmde zwembanen + vrijezwembaan."
+        },
+        "aquagym": {
+          "label": "Aquagym",
+          "description": "Begeleide groepslessen, meerdere niveaus."
+        },
+        "swimmingLessons": {
+          "label": "Zwemlessen",
+          "description": "Individueel of in groep leren zwemmen."
+        }
+      }
+    },
+    "spa": {
+      "title": "Spa & wellness",
+      "items": {
+        "hammam": {
+          "label": "Hamam",
+          "description": "Eucalyptusstoom, onbeperkte toegang voor Premium-leden."
+        },
+        "sauna": {
+          "label": "Sauna",
+          "description": "Noordse houten cabines, sessies van 15 min."
+        },
+        "relaxArea": {
+          "label": "Ontspanningsruimte",
+          "description": "Kruidenthee, lectuur, na elke sessie."
+        }
+      }
+    },
+    "tennis": {
+      "title": "Tennis & racket",
+      "items": {
+        "tennis": {
+          "label": "Tennis",
+          "description": "Overdekte kunststofterreinen, individuele en groepslessen."
+        },
+        "padel": {
+          "label": "Padel",
+          "description": "2 panoramische banen, materiaal inbegrepen."
+        },
+        "squash": {
+          "label": "Squash",
+          "description": "Erkende terreinen, 7 dagen op 7 beschikbaar."
+        }
+      }
+    },
+    "groupClasses": {
+      "title": "Groepslessen",
+      "items": {
+        "yogaPilates": {
+          "label": "Yoga & Pilates",
+          "description": "Vinyasa, Hatha, Pilates Reformer."
+        },
+        "cycling": {
+          "label": "Cycling",
+          "description": "Immersieve studio, ritmische sessies op muziek."
+        },
+        "hiit": {
+          "label": "HIIT & Cross Training",
+          "description": "Kort formaat, maximale intensiteit, begeleid door een coach."
+        }
+      }
+    },
+    "coworking": {
+      "title": "Pro & coworking",
+      "items": {
+        "coworkingSpaces": {
+          "label": "Coworkingruimtes",
+          "description": "Snelle WiFi, onbeperkt koffie, sportieve lounge."
+        },
+        "meetingRooms": {
+          "label": "Vergaderzalen",
+          "description": "Reserveer per uur, 4K-scherm + Zoom-videovergadering."
+        },
+        "premiumLockers": {
+          "label": "Premium lockers",
+          "description": "Persoonlijke lockers met verbonden slot."
+        }
+      }
+    }
+  },
+  "courseCard": {
+    "noCoach": "Zonder vaste coach"
+  },
+  "sessionCard": {
+    "seatsTitle": "{{taken}}/{{capacity}} plaatsen"
+  },
+  "starRating": {
+    "noReviews": "geen reviews",
+    "starsCount_one": "{{count}} ster",
+    "starsCount_other": "{{count}} sterren"
+  },
+  "adminLayout": {
+    "title": "Administratie",
+    "loggedInAs": "Ingelogd als admin"
+  },
+  "coachLayout": {
+    "title": "Coach-ruimte",
+    "loggedInAs": "Ingelogd als coach"
+  },
+  "adminDashboard": {
+    "members": "Leden",
+    "coaches": "Coaches",
+    "totalUsers": "Totaal gebruikers",
+    "activeSubscriptions": "Actieve abonnementen",
+    "revenue30Days": "Omzet 30 dagen",
+    "topActions": "Top 5 geauditeerde acties",
+    "noActivity": "Geen activiteit."
+  },
+  "coachBookings": {
+    "allMySessions": "Al mijn sessies",
+    "empty": "Geen reserveringen.",
+    "colMember": "Lid",
+    "colCourse": "Les",
+    "colRoom": "Zaal",
+    "colBookedOn": "Gereserveerd op"
+  },
+  "coachCourses": {
+    "created": "Les aangemaakt",
+    "createError": "Aanmaken niet mogelijk",
+    "updated": "Les bijgewerkt",
+    "updateError": "Bijwerken niet mogelijk",
+    "deleted": "Les verwijderd",
+    "deleteError": "Verwijderen niet mogelijk",
+    "newCourse": "Nieuwe les",
+    "fieldTitle": "Titel",
+    "fieldCategory": "Categorie",
+    "choose": "Kiezen",
+    "fieldDescription": "Beschrijving",
+    "fieldLevel": "Niveau",
+    "fieldDuration": "Duur (min)",
+    "fieldCapacity": "Capaciteit",
+    "fieldUnitPrice": "Eenheidsprijs (€)",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "empty": "Nog geen lessen.",
+    "colDuration": "Duur",
+    "colPrice": "Prijs",
+    "colStatus": "Status",
+    "colActions": "Acties",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "confirmDeleteTitle": "Deze les verwijderen?",
+    "confirmDeleteDescription": "« {{title}} » wordt uit de catalogus verwijderd. Reeds geplande sessies worden ook verwijderd."
+  },
+  "coachSessions": {
+    "created": "Sessie gepland",
+    "createError": "Plannen niet mogelijk",
+    "updated": "Sessie bijgewerkt",
+    "deleted": "Sessie verwijderd",
+    "multipleCreated": "{{count}} sessies gepland",
+    "newSession": "Sessie plannen",
+    "fieldCourse": "Les",
+    "fieldRoom": "Zaal",
+    "fieldStart": "Start",
+    "fieldEnd": "Einde",
+    "fieldCapacity": "Capaciteit (optioneel)",
+    "capacityPlaceholder": "Neemt de capaciteit van de les over",
+    "repeatWeekly": "Wekelijks herhalen, gedurende",
+    "onceOnly": "Eenmalig",
+    "weeksCount": "{{count}} weken",
+    "schedule": "Plannen",
+    "empty": "Geen sessies gepland.",
+    "colSeats": "Plaatsen",
+    "confirmDeleteTitle": "Deze sessie verwijderen?",
+    "confirmDeleteDescription": "Eventuele bijhorende reserveringen worden ook geannuleerd.",
+    "statusScheduled": "Gepland",
+    "statusCancelled": "Geannuleerd",
+    "statusCompleted": "Voltooid"
+  },
+  "coachDashboard": {
+    "title": "Dashboard",
+    "myCourses": "Mijn lessen",
+    "upcomingSessions": "Komende sessies",
+    "bookings30Days": "Reserveringen 30 dagen",
+    "averageRating": "Gemiddelde score",
+    "nextSession": "Mijn volgende sessie",
+    "seatsBooked": "{{taken}}/{{capacity}} plaatsen gereserveerd",
+    "noSessionPlanned": "Geen sessie gepland.",
+    "planSession": "Sessie plannen",
+    "createOrEditCourse": "Les aanmaken of bewerken",
+    "mySessions": "Mijn sessies",
+    "planSlots": "Tijdsloten plannen",
+    "bookings": "Reserveringen",
+    "seeWhoBooked": "Zie wie zich inschrijft"
+  },
+  "profile": {
+    "title": "Mijn profiel",
+    "phone": "Telefoon",
+    "preferredLanguage": "Voorkeurstaal",
+    "langFrench": "Français",
+    "langEnglish": "English",
+    "saving": "Opslaan...",
+    "save": "Opslaan",
+    "updated": "Profiel bijgewerkt"
+  },
+  "questionnaire": {
+    "title": "Sportvragenlijst",
+    "subtitle": "Help ons u de juiste lessen aan te bevelen.",
+    "hintBeginner": "Ik ben nieuw / ik hervat.",
+    "hintIntermediate": "Ik train regelmatig.",
+    "hintAdvanced": "Ik train intensief.",
+    "levelQuestion": "Wat is uw niveau?",
+    "goalsLabel": "Uw doelen (optioneel)",
+    "goalsPlaceholder": "Afvallen, mijn uithouding verbeteren, enz.",
+    "categoriesLabel": "Categorieën die u interesseren",
+    "saved": "Voorkeuren opgeslagen",
+    "submit": "Bevestigen"
+  },
+  "checkout": {
+    "failedTitle": "Betaling mislukt",
+    "successTitle": "Betaling bevestigd",
+    "verifyingTitle": "Betaling wordt gecontroleerd…",
+    "failedDescription": "De betaling kon niet worden gevalideerd. U kunt het opnieuw proberen.",
+    "successDescription": "Uw abonnement is nu actief.",
+    "verifyingDescription": "Wij raadplegen Stripe — een ogenblik…",
+    "session": "Sessie",
+    "retry": "Opnieuw proberen",
+    "cancelledTitle": "Betaling geannuleerd",
+    "cancelledDescription": "Uw betaling werd niet voltooid. U kunt op elk moment opnieuw beginnen.",
+    "backToPlans": "Terug naar de abonnementen"
+  },
+  "myBookings": {
+    "title": "Mijn reserveringen",
+    "cancelled": "Reservering geannuleerd",
+    "cancelError": "Annuleren niet mogelijk",
+    "noUpcoming": "Geen komende sessie.",
+    "cancel": "Annuleren",
+    "history": "Geschiedenis",
+    "confirmCancelTitle": "Deze reservering annuleren?",
+    "confirmCancelDescription": "De plaats wordt vrijgegeven voor andere leden.",
+    "confirmCancelLabel": "Ja, annuleren"
+  },
+  "myPayments": {
+    "title": "Mijn betalingen",
+    "subtitle": "Geschiedenis van al uw Stripe-transacties.",
+    "empty": "Geen betalingen.",
+    "colDate": "Datum",
+    "colType": "Type",
+    "colDetail": "Detail",
+    "colAmount": "Bedrag",
+    "colStatus": "Status"
+  },
+  "mySubscription": {
+    "title": "Mijn abonnement",
+    "cancelled": "Abonnement geannuleerd",
+    "pricePaid": "{{amount}} € betaald",
+    "startDate": "Start",
+    "endDate": "Einde",
+    "daysRemaining": "Resterende dagen",
+    "cancelSubscription": "Abonnement opzeggen",
+    "noActiveSubscription": "U heeft geen actief abonnement.",
+    "viewPlans": "Bekijk de formules",
+    "noHistory": "Geen geschiedenis.",
+    "confirmCancelTitle": "Abonnement opzeggen?",
+    "confirmCancelDescription": "U verliest onmiddellijk de toegang tot de Premium-diensten. Deze actie is onomkeerbaar."
+  },
+  "memberDashboard": {
+    "greeting": "Hallo {{name}}",
+    "welcome": "Welkom op uw FitZone-dashboard.",
+    "personalizeTitle": "Personaliseer uw aanbevelingen",
+    "personalizeText": "Beantwoord een korte vragenlijst (1 min) zodat wij u de juiste lessen kunnen voorstellen",
+    "statAttended": "Gevolgde sessies",
+    "statLast30Days": "Laatste 30 dagen",
+    "statUpcoming": "Komend",
+    "statFavoriteCategory": "Favoriete categorie",
+    "nextSession": "Mijn volgende sessie",
+    "noBookedSession": "Geen gereserveerde sessie.",
+    "viewPlanning": "Bekijk de planning",
+    "recommendedForYou": "Aanbevolen voor u",
+    "basedOnHistory": "Gebaseerd op uw geschiedenis ({{categories}})",
+    "basedOnPreferences": "Gebaseerd op uw voorkeuren ({{categories}})",
+    "popularComingSoon": "Populaire selectie binnenkort beschikbaar",
+    "noRecommendations": "Momenteel geen aanbevelingen beschikbaar.",
+    "subscription": "Abonnement",
+    "daysLeft_one": "{{count}} dag resterend",
+    "daysLeft_other": "{{count}} dagen resterend",
+    "noSubscription": "Geen abonnement",
+    "bookings": "Reserveringen",
+    "upcomingCount": "{{count}} komend",
+    "profile": "Profiel",
+    "payments": "Betalingen",
+    "stripeHistory": "Stripe-geschiedenis"
+  },
+  "auth": {
+    "fields": {
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "confirmPassword": "Bevestigen",
+      "firstName": "Voornaam",
+      "lastName": "Naam"
+    },
+    "validation": {
+      "emailInvalid": "Ongeldig e-mailadres",
+      "passwordRequired": "Wachtwoord vereist",
+      "firstNameRequired": "Voornaam vereist",
+      "lastNameRequired": "Naam vereist",
+      "passwordMinLength": "Minimum 8 tekens",
+      "passwordMismatch": "De wachtwoorden komen niet overeen"
+    }
+  },
+  "plans": {
+    "title": "Onze abonnementen",
+    "subtitle": "Kies de formule die bij u past.",
+    "activeSubscription": "U heeft al een actief abonnement:",
+    "daysRemaining_one": "u heeft nog {{count}} dag.",
+    "daysRemaining_other": "u heeft nog {{count}} dagen.",
+    "alreadyActive": "Abonnement al actief",
+    "subscribing": "Inschrijving bezig...",
+    "loginToSubscribe": "Inloggen om in te schrijven"
+  },
+  "planCatalog": {
+    "basic-monthly": {
+      "name": "Basic Maandelijks",
+      "description": "Onbeperkte toegang tot de fitnesszaal en de toestellen.",
+      "features": [
+        "Toegang tot de fitnesszaal",
+        "Kleedkamers en douches",
+        "Cardioruimte",
+        "Geen verplichtingen (maandelijks)"
+      ]
+    },
+    "basic-yearly": {
+      "name": "Basic Jaarlijks",
+      "description": "Onbeperkte toegang tot de zaal, jaarformule (2 maanden gratis).",
+      "features": [
+        "Toegang tot de fitnesszaal",
+        "Kleedkamers en douches",
+        "Cardioruimte",
+        "Bespaar € 60 per jaar"
+      ]
+    },
+    "premium-monthly": {
+      "name": "Premium Maandelijks",
+      "description": "Alle Basic-toegang plus alle groepslessen onbeperkt.",
+      "features": [
+        "Alle Basic-toegang",
+        "Onbeperkte groepslessen",
+        "Zwembad, tennis, yoga, fitness",
+        "Prioritaire reservering"
+      ]
+    },
+    "premium-yearly": {
+      "name": "Premium Jaarlijks",
+      "description": "Alle Premium-toegang, jaarformule (2 maanden gratis).",
+      "features": [
+        "Alle Premium-toegang",
+        "Onbeperkte groepslessen",
+        "Zwembad, tennis, yoga, fitness",
+        "Bespaar € 120 per jaar"
+      ]
+    }
+  },
+  "coaches": {
+    "title": "Onze coaches",
+    "subtitle": "Een ervaren team om u te begeleiden.",
+    "loadErrorTitle": "Laadfout",
+    "loadErrorDescription": "Kan de lijst met coaches niet ophalen.",
+    "yearsExperience_one": "{{count}} jaar ervaring",
+    "yearsExperience_other": "{{count}} jaar ervaring"
+  },
+  "coachDetail": {
+    "notFound": "Coach niet gevonden.",
+    "backToList": "Terug naar de lijst",
+    "biography": "Biografie",
+    "coursesBy": "Lessen van {{name}}",
+    "noCourses": "Nog geen lessen.",
+    "included": "Inbegrepen",
+    "myReview": "Mijn review",
+    "leaveReview": "Een review achterlaten",
+    "reviewRequirement": "U moet minstens één sessie bij deze coach hebben gevolgd.",
+    "commentPlaceholder": "Uw opmerking (optioneel)",
+    "update": "Bijwerken",
+    "publishReview": "Review publiceren",
+    "deleteReview": "Mijn review verwijderen",
+    "reviewsCount": "Reviews ({{count}})",
+    "noReviews": "Nog geen reviews."
+  },
+  "planning": {
+    "title": "Planning",
+    "weekOf": "Week van",
+    "weekTo": "tot",
+    "searchPlaceholder": "Zoek een les...",
+    "previousWeek": "Vorige week",
+    "thisWeek": "Deze week",
+    "nextWeek": "Volgende week"
+  },
+  "courseDetail": {
+    "notFound": "Les niet gevonden.",
+    "backToCatalog": "Terug naar de catalogus",
+    "capacity": "Capaciteit",
+    "upcomingSessions": "Komende sessies",
+    "noSessions": "Momenteel geen sessie gepland.",
+    "unitPrice": "Eenheidsprijs",
+    "includedInSubscription": "Inbegrepen in het abonnement",
+    "loginToBook": "Inloggen om te reserveren",
+    "includedInPremium": "Inbegrepen in uw Premium-abonnement",
+    "payHint": "Klik op « Betalen » bij een sessie om per stuk te reserveren.",
+    "subscribePremium": "Een Premium-abonnement afsluiten",
+    "coach": "Coach",
+    "viewProfile": "Bekijk het profiel",
+    "coachReviews": "Reviews over de coach",
+    "reviewsCount": "reviews",
+    "viewAllReviews": "Bekijk alle reviews",
+    "similarCourses": "Vergelijkbare lessen",
+    "full": "Volzet",
+    "book": "Reserveren",
+    "pay": "Betalen",
+    "unavailable": "Niet beschikbaar",
+    "bookingConfirmed": "Reservering bevestigd",
+    "bookingError": "Reservering niet mogelijk",
+    "paymentError": "Betaling niet mogelijk"
+  }
+}

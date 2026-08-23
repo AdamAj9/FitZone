@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { OFFERINGS } from "../../data/offerings";
 import { useLogout } from "../../hooks/useAuth";
 import { useAuthStore } from "../../store/auth";
+
+const LANGUAGES = [
+  { code: "fr", label: "Français" },
+  { code: "en", label: "English" },
+  { code: "nl", label: "Nederlands" },
+] as const;
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
@@ -27,15 +33,32 @@ export function Header() {
   const logoutMutation = useLogout();
   const [open, setOpen] = useState(false);
   const [mobileOfferOpen, setMobileOfferOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => {
     setOpen(false);
     setMobileOfferOpen(false);
   };
 
-  const toggleLang = () => {
-    void i18n.changeLanguage(i18n.language.startsWith("fr") ? "en" : "fr");
+  const currentLang =
+    LANGUAGES.find((l) => i18n.language.startsWith(l.code)) ?? LANGUAGES[0];
+
+  const selectLang = (code: string) => {
+    void i18n.changeLanguage(code);
+    setLangMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (!langMenuOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (!langMenuRef.current?.contains(e.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [langMenuOpen]);
 
   const handleLogout = () => {
     closeMenu();
@@ -148,13 +171,44 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <button
-            type="button"
-            onClick={toggleLang}
-            className="rounded-md border border-ink-200 px-2 py-1 text-xs font-medium text-ink-700 hover:bg-ink-100"
-          >
-            {i18n.language.startsWith("fr") ? "EN" : "FR"}
-          </button>
+          <div className="relative" ref={langMenuRef}>
+            <button
+              type="button"
+              onClick={() => setLangMenuOpen((v) => !v)}
+              aria-expanded={langMenuOpen}
+              aria-label={t("header.language")}
+              className="flex items-center gap-1 rounded-md border border-ink-200 px-2 py-1 text-xs font-medium text-ink-700 hover:bg-ink-100"
+            >
+              {currentLang.code.toUpperCase()}
+              <svg
+                className={`h-3 w-3 transition-transform ${langMenuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {langMenuOpen && (
+              <div className="absolute right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-md border border-ink-200 bg-surface py-1 shadow-lg">
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    onClick={() => selectLang(l.code)}
+                    className={`block w-full px-3 py-1.5 text-left text-sm hover:bg-ink-100 ${
+                      l.code === currentLang.code
+                        ? "font-semibold text-brand-700"
+                        : "text-ink-700"
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           {user ? (
             <>
               {user.role === "admin" && (
@@ -350,17 +404,30 @@ export function Header() {
                 </NavLink>
               </>
             )}
-            <button
-              type="button"
-              onClick={() => {
-                toggleLang();
-                closeMenu();
-              }}
-              className="block w-full rounded-md border border-ink-200 px-4 py-2 text-left text-sm text-ink-700 hover:bg-ink-100"
-            >
-              {t("header.language")} : {i18n.language.startsWith("fr") ? "FR" : "EN"} →{" "}
-              {i18n.language.startsWith("fr") ? "EN" : "FR"}
-            </button>
+            <div>
+              <p className="px-4 pb-1.5 text-xs font-medium text-ink-500">
+                {t("header.language")}
+              </p>
+              <div className="flex gap-2 px-4">
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    onClick={() => {
+                      selectLang(l.code);
+                      closeMenu();
+                    }}
+                    className={`flex-1 rounded-md border px-3 py-2 text-sm font-medium ${
+                      l.code === currentLang.code
+                        ? "border-brand-500 bg-brand-50 text-brand-700"
+                        : "border-ink-200 text-ink-700 hover:bg-ink-100"
+                    }`}
+                  >
+                    {l.code.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}

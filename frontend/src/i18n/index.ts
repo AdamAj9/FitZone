@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 
 import en from "./locales/en.json";
 import fr from "./locales/fr.json";
+import nl from "./locales/nl.json";
 
 void i18n
   .use(LanguageDetector)
@@ -12,9 +13,10 @@ void i18n
     resources: {
       fr: { translation: fr },
       en: { translation: en },
+      nl: { translation: nl },
     },
     fallbackLng: "fr",
-    supportedLngs: ["fr", "en"],
+    supportedLngs: ["fr", "en", "nl"],
     interpolation: { escapeValue: false },
     detection: {
       order: ["localStorage", "navigator"],

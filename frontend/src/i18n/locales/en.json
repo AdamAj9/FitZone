@@ -679,7 +679,7 @@
               [
                 "i18nextLng",
                 "Local storage",
-                "Remember the chosen language (French or English)",
+                "Remember the chosen language (French, English or Dutch)",
                 "Until browser data is cleared"
               ]
             ]
@@ -1113,6 +1113,48 @@
     "alreadyActive": "Plan already active",
     "subscribing": "Subscribing...",
     "loginToSubscribe": "Log in to subscribe"
+  },
+  "planCatalog": {
+    "basic-monthly": {
+      "name": "Basic Monthly",
+      "description": "Unlimited access to the weight room and equipment.",
+      "features": [
+        "Access to the weight room",
+        "Changing rooms & showers",
+        "Cardio area",
+        "No commitment (monthly)"
+      ]
+    },
+    "basic-yearly": {
+      "name": "Basic Yearly",
+      "description": "Unlimited gym access, yearly plan (2 months free).",
+      "features": [
+        "Access to the weight room",
+        "Changing rooms & showers",
+        "Cardio area",
+        "Save €60 a year"
+      ]
+    },
+    "premium-monthly": {
+      "name": "Premium Monthly",
+      "description": "Everything in Basic plus unlimited group classes.",
+      "features": [
+        "Everything in Basic",
+        "Unlimited group classes",
+        "Pool, tennis, yoga, fitness",
+        "Priority booking"
+      ]
+    },
+    "premium-yearly": {
+      "name": "Premium Yearly",
+      "description": "Everything in Premium, yearly plan (2 months free).",
+      "features": [
+        "Everything in Premium",
+        "Unlimited group classes",
+        "Pool, tennis, yoga, fitness",
+        "Save €120 a year"
+      ]
+    }
   },
   "coaches": {
     "title": "Our coaches",

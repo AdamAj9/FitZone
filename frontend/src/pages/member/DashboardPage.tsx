@@ -7,6 +7,7 @@ import { subscriptionsApi } from "../../api/subscriptions";
 import { SessionCard } from "../../components/SessionCard";
 import { useMe } from "../../hooks/useAuth";
 import { formatDateTime } from "../../lib/date";
+import { localizedPlan } from "../../lib/planCatalog";
 
 export function DashboardPage() {
   const { t } = useTranslation();
@@ -139,7 +140,7 @@ export function DashboardPage() {
             {sub ? (
               <>
                 <p className="mt-2 text-lg font-semibold text-slate-900">
-                  {sub.plan.name}
+                  {localizedPlan(t, sub.plan).name}
                 </p>
                 <p className="mt-1 text-sm text-slate-500">
                   {t("memberDashboard.daysLeft", { count: sub.days_remaining })}

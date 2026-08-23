@@ -8,6 +8,7 @@ import { subscriptionsApi } from "../../api/subscriptions";
 import { ConfirmDialog } from "../../components/ui";
 import { formatDateTime } from "../../lib/date";
 import { apiErrorMessage } from "../../lib/errors";
+import { localizedPlan } from "../../lib/planCatalog";
 
 const statusColor: Record<string, string> = {
   active: "bg-green-100 text-green-800",
@@ -61,7 +62,7 @@ export function MySubscriptionPage() {
                 {current.plan.tier_display}
               </p>
               <h2 className="mt-1 text-2xl font-bold text-slate-900">
-                {current.plan.name}
+                {localizedPlan(t, current.plan).name}
               </h2>
               <p className="mt-1 text-sm text-slate-500">
                 {t("mySubscription.pricePaid", { amount: Number(current.price_paid).toFixed(2) })}
@@ -131,7 +132,7 @@ export function MySubscriptionPage() {
                 className="flex items-center justify-between py-3 text-sm"
               >
                 <div>
-                  <p className="font-medium text-slate-900">{s.plan.name}</p>
+                  <p className="font-medium text-slate-900">{localizedPlan(t, s.plan).name}</p>
                   <p className="text-xs text-slate-500">
                     {s.starts_at ? formatDateTime(s.starts_at) : "—"}
                     {s.ends_at ? ` → ${formatDateTime(s.ends_at)}` : ""}
