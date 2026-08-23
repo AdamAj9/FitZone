@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import type { CourseListItem } from "../types/courses";
 
 const levelColor: Record<CourseListItem["level"], string> = {
-  beginner: "bg-green-100 text-green-800",
+  beginner: "bg-accent-100 text-accent-800",
   intermediate: "bg-amber-100 text-amber-800",
   advanced: "bg-red-100 text-red-800",
   all: "bg-slate-100 text-slate-800",

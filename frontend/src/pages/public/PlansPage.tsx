@@ -46,7 +46,7 @@ const checkoutMutation = useMutation({
   return (
     <div className="space-y-6">
       <Reveal className="rounded-2xl bg-surface p-8 text-center shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">{t("plans.title")}</h1>
+        <h1 className="font-display text-3xl font-bold text-slate-900">{t("plans.title")}</h1>
         <p className="mt-2 text-slate-600">
           {t("plans.subtitle")}
         </p>

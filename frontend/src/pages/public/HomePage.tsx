@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { AnimatedNumber } from "../../components/ui/AnimatedNumber";
+import { AnimatedWords } from "../../components/ui/AnimatedWords";
 import { Reveal } from "../../components/ui/Reveal";
+import { TiltCard } from "../../components/ui/TiltCard";
 import { OFFERINGS } from "../../data/offerings";
 import type { Period } from "../../types/subscriptions";
 
@@ -40,10 +42,23 @@ export function HomePage() {
   const filteredPlans =
     plansQuery.data?.results.filter((p) => p.period === period) ?? [];
 
+  const heroRef = useRef<HTMLElement>(null);
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const node = heroRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    node.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+    node.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+  };
+
   return (
     <div className="space-y-24 pb-24">
       {/* === HERO === */}
-      <section className="relative isolate overflow-hidden text-white">
+      <section
+        ref={heroRef}
+        onMouseMove={handleHeroMouseMove}
+        className="relative isolate overflow-hidden text-white"
+      >
         <div
           className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
@@ -51,6 +66,14 @@ export function HomePage() {
         />
         <div
           className="absolute inset-0 -z-10 bg-gradient-to-br from-ink-950/85 via-ink-900/75 to-brand-900/70"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 hover:opacity-100"
+          style={{
+            background:
+              "radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(216,180,254,0.28), transparent 65%)",
+          }}
           aria-hidden
         />
         <div className="absolute -left-24 top-32 -z-10 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl" aria-hidden />
@@ -62,11 +85,23 @@ export function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-accent-400"></span>
               {t("home.badge")}
             </span>
-            <h1 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
-              {t("home.titleLine1")}<br />
-              <span className="bg-gradient-to-r from-brand-300 to-brand-100 bg-clip-text text-transparent">
-                {t("home.titleLine2")}
-              </span>
+            <h1 className="mt-6 font-display text-4xl font-bold leading-tight md:text-6xl">
+              <AnimatedWords
+                words={t("home.titleLine1")
+                  .split(" ")
+                  .map((text: string) => ({ text }))}
+              />
+              <br />
+              <AnimatedWords
+                startDelay={100 + t("home.titleLine1").split(" ").length * 90}
+                words={[
+                  {
+                    text: t("home.titleLine2"),
+                    className:
+                      "bg-gradient-to-r from-brand-300 to-brand-100 bg-clip-text text-transparent",
+                  },
+                ]}
+              />
             </h1>
             <p className="mt-5 max-w-lg text-lg text-ink-100 md:text-xl">
               {t("home.subtitle")}
@@ -131,7 +166,7 @@ export function HomePage() {
             <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
               {t("home.offerLabel")}
             </p>
-            <h2 className="mt-2 text-4xl font-bold text-ink-900">
+            <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
               {t("home.offerTitle")}
             </h2>
           </div>
@@ -145,6 +180,7 @@ export function HomePage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {OFFERINGS.map((group, index) => (
             <Reveal key={group.key} delay={index * 100}>
+              <TiltCard>
               <Link
                 to={group.items[0].href}
                 className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
@@ -174,6 +210,7 @@ export function HomePage() {
                   </div>
                </div>
               </Link>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
@@ -186,7 +223,7 @@ export function HomePage() {
             <p className="text-sm font-bold uppercase tracking-wider text-brand-400">
               {t("home.howItWorksLabel")}
             </p>
-            <h2 className="mt-2 text-4xl font-bold">
+            <h2 className="mt-2 font-display text-4xl font-bold">
               {t("home.howItWorksTitle")}
             </h2>
           </Reveal>
@@ -214,7 +251,7 @@ export function HomePage() {
           <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
             {t("home.pricingLabel")}
           </p>
-          <h2 className="mt-2 text-4xl font-bold text-ink-900">
+          <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
             {t("home.pricingTitle")}
           </h2>
           <p className="mt-3 text-ink-700">
@@ -315,7 +352,7 @@ export function HomePage() {
             <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
               {t("home.teamLabel")}
             </p>
-            <h2 className="mt-2 text-4xl font-bold text-ink-900">
+            <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
               {t("home.teamTitle")}
             </h2>
           </div>
@@ -329,6 +366,7 @@ export function HomePage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {coachesQuery.data?.results.slice(0, 3).map((coach, index) => (
             <Reveal key={coach.id} delay={index * 100}>
+              <TiltCard>
               <Link
                 to={`/coaches/${coach.id}`}
                 className="group block rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
@@ -366,6 +404,7 @@ export function HomePage() {
                   </span>
                 </div>
               </Link>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
@@ -377,7 +416,7 @@ export function HomePage() {
           <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
             {t("home.testimonialsLabel")}
           </p>
-          <h2 className="mt-2 text-4xl font-bold text-ink-900">
+          <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
             {t("home.testimonialsTitle")}
           </h2>
         </Reveal>
@@ -411,7 +450,7 @@ export function HomePage() {
               aria-hidden
             />
             <div className="px-8 py-16 text-center text-white md:px-12 md:py-20">
-              <h2 className="text-3xl font-bold md:text-5xl">
+              <h2 className="font-display text-3xl font-bold md:text-5xl">
                 {t("home.ctaBottomTitle")}
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-ink-100">

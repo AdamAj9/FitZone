@@ -200,7 +200,7 @@ export function CourseDetailPage() {
             <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
               {course.category.name}
             </span>
-            <h1 className="mt-3 text-3xl font-bold text-slate-900">
+            <h1 className="mt-3 font-display text-3xl font-bold text-slate-900">
               {course.title}
             </h1>
             <div className="mt-2 flex flex-wrap gap-3 text-sm text-slate-600">
@@ -265,7 +265,7 @@ export function CourseDetailPage() {
               {t("courseDetail.loginToBook")}
             </Link>
           ) : isPremium ? (
-            <p className="mt-4 rounded-md bg-green-50 p-3 text-sm text-green-700">
+            <p className="mt-4 rounded-md bg-accent-50 p-3 text-sm text-accent-700">
               ✓ {t("courseDetail.includedInPremium")}
             </p>
           ) : unitPrice > 0 ? (

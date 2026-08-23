@@ -62,7 +62,7 @@ export function PlanningPage() {
       <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">{t("planning.title")}</h1>
+            <h1 className="font-display text-3xl font-bold text-slate-900">{t("planning.title")}</h1>
             <p className="mt-1 text-sm text-slate-500">
               {t("planning.weekOf")} {formatDayLabel(weekStart)} {t("planning.weekTo")}{" "}
               {formatDayLabel(addDays(weekStart, 6))}

@@ -39,7 +39,7 @@ export function LegalDocument({ tKey }: LegalDocumentProps) {
         <p className="text-sm font-semibold uppercase tracking-wider text-brand-700">
           {t("legal.sectionLabel")}
         </p>
-        <h1 className="mt-2 text-3xl font-bold text-slate-900">
+        <h1 className="mt-2 font-display text-3xl font-bold text-slate-900">
           {t(`${tKey}.title`)}
         </h1>
         <p className="mt-3 max-w-3xl text-slate-600">{t(`${tKey}.intro`)}</p>

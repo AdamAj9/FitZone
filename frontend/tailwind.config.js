@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["Unbounded", "system-ui", "-apple-system", "sans-serif"],
+      },
       colors: {
         brand: {
           50: "#ede4f7",

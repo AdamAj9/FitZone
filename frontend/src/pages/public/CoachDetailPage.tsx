@@ -121,7 +121,7 @@ export function CoachDetailPage() {
             {coach.first_name.charAt(0)}
             {coach.last_name.charAt(0)}
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-slate-900">
+          <h1 className="mt-4 font-display text-2xl font-bold text-slate-900">
             {coach.full_name}
           </h1>
           {profile?.specialties && (
