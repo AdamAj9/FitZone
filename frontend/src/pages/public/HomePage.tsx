@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { subscriptionsApi } from "../../api/subscriptions";
+import { Reveal } from "../../components/ui/Reveal";
 import { OFFERINGS } from "../../data/offerings";
 import type { Period } from "../../types/subscriptions";
 
@@ -43,7 +44,7 @@ export function HomePage() {
       {/* === HERO === */}
       <section className="relative isolate overflow-hidden text-white">
         <div
-          className="absolute inset-0 -z-20 bg-cover bg-center"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
@@ -55,7 +56,7 @@ export function HomePage() {
         <div className="absolute -right-20 bottom-20 -z-10 h-96 w-96 rounded-full bg-brand-700/30 blur-3xl" aria-hidden />
 
         <div className="mx-auto max-w-7xl px-6 py-28 lg:py-40">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
               {t("home.badge")}
@@ -72,13 +73,13 @@ export function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/register"
-                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:opacity-90"
+                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:-translate-y-0.5 hover:opacity-90"
               >
                 {t("home.ctaStart")} →
               </Link>
               <Link
                 to="/plans"
-                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:bg-white/10"
+                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10"
               >
                 {t("home.ctaPlans")}
               </Link>
@@ -91,13 +92,25 @@ export function HomePage() {
               <span className="hidden h-4 w-px bg-white/20 md:block" />
               <span className="hidden md:inline">{t("home.noCommitment")}</span>
             </div>
-          </div>
+          </Reveal>
         </div>
+
+        <svg
+          className="absolute inset-x-0 -bottom-1 h-16 w-full text-ink-50 md:h-24"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path
+            fill="currentColor"
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z"
+          />
+        </svg>
       </section>
 
       {/* === TRUST STATS === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
+        <Reveal className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-bold text-brand-700 md:text-4xl">
@@ -106,12 +119,12 @@ export function HomePage() {
               <p className="mt-1 text-sm text-ink-500">{s.label}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* === NOTRE OFFRE — cards photo full-bleed === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
               {t("home.offerLabel")}
@@ -126,39 +139,40 @@ export function HomePage() {
           >
             {t("home.offerSeeAll")} →
           </Link>
-        </div>
+        </Reveal>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {OFFERINGS.map((group) => (
-            <Link
-              key={group.key}
-              to={group.items[0].href}
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
-            >
-              <img
-                src={group.image}
-                alt={t(`offerings.${group.key}.title`)}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl drop-shadow">{group.icon}</span>
-                  <h3 className="text-xl font-bold">{t(`offerings.${group.key}.title`)}</h3>
-                </div>
-                <ul className="mt-3 space-y-1 text-sm text-ink-100">
-                  {group.items.map((it) => (
-                    <li key={it.key} className="flex items-start gap-2">
-                      <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
-                      {t(`offerings.${group.key}.items.${it.key}.label`)}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
-                  {t("home.discoverMore")} →
-                </div>
-             </div>
-            </Link>
+          {OFFERINGS.map((group, index) => (
+            <Reveal key={group.key} delay={index * 100}>
+              <Link
+                to={group.items[0].href}
+                className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
+              >
+                <img
+                  src={group.image}
+                  alt={t(`offerings.${group.key}.title`)}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl drop-shadow">{group.icon}</span>
+                    <h3 className="text-xl font-bold">{t(`offerings.${group.key}.title`)}</h3>
+                  </div>
+                  <ul className="mt-3 space-y-1 text-sm text-ink-100">
+                    {group.items.map((it) => (
+                      <li key={it.key} className="flex items-start gap-2">
+                        <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
+                        {t(`offerings.${group.key}.items.${it.key}.label`)}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
+                    {t("home.discoverMore")} →
+                  </div>
+               </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -166,26 +180,25 @@ export function HomePage() {
       {/* === HOW IT WORKS === */}
       <section className="bg-ink-900 py-20 text-white">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center">
+          <Reveal className="text-center">
             <p className="text-sm font-bold uppercase tracking-wider text-brand-400">
               {t("home.howItWorksLabel")}
             </p>
             <h2 className="mt-2 text-4xl font-bold">
               {t("home.howItWorksTitle")}
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {STEPS.map((s) => (
-              <div
-                key={s.n}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur"
-              >
-                <p className="bg-gradient-to-r from-brand-400 to-brand-200 bg-clip-text text-5xl font-bold text-transparent">
-                  {s.n}
-                </p>
-                <h3 className="mt-4 text-xl font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-ink-200">{s.description}</p>
-              </div>
+            {STEPS.map((s, index) => (
+              <Reveal key={s.n} delay={index * 100}>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur transition hover:-translate-y-1 hover:border-brand-400/40">
+                  <p className="bg-gradient-to-r from-brand-400 to-brand-200 bg-clip-text text-5xl font-bold text-transparent">
+                    {s.n}
+                  </p>
+                  <h3 className="mt-4 text-xl font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm text-ink-200">{s.description}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -193,7 +206,7 @@ export function HomePage() {
 
       {/* === TARIFS === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="text-center">
+        <Reveal className="text-center">
           <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
             {t("home.pricingLabel")}
           </p>
@@ -227,62 +240,63 @@ export function HomePage() {
               {t("home.periodYearly")} <span className="ml-1 text-xs text-brand-600">{t("home.yearlyDiscount")}</span>
             </button>
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {filteredPlans.map((plan) => {
+          {filteredPlans.map((plan, index) => {
             const isPremium = plan.tier === "premium";
             return (
-              <div
-                key={plan.id}
-                className={`relative rounded-2xl bg-surface p-8 shadow-sm ring-1 transition hover:-translate-y-1 ${
-                  isPremium
-                    ? "ring-brand-500 shadow-brand-glow"
-                    : "ring-ink-200"
-                }`}
-              >
-                {isPremium && (
-                  <span className="absolute -top-3 right-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 px-3 py-1 text-xs font-semibold text-white">
-                    ⭐ {t("home.recommended")}
-                  </span>
-                )}
-                <p
-                  className={`text-xs font-bold uppercase tracking-wide ${
-                    isPremium ? "text-brand-600" : "text-ink-500"
-                  }`}
-                >
-                  {plan.tier_display}
-                </p>
-                <h3 className="mt-2 text-2xl font-bold text-ink-900">
-                  {plan.name}
-                </h3>
-                <p className="mt-4">
-                  <span className="text-5xl font-bold text-ink-900">
-                    {Number(plan.price).toFixed(0)}
-                  </span>
-                  <span className="text-ink-500">
-                    {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-ink-700">{plan.description}</p>
-                <ul className="mt-5 space-y-2 text-sm">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-ink-700">
-                      <span className="mt-0.5 text-brand-600">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to="/plans"
-                  className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition ${
+              <Reveal key={plan.id} delay={index * 100}>
+                <div
+                  className={`relative rounded-2xl bg-surface p-8 shadow-sm ring-1 transition hover:-translate-y-1 ${
                     isPremium
-                      ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white hover:opacity-90"
-                      : "border border-ink-300 text-ink-700 hover:bg-ink-50"
+                      ? "ring-brand-500 shadow-brand-glow"
+                      : "ring-ink-200"
                   }`}
                 >
-                  {t("home.subscribe")}
-                </Link>
-              </div>
+                  {isPremium && (
+                    <span className="absolute -top-3 right-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 px-3 py-1 text-xs font-semibold text-white">
+                      ⭐ {t("home.recommended")}
+                    </span>
+                  )}
+                  <p
+                    className={`text-xs font-bold uppercase tracking-wide ${
+                      isPremium ? "text-brand-600" : "text-ink-500"
+                    }`}
+                  >
+                    {plan.tier_display}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-bold text-ink-900">
+                    {plan.name}
+                  </h3>
+                  <p className="mt-4">
+                    <span className="text-5xl font-bold text-ink-900">
+                      {Number(plan.price).toFixed(0)}
+                    </span>
+                    <span className="text-ink-500">
+                      {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
+                    </span>
+                  </p>
+                  <p className="mt-2 text-sm text-ink-700">{plan.description}</p>
+                  <ul className="mt-5 space-y-2 text-sm">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-ink-700">
+                        <span className="mt-0.5 text-brand-600">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/plans"
+                    className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition ${
+                      isPremium
+                        ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white hover:opacity-90"
+                        : "border border-ink-300 text-ink-700 hover:bg-ink-50"
+                    }`}
+                  >
+                    {t("home.subscribe")}
+                  </Link>
+                </div>
+              </Reveal>
             );
           })}
         </div>
@@ -290,7 +304,7 @@ export function HomePage() {
 
       {/* === COACHS === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
               {t("home.teamLabel")}
@@ -305,113 +319,115 @@ export function HomePage() {
           >
             {t("home.teamSeeAll")} →
           </Link>
-        </div>
+        </Reveal>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {coachesQuery.data?.results.slice(0, 3).map((coach) => (
-            <Link
-              key={coach.id}
-              to={`/coaches/${coach.id}`}
-              className="group rounded-2xl border border-ink-200 bg-surface p-6 transition hover:border-brand-400 hover:shadow-brand-glow"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-2xl font-bold text-white">
-                  {coach.first_name.charAt(0)}
-                  {coach.last_name.charAt(0)}
+          {coachesQuery.data?.results.slice(0, 3).map((coach, index) => (
+            <Reveal key={coach.id} delay={index * 100}>
+              <Link
+                to={`/coaches/${coach.id}`}
+                className="group block rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-2xl font-bold text-white">
+                    {coach.first_name.charAt(0)}
+                    {coach.last_name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-ink-900 group-hover:text-brand-700">
+                      {coach.full_name}
+                    </p>
+                    <p className="text-sm text-ink-500">
+                      {coach.coach_profile?.specialties || t("home.coachFallback")}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-ink-900 group-hover:text-brand-700">
-                    {coach.full_name}
+                {coach.coach_profile?.bio && (
+                  <p className="mt-4 line-clamp-3 text-sm text-ink-700">
+                    {coach.coach_profile.bio}
                   </p>
-                  <p className="text-sm text-ink-500">
-                    {coach.coach_profile?.specialties || t("home.coachFallback")}
-                  </p>
-                </div>
-              </div>
-              {coach.coach_profile?.bio && (
-                <p className="mt-4 line-clamp-3 text-sm text-ink-700">
-                  {coach.coach_profile.bio}
-                </p>
-              )}
-              <div className="mt-4 flex items-center gap-2 text-sm">
-                <span className="text-amber-500">
-                  {"★".repeat(Math.round(coach.rating_average ?? 0))}
-                  <span className="text-ink-200">
-                    {"★".repeat(5 - Math.round(coach.rating_average ?? 0))}
+                )}
+                <div className="mt-4 flex items-center gap-2 text-sm">
+                  <span className="text-amber-500">
+                    {"★".repeat(Math.round(coach.rating_average ?? 0))}
+                    <span className="text-ink-200">
+                      {"★".repeat(5 - Math.round(coach.rating_average ?? 0))}
+                    </span>
                   </span>
-                </span>
-                <span className="text-ink-500">
-                  {coach.rating_average
-                    ? `${coach.rating_average.toFixed(1)} (${coach.rating_count})`
-                    : t("home.teamBadgeNew")}
-                </span>
-              </div>
-            </Link>
+                  <span className="text-ink-500">
+                    {coach.rating_average
+                      ? `${coach.rating_average.toFixed(1)} (${coach.rating_count})`
+                      : t("home.teamBadgeNew")}
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* === TÉMOIGNAGES === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="text-center">
+        <Reveal className="text-center">
           <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
             {t("home.testimonialsLabel")}
           </p>
           <h2 className="mt-2 text-4xl font-bold text-ink-900">
             {t("home.testimonialsTitle")}
           </h2>
-        </div>
+        </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {TESTIMONIALS.map((item) => (
-            <div
-              key={item.name}
-              className="rounded-2xl border border-ink-200 bg-surface p-6"
-            >
-              <p className="text-amber-500">★★★★★</p>
-              <p className="mt-3 text-sm text-ink-800">"{item.quote}"</p>
-              <div className="mt-4 border-t border-ink-200 pt-4">
-                <p className="font-semibold text-ink-900">{item.name}</p>
-                <p className="text-xs text-ink-500">{item.role}</p>
+          {TESTIMONIALS.map((item, index) => (
+            <Reveal key={item.name} delay={index * 100}>
+              <div className="rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1">
+                <p className="text-amber-500">★★★★★</p>
+                <p className="mt-3 text-sm text-ink-800">"{item.quote}"</p>
+                <div className="mt-4 border-t border-ink-200 pt-4">
+                  <p className="font-semibold text-ink-900">{item.name}</p>
+                  <p className="text-xs text-ink-500">{item.role}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* === CTA FINAL avec photo en background === */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="relative isolate overflow-hidden rounded-3xl shadow-xl">
-          <div
-            className="absolute inset-0 -z-10 bg-cover bg-center"
-            style={{ backgroundImage: `url('${CTA_IMAGE}')` }}
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-700/90 via-ink-900/85 to-ink-950/90"
-            aria-hidden
-          />
-          <div className="px-8 py-16 text-center text-white md:px-12 md:py-20">
-            <h2 className="text-3xl font-bold md:text-5xl">
-              {t("home.ctaBottomTitle")}
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-ink-100">
-              {t("home.ctaBottomSubtitle")}
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                to="/register"
-                className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:bg-brand-50"
-              >
-                {t("home.ctaCreateAccount")} →
-              </Link>
-              <Link
-                to="/coaches"
-                className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:bg-white/10"
-              >
-                {t("home.ctaMeetCoaches")}
-              </Link>
+        <Reveal>
+          <div className="relative isolate overflow-hidden rounded-3xl shadow-xl">
+            <div
+              className="absolute inset-0 -z-10 bg-cover bg-center"
+              style={{ backgroundImage: `url('${CTA_IMAGE}')` }}
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-700/90 via-ink-900/85 to-ink-950/90"
+              aria-hidden
+            />
+            <div className="px-8 py-16 text-center text-white md:px-12 md:py-20">
+              <h2 className="text-3xl font-bold md:text-5xl">
+                {t("home.ctaBottomTitle")}
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-ink-100">
+                {t("home.ctaBottomSubtitle")}
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                  to="/register"
+                  className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:-translate-y-0.5 hover:bg-brand-50"
+                >
+                  {t("home.ctaCreateAccount")} →
+                </Link>
+                <Link
+                  to="/coaches"
+                  className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10"
+                >
+                  {t("home.ctaMeetCoaches")}
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );
