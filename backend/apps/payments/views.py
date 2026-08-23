@@ -150,16 +150,20 @@ class CheckoutCourseView(APIView):
 def _post_success_for(payment: Payment):
     """Hook called once a Payment flips to SUCCEEDED — activates the
     subscription or creates the booking depending on payment kind."""
+    from apps.core.emails import send_payment_confirmation_email
+
     if payment.kind == Payment.Kind.SUBSCRIPTION and payment.subscription:
         sub = payment.subscription
         if sub.status == Subscription.Status.PENDING:
             sub.activate(when=timezone.now())
+        send_payment_confirmation_email(payment)
         return
 
     if payment.kind == Payment.Kind.COURSE:
         from apps.bookings.services import book_for_payment
 
         book_for_payment(payment)
+        send_payment_confirmation_email(payment)
 
 
 class CheckoutVerifyView(APIView):

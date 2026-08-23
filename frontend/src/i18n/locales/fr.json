@@ -997,7 +997,14 @@
     "langEnglish": "English",
     "saving": "Enregistrement...",
     "save": "Enregistrer",
-    "updated": "Profil mis à jour"
+    "updated": "Profil mis à jour",
+    "changePasswordTitle": "Modifier le mot de passe",
+    "changePasswordSubtitle": "Choisissez un nouveau mot de passe pour votre compte.",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordConfirm": "Confirmer le nouveau mot de passe",
+    "changePasswordSubmit": "Mettre à jour le mot de passe",
+    "passwordUpdated": "Mot de passe mis à jour"
   },
   "questionnaire": {
     "title": "Questionnaire sportif",
@@ -1101,7 +1108,15 @@
       "firstNameRequired": "Prénom requis",
       "lastNameRequired": "Nom requis",
       "passwordMinLength": "8 caractères minimum",
-      "passwordMismatch": "Les mots de passe ne correspondent pas"
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "passwordNeedsLetter": "Doit contenir au moins une lettre",
+      "passwordNeedsDigit": "Doit contenir au moins un chiffre"
+    },
+    "passwordRules": {
+      "length": "Au moins 8 caractères",
+      "letter": "Au moins une lettre",
+      "digit": "Au moins un chiffre",
+      "match": "Les mots de passe correspondent"
     }
   },
   "plans": {

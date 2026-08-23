@@ -107,6 +107,83 @@ class AuthFlowTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
 
 
+class ChangePasswordTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email="dana@example.com", password="Old-Pass-123!"
+        )
+        self.client.force_authenticate(self.user)
+        self.url = reverse("auth-change-password")
+
+    def test_change_password_success(self):
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": "Old-Pass-123!",
+                "new_password": "New-Pass-456!",
+                "new_password_confirm": "New-Pass-456!",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password("New-Pass-456!"))
+
+    def test_change_password_wrong_current_password(self):
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": "Wrong-Pass",
+                "new_password": "New-Pass-456!",
+                "new_password_confirm": "New-Pass-456!",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("current_password", response.data)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password("Old-Pass-123!"))
+
+    def test_change_password_mismatch(self):
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": "Old-Pass-123!",
+                "new_password": "New-Pass-456!",
+                "new_password_confirm": "Different-789!",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("new_password_confirm", response.data)
+
+    def test_change_password_too_weak(self):
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": "Old-Pass-123!",
+                "new_password": "short",
+                "new_password_confirm": "short",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("new_password", response.data)
+
+    def test_change_password_requires_auth(self):
+        self.client.force_authenticate(None)
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": "Old-Pass-123!",
+                "new_password": "New-Pass-456!",
+                "new_password_confirm": "New-Pass-456!",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
 class ProfileSignalTests(APITestCase):
     def test_member_profile_created_via_signal(self):
         user = User.objects.create_user(

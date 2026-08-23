@@ -8,6 +8,7 @@ import { formatDateTime } from "../../lib/date";
 const ACTIONS = [
   "login",
   "register",
+  "password_changed",
   "sub_activated",
   "sub_cancelled",
   "pay_succeeded",

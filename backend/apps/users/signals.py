@@ -2,6 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from apps.core.audit import record as audit
+from apps.core.emails import send_registration_email
 
 from .models import CoachProfile, MemberProfile, User
 
@@ -15,3 +16,4 @@ def create_role_profile(sender, instance: User, created: bool, **kwargs):
         CoachProfile.objects.get_or_create(user=instance)
     if created:
         audit("register", actor=instance, target=instance)
+        send_registration_email(instance)

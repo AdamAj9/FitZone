@@ -997,7 +997,14 @@
     "langEnglish": "English",
     "saving": "Opslaan...",
     "save": "Opslaan",
-    "updated": "Profiel bijgewerkt"
+    "updated": "Profiel bijgewerkt",
+    "changePasswordTitle": "Wachtwoord wijzigen",
+    "changePasswordSubtitle": "Kies een nieuw wachtwoord voor uw account.",
+    "currentPassword": "Huidig wachtwoord",
+    "newPassword": "Nieuw wachtwoord",
+    "newPasswordConfirm": "Bevestig nieuw wachtwoord",
+    "changePasswordSubmit": "Wachtwoord bijwerken",
+    "passwordUpdated": "Wachtwoord bijgewerkt"
   },
   "questionnaire": {
     "title": "Sportvragenlijst",
@@ -1101,7 +1108,15 @@
       "firstNameRequired": "Voornaam vereist",
       "lastNameRequired": "Naam vereist",
       "passwordMinLength": "Minimum 8 tekens",
-      "passwordMismatch": "De wachtwoorden komen niet overeen"
+      "passwordMismatch": "De wachtwoorden komen niet overeen",
+      "passwordNeedsLetter": "Moet minstens één letter bevatten",
+      "passwordNeedsDigit": "Moet minstens één cijfer bevatten"
+    },
+    "passwordRules": {
+      "length": "Minstens 8 tekens",
+      "letter": "Minstens één letter",
+      "digit": "Minstens één cijfer",
+      "match": "Wachtwoorden komen overeen"
     }
   },
   "plans": {

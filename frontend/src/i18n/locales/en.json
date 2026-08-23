@@ -997,7 +997,14 @@
     "langEnglish": "English",
     "saving": "Saving...",
     "save": "Save",
-    "updated": "Profile updated"
+    "updated": "Profile updated",
+    "changePasswordTitle": "Change password",
+    "changePasswordSubtitle": "Choose a new password for your account.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "newPasswordConfirm": "Confirm new password",
+    "changePasswordSubmit": "Update password",
+    "passwordUpdated": "Password updated"
   },
   "questionnaire": {
     "title": "Fitness questionnaire",
@@ -1101,7 +1108,15 @@
       "firstNameRequired": "First name required",
       "lastNameRequired": "Last name required",
       "passwordMinLength": "8 characters minimum",
-      "passwordMismatch": "Passwords do not match"
+      "passwordMismatch": "Passwords do not match",
+      "passwordNeedsLetter": "Must contain at least one letter",
+      "passwordNeedsDigit": "Must contain at least one digit"
+    },
+    "passwordRules": {
+      "length": "At least 8 characters",
+      "letter": "At least one letter",
+      "digit": "At least one digit",
+      "match": "Passwords match"
     }
   },
   "plans": {

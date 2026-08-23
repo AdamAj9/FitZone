@@ -15,6 +15,7 @@ class AuditLog(models.Model):
         LOGIN = "login", _("Login")
         LOGOUT = "logout", _("Logout")
         REGISTER = "register", _("Register")
+        PASSWORD_CHANGED = "password_changed", _("Password changed")
         SUBSCRIPTION_ACTIVATED = "sub_activated", _("Subscription activated")
         SUBSCRIPTION_CANCELLED = "sub_cancelled", _("Subscription cancelled")
         PAYMENT_SUCCEEDED = "pay_succeeded", _("Payment succeeded")

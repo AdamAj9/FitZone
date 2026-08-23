@@ -49,3 +49,9 @@ export interface RegisterPayload {
   last_name?: string;
   preferred_language?: "fr" | "en";
 }
+
+export interface ChangePasswordPayload {
+  current_password: string;
+  new_password: string;
+  new_password_confirm: string;
+}

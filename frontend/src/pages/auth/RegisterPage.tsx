@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
+import { PasswordRequirements } from "../../components/ui";
 import { useRegister } from "../../hooks/useAuth";
 
 type FormValues = {
@@ -27,7 +28,11 @@ export function RegisterPage() {
           email: z.string().email(t("auth.validation.emailInvalid")),
           first_name: z.string().min(1, t("auth.validation.firstNameRequired")),
           last_name: z.string().min(1, t("auth.validation.lastNameRequired")),
-          password: z.string().min(8, t("auth.validation.passwordMinLength")),
+          password: z
+            .string()
+            .min(8, t("auth.validation.passwordMinLength"))
+            .regex(/[a-zA-Z]/, t("auth.validation.passwordNeedsLetter"))
+            .regex(/\d/, t("auth.validation.passwordNeedsDigit")),
           password_confirm: z.string(),
         })
         .refine((d) => d.password === d.password_confirm, {
@@ -40,8 +45,12 @@ export function RegisterPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  const password = watch("password") ?? "";
+  const passwordConfirm = watch("password_confirm") ?? "";
 
   const onSubmit = (values: FormValues) => {
     registerMutation.mutate(
@@ -134,6 +143,8 @@ export function RegisterPage() {
             </p>
           )}
         </div>
+
+        <PasswordRequirements password={password} confirmPassword={passwordConfirm} />
 
         {apiError?.response?.data && (
           <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">

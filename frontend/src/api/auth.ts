@@ -1,6 +1,7 @@
 import { apiClient } from "./client";
 import type {
   AuthResponse,
+  ChangePasswordPayload,
   LoginPayload,
   RegisterPayload,
   User,
@@ -32,5 +33,9 @@ export const authApi = {
   async updateMe(payload: Partial<User>): Promise<User> {
     const { data } = await apiClient.patch<User>("/auth/me/", payload);
     return data;
+  },
+
+  async changePassword(payload: ChangePasswordPayload): Promise<void> {
+    await apiClient.post("/auth/me/change-password/", payload);
   },
 };

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { authApi } from "../api/auth";
 import { useAuthStore } from "../store/auth";
-import type { LoginPayload, RegisterPayload } from "../types/auth";
+import type { ChangePasswordPayload, LoginPayload, RegisterPayload } from "../types/auth";
 
 export function useLogin() {
   const setAuth = useAuthStore((s) => s.setAuth);
@@ -46,6 +46,12 @@ export function useLogout() {
       logoutStore();
       queryClient.clear();
     },
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: (payload: ChangePasswordPayload) => authApi.changePassword(payload),
   });
 }
 

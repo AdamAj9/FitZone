@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ subject }}</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#ede4f7; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <span style="display:none; font-size:1px; color:#ede4f7; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
+      {{ preheader }}
+    </span>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#ede4f7; padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 10px 40px -10px rgba(88,28,135,0.25);">
+
+            <!-- Header -->
+            <tr>
+              <td style="background:linear-gradient(135deg,#0f172a 0%,#312e81 60%,#7e22ce 100%); padding:36px 40px; text-align:center;">
+                <img src="{{ frontend_url }}/images/logo.png" alt="FitZone" height="40" style="height:40px; width:auto; display:inline-block;" />
+              </td>
+            </tr>
+
+            <!-- Success badge + hero -->
+            <tr>
+              <td style="padding:40px 40px 8px; text-align:center;">
+                <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 20px;">
+                  <tr>
+                    <td style="width:56px; height:56px; border-radius:50%; background:#d1fae5; text-align:center; vertical-align:middle; font-size:28px; line-height:56px;">
+                      &#10003;
+                    </td>
+                  </tr>
+                </table>
+                <h1 style="margin:0; font-size:26px; line-height:1.25; font-weight:800; color:#18151f;">
+                  {{ greeting }}
+                </h1>
+                <p style="margin:10px 0 0; font-size:16px; line-height:1.6; color:#3f3a4d;">
+                  {{ intro }}
+                </p>
+              </td>
+            </tr>
+
+            <!-- Receipt -->
+            <tr>
+              <td style="padding:24px 40px 8px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #ede4f7; border-radius:14px; overflow:hidden;">
+                  <tr>
+                    <td style="padding:16px 20px; background:#f5f2fa; font-size:13px; font-weight:600; color:#6b6478;">{{ label_item }}</td>
+                    <td style="padding:16px 20px; background:#f5f2fa; font-size:14px; font-weight:700; color:#18151f; text-align:right;">{{ item_name }}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px; font-size:13px; font-weight:600; color:#6b6478; border-top:1px solid #ede4f7;">{{ label_amount }}</td>
+                    <td style="padding:16px 20px; font-size:18px; font-weight:800; color:#7e22ce; text-align:right; border-top:1px solid #ede4f7;">{{ amount }} &euro;</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px; font-size:13px; font-weight:600; color:#6b6478; border-top:1px solid #ede4f7;">{{ label_date }}</td>
+                    <td style="padding:16px 20px; font-size:14px; color:#3f3a4d; text-align:right; border-top:1px solid #ede4f7;">{{ date }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- CTA -->
+            <tr>
+              <td style="padding:28px 40px 8px; text-align:center;">
+                <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 32px;">
+                  <tr>
+                    <td style="border-radius:10px; background:linear-gradient(135deg,#c084fc,#9333ea);">
+                      <a href="{{ frontend_url }}{{ cta_path }}" style="display:inline-block; padding:14px 28px; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none; border-radius:10px;">
+                        {{ cta_label }} &rarr;
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="padding:24px 40px 32px; border-top:1px solid #ede4f7;">
+                <p style="margin:0 0 6px; font-size:12px; line-height:1.6; color:#8f8aa0;">
+                  {{ footer_note }}
+                </p>
+                <p style="margin:0; font-size:12px; line-height:1.6; color:#8f8aa0;">
+                  FitZone — 42 rue de la Forme, 1000 Bruxelles
+                </p>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

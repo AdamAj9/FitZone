@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import CoachProfile, MemberProfile
 from .serializers import (
+    ChangePasswordSerializer,
     CoachProfileSerializer,
     FitZoneTokenObtainPairSerializer,
     MemberProfileSerializer,
@@ -100,6 +101,28 @@ class MeView(generics.RetrieveUpdateAPIView):
     def update(self, request, *args, **kwargs):
         super().update(request, *args, **kwargs)
         return Response(UserSerializer(self.get_object()).data)
+
+
+class ChangePasswordView(APIView):
+    """POST /api/auth/me/change-password/ — update the current user's password."""
+
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        serializer = ChangePasswordSerializer(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+
+        user = request.user
+        user.set_password(serializer.validated_data["new_password"])
+        user.save(update_fields=["password"])
+
+        from apps.core.audit import record as audit
+
+        audit("password_changed", actor=user, target=user)
+
+        return Response({"detail": "Password updated."})
 
 
 class MemberProfileView(generics.RetrieveUpdateAPIView):
