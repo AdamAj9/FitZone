@@ -35,10 +35,22 @@
     "ratingText": "from 200+ reviews",
     "noCommitment": "No commitment · Cancel anytime",
     "stats": [
-      { "value": "200+", "label": "Sessions per week" },
-      { "value": "10+", "label": "Group classes" },
-      { "value": "7", "label": "Dedicated spaces" },
-      { "value": "24/7", "label": "Open non-stop" }
+      {
+        "value": "200+",
+        "label": "Sessions per week"
+      },
+      {
+        "value": "10+",
+        "label": "Group classes"
+      },
+      {
+        "value": "7",
+        "label": "Dedicated spaces"
+      },
+      {
+        "value": "24/7",
+        "label": "Open non-stop"
+      }
     ],
     "offerLabel": "Our offer",
     "offerTitle": "A complete world, under one roof",
@@ -117,6 +129,595 @@
     "rights": "All rights reserved.",
     "madeIn": "Designed and built in Belgium",
     "address": "42 rue de la Forme, 1000 Brussels"
+  },
+  "legal": {
+    "sectionLabel": "Legal information",
+    "lastUpdated": "Last updated: 23 August 2026",
+    "tocTitle": "Contents",
+    "academicTitle": "Academic project.",
+    "academicNotice": "FitZone is a fictional gym created as part of a final-year project at the Institut des Carrières Commerciales (Brussels). The company details, identification numbers and commercial terms shown here illustrate the obligations that genuinely apply to a Belgian e-commerce business, but do not bind any existing company.",
+    "contactLine": "Any question about this document? Write to hello@fitzone.local or by post to FitZone, 42 rue de la Forme, 1000 Brussels, Belgium.",
+    "notice": {
+      "title": "Legal notice",
+      "intro": "Information about the publisher and hosting of the FitZone website, in accordance with Article XII.6 of the Belgian Code of Economic Law.",
+      "sections": [
+        {
+          "heading": "Website publisher",
+          "paragraphs": [
+            "The website available at myfitzone.be is published by:"
+          ],
+          "table": {
+            "columns": [
+              "Item",
+              "Value"
+            ],
+            "rows": [
+              [
+                "Company name",
+                "FitZone SRL"
+              ],
+              [
+                "Legal form",
+                "Private limited liability company (fictional)"
+              ],
+              [
+                "Registered office",
+                "42 rue de la Forme, 1000 Brussels, Belgium"
+              ],
+              [
+                "Company number (CBE)",
+                "BE 0XXX.XXX.XXX — fictional number"
+              ],
+              [
+                "VAT number",
+                "BE 0XXX.XXX.XXX — fictional number"
+              ],
+              [
+                "Email address",
+                "hello@fitzone.local"
+              ],
+              [
+                "Telephone",
+                "+32 2 555 12 34"
+              ],
+              [
+                "Publication manager",
+                "Adam Ajaray"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Hosting and technical providers",
+          "paragraphs": [
+            "The website and its data rely on the following providers, each bound by a data-processing agreement within the meaning of Article 28 GDPR:"
+          ],
+          "table": {
+            "columns": [
+              "Role",
+              "Provider",
+              "Location"
+            ],
+            "rows": [
+              [
+                "Web interface delivery",
+                "Netlify, Inc.",
+                "United States (global delivery network)"
+              ],
+              [
+                "Application API hosting",
+                "Render Services, Inc.",
+                "Instance deployed in Europe"
+              ],
+              [
+                "Database",
+                "Supabase (managed PostgreSQL)",
+                "European Union — Ireland"
+              ],
+              [
+                "Payment processing",
+                "Stripe Payments Europe, Ltd.",
+                "Dublin, Ireland"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Intellectual property",
+          "paragraphs": [
+            "The structure of the website, its texts, visual identity and brand belong to their author. Any reproduction or representation, in whole or in part, for commercial purposes is prohibited without prior written consent.",
+            "The application source code is published for educational purposes on GitHub (github.com/AdamAj9/FitZone). Third-party libraries remain subject to their respective licences: Django (BSD), React (MIT), Tailwind CSS (MIT), Django REST Framework (BSD).",
+            "The photographs and illustrations used on the site were produced specifically for this project and do not reproduce any protected work belonging to a third party."
+          ]
+        },
+        {
+          "heading": "Prices and commercial information",
+          "paragraphs": [
+            "Prices displayed on the site are in euros, all taxes included. They incorporate the applicable Belgian value added tax: 6% for granting access to sports facilities, 21% for separate services.",
+            "The essential characteristics of the services, their prices and payment terms are presented before any order is placed, in accordance with Article VI.45 of the Code of Economic Law. The full contractual terms are set out in our terms of service."
+          ]
+        },
+        {
+          "heading": "Complaints, mediation and disputes",
+          "paragraphs": [
+            "Any complaint should first be sent to hello@fitzone.local. We undertake to acknowledge receipt within five working days and to provide a reasoned reply within one month.",
+            "Failing an amicable solution, consumers may refer the matter free of charge to the Consumer Mediation Service, Boulevard du Roi Albert II 8 box 1, 1000 Brussels (consumerombudsman.be).",
+            "This notice and the relationships it governs are subject to Belgian law. Failing agreement, the courts of the judicial district of Brussels have jurisdiction, without prejudice to the protective rules applicable to consumers."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of sale and use",
+      "intro": "These terms govern the use of the FitZone website, subscription purchases and class bookings.",
+      "sections": [
+        {
+          "heading": "Purpose and acceptance",
+          "paragraphs": [
+            "These terms apply to any use of the FitZone website and to any purchase made through it. Creating an account or subscribing constitutes full acceptance of these terms, in the version in force on the date of the order.",
+            "They supplement, without replacing, the internal rules displayed in our facilities."
+          ]
+        },
+        {
+          "heading": "Member account",
+          "paragraphs": [
+            "Creating an account is free and required in order to subscribe or to book a class."
+          ],
+          "items": [
+            "You undertake to provide accurate information and to keep it up to date from your profile page.",
+            "Your password must contain at least eight characters and must not be trivial; it is stored as a cryptographic hash and remains confidential, including from our staff.",
+            "You are responsible for all activity carried out from your account. Please notify us without delay of any unauthorised use.",
+            "One account corresponds to one natural person: sharing credentials is prohibited.",
+            "In the event of a serious breach of these terms, the account may be deactivated after the member has been informed."
+          ]
+        },
+        {
+          "heading": "Subscriptions",
+          "paragraphs": [
+            "Four plans are available. Only Premium plans include unlimited access to instructor-led classes; Essential plans give access to the open-use facilities."
+          ],
+          "table": {
+            "columns": [
+              "Plan",
+              "Price",
+              "Included"
+            ],
+            "rows": [
+              [
+                "Essential monthly",
+                "€29.99 / month",
+                "Open access to the facilities"
+              ],
+              [
+                "Essential yearly",
+                "€299 / year",
+                "Open access to the facilities"
+              ],
+              [
+                "Premium monthly",
+                "€59.99 / month",
+                "Facilities + unlimited classes"
+              ],
+              [
+                "Premium yearly",
+                "€599 / year",
+                "Facilities + unlimited classes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Duration, renewal and cancellation",
+          "items": [
+            "The subscription starts as soon as payment is confirmed and runs for thirty days (monthly plan) or three hundred and sixty-five days (yearly plan).",
+            "The price paid is fixed at the time of purchase: any later change to our rates has no effect on a running subscription.",
+            "There is no automatic renewal: the subscription ends automatically on its expiry date and no payment is taken without a new purchase on your part.",
+            "You may cancel at any time, online and in one click, from the “My subscription” page. Cancellation ends the subscription but does not give rise to a refund of the period already started, subject to the right of withdrawal set out below."
+          ]
+        },
+        {
+          "heading": "Booking and cancelling classes",
+          "items": [
+            "Each class has a limited number of places, allocated on a first-come, first-served basis. The number of remaining places is shown in real time in the schedule.",
+            "A booking is confirmed immediately and appears under “My bookings”. Only one active booking per class and per member is possible.",
+            "Cancellation is free and possible until the class starts; the place is then immediately released to other members. A class that has already started can no longer be cancelled.",
+            "Members without a Premium plan may buy a single place when the class allows it; the price is shown on the class page.",
+            "FitZone may cancel a class in the event of a technical incident, coach unavailability or insufficient attendance. Registered members are informed and the class is refunded or rescheduled."
+          ]
+        },
+        {
+          "heading": "Prices and payment",
+          "paragraphs": [
+            "Payments are processed by Stripe on a secure page hosted by that provider. No card data passes through or is stored on FitZone servers.",
+            "In accordance with the European Payment Services Directive (PSD2), your bank may require strong customer authentication during payment, usually through your banking app.",
+            "A subscription or a paid booking is only activated once the payment has actually been confirmed by the provider. If payment fails, no right is granted and no amount is due."
+          ]
+        },
+        {
+          "heading": "Right of withdrawal and its exception",
+          "paragraphs": [
+            "In accordance with Article VI.47 of the Code of Economic Law, you have fourteen calendar days from the conclusion of the contract to withdraw from a subscription purchased online, without giving reasons and without penalty.",
+            "To exercise this right, simply send an unambiguous statement to hello@fitzone.local. Reimbursement takes place within fourteen days of receiving your request, using the same means of payment.",
+            "If you expressly asked for the subscription to start before the end of the withdrawal period and have used it, an amount proportionate to the service already supplied remains due (Article VI.51, § 3).",
+            "Important exception: under Article VI.53, 12° of the Code of Economic Law, the right of withdrawal does not apply to services related to leisure activities supplied on a specific date. Booking a class at a specific time slot is therefore not subject to withdrawal; it can nevertheless be cancelled free of charge until the class starts, as described above."
+          ]
+        },
+        {
+          "heading": "Rules for using the facilities",
+          "items": [
+            "Respect for other members, staff and equipment is required at all times.",
+            "Physical activity is undertaken at your own risk. We strongly recommend obtaining medical advice beforehand, particularly in the case of a cardiac history, pregnancy or a return after a long break.",
+            "The safety instructions displayed in each area and the coaches' instructions must be followed.",
+            "FitZone accepts no liability for the theft or loss of personal belongings left unattended."
+          ]
+        },
+        {
+          "heading": "Service availability and liability",
+          "paragraphs": [
+            "We strive to keep the site continuously available, without being able to guarantee it: interruptions may occur for maintenance, updates or due to force majeure.",
+            "Our liability is limited to direct and foreseeable damage resulting from a breach attributable to us. It may not exceed the amounts actually paid under the contract concerned.",
+            "Nothing in these terms limits the mandatory rights you enjoy as a consumer."
+          ]
+        },
+        {
+          "heading": "Personal data",
+          "paragraphs": [
+            "The processing of your personal data is described in detail in our privacy policy, which forms an integral part of these terms."
+          ]
+        },
+        {
+          "heading": "Changes to these terms",
+          "paragraphs": [
+            "These terms may change. Any substantial modification is brought to your attention before it takes effect. The version applicable to an order is the one online at the time the order is placed."
+          ]
+        },
+        {
+          "heading": "Applicable law and jurisdiction",
+          "paragraphs": [
+            "These terms are governed by Belgian law. In the event of a dispute, an amicable solution will be sought first, where appropriate through the mediation described in our legal notice. Failing that, the courts of the judicial district of Brussels have jurisdiction, without prejudice to consumer protection rules."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "intro": "How FitZone collects, uses, shares and protects your personal data, in accordance with the General Data Protection Regulation (Regulation EU 2016/679, “GDPR”) and the Belgian Act of 30 July 2018.",
+      "sections": [
+        {
+          "heading": "Data controller",
+          "paragraphs": [
+            "The controller of your data is FitZone SRL, 42 rue de la Forme, 1000 Brussels, reachable at hello@fitzone.local.",
+            "For any question concerning your data, this address is your single point of contact. Given the size of the organisation, no data protection officer has been appointed: requests are handled directly by the publication manager."
+          ]
+        },
+        {
+          "heading": "Data we collect",
+          "paragraphs": [
+            "We apply the minimisation principle: only data necessary for the service is collected."
+          ],
+          "table": {
+            "columns": [
+              "Category",
+              "Data concerned",
+              "Source"
+            ],
+            "rows": [
+              [
+                "Identity and contact",
+                "Surname, first name, email address, telephone number, preferred language",
+                "Provided by you at registration"
+              ],
+              [
+                "Account",
+                "Password stored as a cryptographic hash, role, creation and last login dates",
+                "Generated by the application"
+              ],
+              [
+                "Fitness profile",
+                "Date of birth, self-declared level, goals, preferred class categories",
+                "Optional questionnaire"
+              ],
+              [
+                "Activity",
+                "Bookings, cancellations, history of attended classes",
+                "Generated by your use of the service"
+              ],
+              [
+                "Subscriptions and payments",
+                "Chosen plan, amount, status, dates, Stripe transaction identifiers",
+                "Generated at purchase"
+              ],
+              [
+                "Reviews",
+                "Rating given to a coach (1 to 5) and any comment",
+                "Provided by you"
+              ],
+              [
+                "Technical data",
+                "IP address and timestamp of sensitive actions (login, payment, booking)",
+                "Security audit log"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What we do not collect",
+          "items": [
+            "No banking data: your card number is entered exclusively on Stripe's secure page and never reaches our servers.",
+            "No health data within the meaning of Article 9 GDPR: the questionnaire covers your goals and class preferences, that is to say wellness data. No medical certificate, diagnosis or medical history is requested or stored in the application.",
+            "No advertising trackers, no audience measurement, no profiling for marketing purposes.",
+            "No sale, rental or transfer of your data to third parties, for any purpose whatsoever."
+          ]
+        },
+        {
+          "heading": "Purposes and legal bases",
+          "paragraphs": [
+            "Each processing operation relies on a legal basis identified in Article 6 GDPR:"
+          ],
+          "table": {
+            "columns": [
+              "Purpose",
+              "Legal basis",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Create and manage your account",
+                "Performance of the contract (Art. 6.1.b)",
+                "Login, profile updates"
+              ],
+              [
+                "Sell subscriptions and manage bookings",
+                "Performance of the contract (Art. 6.1.b)",
+                "Subscription, reserved place, cancellation"
+              ],
+              [
+                "Process payments and keep proof of them",
+                "Performance of the contract and legal obligation (Art. 6.1.b and 6.1.c)",
+                "Collection, accounting record"
+              ],
+              [
+                "Personalise class suggestions",
+                "Legitimate interest (Art. 6.1.f)",
+                "Recommendations based on your bookings and preferences; the questionnaire remains optional"
+              ],
+              [
+                "Ensure security and trace sensitive actions",
+                "Legitimate interest and security obligation (Art. 6.1.f and Art. 32)",
+                "Audit log, detection of abnormal access"
+              ],
+              [
+                "Comply with our accounting and tax obligations",
+                "Legal obligation (Art. 6.1.c)",
+                "Retention of payment records"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Recipients and processors",
+          "paragraphs": [
+            "Your data is accessible to authorised FitZone staff, strictly according to their role: a coach only sees the members registered for their own classes, the administrator has a management view.",
+            "It is also entrusted to the technical providers below, bound by a data-processing agreement compliant with Article 28 GDPR and acting solely on our instructions:"
+          ],
+          "table": {
+            "columns": [
+              "Provider",
+              "Role",
+              "Data location"
+            ],
+            "rows": [
+              [
+                "Stripe Payments Europe, Ltd.",
+                "Payment processing",
+                "European Union (Ireland)"
+              ],
+              [
+                "Supabase",
+                "Database hosting",
+                "European Union (Ireland)"
+              ],
+              [
+                "Render Services, Inc.",
+                "Application API hosting",
+                "European instance"
+              ],
+              [
+                "Netlify, Inc.",
+                "Web interface delivery",
+                "Global network (United States)"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Transfers outside the European Union",
+          "paragraphs": [
+            "The database and payment processing are located within the European Union. Some delivery providers are established in the United States: those transfers are governed by the standard contractual clauses adopted by the European Commission, in accordance with Article 46 GDPR."
+          ]
+        },
+        {
+          "heading": "Retention periods",
+          "paragraphs": [
+            "We only keep your data for as long as necessary for the purposes pursued:"
+          ],
+          "table": {
+            "columns": [
+              "Data",
+              "Retention period"
+            ],
+            "rows": [
+              [
+                "Active account",
+                "For as long as the account exists"
+              ],
+              [
+                "Deactivated account",
+                "Twelve months, then anonymisation, unless a legal obligation provides otherwise"
+              ],
+              [
+                "Bookings and activity history",
+                "Three years from the last class attended"
+              ],
+              [
+                "Accounting records (payments, subscriptions)",
+                "Seven years, under Belgian accounting legislation"
+              ],
+              [
+                "Audit log (IP address, sensitive actions)",
+                "Twelve months"
+              ],
+              [
+                "Reviews published about a coach",
+                "Until deleted by their author"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Your rights",
+          "paragraphs": [
+            "The GDPR grants you the following rights, which you may exercise at any time and free of charge:"
+          ],
+          "items": [
+            "Right of access (Art. 15): obtain confirmation that your data is processed and receive a copy of it.",
+            "Right to rectification (Art. 16): correct inaccurate or incomplete data — most of it directly from your profile.",
+            "Right to erasure (Art. 17), the “right to be forgotten”: obtain deletion of your data, within the limits described in the next section.",
+            "Right to restriction (Art. 18): request the temporary freezing of a contested processing operation.",
+            "Right to portability (Art. 20): receive your data in a structured, machine-readable format, or request its transfer.",
+            "Right to object (Art. 21): object to processing based on our legitimate interest, in particular personalised suggestions.",
+            "Right to withdraw your consent at any time, where processing is based on it, without affecting the lawfulness of prior processing.",
+            "Right to lodge a complaint with the supervisory authority (Art. 77)."
+          ]
+        },
+        {
+          "heading": "How to exercise your rights",
+          "paragraphs": [
+            "Send your request to hello@fitzone.local, specifying the right invoked. We reply within one month, extendable by two months for complex requests, in which case you will be informed (Art. 12.3).",
+            "In the event of reasonable doubt about your identity, additional proof may be requested, for the sole purpose of preventing your data being disclosed to a third party."
+          ]
+        },
+        {
+          "heading": "Right to be forgotten: erasure and its limits",
+          "paragraphs": [
+            "Deletion of your data is organised at two levels, in order to reconcile your right to be forgotten with our legal obligations.",
+            "Account deactivation: your access is closed immediately and your data is no longer used for the service. The history of transactions already carried out is retained, as it constitutes an accounting record.",
+            "Full deletion: on request, your account, profile, bookings and reviews are permanently erased from our systems.",
+            "Limit provided by the GDPR: payment records already issued cannot be deleted before the legal seven-year deadline (Art. 17.3.b). They are then stored separately, serve only that obligation and are no longer used for any other purpose. The identifying data they contain is reduced to what is strictly necessary."
+          ]
+        },
+        {
+          "heading": "Security of your data",
+          "paragraphs": [
+            "In accordance with Article 32 GDPR, we implement appropriate technical and organisational measures:"
+          ],
+          "items": [
+            "Encryption of all communications between your browser and our servers (HTTPS/TLS).",
+            "Passwords stored as a cryptographic hash (PBKDF2-SHA256): they are neither readable nor recoverable, including by us.",
+            "Authentication by short-lived token, automatically renewed and revoked on logout.",
+            "Strict access separation by role: a member only accesses their own data, a coach only their own classes.",
+            "Tamper-evident audit log of sensitive actions, making it possible to detect and reconstruct any abnormal access.",
+            "No card data on our servers: PCI-DSS compliance is provided by Stripe, a certified Level 1 provider.",
+            "Database hosted within the European Union, with regular backups."
+          ]
+        },
+        {
+          "heading": "Automated decision-making and profiling",
+          "paragraphs": [
+            "The class suggestions shown on your dashboard result from a simple ranking, based on the categories you have already booked, those ticked in the questionnaire and your declared level.",
+            "This is not automated decision-making producing legal effects or significantly affecting you within the meaning of Article 22 GDPR: these suggestions have no impact on the prices charged, on access to the service or on your rights as a member. You can neutralise them by leaving the questionnaire empty."
+          ]
+        },
+        {
+          "heading": "Minors",
+          "paragraphs": [
+            "The service is intended for adults. Registration of a minor aged at least sixteen requires the written consent of the holder of parental authority, to be provided at the gym reception. We do not knowingly collect data concerning children under sixteen."
+          ]
+        },
+        {
+          "heading": "Complaint to the supervisory authority",
+          "paragraphs": [
+            "If you consider that the processing of your data does not comply with the regulation, you may lodge a complaint with the Belgian Data Protection Authority:",
+            "Data Protection Authority — Rue de la Presse 35, 1000 Brussels — contact@apd-gba.be — www.dataprotectionauthority.be"
+          ]
+        },
+        {
+          "heading": "Changes to this policy",
+          "paragraphs": [
+            "This policy may be adapted to reflect legal or technical developments. Any substantial change is notified to you before it takes effect. The date of the latest update appears at the top of this page."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookies and local storage",
+      "intro": "FitZone uses no advertising cookies and no audience measurement tools. This page sets out exactly what the site stores in your browser, and why.",
+      "sections": [
+        {
+          "heading": "Our approach",
+          "paragraphs": [
+            "The site works without any tracker. We use no analytics tool, no advertising network and no social media button capable of following your browsing.",
+            "Only two items of information, strictly necessary for the service to work, are stored in your browser. They are stored using local storage (localStorage) rather than cookies: they are therefore never sent automatically with every request and allow no tracking from one site to another."
+          ]
+        },
+        {
+          "heading": "What the site stores",
+          "table": {
+            "columns": [
+              "Name",
+              "Type",
+              "Purpose",
+              "Duration"
+            ],
+            "rows": [
+              [
+                "fitzone-auth",
+                "Local storage",
+                "Keep you signed in from one page to the next (session token and profile information)",
+                "Until logout or until browser data is cleared"
+              ],
+              [
+                "i18nextLng",
+                "Local storage",
+                "Remember the chosen language (French or English)",
+                "Until browser data is cleared"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Cookies set by our providers",
+          "paragraphs": [
+            "During payment you are redirected to a secure page hosted by Stripe. That provider sets its own cookies, on its own domain, for security and fraud prevention purposes. They are governed by its privacy policy.",
+            "No cookie from Stripe or any other third party is set on the pages of the FitZone site itself."
+          ]
+        },
+        {
+          "heading": "Why there is no consent banner",
+          "paragraphs": [
+            "Prior consent is only required for trackers that are not strictly necessary for the service requested by the user.",
+            "The two items listed above are essential for the site to work: without them you would be signed out on every page change and the language would not be kept. They therefore fall under the exemption provided by the ePrivacy rules, as applied by the Belgian Data Protection Authority.",
+            "Should we one day add an audience measurement or advertising tool, a compliant consent banner would be put in place beforehand, with refusal as easy as acceptance."
+          ]
+        },
+        {
+          "heading": "Managing or deleting this data",
+          "items": [
+            "Signing out from the site immediately deletes your session token.",
+            "Chrome or Edge: Settings → Privacy and security → Cookies and other site data.",
+            "Firefox: Settings → Privacy & Security → Cookies and Site Data.",
+            "Safari: Settings → Privacy → Manage Website Data.",
+            "Deleting this data signs you out and resets the display language; it affects neither your account nor your bookings."
+          ]
+        },
+        {
+          "heading": "Any questions?",
+          "paragraphs": [
+            "For any question on this topic, write to us at hello@fitzone.local. The processing of your personal data is described in detail in our privacy policy."
+          ]
+        }
+      ]
+    }
   },
   "notFound": {
     "description": "The page you're looking for doesn't exist or has been moved.",

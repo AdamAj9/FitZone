@@ -28,6 +28,10 @@ import { CoachesListPage } from "./pages/public/CoachesListPage";
 import { CourseDetailPage } from "./pages/public/CourseDetailPage";
 import { CoursesListPage } from "./pages/public/CoursesListPage";
 import { HomePage } from "./pages/public/HomePage";
+import { CookiesPage } from "./pages/public/legal/CookiesPage";
+import { LegalNoticePage } from "./pages/public/legal/LegalNoticePage";
+import { PrivacyPage } from "./pages/public/legal/PrivacyPage";
+import { TermsPage } from "./pages/public/legal/TermsPage";
 import { NotFoundPage } from "./pages/public/NotFoundPage";
 import { PlanningPage } from "./pages/public/PlanningPage";
 import { PlansPage } from "./pages/public/PlansPage";
@@ -43,6 +47,10 @@ export const router = createBrowserRouter([
       { path: "/coaches", element: <CoachesListPage /> },
       { path: "/coaches/:id", element: <CoachDetailPage /> },
       { path: "/plans", element: <PlansPage /> },
+      { path: "/legal/notice", element: <LegalNoticePage /> },
+      { path: "/legal/terms", element: <TermsPage /> },
+      { path: "/legal/privacy", element: <PrivacyPage /> },
+      { path: "/legal/cookies", element: <CookiesPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       {

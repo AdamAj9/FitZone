@@ -26,10 +26,10 @@ export function Footer() {
     {
       title: t("footer.legalTitle"),
       links: [
-        { label: t("footer.legalNotice"), to: "/" },
-        { label: t("footer.terms"), to: "/" },
-        { label: t("footer.privacy"), to: "/" },
-        { label: t("footer.cookies"), to: "/" },
+        { label: t("footer.legalNotice"), to: "/legal/notice" },
+        { label: t("footer.terms"), to: "/legal/terms" },
+        { label: t("footer.privacy"), to: "/legal/privacy" },
+        { label: t("footer.cookies"), to: "/legal/cookies" },
       ],
     },
   ];
