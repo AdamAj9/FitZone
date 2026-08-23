@@ -7,6 +7,7 @@ import { coursesApi } from "../../api/courses";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { AnimatedNumber } from "../../components/ui/AnimatedNumber";
 import { AnimatedWords } from "../../components/ui/AnimatedWords";
+import { Marquee } from "../../components/ui/Marquee";
 import { Reveal } from "../../components/ui/Reveal";
 import { TiltCard } from "../../components/ui/TiltCard";
 import { OFFERINGS } from "../../data/offerings";
@@ -18,6 +19,17 @@ const CTA_IMAGE = "/images/hero/Hero%20secondaire.png";
 type Stat = { value: string; label: string };
 type Step = { n: string; title: string; description: string };
 type Testimonial = { name: string; role: string; quote: string };
+
+/** Bento layout for the 6 OFFERINGS tiles: one big hero tile, two wide tiles,
+ *  two narrow tiles and one more wide tile. Only kicks in at the lg breakpoint. */
+const BENTO_SPANS = [
+  "sm:col-span-2 lg:col-span-2 lg:row-span-2",
+  "lg:col-span-2",
+  "lg:col-span-1",
+  "lg:col-span-1",
+  "sm:col-span-2 lg:col-span-2",
+  "sm:col-span-2 lg:col-span-2",
+];
 
 export function HomePage() {
   const { t } = useTranslation();
@@ -53,11 +65,12 @@ export function HomePage() {
 
   return (
     <div className="space-y-24 pb-24">
+      <div>
       {/* === HERO === */}
       <section
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
-        className="relative isolate overflow-hidden text-white"
+        className="group relative isolate overflow-hidden text-white"
       >
         <div
           className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center"
@@ -69,10 +82,10 @@ export function HomePage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 hover:opacity-100"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(216,180,254,0.28), transparent 65%)",
+              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(226,196,255,0.55), rgba(192,132,252,0.18) 40%, transparent 70%)",
           }}
           aria-hidden
         />
@@ -144,6 +157,18 @@ export function HomePage() {
         </svg>
       </section>
 
+      {/* === MARQUEE === */}
+      <Marquee
+        className="bg-ink-900 py-4 text-white"
+        items={OFFERINGS.map((group) => (
+          <span key={group.key} className="flex items-center gap-3 font-display text-lg uppercase tracking-wide">
+            <span aria-hidden>{group.icon}</span>
+            {t(`offerings.${group.key}.title`)}
+          </span>
+        ))}
+      />
+      </div>
+
       {/* === TRUST STATS === */}
       <section className="mx-auto max-w-7xl px-4">
         <Reveal className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
@@ -177,42 +202,58 @@ export function HomePage() {
             {t("home.offerSeeAll")} →
           </Link>
         </Reveal>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {OFFERINGS.map((group, index) => (
-            <Reveal key={group.key} delay={index * 100}>
-              <TiltCard>
-              <Link
-                to={group.items[0].href}
-                className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow"
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[200px]">
+          {OFFERINGS.map((group, index) => {
+            const isLarge = index === 0;
+            const showItems = index !== 2 && index !== 3;
+            return (
+              <Reveal
+                key={group.key}
+                delay={index * 80}
+                className={BENTO_SPANS[index] ?? ""}
               >
-                <img
-                  src={group.image}
-                  alt={t(`offerings.${group.key}.title`)}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                  <div className="flex items-center gap-2">
-                    <span className="text-3xl drop-shadow">{group.icon}</span>
-                    <h3 className="text-xl font-bold">{t(`offerings.${group.key}.title`)}</h3>
-                  </div>
-                  <ul className="mt-3 space-y-1 text-sm text-ink-100">
-                    {group.items.map((it) => (
-                      <li key={it.key} className="flex items-start gap-2">
-                        <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
-                        {t(`offerings.${group.key}.items.${it.key}.label`)}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
-                    {t("home.discoverMore")} →
-                  </div>
-               </div>
-              </Link>
-              </TiltCard>
-            </Reveal>
-          ))}
+                <TiltCard className="h-full">
+                  <Link
+                    to={group.items[0].href}
+                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow lg:aspect-auto lg:h-full"
+                  >
+                    <img
+                      src={group.image}
+                      alt={t(`offerings.${group.key}.title`)}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-6">
+                      <div className="flex items-center gap-2">
+                        <span className={isLarge ? "text-4xl drop-shadow" : "text-2xl drop-shadow"}>
+                          {group.icon}
+                        </span>
+                        <h3
+                          className={`font-display font-bold ${isLarge ? "text-2xl" : "text-lg"}`}
+                        >
+                          {t(`offerings.${group.key}.title`)}
+                        </h3>
+                      </div>
+                      {showItems && (
+                        <ul className="mt-3 space-y-1 text-sm text-ink-100">
+                          {group.items.map((it) => (
+                            <li key={it.key} className="flex items-start gap-2">
+                              <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
+                              {t(`offerings.${group.key}.items.${it.key}.label`)}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
+                        {t("home.discoverMore")} →
+                      </div>
+                    </div>
+                  </Link>
+                </TiltCard>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
