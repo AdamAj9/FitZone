@@ -85,7 +85,7 @@ export function HomePage() {
           className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(226,196,255,0.55), rgba(192,132,252,0.18) 40%, transparent 70%)",
+              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(226,196,255,0.32), rgba(192,132,252,0.1) 40%, transparent 70%)",
           }}
           aria-hidden
         />
