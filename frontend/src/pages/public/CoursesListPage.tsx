@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { coursesApi } from "../../api/courses";
 import { CourseCard } from "../../components/CourseCard";
-import { EmptyState, SkeletonCard } from "../../components/ui";
+import { EmptyState, Reveal, SkeletonCard } from "../../components/ui";
 import type { CourseLevel } from "../../types/courses";
 
 export function CoursesListPage() {
@@ -30,7 +30,7 @@ export function CoursesListPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-surface p-6 shadow-sm">
+      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">{t("courses.title")}</h1>
         <p className="mt-1 text-slate-600">
           {t("courses.subtitle")}
@@ -68,7 +68,7 @@ export function CoursesListPage() {
             <option value="all">{t("common.levels.all")}</option>
           </select>
         </div>
-      </div>
+      </Reveal>
 
       {coursesQuery.isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -86,8 +86,10 @@ export function CoursesListPage() {
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {coursesQuery.data?.results.map((course) => (
-            <CourseCard key={course.id} course={course} />
+          {coursesQuery.data?.results.map((course, index) => (
+            <Reveal key={course.id} delay={Math.min(index, 6) * 80}>
+              <CourseCard course={course} />
+            </Reveal>
           ))}
         </div>
       )}

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { paymentsApi } from "../../api/payments";
 import { subscriptionsApi } from "../../api/subscriptions";
+import { Reveal } from "../../components/ui/Reveal";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
 
@@ -44,7 +45,7 @@ const checkoutMutation = useMutation({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
+      <Reveal className="rounded-2xl bg-surface p-8 text-center shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">{t("plans.title")}</h1>
         <p className="mt-2 text-slate-600">
           {t("plans.subtitle")}
@@ -54,7 +55,7 @@ const checkoutMutation = useMutation({
           <button
             type="button"
             onClick={() => setPeriod("monthly")}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+            className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
               period === "monthly"
                 ? "bg-surface text-slate-900 shadow-sm"
                 : "text-slate-600"
@@ -65,23 +66,23 @@ const checkoutMutation = useMutation({
           <button
             type="button"
             onClick={() => setPeriod("yearly")}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+            className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
               period === "yearly"
                 ? "bg-surface text-slate-900 shadow-sm"
                 : "text-slate-600"
             }`}
           >
-            {t("home.periodYearly")} <span className="ml-1 text-xs text-brand-600">{t("home.yearlyDiscount")}</span>
+            {t("home.periodYearly")} <span className="ml-1 text-xs font-semibold text-accent-600">{t("home.yearlyDiscount")}</span>
           </button>
         </div>
-      </div>
+      </Reveal>
 
       {currentSub && (
-        <div className="rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
+        <Reveal className="rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
           {t("plans.activeSubscription")}{" "}
           <strong>{currentSub.plan.name}</strong> —{" "}
           {t("plans.daysRemaining", { count: currentSub.days_remaining })}
-        </div>
+        </Reveal>
       )}
 
       {apiError?.response?.data?.detail && (
@@ -94,12 +95,12 @@ const checkoutMutation = useMutation({
         <p className="text-slate-500">{t("common.loading")}</p>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {filteredPlans.map((plan) => {
+          {filteredPlans.map((plan, index) => {
             const isPremium = plan.tier === "premium";
             return (
+              <Reveal key={plan.id} delay={index * 100}>
               <div
-                key={plan.id}
-                className={`rounded-2xl bg-surface p-6 shadow-sm ring-1 ${
+                className={`rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm ring-1 backdrop-blur-xl ${
                   isPremium ? "ring-brand-500" : "ring-slate-200"
                 }`}
               >
@@ -137,12 +138,12 @@ const checkoutMutation = useMutation({
                 <ul className="mt-5 space-y-2 text-sm">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-slate-700">
-                      <span className="mt-0.5 text-brand-600">✓</span> {f}
+                      <span className="mt-0.5 text-accent-600">✓</span> {f}
                     </li>
                   ))}
                 </ul>
 
-                         <button
+                <button
                   type="button"
                   onClick={() => {
                     if (!user) {
@@ -152,11 +153,11 @@ const checkoutMutation = useMutation({
                     checkoutMutation.mutate(plan.id);
                   }}
                   disabled={checkoutMutation.isPending || Boolean(currentSub)}
-                  className={`mt-6 w-full rounded-md px-4 py-3 font-medium transition ${
+                  className={`mt-6 w-full rounded-md px-4 py-3 font-medium transition active:scale-[0.97] ${
                     isPremium
                       ? "bg-brand-600 text-white hover:bg-brand-700"
                       : "border border-slate-300 text-slate-700 hover:bg-slate-50"
-                  } disabled:cursor-not-allowed disabled:opacity-50`}
+                  } disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100`}
                 >
                   {currentSub
                     ? t("plans.alreadyActive")
@@ -168,6 +169,7 @@ const checkoutMutation = useMutation({
                         : t("plans.loginToSubscribe")}
                 </button>
               </div>
+              </Reveal>
             );
           })}
         </div>

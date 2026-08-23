@@ -1,10 +1,19 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
-type RevealProps = {
+type RevealProps<T extends ElementType> = {
   children: ReactNode;
   className?: string;
   delay?: number;
-};
+  /** Tag to render as — defaults to "div". Use "section"/"nav"/etc. when semantics matter. */
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, "children" | "className">;
 
 function prefersReducedMotion() {
   return (
@@ -14,7 +23,14 @@ function prefersReducedMotion() {
 }
 
 /** Fait apparaître son contenu (fondu + léger décalage vers le haut) quand il entre dans le viewport. */
-export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
+export function Reveal<T extends ElementType = "div">({
+  children,
+  className = "",
+  delay = 0,
+  as,
+  ...rest
+}: RevealProps<T>) {
+  const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(prefersReducedMotion);
 
@@ -37,14 +53,15 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
   }, []);
 
   return (
-    <div
+    <Tag
       ref={ref}
       className={`transition-all duration-700 ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       } ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
+      {...rest}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

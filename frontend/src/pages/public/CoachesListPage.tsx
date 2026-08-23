@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { StarRating } from "../../components/StarRating";
-import { EmptyState, SkeletonCard } from "../../components/ui";
+import { EmptyState, Reveal, SkeletonCard } from "../../components/ui";
 
 export function CoachesListPage() {
   const { t } = useTranslation();
@@ -39,43 +39,44 @@ export function CoachesListPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-surface p-6 shadow-sm">
+      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
         <h1 className="text-3xl font-bold text-slate-900">{t("coaches.title")}</h1>
         <p className="mt-1 text-slate-600">
           {t("coaches.subtitle")}
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {data?.results.map((coach) => (
-          <Link
-            key={coach.id}
-            to={`/coaches/${coach.id}`}
-            className="rounded-2xl bg-surface p-6 shadow-sm transition hover:shadow-md"
-          >
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
-              {coach.first_name.charAt(0)}
-              {coach.last_name.charAt(0)}
-            </div>
-            <h3 className="font-semibold text-slate-900">{coach.full_name}</h3>
-            {coach.coach_profile?.specialties && (
-              <p className="mt-1 text-sm text-slate-500">
-                {coach.coach_profile.specialties}
-              </p>
-            )}
-            {coach.coach_profile?.years_of_experience ? (
-              <p className="mt-2 text-xs text-slate-400">
-                {t("coaches.yearsExperience", { count: coach.coach_profile.years_of_experience })}
-              </p>
-            ) : null}
-            <div className="mt-3">
-              <StarRating
-                value={coach.rating_average}
-                count={coach.rating_count}
-                size="sm"
-              />
-            </div>
-          </Link>
+        {data?.results.map((coach, index) => (
+          <Reveal key={coach.id} delay={Math.min(index, 6) * 80}>
+            <Link
+              to={`/coaches/${coach.id}`}
+              className="block rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
+                {coach.first_name.charAt(0)}
+                {coach.last_name.charAt(0)}
+              </div>
+              <h3 className="font-semibold text-slate-900">{coach.full_name}</h3>
+              {coach.coach_profile?.specialties && (
+                <p className="mt-1 text-sm text-slate-500">
+                  {coach.coach_profile.specialties}
+                </p>
+              )}
+              {coach.coach_profile?.years_of_experience ? (
+                <p className="mt-2 text-xs text-slate-400">
+                  {t("coaches.yearsExperience", { count: coach.coach_profile.years_of_experience })}
+                </p>
+              ) : null}
+              <div className="mt-3">
+                <StarRating
+                  value={coach.rating_average}
+                  count={coach.rating_count}
+                  size="sm"
+                />
+              </div>
+            </Link>
+          </Reveal>
         ))}
       </div>
     </div>

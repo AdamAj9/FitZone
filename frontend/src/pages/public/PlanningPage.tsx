@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { coursesApi } from "../../api/courses";
 import { sessionsApi } from "../../api/sessions";
 import { SessionCard } from "../../components/SessionCard";
+import { Reveal } from "../../components/ui/Reveal";
 import { addDays, formatDayLabel, isoDate, startOfWeek } from "../../lib/date";
 import type { CourseSessionItem } from "../../types/sessions";
 
@@ -58,7 +59,7 @@ export function PlanningPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-surface p-6 shadow-sm">
+      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">{t("planning.title")}</h1>
@@ -102,28 +103,28 @@ export function PlanningPage() {
               <button
                 type="button"
                 onClick={() => setWeekStart(addDays(weekStart, -7))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
               >
                 ← {t("planning.previousWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(startOfWeek(new Date()))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
               >
                 {t("planning.thisWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(addDays(weekStart, 7))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
               >
                 {t("planning.nextWeek")} →
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {sessionsQuery.isLoading ? (
         <p className="text-slate-500">{t("common.loading")}</p>
@@ -131,13 +132,13 @@ export function PlanningPage() {
         <p className="text-red-600">{t("courses.loadError")}</p>
       ) : (
         <div className="grid gap-3 md:grid-cols-7">
-          {days.map((day) => {
+          {days.map((day, index) => {
             const key = isoDate(day);
             const items = sessionsByDay.get(key) ?? [];
             const isToday = key === today;
             return (
+              <Reveal key={key} delay={index * 60}>
               <div
-                key={key}
                 className={`rounded-xl border bg-surface p-3 shadow-sm ${
                   isToday ? "border-brand-400" : "border-transparent"
                 }`}
@@ -162,6 +163,7 @@ export function PlanningPage() {
                   </div>
                 )}
               </div>
+              </Reveal>
             );
           })}
         </div>

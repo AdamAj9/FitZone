@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { subscriptionsApi } from "../../api/subscriptions";
+import { AnimatedNumber } from "../../components/ui/AnimatedNumber";
 import { Reveal } from "../../components/ui/Reveal";
 import { OFFERINGS } from "../../data/offerings";
 import type { Period } from "../../types/subscriptions";
@@ -58,7 +59,7 @@ export function HomePage() {
         <div className="mx-auto max-w-7xl px-6 py-28 lg:py-40">
           <Reveal className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-400"></span>
               {t("home.badge")}
             </span>
             <h1 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
@@ -73,13 +74,13 @@ export function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/register"
-                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:-translate-y-0.5 hover:opacity-90"
+                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
               >
                 {t("home.ctaStart")} →
               </Link>
               <Link
                 to="/plans"
-                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10"
+                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
               >
                 {t("home.ctaPlans")}
               </Link>
@@ -113,9 +114,10 @@ export function HomePage() {
         <Reveal className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-bold text-brand-700 md:text-4xl">
-                {s.value}
-              </p>
+              <AnimatedNumber
+                value={s.value}
+                className="block text-3xl font-bold text-brand-700 md:text-4xl"
+              />
               <p className="mt-1 text-sm text-ink-500">{s.label}</p>
             </div>
           ))}
@@ -205,7 +207,9 @@ export function HomePage() {
       </section>
 
       {/* === TARIFS === */}
-      <section className="mx-auto max-w-7xl px-4">
+      <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
+        <div className="absolute -left-32 top-0 -z-10 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl" aria-hidden />
+        <div className="absolute -right-24 bottom-0 -z-10 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl" aria-hidden />
         <Reveal className="text-center">
           <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
             {t("home.pricingLabel")}
@@ -220,7 +224,7 @@ export function HomePage() {
             <button
               type="button"
               onClick={() => setPeriod("monthly")}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
                 period === "monthly"
                   ? "bg-surface text-ink-900 shadow-sm"
                   : "text-ink-700"
@@ -231,13 +235,13 @@ export function HomePage() {
             <button
               type="button"
               onClick={() => setPeriod("yearly")}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
                 period === "yearly"
                   ? "bg-surface text-ink-900 shadow-sm"
                   : "text-ink-700"
               }`}
             >
-              {t("home.periodYearly")} <span className="ml-1 text-xs text-brand-600">{t("home.yearlyDiscount")}</span>
+              {t("home.periodYearly")} <span className="ml-1 text-xs font-semibold text-accent-600">{t("home.yearlyDiscount")}</span>
             </button>
           </div>
         </Reveal>
@@ -248,7 +252,7 @@ export function HomePage() {
             return (
               <Reveal key={plan.id} delay={index * 100}>
                 <div
-                  className={`relative rounded-2xl bg-surface p-8 shadow-sm ring-1 transition hover:-translate-y-1 ${
+                  className={`relative rounded-2xl border border-white/60 bg-white/60 p-8 shadow-sm ring-1 backdrop-blur-xl transition hover:-translate-y-1 ${
                     isPremium
                       ? "ring-brand-500 shadow-brand-glow"
                       : "ring-ink-200"
@@ -281,13 +285,13 @@ export function HomePage() {
                   <ul className="mt-5 space-y-2 text-sm">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-ink-700">
-                        <span className="mt-0.5 text-brand-600">✓</span> {f}
+                        <span className="mt-0.5 text-accent-600">✓</span> {f}
                       </li>
                     ))}
                   </ul>
                   <Link
                     to="/plans"
-                    className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition ${
+                    className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition active:scale-[0.97] ${
                       isPremium
                         ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white hover:opacity-90"
                         : "border border-ink-300 text-ink-700 hover:bg-ink-50"
@@ -303,7 +307,9 @@ export function HomePage() {
       </section>
 
       {/* === COACHS === */}
-      <section className="mx-auto max-w-7xl px-4">
+      <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
+        <div className="absolute -right-32 top-10 -z-10 h-80 w-80 rounded-full bg-accent-300/30 blur-3xl" aria-hidden />
+        <div className="absolute -left-24 bottom-0 -z-10 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl" aria-hidden />
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
@@ -325,7 +331,7 @@ export function HomePage() {
             <Reveal key={coach.id} delay={index * 100}>
               <Link
                 to={`/coaches/${coach.id}`}
-                className="group block rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
+                className="group block rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-2xl font-bold text-white">
@@ -414,13 +420,13 @@ export function HomePage() {
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link
                   to="/register"
-                  className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:-translate-y-0.5 hover:bg-brand-50"
+                  className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:-translate-y-0.5 hover:bg-brand-50 active:scale-[0.97] active:translate-y-0"
                 >
                   {t("home.ctaCreateAccount")} →
                 </Link>
                 <Link
                   to="/coaches"
-                  className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10"
+                  className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
                 >
                   {t("home.ctaMeetCoaches")}
                 </Link>

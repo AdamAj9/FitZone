@@ -194,7 +194,7 @@ export function Header() {
               </NavLink>
               <NavLink
                 to="/register"
-                className="rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-sm font-medium text-white shadow-brand-glow transition hover:opacity-90"
+                className="rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-sm font-medium text-white shadow-brand-glow transition hover:opacity-90 active:scale-[0.97]"
               >
                 {t("nav.register")}
               </NavLink>

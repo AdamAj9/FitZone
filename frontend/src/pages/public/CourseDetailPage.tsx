@@ -13,6 +13,7 @@ import { apiErrorMessage } from "../../lib/errors";
 import { useAuthStore } from "../../store/auth";
 import type { CourseSessionItem } from "../../types/sessions";
 import { CourseCard } from "../../components/CourseCard";
+import { Reveal } from "../../components/ui/Reveal";
 
 interface SessionRowProps {
   session: CourseSessionItem;
@@ -184,7 +185,7 @@ export function CourseDetailPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <div className="lg:col-span-2 space-y-6">
-        <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
+        <Reveal className="overflow-hidden rounded-2xl bg-surface shadow-sm">
          <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
             <img
               src={`/images/courses/${course.slug}.png`}
@@ -213,9 +214,9 @@ export function CourseDetailPage() {
               {course.description}
             </p>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="rounded-2xl bg-surface p-6 shadow-sm">
+        <Reveal delay={100} className="rounded-2xl bg-surface p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-900">
             {t("courseDetail.upcomingSessions")}
           </h2>
@@ -245,11 +246,11 @@ export function CourseDetailPage() {
               ))}
             </ul>
           )}
-        </div>
+        </Reveal>
       </div>
 
       <aside className="space-y-4">
-        <div className="rounded-2xl bg-surface p-6 shadow-sm">
+        <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
           <p className="text-sm text-slate-500">{t("courseDetail.unitPrice")}</p>
           <p className="mt-1 text-3xl font-bold text-slate-900">
             {unitPrice > 0
@@ -279,10 +280,10 @@ export function CourseDetailPage() {
               {t("courseDetail.subscribePremium")}
             </Link>
           )}
-        </div>
+        </Reveal>
 
         {course.coach && (
-          <div className="rounded-2xl bg-surface p-6 shadow-sm">
+          <Reveal delay={100} className="rounded-2xl bg-surface p-6 shadow-sm">
             <p className="text-sm text-slate-500">{t("courseDetail.coach")}</p>
             <p className="mt-1 text-lg font-semibold text-slate-900">
               {course.coach.full_name}
@@ -303,11 +304,11 @@ export function CourseDetailPage() {
             >
               {t("courseDetail.viewProfile")} →
             </Link>
-          </div>
+          </Reveal>
         )}
       {course.coach &&
           (course.coach.rating_count ?? 0) > 0 && (
-            <div className="rounded-2xl bg-surface p-6 shadow-sm">
+            <Reveal delay={200} className="rounded-2xl bg-surface p-6 shadow-sm">
               <p className="text-sm text-slate-500">{t("courseDetail.coachReviews")}</p>
               <p className="mt-1 flex items-center gap-2 text-lg font-semibold text-slate-900">
                 ⭐ {course.coach.rating_average?.toFixed(1)}
@@ -321,7 +322,7 @@ export function CourseDetailPage() {
               >
                 {t("courseDetail.viewAllReviews")} →
               </Link>
-            </div>
+            </Reveal>
           )}
       </aside>
 
@@ -335,8 +336,10 @@ export function CourseDetailPage() {
             {similarQuery.data?.results
               .filter((c) => c.slug !== course.slug)
               .slice(0, 3)
-              .map((c) => (
-                <CourseCard key={c.id} course={c} />
+              .map((c, index) => (
+                <Reveal key={c.id} delay={index * 100}>
+                  <CourseCard course={c} />
+                </Reveal>
               ))}
           </div>
         </div>

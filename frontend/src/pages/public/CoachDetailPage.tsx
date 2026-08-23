@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { coursesApi } from "../../api/courses";
 import { ratingsApi } from "../../api/ratings";
 import { StarRating, StarRatingInput } from "../../components/StarRating";
+import { Reveal } from "../../components/ui/Reveal";
 import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 import type { Rating } from "../../types/ratings";
@@ -115,7 +116,7 @@ export function CoachDetailPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <aside className="space-y-4">
-        <div className="rounded-2xl bg-surface p-6 text-center shadow-sm">
+        <Reveal className="rounded-2xl bg-surface p-6 text-center shadow-sm">
           <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-brand-100 text-3xl font-bold text-brand-700">
             {coach.first_name.charAt(0)}
             {coach.last_name.charAt(0)}
@@ -138,20 +139,20 @@ export function CoachDetailPage() {
               size="md"
             />
           </div>
-        </div>
+        </Reveal>
 
         {profile?.bio && (
-          <div className="rounded-2xl bg-surface p-6 shadow-sm">
+          <Reveal delay={100} className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="font-semibold text-slate-900">{t("coachDetail.biography")}</h2>
             <p className="mt-2 whitespace-pre-line text-sm text-slate-600">
               {profile.bio}
             </p>
-          </div>
+          </Reveal>
         )}
       </aside>
 
       <div className="lg:col-span-2 space-y-6">
-        <section>
+        <Reveal as="section">
           <h2 className="mb-4 text-xl font-semibold text-slate-900">
             {t("coachDetail.coursesBy", { name: coach.first_name })}
           </h2>
@@ -182,10 +183,10 @@ export function CoachDetailPage() {
               ))}
             </div>
           )}
-        </section>
+        </Reveal>
 
         {user && (
-          <section className="rounded-2xl bg-surface p-6 shadow-sm">
+          <Reveal as="section" delay={100} className="rounded-2xl bg-surface p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-slate-900">
               {editingId ? t("coachDetail.myReview") : t("coachDetail.leaveReview")}
             </h2>
@@ -235,10 +236,10 @@ export function CoachDetailPage() {
                 </button>
               )}
             </div>
-          </section>
+          </Reveal>
         )}
 
-        <section>
+        <Reveal as="section" delay={200}>
           <h2 className="mb-4 text-xl font-semibold text-slate-900">
             {t("coachDetail.reviewsCount", { count: coach.rating_count })}
           </h2>
@@ -266,7 +267,7 @@ export function CoachDetailPage() {
               ))}
             </ul>
           )}
-        </section>
+        </Reveal>
       </div>
     </div>
   );

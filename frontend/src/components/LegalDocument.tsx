@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { Reveal } from "./ui/Reveal";
+
 /** Une ligne de tableau : autant de cellules que de colonnes déclarées. */
 type LegalTable = {
   columns: string[];
@@ -33,7 +35,7 @@ export function LegalDocument({ tKey }: LegalDocumentProps) {
 
   return (
     <div className="space-y-6">
-      <header className="rounded-2xl bg-surface p-8 shadow-sm">
+      <Reveal as="header" className="rounded-2xl bg-surface p-8 shadow-sm">
         <p className="text-sm font-semibold uppercase tracking-wider text-brand-700">
           {t("legal.sectionLabel")}
         </p>
@@ -47,11 +49,12 @@ export function LegalDocument({ tKey }: LegalDocumentProps) {
           <span className="font-semibold">{t("legal.academicTitle")}</span>{" "}
           {t("legal.academicNotice")}
         </p>
-      </header>
+      </Reveal>
 
       <div className="grid gap-6 lg:grid-cols-4">
         {sections.length > 1 && (
-          <nav
+          <Reveal
+            as="nav"
             aria-label={t("legal.tocTitle")}
             className="min-w-0 rounded-2xl bg-surface p-6 shadow-sm lg:col-span-1 lg:sticky lg:top-6 lg:self-start"
           >
@@ -70,10 +73,12 @@ export function LegalDocument({ tKey }: LegalDocumentProps) {
                 </li>
               ))}
             </ol>
-          </nav>
+          </Reveal>
         )}
 
-        <article
+        <Reveal
+          as="article"
+          delay={100}
           className={`min-w-0 rounded-2xl bg-surface p-4 shadow-sm sm:p-8 ${
             sections.length > 1 ? "lg:col-span-3" : "lg:col-span-4"
           }`}
@@ -172,7 +177,7 @@ export function LegalDocument({ tKey }: LegalDocumentProps) {
               </Link>
             </div>
           </footer>
-        </article>
+        </Reveal>
       </div>
     </div>
   );
