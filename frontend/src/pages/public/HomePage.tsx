@@ -10,6 +10,7 @@ import { AnimatedWords } from "../../components/ui/AnimatedWords";
 import { Marquee } from "../../components/ui/Marquee";
 import { Reveal } from "../../components/ui/Reveal";
 import { TiltCard } from "../../components/ui/TiltCard";
+import { VoltGlow } from "../../components/ui/VoltGlow";
 import { OFFERINGS } from "../../data/offerings";
 import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
@@ -31,6 +32,25 @@ const BENTO_SPANS = [
   "sm:col-span-2 lg:col-span-2",
   "sm:col-span-2 lg:col-span-2",
 ];
+
+/** Renders a heading with its final word picked out in the volt→ember
+ *  gradient — works across languages since it doesn't depend on which
+ *  word that is, just "the last one". Used sparingly (a few headings
+ *  only), per the brand direction: gradient is an accent, not a default. */
+function GradientTail({ text }: { text: string }) {
+  const words = text.trim().split(" ");
+  if (words.length < 2) {
+    return <span className="bg-volt-ember bg-clip-text text-transparent">{text}</span>;
+  }
+  const head = words.slice(0, -1).join(" ");
+  const tail = words[words.length - 1];
+  return (
+    <>
+      {head}{" "}
+      <span className="bg-volt-ember bg-clip-text text-transparent">{tail}</span>
+    </>
+  );
+}
 
 export function HomePage() {
   const { t } = useTranslation();
@@ -65,7 +85,7 @@ export function HomePage() {
   };
 
   return (
-    <div className="space-y-24 pb-24">
+    <div className="space-y-24 bg-char-950 pb-24">
       <div>
       {/* === HERO === */}
       <section
@@ -74,29 +94,28 @@ export function HomePage() {
         className="group relative isolate overflow-hidden text-white"
       >
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center grayscale-[55%]"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
         <div
-          className="absolute inset-0 -z-10 bg-gradient-to-br from-ink-950/85 via-ink-900/75 to-brand-900/70"
+          className="absolute inset-0 -z-10 bg-gradient-to-br from-char-950/92 via-char-950/78 to-char-900/70"
           aria-hidden
         />
         <div
           className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(226,196,255,0.32), rgba(192,132,252,0.1) 40%, transparent 70%)",
+              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(182,255,0,0.22), rgba(255,106,0,0.14) 45%, transparent 70%)",
           }}
           aria-hidden
         />
-        <div className="absolute -left-24 top-32 -z-10 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl" aria-hidden />
-        <div className="absolute -right-20 bottom-20 -z-10 h-96 w-96 rounded-full bg-brand-700/30 blur-3xl" aria-hidden />
+        <VoltGlow />
 
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:py-40">
+        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:py-40">
           <Reveal className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/5 px-3 py-1 text-xs font-medium text-brand-100 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-400"></span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-volt-400/30 bg-white/5 px-3 py-1 text-xs font-medium text-volt-100 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-volt-400"></span>
               {t("home.badge")}
             </span>
             <h1 className="mt-6 font-display text-4xl font-bold leading-tight md:text-6xl">
@@ -111,42 +130,41 @@ export function HomePage() {
                 words={[
                   {
                     text: t("home.titleLine2"),
-                    className:
-                      "bg-gradient-to-r from-brand-300 to-brand-100 bg-clip-text text-transparent",
+                    className: "bg-volt-ember bg-clip-text text-transparent",
                   },
                 ]}
               />
             </h1>
-            <p className="mt-5 max-w-lg text-lg text-ink-100 md:text-xl">
+            <p className="mt-5 max-w-lg text-lg text-char-200 md:text-xl">
               {t("home.subtitle")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/register"
-                className="rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 px-7 py-3.5 font-semibold text-white shadow-brand-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
+                className="rounded-lg bg-volt-ember px-7 py-3.5 font-bold text-char-950 shadow-volt-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
               >
                 {t("home.ctaStart")} →
               </Link>
               <Link
                 to="/plans"
-                className="rounded-lg border border-white/30 bg-white/5 px-7 py-3.5 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
+                className="rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
               >
                 {t("home.ctaPlans")}
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-ink-200">
+            <div className="mt-10 flex items-center gap-6 text-sm text-char-300">
               <div className="flex items-center gap-2">
                 <span className="text-amber-400">★★★★★</span>
                 <span>{t("home.ratingValue")} {t("home.ratingText")}</span>
               </div>
-              <span className="hidden h-4 w-px bg-white/20 md:block" />
+              <span className="hidden h-4 w-px bg-white/15 md:block" />
               <span className="hidden md:inline">{t("home.noCommitment")}</span>
             </div>
           </Reveal>
         </div>
 
         <svg
-          className="absolute inset-x-0 -bottom-1 h-16 w-full text-ink-50 md:h-24"
+          className="absolute inset-x-0 -bottom-1 h-16 w-full text-char-950 md:h-24"
           viewBox="0 0 1440 100"
           preserveAspectRatio="none"
           aria-hidden
@@ -160,45 +178,47 @@ export function HomePage() {
 
       {/* === MARQUEE === */}
       <Marquee
-        className="bg-ink-900 py-4 text-white"
+        className="bg-char-900 py-4 text-white"
         items={OFFERINGS.map((group) => (
           <span key={group.key} className="flex items-center gap-3 font-display text-lg uppercase tracking-wide">
             <span aria-hidden>{group.icon}</span>
             {t(`offerings.${group.key}.title`)}
+            <span className="text-volt-400" aria-hidden>✦</span>
           </span>
         ))}
       />
       </div>
 
-      {/* === TRUST STATS === */}
-      <section className="mx-auto max-w-7xl px-4">
-        <Reveal className="grid gap-4 rounded-2xl bg-surface p-8 shadow-sm md:grid-cols-4">
+      {/* === TRUST STATS — full-bleed dark separator band === */}
+      <section className="relative isolate w-full overflow-hidden bg-char-900 py-16">
+        <VoltGlow subtle />
+        <Reveal className="relative mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
               <AnimatedNumber
                 value={s.value}
-                className="block text-3xl font-bold text-brand-700 md:text-4xl"
+                className="block bg-volt-ember bg-clip-text font-display text-3xl font-bold text-transparent md:text-4xl"
               />
-              <p className="mt-1 text-sm text-ink-500">{s.label}</p>
+              <p className="mt-2 text-sm text-char-300">{s.label}</p>
             </div>
           ))}
         </Reveal>
       </section>
 
-      {/* === NOTRE OFFRE — cards photo full-bleed === */}
+      {/* === NOTRE OFFRE / INSTALLATIONS — cards photo full-bleed === */}
       <section className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
+            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
               {t("home.offerLabel")}
             </p>
-            <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
-              {t("home.offerTitle")}
+            <h2 className="mt-2 font-display text-4xl font-bold text-white">
+              <GradientTail text={t("home.offerTitle")} />
             </h2>
           </div>
           <Link
             to="/plans"
-            className="text-sm font-semibold text-brand-700 hover:underline"
+            className="text-sm font-semibold text-volt-400 hover:underline"
           >
             {t("home.offerSeeAll")} →
           </Link>
@@ -216,15 +236,15 @@ export function HomePage() {
                 <TiltCard className="h-full">
                   <Link
                     to={group.items[0].href}
-                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md transition hover:shadow-brand-glow lg:aspect-auto lg:h-full"
+                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-md ring-1 ring-char-800 transition hover:shadow-volt-glow hover:ring-volt-400/50 lg:aspect-auto lg:h-full"
                   >
                     <img
                       src={group.image}
                       alt={t(`offerings.${group.key}.title`)}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="absolute inset-0 h-full w-full object-cover grayscale-[30%] transition-transform duration-500 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/50 to-ink-950/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-char-950/95 via-char-950/55 to-char-950/15" />
                     <div className="absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-6">
                       <div className="flex items-center gap-2">
                         <span className={isLarge ? "text-4xl drop-shadow" : "text-2xl drop-shadow"}>
@@ -237,16 +257,16 @@ export function HomePage() {
                         </h3>
                       </div>
                       {showItems && (
-                        <ul className="mt-3 space-y-1 text-sm text-ink-100">
+                        <ul className="mt-3 space-y-1 text-sm text-char-200">
                           {group.items.map((it) => (
                             <li key={it.key} className="flex items-start gap-2">
-                              <span className="mt-1 h-1 w-1 rounded-full bg-brand-300"></span>
+                              <span className="mt-1 h-1 w-1 rounded-full bg-volt-400"></span>
                               {t(`offerings.${group.key}.items.${it.key}.label`)}
                             </li>
                           ))}
                         </ul>
                       )}
-                      <div className="mt-4 flex items-center text-sm font-medium text-brand-200 opacity-0 transition group-hover:opacity-100">
+                      <div className="mt-4 flex items-center text-sm font-medium text-volt-300 opacity-0 transition group-hover:opacity-100">
                         {t("home.discoverMore")} →
                       </div>
                     </div>
@@ -259,10 +279,10 @@ export function HomePage() {
       </section>
 
       {/* === HOW IT WORKS === */}
-      <section className="bg-ink-900 py-20 text-white">
+      <section className="bg-char-900 py-20 text-white">
         <div className="mx-auto max-w-7xl px-4">
           <Reveal className="text-center">
-            <p className="text-sm font-bold uppercase tracking-wider text-brand-400">
+            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
               {t("home.howItWorksLabel")}
             </p>
             <h2 className="mt-2 font-display text-4xl font-bold">
@@ -272,12 +292,12 @@ export function HomePage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {STEPS.map((s, index) => (
               <Reveal key={s.n} delay={index * 100}>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur transition hover:-translate-y-1 hover:border-brand-400/40">
-                  <p className="bg-gradient-to-r from-brand-400 to-brand-200 bg-clip-text text-5xl font-bold text-transparent">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur transition hover:-translate-y-1 hover:border-volt-400/40">
+                  <p className="bg-volt-ember bg-clip-text font-display text-5xl font-bold text-transparent">
                     {s.n}
                   </p>
                   <h3 className="mt-4 text-xl font-semibold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-ink-200">{s.description}</p>
+                  <p className="mt-2 text-sm text-char-300">{s.description}</p>
                 </div>
               </Reveal>
             ))}
@@ -285,28 +305,27 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* === TARIFS === */}
+      {/* === TARIFS / ABONNEMENTS === */}
       <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
-        <div className="absolute -left-32 top-0 -z-10 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl" aria-hidden />
-        <div className="absolute -right-24 bottom-0 -z-10 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl" aria-hidden />
+        <VoltGlow subtle />
         <Reveal className="text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
+          <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
             {t("home.pricingLabel")}
           </p>
-          <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
-            {t("home.pricingTitle")}
+          <h2 className="mt-2 font-display text-4xl font-bold text-white">
+            <GradientTail text={t("home.pricingTitle")} />
           </h2>
-          <p className="mt-3 text-ink-700">
+          <p className="mt-3 text-char-300">
             {t("home.pricingSubtitle")}
           </p>
-          <div className="mt-6 inline-flex rounded-full bg-ink-100 p-1">
+          <div className="mt-6 inline-flex rounded-full border border-char-800 bg-char-900 p-1">
             <button
               type="button"
               onClick={() => setPeriod("monthly")}
               className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
                 period === "monthly"
-                  ? "bg-surface text-ink-900 shadow-sm"
-                  : "text-ink-700"
+                  ? "bg-volt-400 text-char-950"
+                  : "text-char-300"
               }`}
             >
               {t("home.periodMonthly")}
@@ -316,11 +335,11 @@ export function HomePage() {
               onClick={() => setPeriod("yearly")}
               className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
                 period === "yearly"
-                  ? "bg-surface text-ink-900 shadow-sm"
-                  : "text-ink-700"
+                  ? "bg-volt-400 text-char-950"
+                  : "text-char-300"
               }`}
             >
-              {t("home.periodYearly")} <span className="ml-1 text-xs font-semibold text-accent-600">{t("home.yearlyDiscount")}</span>
+              {t("home.periodYearly")} <span className="ml-1 text-xs font-semibold text-ember-400">{t("home.yearlyDiscount")}</span>
             </button>
           </div>
         </Reveal>
@@ -329,57 +348,66 @@ export function HomePage() {
           {filteredPlans.map((plan, index) => {
             const isPremium = plan.tier === "premium";
             const { name, description, features } = localizedPlan(t, plan);
-            return (
-              <Reveal key={plan.id} delay={index * 100}>
-                <div
-                  className={`relative rounded-2xl border border-white/60 bg-white/60 p-8 shadow-sm ring-1 backdrop-blur-xl transition hover:-translate-y-1 ${
-                    isPremium
-                      ? "ring-brand-500 shadow-brand-glow"
-                      : "ring-ink-200"
+            const card = (
+              <div
+                className={`relative h-full rounded-2xl border p-8 backdrop-blur-xl transition hover:-translate-y-1 ${
+                  isPremium
+                    ? "border-transparent bg-char-900"
+                    : "border-char-800 bg-char-900/60 shadow-sm"
+                }`}
+              >
+                {isPremium && (
+                  <span className="absolute -top-3 right-6 rounded-full bg-volt-ember px-3 py-1 text-xs font-bold text-char-950">
+                    ⭐ {t("home.recommended")}
+                  </span>
+                )}
+                <p
+                  className={`text-xs font-bold uppercase tracking-wide ${
+                    isPremium ? "text-volt-400" : "text-char-400"
                   }`}
                 >
-                  {isPremium && (
-                    <span className="absolute -top-3 right-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 px-3 py-1 text-xs font-semibold text-white">
-                      ⭐ {t("home.recommended")}
-                    </span>
-                  )}
-                  <p
-                    className={`text-xs font-bold uppercase tracking-wide ${
-                      isPremium ? "text-brand-600" : "text-ink-500"
-                    }`}
-                  >
-                    {plan.tier_display}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-bold text-ink-900">
-                    {name}
-                  </h3>
-                  <p className="mt-4">
-                    <span className="text-5xl font-bold text-ink-900">
-                      {Number(plan.price).toFixed(0)}
-                    </span>
-                    <span className="text-ink-500">
-                      {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
-                    </span>
-                  </p>
-                  <p className="mt-2 text-sm text-ink-700">{description}</p>
-                  <ul className="mt-5 space-y-2 text-sm">
-                    {features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-ink-700">
-                        <span className="mt-0.5 text-accent-600">✓</span> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    to="/plans"
-                    className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition active:scale-[0.97] ${
-                      isPremium
-                        ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white hover:opacity-90"
-                        : "border border-ink-300 text-ink-700 hover:bg-ink-50"
-                    }`}
-                  >
-                    {t("home.subscribe")}
-                  </Link>
-                </div>
+                  {plan.tier_display}
+                </p>
+                <h3 className="mt-2 text-2xl font-bold text-white">
+                  {name}
+                </h3>
+                <p className="mt-4">
+                  <span className="text-5xl font-bold text-white">
+                    {Number(plan.price).toFixed(0)}
+                  </span>
+                  <span className="text-char-400">
+                    {" €"} / {plan.period === "monthly" ? t("home.perMonth") : t("home.perYear")}
+                  </span>
+                </p>
+                <p className="mt-2 text-sm text-char-300">{description}</p>
+                <ul className="mt-5 space-y-2 text-sm">
+                  {features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-char-200">
+                      <span className="mt-0.5 text-volt-400">✓</span> {f}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/plans"
+                  className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition active:scale-[0.97] ${
+                    isPremium
+                      ? "bg-volt-ember text-char-950 hover:opacity-90"
+                      : "border border-char-700 text-char-200 hover:bg-white/5"
+                  }`}
+                >
+                  {t("home.subscribe")}
+                </Link>
+              </div>
+            );
+            return (
+              <Reveal key={plan.id} delay={index * 100}>
+                {isPremium ? (
+                  <div className="h-full rounded-2xl bg-volt-ember p-[2px] shadow-volt-glow">
+                    {card}
+                  </div>
+                ) : (
+                  card
+                )}
               </Reveal>
             );
           })}
@@ -388,20 +416,19 @@ export function HomePage() {
 
       {/* === COACHS === */}
       <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
-        <div className="absolute -right-32 top-10 -z-10 h-80 w-80 rounded-full bg-accent-300/30 blur-3xl" aria-hidden />
-        <div className="absolute -left-24 bottom-0 -z-10 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl" aria-hidden />
+        <VoltGlow subtle flip />
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
+            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
               {t("home.teamLabel")}
             </p>
-            <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
-              {t("home.teamTitle")}
+            <h2 className="mt-2 font-display text-4xl font-bold text-white">
+              <GradientTail text={t("home.teamTitle")} />
             </h2>
           </div>
           <Link
             to="/coaches"
-            className="text-sm font-semibold text-brand-700 hover:underline"
+            className="text-sm font-semibold text-volt-400 hover:underline"
           >
             {t("home.teamSeeAll")} →
           </Link>
@@ -412,35 +439,35 @@ export function HomePage() {
               <TiltCard>
               <Link
                 to={`/coaches/${coach.id}`}
-                className="group block rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:border-brand-400 hover:shadow-brand-glow"
+                className="group block rounded-2xl border border-char-800 bg-char-900/70 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-volt-400/50 hover:shadow-volt-glow"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-2xl font-bold text-white">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-volt-ember text-2xl font-bold text-char-950">
                     {coach.first_name.charAt(0)}
                     {coach.last_name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-ink-900 group-hover:text-brand-700">
+                    <p className="font-semibold text-white group-hover:text-volt-400">
                       {coach.full_name}
                     </p>
-                    <p className="text-sm text-ink-500">
+                    <p className="text-sm text-char-400">
                       {coach.coach_profile?.specialties || t("home.coachFallback")}
                     </p>
                   </div>
                 </div>
                 {coach.coach_profile?.bio && (
-                  <p className="mt-4 line-clamp-3 text-sm text-ink-700">
+                  <p className="mt-4 line-clamp-3 text-sm text-char-300">
                     {coach.coach_profile.bio}
                   </p>
                 )}
                 <div className="mt-4 flex items-center gap-2 text-sm">
                   <span className="text-amber-500">
                     {"★".repeat(Math.round(coach.rating_average ?? 0))}
-                    <span className="text-ink-200">
+                    <span className="text-char-700">
                       {"★".repeat(5 - Math.round(coach.rating_average ?? 0))}
                     </span>
                   </span>
-                  <span className="text-ink-500">
+                  <span className="text-char-400">
                     {coach.rating_average
                       ? `${coach.rating_average.toFixed(1)} (${coach.rating_count})`
                       : t("home.teamBadgeNew")}
@@ -456,22 +483,22 @@ export function HomePage() {
       {/* === TÉMOIGNAGES === */}
       <section className="mx-auto max-w-7xl px-4">
         <Reveal className="text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-brand-600">
+          <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
             {t("home.testimonialsLabel")}
           </p>
-          <h2 className="mt-2 font-display text-4xl font-bold text-ink-900">
+          <h2 className="mt-2 font-display text-4xl font-bold text-white">
             {t("home.testimonialsTitle")}
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {TESTIMONIALS.map((item, index) => (
             <Reveal key={item.name} delay={index * 100}>
-              <div className="rounded-2xl border border-ink-200 bg-surface p-6 transition hover:-translate-y-1">
+              <div className="rounded-2xl border border-char-800 bg-char-900 p-6 transition hover:-translate-y-1">
                 <p className="text-amber-500">★★★★★</p>
-                <p className="mt-3 text-sm text-ink-800">"{item.quote}"</p>
-                <div className="mt-4 border-t border-ink-200 pt-4">
-                  <p className="font-semibold text-ink-900">{item.name}</p>
-                  <p className="text-xs text-ink-500">{item.role}</p>
+                <p className="mt-3 text-sm text-char-100">"{item.quote}"</p>
+                <div className="mt-4 border-t border-char-800 pt-4">
+                  <p className="font-semibold text-white">{item.name}</p>
+                  <p className="text-xs text-char-400">{item.role}</p>
                 </div>
               </div>
             </Reveal>
@@ -484,31 +511,32 @@ export function HomePage() {
         <Reveal>
           <div className="relative isolate overflow-hidden rounded-3xl shadow-xl">
             <div
-              className="absolute inset-0 -z-10 bg-cover bg-center"
+              className="absolute inset-0 -z-20 bg-cover bg-center grayscale-[55%]"
               style={{ backgroundImage: `url('${CTA_IMAGE}')` }}
               aria-hidden
             />
             <div
-              className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-700/90 via-ink-900/85 to-ink-950/90"
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-char-950/95 via-char-950/88 to-char-950/95"
               aria-hidden
             />
-            <div className="px-8 py-16 text-center text-white md:px-12 md:py-20">
+            <VoltGlow flip />
+            <div className="relative px-8 py-16 text-center text-white md:px-12 md:py-20">
               <h2 className="font-display text-3xl font-bold md:text-5xl">
                 {t("home.ctaBottomTitle")}
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-ink-100">
+              <p className="mx-auto mt-4 max-w-xl text-char-200">
                 {t("home.ctaBottomSubtitle")}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link
                   to="/register"
-                  className="rounded-lg bg-white px-8 py-3 font-semibold text-brand-700 shadow-brand-glow transition hover:-translate-y-0.5 hover:bg-brand-50 active:scale-[0.97] active:translate-y-0"
+                  className="rounded-lg bg-volt-ember px-8 py-3 font-bold text-char-950 shadow-ember-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
                 >
                   {t("home.ctaCreateAccount")} →
                 </Link>
                 <Link
                   to="/coaches"
-                  className="rounded-lg border border-white/40 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
+                  className="rounded-lg border border-white/30 bg-white/5 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
                 >
                   {t("home.ctaMeetCoaches")}
                 </Link>

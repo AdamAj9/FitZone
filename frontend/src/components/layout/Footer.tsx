@@ -35,7 +35,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mt-auto bg-ink-950 text-ink-300">
+    <footer className="mt-auto border-t border-char-800 bg-char-950 text-char-300">
       <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-10 lg:grid-cols-5">
           <div className="lg:col-span-2">
@@ -44,12 +44,12 @@ export function Footer() {
               className="flex items-center gap-2 text-xl font-bold text-white"
             >
               <img
-                src="/images/logo1.png"
+                src="/images/logo1-volt.png"
                 alt="FitZone"
                 className="h-16 w-auto object-contain"
               />
             </Link>
-            <p className="mt-4 max-w-sm text-sm text-ink-300">
+            <p className="mt-4 max-w-sm text-sm text-char-400">
               {t("footer.description")}
             </p>
             <div className="mt-6 space-y-2 text-sm">
@@ -75,7 +75,7 @@ export function Footer() {
                   <li key={l.label}>
                     <Link
                       to={l.to}
-                      className="text-sm text-ink-300 transition hover:text-white"
+                      className="text-sm text-char-400 transition hover:text-volt-400"
                     >
                       {l.label}
                     </Link>
@@ -86,7 +86,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-ink-800 pt-6 text-xs text-ink-500 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-char-800 pt-6 text-xs text-char-500 md:flex-row">
           <p>
             © {new Date().getFullYear()} FitZone — TFE — {t("footer.rights")}
           </p>

@@ -13,3 +13,4 @@ export {
 export { Reveal } from "./Reveal";
 export { Skeleton, SkeletonCard, SkeletonRow } from "./Skeleton";
 export { TiltCard } from "./TiltCard";
+export { VoltGlow } from "./VoltGlow";

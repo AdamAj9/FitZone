@@ -15,15 +15,15 @@ const LANGUAGES = [
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
     isActive
-      ? "text-brand-700 bg-brand-50"
-      : "text-ink-700 hover:text-brand-700 hover:bg-ink-100"
+      ? "text-volt-400"
+      : "text-char-200 hover:text-volt-400"
   }`;
 
 const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   `block px-4 py-2 text-base font-medium rounded-md ${
     isActive
-      ? "text-brand-700 bg-brand-50"
-      : "text-ink-700 hover:bg-ink-100"
+      ? "text-volt-400 bg-white/5"
+      : "text-char-200 hover:bg-white/5"
   }`;
 
 export function Header() {
@@ -68,14 +68,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-200 bg-brand-100/90 backdrop-blur">
-            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4">
+    <header className="sticky top-0 z-40 border-b border-char-800 bg-char-950/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4">
         <Link
           to="/"
           className="flex items-center gap-2 text-xl font-bold"
           onClick={closeMenu}
         >
-          <img src="/images/logo.png" alt="FitZone" className="h-16 w-auto object-contain" />
+          <img src="/images/logo-volt.png" alt="FitZone" className="h-16 w-auto object-contain" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
@@ -86,7 +86,7 @@ export function Header() {
           <div className="group relative">
             <button
               type="button"
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 hover:text-brand-700"
+              className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-char-200 hover:text-volt-400"
             >
               {t("header.ourOffer")}
               <svg
@@ -105,29 +105,29 @@ export function Header() {
               </svg>
             </button>
             <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              <div className="w-[920px] overflow-hidden rounded-2xl border border-ink-200 bg-surface shadow-2xl">
+              <div className="w-[920px] overflow-hidden rounded-2xl border border-char-800 bg-char-900 shadow-2xl">
                 <div className="grid grid-cols-3 gap-6 p-6">
                   {OFFERINGS.map((group) => (
                     <Link
                       key={group.key}
                       to={group.items[0]?.href ?? "/courses"}
-                      className="group/item relative overflow-hidden rounded-xl border border-ink-200 bg-ink-100 transition hover:border-brand-400 hover:shadow-brand-glow"
+                      className="group/item relative overflow-hidden rounded-xl border border-char-700 bg-char-850 transition hover:border-volt-400/60 hover:shadow-volt-glow"
                     >
                       <div className="aspect-[16/10] overflow-hidden">
                         <img
                           src={group.image}
                           alt={t(`offerings.${group.key}.title`)}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-110"
+                          className="h-full w-full object-cover grayscale-[15%] transition-transform duration-500 group-hover/item:scale-110"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-char-950/90 via-char-950/30 to-transparent" />
                       </div>
                       <div className="absolute inset-x-0 bottom-0 p-3 text-white">
                         <p className="flex items-center gap-1.5 text-sm font-semibold">
                           <span>{group.icon}</span>
                           {t(`offerings.${group.key}.title`)}
                         </p>
-                        <p className="mt-1 line-clamp-1 text-xs text-ink-100">
+                        <p className="mt-1 line-clamp-1 text-xs text-char-300">
                           {group.items
                             .map((i) => t(`offerings.${group.key}.items.${i.key}.label`))
                             .join(" · ")}
@@ -136,18 +136,18 @@ export function Header() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex items-center justify-between bg-ink-900 px-6 py-4 text-white">
+                <div className="flex items-center justify-between border-t border-char-800 bg-char-950 px-6 py-4 text-white">
                   <div>
                     <p className="text-sm font-semibold">
                       {t("header.discoverFitZone")}
                     </p>
-                    <p className="text-xs text-ink-200">
+                    <p className="text-xs text-char-400">
                       {t("header.discoverFitZoneSubtitle")}
                     </p>
                   </div>
                   <Link
                     to="/plans"
-                    className="rounded-md bg-brand-500 px-4 py-2 text-sm font-medium hover:bg-brand-600"
+                    className="rounded-md bg-volt-400 px-4 py-2 text-sm font-semibold text-char-950 transition hover:bg-volt-300"
                   >
                     {t("home.offerSeeAll")} →
                   </Link>
@@ -177,7 +177,7 @@ export function Header() {
               onClick={() => setLangMenuOpen((v) => !v)}
               aria-expanded={langMenuOpen}
               aria-label={t("header.language")}
-              className="flex items-center gap-1 rounded-md border border-ink-200 px-2 py-1 text-xs font-medium text-ink-700 hover:bg-ink-100"
+              className="flex items-center gap-1 rounded-md border border-char-700 px-2 py-1 text-xs font-medium text-char-200 hover:border-volt-400/50 hover:text-volt-400"
             >
               {currentLang.code.toUpperCase()}
               <svg
@@ -191,16 +191,16 @@ export function Header() {
               </svg>
             </button>
             {langMenuOpen && (
-              <div className="absolute right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-md border border-ink-200 bg-surface py-1 shadow-lg">
+              <div className="absolute right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-md border border-char-700 bg-char-900 py-1 shadow-lg">
                 {LANGUAGES.map((l) => (
                   <button
                     key={l.code}
                     type="button"
                     onClick={() => selectLang(l.code)}
-                    className={`block w-full px-3 py-1.5 text-left text-sm hover:bg-ink-100 ${
+                    className={`block w-full px-3 py-1.5 text-left text-sm hover:bg-white/5 ${
                       l.code === currentLang.code
-                        ? "font-semibold text-brand-700"
-                        : "text-ink-700"
+                        ? "font-semibold text-volt-400"
+                        : "text-char-200"
                     }`}
                   >
                     {l.label}
@@ -222,7 +222,7 @@ export function Header() {
               {user.role === "coach" && (
                 <NavLink
                   to="/coach"
-                  className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+                  className="rounded-md bg-ember-600 px-3 py-2 text-sm font-medium text-white hover:bg-ember-700"
                 >
                   {t("header.coachBadge")}
                 </NavLink>
@@ -236,7 +236,7 @@ export function Header() {
                 type="button"
                 onClick={handleLogout}
                 disabled={logoutMutation.isPending}
-                className="rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 disabled:opacity-50"
+                className="rounded-md px-3 py-2 text-sm font-medium text-char-200 hover:text-volt-400 disabled:opacity-50"
               >
                 {t("nav.logout")}
               </button>
@@ -248,7 +248,7 @@ export function Header() {
               </NavLink>
               <NavLink
                 to="/register"
-                className="rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-sm font-medium text-white shadow-brand-glow transition hover:opacity-90 active:scale-[0.97]"
+                className="rounded-md bg-volt-ember px-4 py-2 text-sm font-bold text-char-950 shadow-volt-glow transition hover:opacity-90 active:scale-[0.97]"
               >
                 {t("nav.register")}
               </NavLink>
@@ -261,7 +261,7 @@ export function Header() {
           aria-label={open ? t("header.closeMenu") : t("header.openMenu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-ink-700 hover:bg-ink-100 lg:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-char-200 hover:bg-white/5 lg:hidden"
         >
           <svg
             className="h-6 w-6"
@@ -290,7 +290,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-ink-200 bg-surface px-3 py-3 lg:hidden">
+        <div className="border-t border-char-800 bg-char-950 px-3 py-3 lg:hidden">
           <nav className="space-y-1">
             <NavLink to="/" end onClick={closeMenu} className={mobileNavLinkClass}>
               {t("nav.home")}
@@ -299,7 +299,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileOfferOpen((v) => !v)}
-              className="flex w-full items-center justify-between rounded-md px-4 py-2 text-base font-medium text-ink-700 hover:bg-ink-100"
+              className="flex w-full items-center justify-between rounded-md px-4 py-2 text-base font-medium text-char-200 hover:bg-white/5"
             >
               {t("header.ourOffer")}
               <span
@@ -311,10 +311,10 @@ export function Header() {
               </span>
             </button>
             {mobileOfferOpen && (
-              <div className="rounded-md bg-ink-50 p-3">
+              <div className="rounded-md bg-char-900 p-3">
                 {OFFERINGS.map((group) => (
                   <div key={group.key} className="mb-4 last:mb-0">
-                    <p className="px-2 text-xs font-bold uppercase tracking-wider text-ink-500">
+                    <p className="px-2 text-xs font-bold uppercase tracking-wider text-char-400">
                       {group.icon} {t(`offerings.${group.key}.title`)}
                     </p>
                     <ul className="mt-2 space-y-1">
@@ -323,7 +323,7 @@ export function Header() {
                           <Link
                             to={item.href}
                             onClick={closeMenu}
-                            className="block rounded-md px-2 py-1.5 text-sm text-ink-700 hover:bg-surface"
+                            className="block rounded-md px-2 py-1.5 text-sm text-char-200 hover:bg-white/5"
                           >
                             {t(`offerings.${group.key}.items.${item.key}.label`)}
                           </Link>
@@ -348,7 +348,7 @@ export function Header() {
               {t("nav.plans")}
             </NavLink>
           </nav>
-          <div className="mt-3 space-y-1 border-t border-ink-200 pt-3">
+          <div className="mt-3 space-y-1 border-t border-char-800 pt-3">
             {user ? (
               <>
                 {user.role === "admin" && (
@@ -364,7 +364,7 @@ export function Header() {
                   <NavLink
                     to="/coach"
                     onClick={closeMenu}
-                    className="block rounded-md bg-emerald-600 px-4 py-2 text-base font-medium text-white"
+                    className="block rounded-md bg-ember-600 px-4 py-2 text-base font-medium text-white"
                   >
                     {t("header.coachBadge")}
                   </NavLink>
@@ -381,7 +381,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="block w-full rounded-md px-4 py-2 text-left text-base font-medium text-ink-700 hover:bg-ink-100"
+                  className="block w-full rounded-md px-4 py-2 text-left text-base font-medium text-char-200 hover:bg-white/5"
                 >
                   {t("nav.logout")}
                 </button>
@@ -398,14 +398,14 @@ export function Header() {
                 <NavLink
                   to="/register"
                   onClick={closeMenu}
-                  className="block rounded-md bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-2 text-base font-medium text-white"
+                  className="block rounded-md bg-volt-ember px-4 py-2 text-base font-bold text-char-950"
                 >
                   {t("nav.register")}
                 </NavLink>
               </>
             )}
             <div>
-              <p className="px-4 pb-1.5 text-xs font-medium text-ink-500">
+              <p className="px-4 pb-1.5 text-xs font-medium text-char-400">
                 {t("header.language")}
               </p>
               <div className="flex gap-2 px-4">
@@ -419,8 +419,8 @@ export function Header() {
                     }}
                     className={`flex-1 rounded-md border px-3 py-2 text-sm font-medium ${
                       l.code === currentLang.code
-                        ? "border-brand-500 bg-brand-50 text-brand-700"
-                        : "border-ink-200 text-ink-700 hover:bg-ink-100"
+                        ? "border-volt-400 bg-volt-400/10 text-volt-400"
+                        : "border-char-700 text-char-200 hover:bg-white/5"
                     }`}
                   >
                     {l.code.toUpperCase()}
