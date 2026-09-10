@@ -15,7 +15,7 @@ import { OFFERINGS } from "../../data/offerings";
 import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
 
-const HERO_IMAGE = "/images/hero/Hero%20principal.png";
+const HERO_IMAGE = "/images/hero/Hero-volt-ember.png";
 const CTA_IMAGE = "/images/hero/Hero%20secondaire.png";
 
 type Stat = { value: string; label: string };
@@ -94,23 +94,26 @@ export function HomePage() {
         className="group relative isolate overflow-hidden text-white"
       >
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-center grayscale-[55%]"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-left md:bg-center"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
         <div
-          className="absolute inset-0 -z-10 bg-gradient-to-br from-char-950/92 via-char-950/78 to-char-900/70"
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-char-950/92 via-char-950/55 to-char-950/10"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-char-950/80 via-transparent to-transparent"
           aria-hidden
         />
         <div
           className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(182,255,0,0.22), rgba(255,106,0,0.14) 45%, transparent 70%)",
+              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(182,255,0,0.18), rgba(255,106,0,0.12) 45%, transparent 70%)",
           }}
           aria-hidden
         />
-        <VoltGlow />
 
         <div className="relative mx-auto max-w-7xl px-6 py-28 lg:py-40">
           <Reveal className="max-w-2xl">
