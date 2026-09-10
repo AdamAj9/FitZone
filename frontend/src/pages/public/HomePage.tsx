@@ -91,10 +91,10 @@ export function HomePage() {
       <section
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
-        className="group relative isolate overflow-hidden text-white"
+        className="group relative isolate flex min-h-[92vh] items-center overflow-hidden text-white"
       >
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] md:bg-top"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] bg-no-repeat md:bg-right-top md:bg-[length:auto_100%]"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
@@ -122,7 +122,7 @@ export function HomePage() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:py-40">
+        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:py-28">
           <Reveal className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-volt-400/30 bg-white/5 px-3 py-1 text-xs font-medium text-volt-100 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-volt-400"></span>
