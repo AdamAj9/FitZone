@@ -91,10 +91,10 @@ export function HomePage() {
       <section
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
-        className="group relative isolate flex min-h-[92vh] items-center overflow-hidden text-white"
+        className="group relative isolate flex min-h-[88vh] items-center overflow-hidden text-white md:min-h-[34rem] md:max-h-[92vh] md:aspect-[2.5/1]"
       >
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] bg-no-repeat md:bg-right-top md:bg-[length:auto_100%]"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] bg-no-repeat md:bg-top"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
@@ -122,7 +122,9 @@ export function HomePage() {
           aria-hidden
         />
 
-        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:py-28">
+        {/* Wider than the navbar container from 2xl up: on very large screens
+            the centred max-w-7xl pushed the copy onto the athletes' torsos. */}
+        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:py-28 2xl:max-w-[100rem]">
           <Reveal className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-volt-400/30 bg-white/5 px-3 py-1 text-xs font-medium text-volt-100 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-volt-400"></span>
@@ -162,7 +164,7 @@ export function HomePage() {
                 {t("home.ctaPlans")}
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-char-300">
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-char-300">
               <div className="flex items-center gap-2">
                 <span className="text-amber-400">★★★★★</span>
                 <span>{t("home.ratingValue")} {t("home.ratingText")}</span>
