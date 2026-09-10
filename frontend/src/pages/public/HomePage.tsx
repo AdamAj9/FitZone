@@ -94,7 +94,7 @@ export function HomePage() {
         className="group relative isolate overflow-hidden text-white"
       >
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-left md:bg-center"
+          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] md:bg-top"
           style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
           aria-hidden
         />
@@ -102,8 +102,15 @@ export function HomePage() {
           className="absolute inset-0 -z-10 bg-gradient-to-r from-char-950/92 via-char-950/55 to-char-950/10"
           aria-hidden
         />
+        {/* Mobile only: the crop puts the models right behind the copy, so we
+            add a flat scrim to keep the headline readable. */}
+        <div className="absolute inset-0 -z-10 bg-char-950/45 md:hidden" aria-hidden />
         <div
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-char-950/80 via-transparent to-transparent"
+          className="absolute inset-x-0 bottom-0 -z-10 h-3/4"
+          style={{
+            background:
+              "linear-gradient(to top, #080a09 0%, rgba(8,10,9,0.96) 18%, rgba(8,10,9,0.78) 38%, rgba(8,10,9,0.45) 60%, rgba(8,10,9,0.18) 80%, rgba(8,10,9,0) 100%)",
+          }}
           aria-hidden
         />
         <div
