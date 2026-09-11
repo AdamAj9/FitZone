@@ -109,7 +109,7 @@ export function HomePage() {
           className="absolute inset-x-0 bottom-0 -z-10 h-3/4"
           style={{
             background:
-              "linear-gradient(to top, #080a09 0%, rgba(8,10,9,0.96) 18%, rgba(8,10,9,0.78) 38%, rgba(8,10,9,0.45) 60%, rgba(8,10,9,0.18) 80%, rgba(8,10,9,0) 100%)",
+              "linear-gradient(to top, #111412 0%, rgba(17,20,18,0.95) 7%, rgba(10,12,11,0.84) 18%, rgba(8,10,9,0.64) 34%, rgba(8,10,9,0.4) 52%, rgba(8,10,9,0.19) 72%, rgba(8,10,9,0.05) 88%, rgba(8,10,9,0) 100%)",
           }}
           aria-hidden
         />
@@ -175,17 +175,6 @@ export function HomePage() {
           </Reveal>
         </div>
 
-        <svg
-          className="absolute inset-x-0 -bottom-1 h-16 w-full text-char-950 md:h-24"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z"
-          />
-        </svg>
       </section>
 
       {/* === MARQUEE === */}
@@ -199,6 +188,9 @@ export function HomePage() {
           </span>
         ))}
       />
+      {/* The hero now dissolves into the marquee rather than butting against
+          it, so the strip needs a soft bottom edge to match. */}
+      <div className="h-20 bg-gradient-to-b from-char-900 to-char-950" aria-hidden />
       </div>
 
       {/* === TRUST STATS — full-bleed dark separator band === */}
