@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
+import { CoachPortrait } from "../../components/CoachPortrait";
 import { StarRating } from "../../components/StarRating";
 import { EmptyState, Reveal, SkeletonCard, TiltCard } from "../../components/ui";
 
@@ -52,29 +53,34 @@ export function CoachesListPage() {
             <TiltCard>
               <Link
                 to={`/coaches/${coach.id}`}
-                className="block rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-md"
+                className="group block overflow-hidden rounded-2xl border border-char-800 bg-char-900/60 backdrop-blur-xl transition hover:-translate-y-1 hover:border-volt-400/50 hover:shadow-volt-glow"
               >
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
-                  {coach.first_name.charAt(0)}
-                  {coach.last_name.charAt(0)}
+                <div className="relative">
+                  <CoachPortrait coach={coach} className="aspect-[4/5] w-full" />
+                  {/* Name sits on the portrait, as the bento tiles do on the
+                      home page, so the card leads with a face. */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-char-950 via-char-950/80 to-transparent p-4 pt-12">
+                    <h3 className="font-display text-lg font-bold text-white">
+                      {coach.full_name}
+                    </h3>
+                    {coach.coach_profile?.specialties && (
+                      <p className="mt-0.5 text-sm text-char-200">
+                        {coach.coach_profile.specialties}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <h3 className="font-semibold text-slate-900">{coach.full_name}</h3>
-                {coach.coach_profile?.specialties && (
-                  <p className="mt-1 text-sm text-slate-500">
-                    {coach.coach_profile.specialties}
-                  </p>
-                )}
-                {coach.coach_profile?.years_of_experience ? (
-                  <p className="mt-2 text-xs text-slate-400">
-                    {t("coaches.yearsExperience", { count: coach.coach_profile.years_of_experience })}
-                  </p>
-                ) : null}
-                <div className="mt-3">
+                <div className="flex items-center justify-between gap-3 px-4 py-3">
                   <StarRating
                     value={coach.rating_average}
                     count={coach.rating_count}
                     size="sm"
                   />
+                  {coach.coach_profile?.years_of_experience ? (
+                    <p className="shrink-0 text-xs text-slate-500">
+                      {t("coaches.yearsExperience", { count: coach.coach_profile.years_of_experience })}
+                    </p>
+                  ) : null}
                 </div>
               </Link>
             </TiltCard>

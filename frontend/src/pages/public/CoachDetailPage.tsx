@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
 import { ratingsApi } from "../../api/ratings";
+import { CoachPortrait } from "../../components/CoachPortrait";
 import { StarRating, StarRatingInput } from "../../components/StarRating";
 import { Reveal } from "../../components/ui/Reveal";
 import { useAuthStore } from "../../store/auth";
@@ -117,12 +118,10 @@ export function CoachDetailPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <aside className="space-y-4">
-        <Reveal className="rounded-2xl bg-surface p-6 text-center shadow-sm">
-          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-brand-100 text-3xl font-bold text-brand-700">
-            {coach.first_name.charAt(0)}
-            {coach.last_name.charAt(0)}
-          </div>
-          <h1 className="mt-4 font-display text-2xl font-bold text-slate-900">
+        <Reveal className="overflow-hidden rounded-2xl border border-char-800 bg-surface">
+          <CoachPortrait coach={coach} className="aspect-[4/5] w-full" />
+          <div className="p-6 text-center">
+          <h1 className="font-display text-2xl font-bold text-slate-900">
             {coach.full_name}
           </h1>
           {profile?.specialties && (
@@ -139,6 +138,7 @@ export function CoachDetailPage() {
               count={coach.rating_count}
               size="md"
             />
+          </div>
           </div>
         </Reveal>
 
