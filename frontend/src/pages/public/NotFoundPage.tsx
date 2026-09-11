@@ -6,7 +6,7 @@ export function NotFoundPage() {
   return (
     <div className="mx-auto max-w-lg rounded-2xl bg-surface p-12 text-center shadow-sm">
       <p className="text-7xl">🤷</p>
-      <h1 className="mt-4 text-5xl font-bold text-slate-900">404</h1>
+      <h1 className="mt-4 font-display text-5xl font-bold text-slate-900">404</h1>
       <p className="mt-3 text-slate-600">
         {t("notFound.description")}
       </p>

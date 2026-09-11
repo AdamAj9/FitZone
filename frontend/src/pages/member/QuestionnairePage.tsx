@@ -66,7 +66,7 @@ export function QuestionnairePage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="font-display text-2xl font-bold text-slate-900">
           {t("questionnaire.title")}
         </h1>
         <p className="mt-1 text-sm text-slate-500">

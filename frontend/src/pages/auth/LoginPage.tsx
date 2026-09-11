@@ -53,7 +53,7 @@ export function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md rounded-2xl bg-surface p-8 shadow-sm">
-      <h1 className="text-2xl font-bold text-slate-900">{t("nav.login")}</h1>
+      <h1 className="font-display text-2xl font-bold text-slate-900">{t("nav.login")}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700">{t("auth.fields.email")}</label>

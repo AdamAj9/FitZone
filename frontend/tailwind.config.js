@@ -153,13 +153,9 @@ export default {
         },
       },
       backgroundImage: {
-        "hero-gradient":
-          "radial-gradient(circle at 20% 0%, rgba(168, 85, 247, 0.45), transparent 50%), radial-gradient(circle at 80% 100%, rgba(192, 132, 252, 0.3), transparent 55%), linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #312e81 100%)",
         "volt-ember": "linear-gradient(90deg, #B6FF00 0%, #FF6A00 100%)",
-        "volt-ember-diag": "linear-gradient(135deg, #B6FF00 0%, #8FD900 40%, #FF6A00 100%)",
       },
       boxShadow: {
-        "brand-glow": "0 10px 40px -10px rgba(168, 85, 247, 0.5)",
         "volt-glow": "0 10px 40px -10px rgba(182, 255, 0, 0.45)",
         "ember-glow": "0 10px 40px -10px rgba(255, 106, 0, 0.4)",
       },

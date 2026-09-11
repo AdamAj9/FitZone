@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { adminApi } from "../../api/admin";
 import type { AdminUser } from "../../types/admin";
 import { formatDateTime } from "../../lib/date";
+import { SkeletonList } from "../../components/ui/Skeleton";
+import { EmptyState } from "../../components/ui/EmptyState";
 
 const roleColor: Record<string, string> = {
   admin: "bg-red-100 text-red-700",
@@ -41,7 +43,7 @@ export function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{t("adminUsers.title")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("adminUsers.title")}</h1>
       </div>
 
       <div className="flex gap-3">
@@ -66,9 +68,9 @@ export function AdminUsersPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={5} className="p-4" />
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">{t("adminUsers.empty")}</p>
+          <EmptyState compact icon="👥" title={t("adminUsers.empty")} />
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">

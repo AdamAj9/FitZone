@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 
 import { adminApi } from "../../api/admin";
 import { formatDateTime } from "../../lib/date";
+import { SkeletonList } from "../../components/ui/Skeleton";
+import { EmptyState } from "../../components/ui/EmptyState";
 
 const ACTIONS = [
   "login",
@@ -30,7 +32,7 @@ export function AdminLogsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{t("adminLogs.title")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("adminLogs.title")}</h1>
         <select
           value={action}
           onChange={(e) => setAction(e.target.value)}
@@ -47,9 +49,9 @@ export function AdminLogsPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {isLoading ? (
-          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={5} className="p-4" />
         ) : (data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">{t("adminLogs.empty")}</p>
+          <EmptyState compact icon="🗒️" title={t("adminLogs.empty")} />
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">

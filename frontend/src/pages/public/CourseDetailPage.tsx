@@ -14,6 +14,7 @@ import { useAuthStore } from "../../store/auth";
 import type { CourseSessionItem } from "../../types/sessions";
 import { CourseCard } from "../../components/CourseCard";
 import { Reveal } from "../../components/ui/Reveal";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 interface SessionRowProps {
   session: CourseSessionItem;
@@ -142,7 +143,7 @@ export function CourseDetailPage() {
   });
 
   if (courseQuery.isLoading) {
-    return <p className="text-slate-500">{t("common.loading")}</p>;
+    return <SkeletonList rows={3} />;
   }
   if (courseQuery.isError || !courseQuery.data) {
     return (
@@ -226,7 +227,7 @@ export function CourseDetailPage() {
             </div>
           )}
           {sessionsQuery.isLoading ? (
-            <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
+            <SkeletonList rows={3} className="mt-3" />
           ) : (sessionsQuery.data?.results.length ?? 0) === 0 ? (
             <p className="mt-3 text-sm text-slate-500">
               {t("courseDetail.noSessions")}

@@ -10,6 +10,7 @@ import { Reveal } from "../../components/ui/Reveal";
 import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
 import type { Rating } from "../../types/ratings";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 function getResults(data: Rating[] | { results: Rating[] } | undefined): Rating[] {
   if (!data) return [];
@@ -92,7 +93,7 @@ export function CoachDetailPage() {
     },
   });
 
-  if (coachQuery.isLoading) return <p className="text-slate-500">{t("common.loading")}</p>;
+  if (coachQuery.isLoading) return <SkeletonList rows={3} />;
   if (coachQuery.isError || !coachQuery.data) {
     return (
       <div className="rounded-2xl bg-surface p-12 text-center shadow-sm">

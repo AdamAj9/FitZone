@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { adminApi } from "../../api/admin";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 export function AdminDashboardPage() {
   const { t } = useTranslation();
@@ -10,11 +11,11 @@ export function AdminDashboardPage() {
     queryFn: () => adminApi.dashboard(),
   });
 
-  if (isLoading || !data) return <p className="text-slate-500">{t("common.loading")}</p>;
+  if (isLoading || !data) return <SkeletonList rows={3} />;
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.title")}</h1>
+      <h1 className="font-display text-2xl font-bold text-slate-900">{t("coachDashboard.title")}</h1>
 
       <section className="grid gap-4 md:grid-cols-3">
         <Kpi label={t("adminDashboard.members")} value={data.users.members} />

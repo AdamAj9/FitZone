@@ -8,6 +8,7 @@ import { z } from "zod";
 import { authApi } from "../../api/auth";
 import { PasswordRequirements } from "../../components/ui";
 import { useChangePassword, useMe } from "../../hooks/useAuth";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 interface FormValues {
   first_name: string;
@@ -95,13 +96,13 @@ export function ProfilePage() {
     | null;
 
   if (isLoading || !user) {
-    return <p className="text-slate-500">{t("common.loading")}</p>;
+    return <SkeletonList rows={3} />;
   }
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">{t("profile.title")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("profile.title")}</h1>
         <p className="mt-1 text-sm text-slate-500">
           {user.email} · <span className="font-medium">{user.role}</span>
         </p>

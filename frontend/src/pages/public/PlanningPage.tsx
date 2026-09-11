@@ -6,6 +6,7 @@ import { coursesApi } from "../../api/courses";
 import { sessionsApi } from "../../api/sessions";
 import { SessionCard } from "../../components/SessionCard";
 import { Reveal } from "../../components/ui/Reveal";
+import { Skeleton } from "../../components/ui/Skeleton";
 import { addDays, formatDayLabel, isoDate, startOfWeek } from "../../lib/date";
 import type { CourseSessionItem } from "../../types/sessions";
 
@@ -127,7 +128,17 @@ export function PlanningPage() {
       </Reveal>
 
       {sessionsQuery.isLoading ? (
-        <p className="text-slate-500">{t("common.loading")}</p>
+        <div className="grid gap-3 md:grid-cols-7">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div
+              key={i}
+              className="rounded-xl border border-transparent bg-surface p-3"
+            >
+              <Skeleton className="h-3 w-20" />
+              <Skeleton className="mt-3 h-12 w-full" />
+            </div>
+          ))}
+        </div>
       ) : sessionsQuery.isError ? (
         <p className="text-red-600">{t("courses.loadError")}</p>
       ) : (

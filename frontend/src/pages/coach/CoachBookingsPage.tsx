@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { coachApi } from "../../api/coach";
 import { useAuthStore } from "../../store/auth";
 import { formatDateTime } from "../../lib/date";
+import { SkeletonList } from "../../components/ui/Skeleton";
+import { EmptyState } from "../../components/ui/EmptyState";
 
 export function CoachBookingsPage() {
   const { t } = useTranslation();
@@ -24,7 +26,7 @@ export function CoachBookingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.bookings")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("coachDashboard.bookings")}</h1>
         <select
           value={sessionId}
           onChange={(e) =>
@@ -43,11 +45,9 @@ export function CoachBookingsPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {bookingsQuery.isLoading ? (
-          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={4} className="p-4" />
         ) : (bookingsQuery.data?.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">
-            {t("coachBookings.empty")}
-          </p>
+          <EmptyState compact icon="📅" title={t("coachBookings.empty")} />
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">

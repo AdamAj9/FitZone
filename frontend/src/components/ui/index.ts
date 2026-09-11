@@ -1,5 +1,4 @@
 export { Button } from "./Button";
-export { Card } from "./Card";
 export { ConfirmDialog } from "./ConfirmDialog";
 export { AnimatedNumber } from "./AnimatedNumber";
 export { AnimatedWords } from "./AnimatedWords";
@@ -11,6 +10,11 @@ export {
   passwordRulesMet,
 } from "./PasswordRequirements";
 export { Reveal } from "./Reveal";
-export { Skeleton, SkeletonCard, SkeletonRow } from "./Skeleton";
+export {
+  Skeleton,
+  SkeletonCard,
+  SkeletonList,
+  SkeletonRow,
+} from "./Skeleton";
 export { TiltCard } from "./TiltCard";
 export { VoltGlow } from "./VoltGlow";

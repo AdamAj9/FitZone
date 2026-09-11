@@ -8,6 +8,7 @@ import { SessionCard } from "../../components/SessionCard";
 import { useMe } from "../../hooks/useAuth";
 import { formatDateTime } from "../../lib/date";
 import { localizedPlan } from "../../lib/planCatalog";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 export function DashboardPage() {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ export function DashboardPage() {
   });
 
   if (userLoading || !user) {
-    return <p className="text-slate-500">{t("common.loading")}</p>;
+    return <SkeletonList rows={3} />;
   }
 
   const sub = subQuery.data?.subscription ?? null;
@@ -40,7 +41,7 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-8 shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">
+        <h1 className="font-display text-3xl font-bold text-slate-900">
           {t("memberDashboard.greeting", { name: user.first_name || user.email })} 👋
         </h1>
         <p className="mt-2 text-slate-600">
@@ -114,7 +115,7 @@ export function DashboardPage() {
                   : t("memberDashboard.popularComingSoon")}
             </p>
             {recoQuery.isLoading ? (
-              <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
+              <SkeletonList rows={2} className="mt-3" />
             ) : (reco?.results.length ?? 0) === 0 ? (
               <p className="mt-3 text-sm text-slate-500">
                 {t("memberDashboard.noRecommendations")}

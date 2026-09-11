@@ -9,6 +9,7 @@ import { ConfirmDialog } from "../../components/ui";
 import { formatDateTime } from "../../lib/date";
 import { apiErrorMessage } from "../../lib/errors";
 import { localizedPlan } from "../../lib/planCatalog";
+import { SkeletonCard, SkeletonList } from "../../components/ui/Skeleton";
 
 const statusColor: Record<string, string> = {
   active: "bg-green-100 text-green-800",
@@ -49,11 +50,11 @@ export function MySubscriptionPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">{t("mySubscription.title")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("mySubscription.title")}</h1>
       </div>
 
       {currentQuery.isLoading ? (
-        <p className="text-slate-500">{t("common.loading")}</p>
+        <SkeletonCard />
       ) : current ? (
         <div className="rounded-2xl border-2 border-brand-200 bg-surface p-6 shadow-sm">
           <div className="flex items-start justify-between">
@@ -121,7 +122,7 @@ export function MySubscriptionPage() {
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">{t("myBookings.history")}</h2>
         {historyQuery.isLoading ? (
-          <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={3} className="mt-3" />
         ) : history.length === 0 ? (
           <p className="mt-3 text-sm text-slate-500">{t("mySubscription.noHistory")}</p>
         ) : (

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { paymentsApi } from "../../api/payments";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { Reveal } from "../../components/ui/Reveal";
+import { SkeletonCard } from "../../components/ui/Skeleton";
 import { localizedPlan } from "../../lib/planCatalog";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
@@ -93,7 +94,11 @@ const checkoutMutation = useMutation({
       )}
 
       {plansQuery.isLoading ? (
-        <p className="text-slate-500">{t("common.loading")}</p>
+        <div className="grid gap-4 md:grid-cols-2">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {filteredPlans.map((plan, index) => {

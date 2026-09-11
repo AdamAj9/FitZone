@@ -9,6 +9,7 @@ import { ConfirmDialog } from "../../components/ui";
 import { apiErrorMessage } from "../../lib/errors";
 import { formatDateTime } from "../../lib/date";
 import type { Booking } from "../../types/bookings";
+import { SkeletonList } from "../../components/ui/Skeleton";
 
 const statusColor: Record<string, string> = {
   confirmed: "bg-green-100 text-green-800",
@@ -46,13 +47,13 @@ export function MyBookingsPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900">{t("myBookings.title")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("myBookings.title")}</h1>
       </div>
 
       <section className="rounded-2xl bg-surface p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">{t("memberDashboard.statUpcoming")}</h2>
         {isLoading ? (
-          <p className="mt-3 text-sm text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={3} className="mt-3" />
         ) : upcoming.length === 0 ? (
           <p className="mt-3 text-sm text-slate-500">
             {t("myBookings.noUpcoming")}{" "}

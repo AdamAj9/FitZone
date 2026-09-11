@@ -46,7 +46,7 @@ export function CheckoutSuccessPage() {
       >
         {isFailed ? "✗" : isSuccess ? "✓" : "…"}
       </div>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">
+      <h1 className="mt-4 font-display text-2xl font-bold text-slate-900">
         {isFailed
           ? t("checkout.failedTitle")
           : isSuccess

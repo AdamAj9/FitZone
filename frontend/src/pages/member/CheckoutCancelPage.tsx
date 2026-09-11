@@ -8,7 +8,7 @@ export function CheckoutCancelPage() {
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl">
         ⚠
       </div>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">
+      <h1 className="mt-4 font-display text-2xl font-bold text-slate-900">
         {t("checkout.cancelledTitle")}
       </h1>
       <p className="mt-2 text-sm text-slate-500">

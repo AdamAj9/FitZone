@@ -11,6 +11,8 @@ import { apiErrorMessage } from "../../lib/errors";
 import { useAuthStore } from "../../store/auth";
 import type { CoachCourseWritePayload } from "../../types/coach";
 import type { CourseListItem } from "../../types/courses";
+import { SkeletonList } from "../../components/ui/Skeleton";
+import { EmptyState } from "../../components/ui/EmptyState";
 
 const emptyForm: CoachCourseWritePayload = {
   title: "",
@@ -128,7 +130,7 @@ export function CoachCoursesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{t("coachDashboard.myCourses")}</h1>
+        <h1 className="font-display text-2xl font-bold text-slate-900">{t("coachDashboard.myCourses")}</h1>
         <button
           type="button"
           onClick={() => {
@@ -301,11 +303,9 @@ export function CoachCoursesPage() {
 
       <div className="overflow-hidden rounded-2xl bg-surface shadow-sm">
         {coursesQuery.isLoading ? (
-          <p className="p-8 text-center text-slate-500">{t("common.loading")}</p>
+          <SkeletonList rows={4} className="p-4" />
         ) : (coursesQuery.data?.results.length ?? 0) === 0 ? (
-          <p className="p-8 text-center text-slate-500">
-            {t("coachCourses.empty")}
-          </p>
+          <EmptyState compact icon="🏋️" title={t("coachCourses.empty")} />
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-slate-50 text-left text-slate-500">
