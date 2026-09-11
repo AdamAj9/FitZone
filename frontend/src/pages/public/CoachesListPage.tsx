@@ -6,6 +6,7 @@ import { coursesApi } from "../../api/courses";
 import { CoachPortrait } from "../../components/CoachPortrait";
 import { StarRating } from "../../components/StarRating";
 import { EmptyState, Reveal, SkeletonCard, TiltCard } from "../../components/ui";
+import { PageHeader } from "../../components/ui/PageHeader";
 
 export function CoachesListPage() {
   const { t } = useTranslation();
@@ -40,12 +41,11 @@ export function CoachesListPage() {
 
   return (
     <div className="space-y-6">
-      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="font-display text-3xl font-bold text-slate-900">{t("coaches.title")}</h1>
-        <p className="mt-1 text-slate-600">
-          {t("coaches.subtitle")}
-        </p>
-      </Reveal>
+      <PageHeader
+        label={t("home.teamLabel")}
+        title={t("coaches.title")}
+        subtitle={t("coaches.subtitle")}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {data?.results.map((coach, index) => (

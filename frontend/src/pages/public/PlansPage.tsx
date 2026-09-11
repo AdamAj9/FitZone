@@ -11,6 +11,7 @@ import { SkeletonCard } from "../../components/ui/Skeleton";
 import { localizedPlan } from "../../lib/planCatalog";
 import { useAuthStore } from "../../store/auth";
 import type { Period } from "../../types/subscriptions";
+import { PageHeader } from "../../components/ui/PageHeader";
 
 export function PlansPage() {
   const { t } = useTranslation();
@@ -47,20 +48,23 @@ const checkoutMutation = useMutation({
 
   return (
     <div className="space-y-6">
-      <Reveal className="rounded-2xl bg-surface p-8 text-center shadow-sm">
-        <h1 className="font-display text-3xl font-bold text-slate-900">{t("plans.title")}</h1>
-        <p className="mt-2 text-slate-600">
-          {t("plans.subtitle")}
-        </p>
-
-        <div className="mt-6 inline-flex rounded-full bg-slate-100 p-1">
+      <PageHeader
+        label={t("home.pricingLabel")}
+        title={t("plans.title")}
+        subtitle={t("plans.subtitle")}
+        align="center"
+      >
+        {/* Same toggle as the home page: the previous active pill was
+            bg-surface on a slate track, which after the dark pass left the
+            two states almost identical. */}
+        <div className="mt-6 inline-flex rounded-full bg-char-950/60 p-1 ring-1 ring-char-800">
           <button
             type="button"
             onClick={() => setPeriod("monthly")}
             className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
               period === "monthly"
-                ? "bg-surface text-slate-900 shadow-sm"
-                : "text-slate-600"
+                ? "bg-volt-400 text-char-950"
+                : "text-char-300"
             }`}
           >
             {t("home.periodMonthly")}
@@ -70,14 +74,17 @@ const checkoutMutation = useMutation({
             onClick={() => setPeriod("yearly")}
             className={`rounded-full px-5 py-2 text-sm font-medium transition active:scale-95 ${
               period === "yearly"
-                ? "bg-surface text-slate-900 shadow-sm"
-                : "text-slate-600"
+                ? "bg-volt-400 text-char-950"
+                : "text-char-300"
             }`}
           >
-            {t("home.periodYearly")} <span className="ml-1 text-xs font-semibold text-accent-600">{t("home.yearlyDiscount")}</span>
+            {t("home.periodYearly")}{" "}
+            <span className="ml-1 text-xs font-semibold text-ember-400">
+              {t("home.yearlyDiscount")}
+            </span>
           </button>
         </div>
-      </Reveal>
+      </PageHeader>
 
       {currentSub && (
         <Reveal className="rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">

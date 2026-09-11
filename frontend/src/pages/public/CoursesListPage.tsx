@@ -6,6 +6,7 @@ import { coursesApi } from "../../api/courses";
 import { CourseCard } from "../../components/CourseCard";
 import { EmptyState, Reveal, SkeletonCard } from "../../components/ui";
 import type { CourseLevel } from "../../types/courses";
+import { PageHeader } from "../../components/ui/PageHeader";
 
 export function CoursesListPage() {
   const { t } = useTranslation();
@@ -30,13 +31,12 @@ export function CoursesListPage() {
 
   return (
     <div className="space-y-6">
-      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
-        <h1 className="font-display text-3xl font-bold text-slate-900">{t("courses.title")}</h1>
-        <p className="mt-1 text-slate-600">
-          {t("courses.subtitle")}
-        </p>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-3">
+      <PageHeader
+        label={t("home.offerLabel")}
+        title={t("courses.title")}
+        subtitle={t("courses.subtitle")}
+      >
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
           <input
             type="search"
             placeholder={t("courses.searchPlaceholder")}
@@ -68,7 +68,7 @@ export function CoursesListPage() {
             <option value="all">{t("common.levels.all")}</option>
           </select>
         </div>
-      </Reveal>
+      </PageHeader>
 
       {coursesQuery.isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

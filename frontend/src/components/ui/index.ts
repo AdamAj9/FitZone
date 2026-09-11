@@ -3,7 +3,9 @@ export { ConfirmDialog } from "./ConfirmDialog";
 export { AnimatedNumber } from "./AnimatedNumber";
 export { AnimatedWords } from "./AnimatedWords";
 export { EmptyState } from "./EmptyState";
+export { GradientTail } from "./GradientTail";
 export { Marquee } from "./Marquee";
+export { PageHeader } from "./PageHeader";
 export {
   PASSWORD_RULES,
   PasswordRequirements,

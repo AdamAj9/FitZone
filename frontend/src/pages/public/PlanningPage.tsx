@@ -9,6 +9,7 @@ import { Reveal } from "../../components/ui/Reveal";
 import { Skeleton } from "../../components/ui/Skeleton";
 import { addDays, formatDayLabel, isoDate, startOfWeek } from "../../lib/date";
 import type { CourseSessionItem } from "../../types/sessions";
+import { VoltGlow } from "../../components/ui/VoltGlow";
 
 const WEEK_LENGTH = 7;
 
@@ -60,8 +61,9 @@ export function PlanningPage() {
 
   return (
     <div className="space-y-6">
-      <Reveal className="rounded-2xl bg-surface p-6 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+      <Reveal className="relative isolate overflow-hidden rounded-2xl border border-char-800 bg-char-900/60 p-6 backdrop-blur-xl">
+        <VoltGlow subtle />
+        <div className="relative flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="font-display text-3xl font-bold text-slate-900">{t("planning.title")}</h1>
             <p className="mt-1 text-sm text-slate-500">
@@ -104,21 +106,21 @@ export function PlanningPage() {
               <button
                 type="button"
                 onClick={() => setWeekStart(addDays(weekStart, -7))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:border-volt-400/50 hover:text-volt-400 active:scale-95"
               >
                 ← {t("planning.previousWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(startOfWeek(new Date()))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:border-volt-400/50 hover:text-volt-400 active:scale-95"
               >
                 {t("planning.thisWeek")}
               </button>
               <button
                 type="button"
                 onClick={() => setWeekStart(addDays(weekStart, 7))}
-                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-50 active:scale-95"
+                className="rounded-md border border-slate-300 px-3 py-2 text-sm transition hover:border-volt-400/50 hover:text-volt-400 active:scale-95"
               >
                 {t("planning.nextWeek")} →
               </button>
