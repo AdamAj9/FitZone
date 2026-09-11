@@ -75,7 +75,7 @@ export function Header() {
           className="flex items-center gap-2 text-xl font-bold"
           onClick={closeMenu}
         >
-          <img src="/images/logo-volt.png" alt="FitZone" className="h-16 w-auto object-contain" />
+          <img src="/images/logo-volt.webp" alt="FitZone" className="h-16 w-auto object-contain" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

@@ -44,9 +44,10 @@ export function Footer() {
               className="flex items-center gap-2 text-xl font-bold text-white"
             >
               <img
-                src="/images/logo1-volt.png"
+                src="/images/logo1-volt.webp"
                 alt="FitZone"
                 className="h-16 w-auto object-contain"
+                loading="lazy"
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm text-char-400">

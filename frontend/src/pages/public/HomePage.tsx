@@ -15,8 +15,8 @@ import { OFFERINGS } from "../../data/offerings";
 import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
 
-const HERO_IMAGE = "/images/hero/Hero-volt-ember.png";
-const CTA_IMAGE = "/images/hero/Hero%20secondaire.png";
+const HERO_IMAGE = "/images/hero/hero-volt-ember.webp";
+const CTA_IMAGE = "/images/hero/hero-secondaire.webp";
 
 type Stat = { value: string; label: string };
 type Step = { n: string; title: string; description: string };

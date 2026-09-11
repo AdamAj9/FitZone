@@ -23,7 +23,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "fitness",
     icon: "🏋️",
-    image: "/images/facilities/Salle%20de%20musculation.png",
+    image: "/images/facilities/salle-de-musculation.webp",
     items: [
       { key: "mixedRoom", href: "/courses?category=fitness" },
       { key: "womenOnlyRoom", href: "/courses?category=fitness" },
@@ -33,7 +33,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "pool",
     icon: "🏊",
-    image: "/images/facilities/Piscine.png",
+    image: "/images/facilities/piscine.webp",
     items: [
       { key: "freeSwim", href: "/courses?category=piscine" },
       { key: "aquagym", href: "/courses?category=piscine" },
@@ -43,7 +43,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "spa",
     icon: "♨️",
-    image: "/images/facilities/Spa-hammam.png",
+    image: "/images/facilities/spa-hammam.webp",
     items: [
       { key: "hammam", href: "/plans" },
       { key: "sauna", href: "/plans" },
@@ -53,7 +53,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "tennis",
     icon: "🎾",
-    image: "/images/facilities/Tennins%20indoor.png",
+    image: "/images/facilities/tennis-indoor.webp",
     items: [
       { key: "tennis", href: "/courses?category=tennis" },
       { key: "padel", href: "/courses" },
@@ -63,7 +63,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "groupClasses",
     icon: "🧘",
-    image: "/images/facilities/Salle%20Yoga.png",
+    image: "/images/facilities/salle-yoga.webp",
     items: [
       { key: "yogaPilates", href: "/courses?category=yoga" },
       { key: "cycling", href: "/courses?category=cycling" },
@@ -73,7 +73,7 @@ export const OFFERINGS: OfferingGroup[] = [
   {
     key: "coworking",
     icon: "💼",
-    image: "/images/facilities/Lounge-coworking.png",
+    image: "/images/facilities/lounge-coworking.webp",
     items: [
       { key: "coworkingSpaces", href: "/plans" },
       { key: "meetingRooms", href: "/plans" },

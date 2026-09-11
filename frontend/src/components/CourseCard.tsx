@@ -25,9 +25,11 @@ export function CourseCard({ course }: { course: CourseListItem }) {
     >
     <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-50">
         <img
-          src={`/images/courses/${course.slug}.png`}
+          src={`/images/courses/${course.slug}.webp`}
           alt={course.title}
           className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
