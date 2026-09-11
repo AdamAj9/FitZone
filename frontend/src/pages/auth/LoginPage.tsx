@@ -6,6 +6,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import { useLogin } from "../../hooks/useAuth";
+import {
+  AuthField,
+  AuthShell,
+  authInputClass,
+  authSubmitClass,
+} from "./AuthShell";
 
 type FormValues = {
   email: string;
@@ -52,39 +58,44 @@ export function LoginPage() {
     | null;
 
   return (
-    <div className="mx-auto max-w-md rounded-2xl bg-surface p-8 shadow-sm">
-      <h1 className="font-display text-2xl font-bold text-slate-900">{t("nav.login")}</h1>
+    <AuthShell
+      title={t("nav.login")}
+      footer={
+        <>
+          {t("auth.noAccount")}{" "}
+          <Link
+            to="/register"
+            className="font-medium text-volt-400 transition hover:text-volt-300"
+          >
+            {t("nav.register")}
+          </Link>
+        </>
+      }
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-slate-700">{t("auth.fields.email")}</label>
+        <AuthField label={t("auth.fields.email")} error={errors.email?.message}>
           <input
             type="email"
             autoComplete="email"
             {...register("email")}
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+            className={authInputClass}
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-          )}
-        </div>
+        </AuthField>
 
-        <div>
-          <label className="block text-sm font-medium text-slate-700">
-            {t("auth.fields.password")}
-          </label>
+        <AuthField
+          label={t("auth.fields.password")}
+          error={errors.password?.message}
+        >
           <input
             type="password"
             autoComplete="current-password"
             {...register("password")}
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+            className={authInputClass}
           />
-          {errors.password && (
-            <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-          )}
-        </div>
+        </AuthField>
 
         {apiError?.response?.data?.detail && (
-          <p className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+          <p className="rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-700">
             {apiError.response.data.detail}
           </p>
         )}
@@ -92,17 +103,11 @@ export function LoginPage() {
         <button
           type="submit"
           disabled={login.isPending}
-          className="w-full rounded-md bg-volt-400 px-4 py-2 font-medium text-char-950 hover:bg-volt-300 disabled:opacity-50"
+          className={`${authSubmitClass} !mt-6`}
         >
           {login.isPending ? t("common.loading") : t("nav.login")}
         </button>
       </form>
-
-      <p className="mt-4 text-center text-sm text-slate-600">
-        <Link to="/register" className="text-brand-600 hover:underline">
-          {t("nav.register")}
-        </Link>
-      </p>
-    </div>
+    </AuthShell>
   );
 }

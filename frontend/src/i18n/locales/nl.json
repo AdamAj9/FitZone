@@ -1117,7 +1117,10 @@
       "letter": "Minstens één letter",
       "digit": "Minstens één cijfer",
       "match": "Wachtwoorden komen overeen"
-    }
+    },
+    "noAccount": "Nog geen account?",
+    "haveAccount": "Heb je al een account?",
+    "loginTagline": "Bekijk je planning, je reserveringen en je abonnement."
   },
   "plans": {
     "title": "Onze abonnementen",

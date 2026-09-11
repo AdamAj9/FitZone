@@ -1117,7 +1117,10 @@
       "letter": "At least one letter",
       "digit": "At least one digit",
       "match": "Passwords match"
-    }
+    },
+    "noAccount": "Don't have an account yet?",
+    "haveAccount": "Already have an account?",
+    "loginTagline": "Access your schedule, your bookings and your membership."
   },
   "plans": {
     "title": "Our plans",
