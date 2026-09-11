@@ -52,7 +52,7 @@ export function CoachesListPage() {
             <TiltCard>
               <Link
                 to={`/coaches/${coach.id}`}
-                className="block rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-md"
+                className="block rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-2xl font-bold text-brand-700">
                   {coach.first_name.charAt(0)}

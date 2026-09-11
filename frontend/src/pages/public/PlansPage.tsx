@@ -102,7 +102,7 @@ const checkoutMutation = useMutation({
             return (
               <Reveal key={plan.id} delay={index * 100}>
               <div
-                className={`rounded-2xl border border-white/60 bg-white/60 p-6 shadow-sm ring-1 backdrop-blur-xl ${
+                className={`rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm ring-1 backdrop-blur-xl ${
                   isPremium ? "ring-brand-500" : "ring-slate-200"
                 }`}
               >
@@ -157,7 +157,7 @@ const checkoutMutation = useMutation({
                   disabled={checkoutMutation.isPending || Boolean(currentSub)}
                   className={`mt-6 w-full rounded-md px-4 py-3 font-medium transition active:scale-[0.97] ${
                     isPremium
-                      ? "bg-brand-600 text-white hover:bg-brand-700"
+                      ? "bg-volt-400 text-char-950 hover:bg-volt-300"
                       : "border border-slate-300 text-slate-700 hover:bg-slate-50"
                   } disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100`}
                 >

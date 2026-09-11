@@ -5,12 +5,36 @@
 @layer base {
   html {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Makes the browser render its own widgets dark: select dropdowns,
+       date/time pickers, scrollbars, autofill. */
+    color-scheme: dark;
   }
   body {
     @apply bg-ink-50 text-ink-800 antialiased;
   }
   ::selection {
     @apply bg-brand-200 text-brand-900;
+  }
+
+  /* Form controls carry a border class but no background, so they fell back
+     to the browser's white. Styled here rather than across 42 call sites:
+     base-layer utilities lose to any class already on the element, so a page
+     that sets its own background or border still wins. */
+  input,
+  select,
+  textarea {
+    @apply border-char-700 bg-char-900 text-char-50;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-char-400;
+  }
+  select option {
+    @apply bg-char-900 text-char-50;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply accent-volt-400;
   }
 }
 
