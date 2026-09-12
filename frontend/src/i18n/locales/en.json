@@ -1303,6 +1303,7 @@
     ],
     "ctaTitle": "Still have a question?",
     "ctaBody": "Drop by and someone from the team will show you around.",
-    "ctaButton": "Create my account"
+    "ctaButton": "Create my account",
+    "messageTooShort": "Your message must be at least 4 characters long."
   }
 }

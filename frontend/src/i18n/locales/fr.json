@@ -1303,6 +1303,7 @@
     ],
     "ctaTitle": "Toujours une question ?",
     "ctaBody": "Passez nous voir, un membre de l’équipe vous fera visiter.",
-    "ctaButton": "Créer mon compte"
+    "ctaButton": "Créer mon compte",
+    "messageTooShort": "Votre message doit faire au moins 4 caractères."
   }
 }

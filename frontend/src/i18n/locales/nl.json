@@ -1303,6 +1303,7 @@
     ],
     "ctaTitle": "Nog een vraag?",
     "ctaBody": "Kom gerust langs, iemand van het team geeft je een rondleiding.",
-    "ctaButton": "Mijn account aanmaken"
+    "ctaButton": "Mijn account aanmaken",
+    "messageTooShort": "Je bericht moet minstens 4 tekens lang zijn."
   }
 }

@@ -66,7 +66,7 @@ export function ContactPage() {
         first_name: z.string().min(1, t("auth.validation.firstNameRequired")),
         email: z.string().email(t("auth.validation.emailInvalid")),
         subject: z.enum(["membership", "classes", "coaching", "facilities", "other"]),
-        message: z.string().min(10, t("contact.messagePlaceholder")),
+        message: z.string().trim().min(4, t("contact.messageTooShort")),
       }),
     [t],
   );

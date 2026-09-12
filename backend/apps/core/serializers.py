@@ -70,8 +70,8 @@ class ContactMessageSerializer(serializers.ModelSerializer):
 
     def validate_message(self, value: str) -> str:
         stripped = value.strip()
-        if len(stripped) < 10:
+        if len(stripped) < 4:
             raise serializers.ValidationError(
-                "Merci de détailler un peu votre demande (10 caractères minimum)."
+                "Votre message doit faire au moins 4 caractères."
             )
         return stripped
