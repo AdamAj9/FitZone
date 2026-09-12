@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { CONTACT_INFO } from "../../lib/contactInfo";
+
 export function Footer() {
   const { t } = useTranslation();
 
@@ -12,6 +14,7 @@ export function Footer() {
         { label: t("nav.planning"), to: "/planning" },
         { label: t("nav.coaches"), to: "/coaches" },
         { label: t("nav.plans"), to: "/plans" },
+        { label: t("nav.contact"), to: "/contact" },
       ],
     },
     {
@@ -58,10 +61,16 @@ export function Footer() {
                 <span>📍</span> {t("footer.address")}
               </p>
               <p className="flex items-center gap-2">
-                <span>📞</span> +32 2 555 12 34
+                <span aria-hidden>📞</span>
+                <a href={CONTACT_INFO.phoneHref} className="transition hover:text-volt-400">
+                  {CONTACT_INFO.phone}
+                </a>
               </p>
               <p className="flex items-center gap-2">
-                <span>✉️</span> hello@fitzone.local
+                <span aria-hidden>✉️</span>
+                <a href={`mailto:${CONTACT_INFO.email}`} className="transition hover:text-volt-400">
+                  {CONTACT_INFO.email}
+                </a>
               </p>
             </div>
           </div>

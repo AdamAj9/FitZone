@@ -148,3 +148,36 @@ def send_payment_confirmation_email(payment) -> bool:
             "cta_path": cta_path,
         },
     )
+
+
+def send_contact_notification(contact) -> bool:
+    """Tell the gym a contact form was submitted.
+
+    Sent to CONTACT_NOTIFY_EMAIL (falling back to DEFAULT_FROM_EMAIL), with
+    the visitor's address as reply-to so staff can answer straight from
+    their client. Best-effort like every other send here: the row is
+    already saved, so a failure loses the notification, never the enquiry.
+    """
+    to = getattr(settings, "CONTACT_NOTIFY_EMAIL", "") or settings.DEFAULT_FROM_EMAIL
+    received = timezone.localtime(contact.created_at)
+    body = "\n".join([
+        f"De : {contact.first_name} {contact.last_name} <{contact.email}>",
+        f"Sujet : {contact.get_subject_display()}",
+        f"Recu le : {received:%d/%m/%Y %H:%M}",
+        "",
+        contact.message,
+        "",
+    ])
+    try:
+        message = EmailMultiAlternatives(
+            subject=f"[FitZone] Nouveau message - {contact.get_subject_display()}",
+            body=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[to],
+            reply_to=[contact.email],
+        )
+        message.send(fail_silently=False)
+        return True
+    except Exception:
+        logger.exception("Failed to send contact notification for #%s", contact.pk)
+        return False

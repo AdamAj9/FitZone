@@ -22,7 +22,8 @@
     "login": "Connexion",
     "register": "Inscription",
     "dashboard": "Tableau de bord",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "contact": "Contact"
   },
   "home": {
     "badge": "Nouvelle salle ouverte 7j/7",
@@ -1233,5 +1234,75 @@
     "bookingConfirmed": "Réservation confirmée",
     "bookingError": "Réservation impossible",
     "paymentError": "Paiement impossible"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "On est là pour vous",
+    "subtitle": "Une question ? Un renseignement ? Notre équipe est à votre écoute.",
+    "phoneTitle": "Téléphone",
+    "phoneNote": "Du lundi au dimanche",
+    "emailTitle": "E-mail",
+    "emailNote": "Réponse sous 24 h ouvrées",
+    "addressTitle": "Adresse",
+    "addressNote": "Accessible à pied, à vélo et en transports",
+    "hoursTitle": "Horaires",
+    "hoursWeekdays": "Lundi – Vendredi",
+    "hoursWeekend": "Samedi – Dimanche",
+    "formLabel": "Envoyez-nous un message",
+    "formTitle": "Parlons de vos objectifs",
+    "fieldLastName": "Nom",
+    "fieldFirstName": "Prénom",
+    "fieldEmail": "Adresse e-mail",
+    "fieldSubject": "Sujet",
+    "fieldMessage": "Votre message",
+    "messagePlaceholder": "Dites-nous en quelques mots ce qui vous amène.",
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "successTitle": "Message envoyé",
+    "successBody": "Merci ! Nous revenons vers vous sous 24 h ouvrées.",
+    "errorGeneric": "L’envoi a échoué. Réessayez dans un instant.",
+    "errorThrottled": "Vous avez envoyé plusieurs messages récemment. Réessayez plus tard ou appelez-nous.",
+    "subjects": {
+      "membership": "Abonnements et tarifs",
+      "classes": "Cours et planning",
+      "coaching": "Coaching personnalisé",
+      "facilities": "Installations",
+      "other": "Autre sujet"
+    },
+    "mapLabel": "Nous trouver",
+    "mapTitle": "Venir à la salle",
+    "mapBody": "En plein centre de Bruxelles, accessible à pied, à vélo et en transports en commun.",
+    "openMap": "Ouvrir dans Google Maps",
+    "faqLabel": "FAQ rapide",
+    "faqTitle": "Les questions fréquentes",
+    "faq": [
+      {
+        "q": "Faut-il un abonnement pour venir essayer ?",
+        "a": "Non. Vous pouvez réserver une séance à l’unité et payer en ligne, sans engagement. L’abonnement devient intéressant à partir de deux séances par semaine."
+      },
+      {
+        "q": "Quels sont vos horaires d’ouverture ?",
+        "a": "Du lundi au vendredi de 6 h 30 à 22 h 30, et le week-end de 8 h à 20 h. Les cours collectifs suivent le planning en ligne, mis à jour chaque semaine."
+      },
+      {
+        "q": "Puis-je résilier mon abonnement quand je veux ?",
+        "a": "Oui. Les formules mensuelles sont sans engagement et se résilient depuis votre espace membre. La formule annuelle court jusqu’à son terme."
+      },
+      {
+        "q": "Proposez-vous du coaching individuel ?",
+        "a": "Oui, avec chacun de nos coachs. Les séances se réservent directement depuis la fiche du coach."
+      },
+      {
+        "q": "Comment réserver un cours ?",
+        "a": "Créez un compte, ouvrez le planning et cliquez sur la séance qui vous intéresse. L’annulation est gratuite jusqu’à 4 h avant le début."
+      },
+      {
+        "q": "Les vestiaires et le matériel sont-ils inclus ?",
+        "a": "Oui. Vestiaires, douches et matériel de salle sont compris dans toutes les formules, y compris pour une séance à l’unité."
+      }
+    ],
+    "ctaTitle": "Toujours une question ?",
+    "ctaBody": "Passez nous voir, un membre de l’équipe vous fera visiter.",
+    "ctaButton": "Créer mon compte"
   }
 }

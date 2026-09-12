@@ -54,3 +54,41 @@ class AuditLog(models.Model):
     def __str__(self) -> str:
         actor = self.actor.email if self.actor_id else "system"
         return f"{self.created_at:%Y-%m-%d %H:%M} {actor} · {self.action}"
+
+
+class ContactMessage(models.Model):
+    """A message sent from the public contact form.
+
+    Stored as well as emailed: the mail is best-effort (see emails.py), so
+    the row is what guarantees an enquiry is never silently lost when SMTP
+    is misconfigured. Staff triage them from Django admin via `is_handled`.
+    """
+
+    class Subject(models.TextChoices):
+        MEMBERSHIP = "membership", _("Memberships and pricing")
+        CLASSES = "classes", _("Classes and schedule")
+        COACHING = "coaching", _("Personal coaching")
+        FACILITIES = "facilities", _("Facilities")
+        OTHER = "other", _("Something else")
+
+    last_name = models.CharField(max_length=80)
+    first_name = models.CharField(max_length=80)
+    email = models.EmailField()
+    subject = models.CharField(
+        max_length=20,
+        choices=Subject.choices,
+        default=Subject.OTHER,
+    )
+    message = models.TextField(max_length=4000)
+    is_handled = models.BooleanField(
+        default=False,
+        help_text="Ticked by staff once the enquiry has been answered.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["is_handled", "-created_at"])]
+
+    def __str__(self) -> str:
+        return f"{self.created_at:%Y-%m-%d %H:%M} {self.email} · {self.subject}"

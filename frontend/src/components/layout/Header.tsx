@@ -168,6 +168,9 @@ export function Header() {
           <NavLink to="/plans" className={navLinkClass}>
             {t("nav.plans")}
           </NavLink>
+          <NavLink to="/contact" className={navLinkClass}>
+            {t("nav.contact")}
+          </NavLink>
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -346,6 +349,9 @@ export function Header() {
             </NavLink>
             <NavLink to="/plans" onClick={closeMenu} className={mobileNavLinkClass}>
               {t("nav.plans")}
+            </NavLink>
+            <NavLink to="/contact" onClick={closeMenu} className={mobileNavLinkClass}>
+              {t("nav.contact")}
             </NavLink>
           </nav>
           <div className="mt-3 space-y-1 border-t border-char-800 pt-3">

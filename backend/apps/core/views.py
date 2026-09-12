@@ -4,11 +4,12 @@ from django.contrib.auth import get_user_model
 from django.db.models import Count, Sum
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
 from apps.bookings.models import Booking
@@ -17,8 +18,13 @@ from apps.subscriptions.models import Subscription
 from apps.users.permissions import IsAdminRole
 
 from .audit import record as audit
+from .emails import send_contact_notification
 from .models import AuditLog
-from .serializers import AdminUserSerializer, AuditLogSerializer
+from .serializers import (
+    AdminUserSerializer,
+    AuditLogSerializer,
+    ContactMessageSerializer,
+)
 
 User = get_user_model()
 
@@ -135,4 +141,30 @@ class AdminDashboardView(APIView):
                 "bookings_last_30_days": bookings_30d,
                 "top_actions": recent_actions,
             }
+        )
+
+
+class ContactMessageView(APIView):
+    """Public contact form endpoint.
+
+    Open to anonymous visitors, so it is rate limited by IP — without that
+    it is an open relay for whoever finds it. The message is persisted
+    first and mailed second: the notification is allowed to fail, the
+    enquiry is not.
+    """
+
+    permission_classes = (AllowAny,)
+    authentication_classes = ()
+    throttle_classes = (ScopedRateThrottle,)
+    throttle_scope = "contact"
+    serializer_class = ContactMessageSerializer
+
+    def post(self, request):
+        serializer = ContactMessageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        contact = serializer.save()
+        send_contact_notification(contact)
+        return Response(
+            {"detail": "Message reçu."},
+            status=status.HTTP_201_CREATED,
         )

@@ -35,6 +35,7 @@ import { TermsPage } from "./pages/public/legal/TermsPage";
 import { NotFoundPage } from "./pages/public/NotFoundPage";
 import { PlanningPage } from "./pages/public/PlanningPage";
 import { PlansPage } from "./pages/public/PlansPage";
+import { ContactPage } from "./pages/public/ContactPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       { path: "/coaches", element: <CoachesListPage /> },
       { path: "/coaches/:id", element: <CoachDetailPage /> },
       { path: "/plans", element: <PlansPage /> },
+      { path: "/contact", element: <ContactPage /> },
       { path: "/legal/notice", element: <LegalNoticePage /> },
       { path: "/legal/terms", element: <TermsPage /> },
       { path: "/legal/privacy", element: <PrivacyPage /> },

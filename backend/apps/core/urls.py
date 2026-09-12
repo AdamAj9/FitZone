@@ -1,7 +1,12 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .views import AdminDashboardView, AdminUserViewSet, AuditLogViewSet
+from .views import (
+    AdminDashboardView,
+    AdminUserViewSet,
+    AuditLogViewSet,
+    ContactMessageView,
+)
 
 router = DefaultRouter()
 router.register("admin/users", AdminUserViewSet, basename="admin-users")
@@ -13,4 +18,5 @@ urlpatterns = router.urls + [
         AdminDashboardView.as_view(),
         name="admin-dashboard",
     ),
+    path("contact/", ContactMessageView.as_view(), name="contact"),
 ]

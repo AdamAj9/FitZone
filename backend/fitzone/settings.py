@@ -144,6 +144,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # Only the public contact endpoint opts in, via throttle_scope.
+    "DEFAULT_THROTTLE_CLASSES": (),
+    "DEFAULT_THROTTLE_RATES": {"contact": "5/hour"},
 }
 
 # ===== JWT =====
@@ -190,6 +193,9 @@ EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+
+# Inbox for public contact-form enquiries; falls back to DEFAULT_FROM_EMAIL.
+CONTACT_NOTIFY_EMAIL = env("CONTACT_NOTIFY_EMAIL", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="FitZone <hello@fitzone.local>")
 
 # ===== Stripe =====

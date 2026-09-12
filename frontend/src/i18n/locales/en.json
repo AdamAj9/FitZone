@@ -22,7 +22,8 @@
     "login": "Login",
     "register": "Sign up",
     "dashboard": "Dashboard",
-    "logout": "Logout"
+    "logout": "Logout",
+    "contact": "Contact"
   },
   "home": {
     "badge": "New gym open 7 days a week",
@@ -1233,5 +1234,75 @@
     "bookingConfirmed": "Booking confirmed",
     "bookingError": "Booking failed",
     "paymentError": "Payment failed"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "We are here for you",
+    "subtitle": "A question? Need some advice? Our team is listening.",
+    "phoneTitle": "Phone",
+    "phoneNote": "Monday to Sunday",
+    "emailTitle": "Email",
+    "emailNote": "We reply within 24 working hours",
+    "addressTitle": "Address",
+    "addressNote": "Easy to reach on foot, by bike or by transport",
+    "hoursTitle": "Opening hours",
+    "hoursWeekdays": "Monday – Friday",
+    "hoursWeekend": "Saturday – Sunday",
+    "formLabel": "Send us a message",
+    "formTitle": "Let us talk about your goals",
+    "fieldLastName": "Last name",
+    "fieldFirstName": "First name",
+    "fieldEmail": "Email address",
+    "fieldSubject": "Subject",
+    "fieldMessage": "Your message",
+    "messagePlaceholder": "Tell us briefly what brings you here.",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "successTitle": "Message sent",
+    "successBody": "Thank you! We will get back to you within 24 working hours.",
+    "errorGeneric": "Sending failed. Please try again in a moment.",
+    "errorThrottled": "You have sent several messages recently. Try again later or give us a call.",
+    "subjects": {
+      "membership": "Memberships and pricing",
+      "classes": "Classes and schedule",
+      "coaching": "Personal coaching",
+      "facilities": "Facilities",
+      "other": "Something else"
+    },
+    "mapLabel": "Find us",
+    "mapTitle": "Getting to the gym",
+    "mapBody": "Right in central Brussels, easy to reach on foot, by bike or by public transport.",
+    "openMap": "Open in Google Maps",
+    "faqLabel": "Quick FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Do I need a membership to try a class?",
+        "a": "No. You can book a single session and pay online, with no commitment. A membership starts paying off from two sessions a week."
+      },
+      {
+        "q": "What are your opening hours?",
+        "a": "Monday to Friday 6:30–22:30, weekends 8:00–20:00. Group classes follow the online schedule, updated every week."
+      },
+      {
+        "q": "Can I cancel my membership at any time?",
+        "a": "Yes. Monthly plans have no commitment and can be cancelled from your member area. The yearly plan runs to its end date."
+      },
+      {
+        "q": "Do you offer one-to-one coaching?",
+        "a": "Yes, with any of our coaches. Sessions are booked straight from the coach page."
+      },
+      {
+        "q": "How do I book a class?",
+        "a": "Create an account, open the schedule and click the session you want. Cancelling is free up to 4 hours before it starts."
+      },
+      {
+        "q": "Are changing rooms and equipment included?",
+        "a": "Yes. Changing rooms, showers and gym equipment are included in every plan, single sessions included."
+      }
+    ],
+    "ctaTitle": "Still have a question?",
+    "ctaBody": "Drop by and someone from the team will show you around.",
+    "ctaButton": "Create my account"
   }
 }

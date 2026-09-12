@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import AuditLog
+from .models import AuditLog, ContactMessage
 
 User = get_user_model()
 
@@ -58,3 +58,20 @@ class AdminUserSerializer(serializers.ModelSerializer):
             "last_login",
             "is_superuser",
         )
+
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    """Write-only: the public form posts it, nothing ever reads it back."""
+
+    class Meta:
+        model = ContactMessage
+        fields = ("id", "last_name", "first_name", "email", "subject", "message")
+        read_only_fields = ("id",)
+
+    def validate_message(self, value: str) -> str:
+        stripped = value.strip()
+        if len(stripped) < 10:
+            raise serializers.ValidationError(
+                "Merci de détailler un peu votre demande (10 caractères minimum)."
+            )
+        return stripped

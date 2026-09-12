@@ -22,7 +22,8 @@
     "login": "Inloggen",
     "register": "Registreren",
     "dashboard": "Dashboard",
-    "logout": "Uitloggen"
+    "logout": "Uitloggen",
+    "contact": "Contact"
   },
   "home": {
     "badge": "Nieuwe club 7 dagen per week open",
@@ -1233,5 +1234,75 @@
     "bookingConfirmed": "Reservering bevestigd",
     "bookingError": "Reservering niet mogelijk",
     "paymentError": "Betaling niet mogelijk"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "We staan voor je klaar",
+    "subtitle": "Een vraag? Advies nodig? Ons team luistert naar je.",
+    "phoneTitle": "Telefoon",
+    "phoneNote": "Van maandag tot zondag",
+    "emailTitle": "E-mail",
+    "emailNote": "Antwoord binnen 24 werkuren",
+    "addressTitle": "Adres",
+    "addressNote": "Vlot bereikbaar te voet, met de fiets of het openbaar vervoer",
+    "hoursTitle": "Openingsuren",
+    "hoursWeekdays": "Maandag – vrijdag",
+    "hoursWeekend": "Zaterdag – zondag",
+    "formLabel": "Stuur ons een bericht",
+    "formTitle": "Laten we het over je doelen hebben",
+    "fieldLastName": "Naam",
+    "fieldFirstName": "Voornaam",
+    "fieldEmail": "E-mailadres",
+    "fieldSubject": "Onderwerp",
+    "fieldMessage": "Je bericht",
+    "messagePlaceholder": "Vertel ons kort wat je zoekt.",
+    "submit": "Bericht versturen",
+    "sending": "Bezig met versturen…",
+    "successTitle": "Bericht verzonden",
+    "successBody": "Bedankt! We nemen binnen 24 werkuren contact met je op.",
+    "errorGeneric": "Versturen mislukt. Probeer het zo meteen opnieuw.",
+    "errorThrottled": "Je hebt onlangs meerdere berichten gestuurd. Probeer het later opnieuw of bel ons.",
+    "subjects": {
+      "membership": "Abonnementen en tarieven",
+      "classes": "Lessen en planning",
+      "coaching": "Persoonlijke coaching",
+      "facilities": "Faciliteiten",
+      "other": "Iets anders"
+    },
+    "mapLabel": "Ons vinden",
+    "mapTitle": "Naar de club komen",
+    "mapBody": "In hartje Brussel, vlot bereikbaar te voet, met de fiets of het openbaar vervoer.",
+    "openMap": "Openen in Google Maps",
+    "faqLabel": "Snelle FAQ",
+    "faqTitle": "Veelgestelde vragen",
+    "faq": [
+      {
+        "q": "Heb ik een abonnement nodig om te komen proberen?",
+        "a": "Nee. Je kunt een losse sessie boeken en online betalen, zonder verbintenis. Een abonnement loont vanaf twee sessies per week."
+      },
+      {
+        "q": "Wat zijn jullie openingsuren?",
+        "a": "Maandag tot vrijdag van 6.30 tot 22.30 uur, in het weekend van 8 tot 20 uur. Groepslessen volgen de online planning, die elke week wordt bijgewerkt."
+      },
+      {
+        "q": "Kan ik mijn abonnement altijd opzeggen?",
+        "a": "Ja. Maandformules zijn zonder verbintenis en zeg je op in je ledenzone. De jaarformule loopt tot de einddatum."
+      },
+      {
+        "q": "Bieden jullie persoonlijke coaching aan?",
+        "a": "Ja, bij elk van onze coaches. Sessies boek je rechtstreeks via de pagina van de coach."
+      },
+      {
+        "q": "Hoe boek ik een les?",
+        "a": "Maak een account aan, open de planning en klik op de sessie die je wilt. Annuleren is gratis tot 4 uur voor aanvang."
+      },
+      {
+        "q": "Zijn kleedkamers en materiaal inbegrepen?",
+        "a": "Ja. Kleedkamers, douches en zaalmateriaal zitten in elke formule, ook bij een losse sessie."
+      }
+    ],
+    "ctaTitle": "Nog een vraag?",
+    "ctaBody": "Kom gerust langs, iemand van het team geeft je een rondleiding.",
+    "ctaButton": "Mijn account aanmaken"
   }
 }
