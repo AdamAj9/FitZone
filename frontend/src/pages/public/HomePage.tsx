@@ -19,6 +19,7 @@ import type { Period } from "../../types/subscriptions";
 import { PillLink } from "../../components/ui/PillButton";
 
 const HERO_IMAGE = "/images/home/hero-dexafit.webp";
+const HERO_CUTOUT = "/images/home/hero-dexafit-cutout.webp";
 const ABOUT_IMAGES = ["/images/home/about-1.webp", "/images/home/about-2.webp"];
 const PROGRAM_IMAGES: Record<string, string> = {
   beginner: "/images/home/program-beginner.webp",
@@ -111,6 +112,15 @@ export function HomePage() {
           aria-hidden
           className="hero-feather absolute inset-0 -z-20 h-full w-full object-cover object-[60%_30%] lg:inset-auto lg:right-0 lg:top-0 lg:w-auto lg:max-w-none"
         />
+        {/* The athlete, cut out of the same photo and laid over the ghost
+            lettering so the words pass behind him, as in the reference. Same
+            box and object-fit as the photo, so it lands on it pixel for pixel. */}
+        <img
+          src={HERO_CUTOUT}
+          alt=""
+          aria-hidden
+          className="hero-feather absolute inset-0 -z-[12] h-full w-full object-cover object-[60%_30%] lg:inset-auto lg:right-0 lg:top-0 lg:w-auto lg:max-w-none"
+        />
         {/* Mobile: the athlete sits behind the copy, so darken the whole frame. */}
         <div className="absolute inset-0 -z-10 bg-char-950/40 md:hidden" aria-hidden />
         <div
@@ -125,19 +135,19 @@ export function HomePage() {
         {/* Ghost lettering, cropped by the card's right edge. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-4 top-[7%] -z-10 hidden select-none text-right md:block"
+          className="pointer-events-none absolute left-[58%] top-[7%] -z-[15] hidden select-none whitespace-nowrap md:block"
         >
           {GHOST_LINES.map((line) => (
             <span
               key={line}
-              className="block font-display text-[9vw] leading-[0.86] text-white/[0.07] xl:text-[8.5rem]"
+              className="block font-display text-[24vh] leading-[0.84] text-white/[0.12]"
             >
               {line}
             </span>
           ))}
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-6 pb-12 pt-10 sm:px-10 lg:pb-16 lg:pt-14 2xl:max-w-[92rem]">
+        <div className="relative flex w-full flex-1 flex-col justify-between px-6 pb-12 pt-10 sm:px-10 lg:px-16 lg:pb-16 lg:pt-14 2xl:px-28">
           <Reveal>
             <p className="max-w-sm indent-12 text-sm leading-relaxed text-char-200 md:text-base">
               {t("home.subtitle")}
@@ -145,7 +155,7 @@ export function HomePage() {
           </Reveal>
 
           <div>
-            <h1 className="font-display text-[3.1rem] leading-[0.9] text-white sm:text-7xl lg:text-[6.5rem] 2xl:text-[8.5rem]">
+            <h1 className="font-display text-[3.1rem] leading-[0.88] text-white sm:text-7xl lg:text-[6.75rem] xl:text-[7.5rem] 2xl:text-[10rem]">
               {/* One word group per line, all white, as in the reference. */}
               {HERO_LINES.map((line, i) => (
                 <span key={line} className="block whitespace-nowrap">
