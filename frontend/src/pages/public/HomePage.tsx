@@ -54,6 +54,7 @@ export function HomePage() {
 
   const STATS = t("home.stats", { returnObjects: true }) as Stat[];
   const GHOST_LINES = t("home.ghostLines", { returnObjects: true }) as string[];
+  const HERO_LINES = t("home.heroLines", { returnObjects: true }) as string[];
   const PROGRAMS = t("home.programs.items", { returnObjects: true }) as Program[];
   const STEPS = t("home.steps", { returnObjects: true }) as Step[];
   const TESTIMONIALS = t("home.testimonials.items", {
@@ -144,22 +145,16 @@ export function HomePage() {
           </Reveal>
 
           <div>
-            <h1 className="font-display text-5xl leading-[0.95] sm:text-6xl lg:text-[5.5rem]">
-              <AnimatedWords
-                words={t("home.titleLine1")
-                  .split(" ")
-                  .map((text: string) => ({ text }))}
-              />
-              <br />
-              <AnimatedWords
-                startDelay={100 + t("home.titleLine1").split(" ").length * 90}
-                words={[
-                  {
-                    text: t("home.titleLine2"),
-                    className: "bg-volt-ember bg-clip-text text-transparent",
-                  },
-                ]}
-              />
+            <h1 className="font-display text-[3.1rem] leading-[0.9] text-white sm:text-7xl lg:text-[6.5rem] 2xl:text-[8.5rem]">
+              {/* One word group per line, all white, as in the reference. */}
+              {HERO_LINES.map((line, i) => (
+                <span key={line} className="block whitespace-nowrap">
+                  <AnimatedWords
+                    startDelay={100 + i * 160}
+                    words={[{ text: line }]}
+                  />
+                </span>
+              ))}
             </h1>
             <div className="mt-8 flex flex-wrap gap-3">
               <PillLink to="/register" size="lg">

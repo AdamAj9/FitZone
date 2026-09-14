@@ -153,7 +153,12 @@
           "desc": "Zware gewichten, intensiteit en opvolging om je grenzen te verleggen."
         }
       ]
-    }
+    },
+    "heroLines": [
+      "Train.",
+      "Groei.",
+      "Hoor erbij."
+    ]
   },
   "footer": {
     "description": "Uw allround fitnessclub: fitness, zwembad, tennis, padel, hamam, coworking — allemaal onder één dak.",

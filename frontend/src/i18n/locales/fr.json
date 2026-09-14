@@ -153,7 +153,12 @@
           "desc": "Charges lourdes, intensité et suivi pour dépasser ses limites."
         }
       ]
-    }
+    },
+    "heroLines": [
+      "Entraîne-toi.",
+      "Progresse.",
+      "Rejoins-nous."
+    ]
   },
   "footer": {
     "description": "Votre salle de sport généraliste : fitness, piscine, tennis, padel, hammam, coworking — tout sous un même toit.",

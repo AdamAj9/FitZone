@@ -153,7 +153,12 @@
           "desc": "Heavy loads, intensity and tracking to push past your limits."
         }
       ]
-    }
+    },
+    "heroLines": [
+      "Train.",
+      "Progress.",
+      "Belong."
+    ]
   },
   "footer": {
     "description": "Your all-in-one gym: fitness, pool, tennis, padel, spa, coworking — all under one roof.",
