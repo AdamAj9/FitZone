@@ -10,8 +10,8 @@ import {
   AuthField,
   AuthShell,
   authInputClass,
-  authSubmitClass,
 } from "./AuthShell";
+import { PillButton } from "../../components/ui/PillButton";
 
 type FormValues = {
   email: string;
@@ -100,13 +100,9 @@ export function LoginPage() {
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={login.isPending}
-          className={`${authSubmitClass} !mt-6`}
-        >
+        <PillButton type="submit" disabled={login.isPending} fullWidth size="lg" className="!mt-6">
           {login.isPending ? t("common.loading") : t("nav.login")}
-        </button>
+        </PillButton>
       </form>
     </AuthShell>
   );

@@ -112,7 +112,7 @@ export function MySubscriptionPage() {
           <p className="text-slate-600">{t("mySubscription.noActiveSubscription")}</p>
           <Link
             to="/plans"
-            className="mt-4 inline-block rounded-md bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
+            className="mt-4 inline-block rounded-full bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
           >
             {t("mySubscription.viewPlans")}
           </Link>

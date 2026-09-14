@@ -13,7 +13,7 @@ export function NotFoundPage() {
       <div className="mt-6 flex justify-center gap-3">
         <Link
           to="/"
-          className="rounded-md bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
+          className="rounded-full bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
         >
           {t("notFound.backHome")}
         </Link>

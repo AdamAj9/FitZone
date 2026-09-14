@@ -7,12 +7,19 @@ type VoltGlowProps = {
   subtle?: boolean;
 };
 
+// Full literal class names on purpose. These were once assembled as
+// `${color}/20`, which Tailwind cannot see when it scans the source, so the
+// classes were never generated and both large blobs rendered with no colour.
+const VOLT_BLOB = "bg-volt-400/20";
+// Orange stays in the palette but only as a whisper next to the volt.
+const EMBER_BLOB = "bg-ember-500/10";
+
 /** Decorative abstract volt-green / ember-orange glow blobs. Purely
  * decorative — pointer-events-none, never affects layout or readability. */
 export function VoltGlow({ className = "", flip = false, subtle = false }: VoltGlowProps) {
   const opacity = subtle ? "opacity-60" : "";
-  const first = flip ? "bg-ember-500" : "bg-volt-400";
-  const second = flip ? "bg-volt-400" : "bg-ember-500";
+  const first = flip ? EMBER_BLOB : VOLT_BLOB;
+  const second = flip ? VOLT_BLOB : EMBER_BLOB;
 
   return (
     <div
@@ -20,10 +27,10 @@ export function VoltGlow({ className = "", flip = false, subtle = false }: VoltG
       aria-hidden
     >
       <div
-        className={`absolute -left-32 top-0 h-[26rem] w-[26rem] rounded-full ${first}/20 blur-[110px]`}
+        className={`absolute -left-32 top-0 h-[26rem] w-[26rem] rounded-full ${first} blur-[110px]`}
       />
       <div
-        className={`absolute -right-24 bottom-0 h-[30rem] w-[30rem] rounded-full ${second}/20 blur-[120px]`}
+        className={`absolute -right-24 bottom-0 h-[30rem] w-[30rem] rounded-full ${second} blur-[120px]`}
       />
       <div className="absolute left-1/2 top-1/3 h-56 w-56 -translate-x-1/2 rounded-full bg-volt-300/10 blur-[90px]" />
     </div>

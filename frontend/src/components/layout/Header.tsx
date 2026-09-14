@@ -5,6 +5,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { OFFERINGS } from "../../data/offerings";
 import { useLogout } from "../../hooks/useAuth";
 import { useAuthStore } from "../../store/auth";
+import { PillLink } from "../ui/PillButton";
 
 const LANGUAGES = [
   { code: "fr", label: "Français" },
@@ -147,7 +148,7 @@ export function Header() {
                   </div>
                   <Link
                     to="/plans"
-                    className="rounded-md bg-volt-400 px-4 py-2 text-sm font-semibold text-char-950 transition hover:bg-volt-300"
+                    className="rounded-full bg-volt-400 px-4 py-2 text-sm font-semibold text-char-950 transition hover:bg-volt-300"
                   >
                     {t("home.offerSeeAll")} →
                   </Link>
@@ -249,12 +250,9 @@ export function Header() {
               <NavLink to="/login" className={navLinkClass}>
                 {t("nav.login")}
               </NavLink>
-              <NavLink
-                to="/register"
-                className="rounded-md bg-volt-ember px-4 py-2 text-sm font-bold text-char-950 shadow-volt-glow transition hover:opacity-90 active:scale-[0.97]"
-              >
+              <PillLink to="/register" size="sm">
                 {t("nav.register")}
-              </NavLink>
+              </PillLink>
             </>
           )}
         </div>
@@ -401,13 +399,9 @@ export function Header() {
                 >
                   {t("nav.login")}
                 </NavLink>
-                <NavLink
-                  to="/register"
-                  onClick={closeMenu}
-                  className="block rounded-md bg-volt-ember px-4 py-2 text-base font-bold text-char-950"
-                >
+                <PillLink to="/register" onClick={closeMenu} fullWidth>
                   {t("nav.register")}
-                </NavLink>
+                </PillLink>
               </>
             )}
             <div>

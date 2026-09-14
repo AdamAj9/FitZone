@@ -88,6 +88,3 @@ export function AuthField({
 
 export const authInputClass =
   "mt-1.5 w-full rounded-lg border border-char-700 bg-char-950/60 px-3.5 py-2.5 text-slate-900 transition placeholder:text-char-400 focus:border-volt-400 focus:outline-none focus:ring-2 focus:ring-volt-400/30";
-
-export const authSubmitClass =
-  "w-full rounded-lg bg-volt-ember px-4 py-2.5 font-bold text-char-950 shadow-volt-glow transition hover:-translate-y-0.5 hover:opacity-90 active:translate-y-0 active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50";

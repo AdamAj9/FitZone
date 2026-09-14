@@ -20,3 +20,6 @@ export {
 } from "./Skeleton";
 export { TiltCard } from "./TiltCard";
 export { VoltGlow } from "./VoltGlow";
+export { Eyebrow } from "./Eyebrow";
+export { GhostText } from "./GhostText";
+export { PillButton, PillLink } from "./PillButton";

@@ -222,7 +222,7 @@ export function CoachDetailPage() {
                   createMutation.isPending ||
                   updateMutation.isPending
                 }
-                className="rounded-md bg-volt-400 px-4 py-2 text-sm font-medium text-char-950 hover:bg-volt-300 disabled:opacity-50"
+                className="rounded-full bg-volt-400 px-4 py-2 text-sm font-medium text-char-950 hover:bg-volt-300 disabled:opacity-50"
               >
                 {editingId ? t("coachDetail.update") : t("coachDetail.publishReview")}
               </button>

@@ -11,8 +11,8 @@ import {
   AuthField,
   AuthShell,
   authInputClass,
-  authSubmitClass,
 } from "./AuthShell";
+import { PillButton } from "../../components/ui/PillButton";
 
 type FormValues = {
   email: string;
@@ -149,15 +149,11 @@ export function RegisterPage() {
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={registerMutation.isPending}
-          className={`${authSubmitClass} !mt-6`}
-        >
+        <PillButton type="submit" disabled={registerMutation.isPending} fullWidth size="lg" className="!mt-6">
           {registerMutation.isPending
             ? t("common.loading")
             : t("nav.register")}
-        </button>
+        </PillButton>
       </form>
     </AuthShell>
   );

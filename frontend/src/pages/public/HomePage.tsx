@@ -15,6 +15,7 @@ import { VoltGlow } from "../../components/ui/VoltGlow";
 import { OFFERINGS } from "../../data/offerings";
 import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
+import { PillLink } from "../../components/ui/PillButton";
 
 const HERO_IMAGE = "/images/hero/hero-volt-ember.webp";
 const CTA_IMAGE = "/images/hero/hero-secondaire.webp";
@@ -133,18 +134,12 @@ export function HomePage() {
               {t("home.subtitle")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/register"
-                className="rounded-lg bg-volt-ember px-7 py-3.5 font-bold text-char-950 shadow-volt-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
-              >
-                {t("home.ctaStart")} →
-              </Link>
-              <Link
-                to="/plans"
-                className="rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
-              >
+              <PillLink to="/register" size="lg">
+                {t("home.ctaStart")}
+              </PillLink>
+              <PillLink to="/plans" size="lg" variant="ghost">
                 {t("home.ctaPlans")}
-              </Link>
+              </PillLink>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-char-300">
               <div className="flex items-center gap-2">
@@ -514,18 +509,12 @@ export function HomePage() {
                 {t("home.ctaBottomSubtitle")}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link
-                  to="/register"
-                  className="rounded-lg bg-volt-ember px-8 py-3 font-bold text-char-950 shadow-ember-glow transition hover:-translate-y-0.5 hover:opacity-90 active:scale-[0.97] active:translate-y-0"
-                >
-                  {t("home.ctaCreateAccount")} →
-                </Link>
-                <Link
-                  to="/coaches"
-                  className="rounded-lg border border-white/30 bg-white/5 px-8 py-3 font-semibold backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] active:translate-y-0"
-                >
+                <PillLink to="/register" size="lg">
+                  {t("home.ctaCreateAccount")}
+                </PillLink>
+                <PillLink to="/coaches" size="lg" variant="ghost">
                   {t("home.ctaMeetCoaches")}
-                </Link>
+                </PillLink>
               </div>
             </div>
           </div>

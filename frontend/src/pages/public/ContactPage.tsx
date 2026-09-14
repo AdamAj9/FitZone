@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { z } from "zod";
 
 import { contactApi } from "../../api/contact";
@@ -12,6 +11,8 @@ import { Reveal } from "../../components/ui/Reveal";
 import { VoltGlow } from "../../components/ui/VoltGlow";
 import { CONTACT_INFO } from "../../lib/contactInfo";
 import type { ContactPayload, ContactSubject } from "../../types/contact";
+import { Eyebrow } from "../../components/ui/Eyebrow";
+import { PillButton, PillLink } from "../../components/ui/PillButton";
 
 const HERO_IMAGE = "/images/hero/hero-volt-ember.webp";
 
@@ -103,9 +104,7 @@ export function ContactPage() {
         <div className="relative z-10 p-6 sm:p-10">
           <VoltGlow subtle />
           <div className="relative">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt-400">
-              {t("contact.label")}
-            </p>
+            <Eyebrow>{t("contact.label")}</Eyebrow>
             <h1 className="mt-2 font-display text-3xl font-bold text-slate-900 md:text-4xl">
               <GradientTail text={t("contact.title")} />
             </h1>
@@ -173,9 +172,7 @@ export function ContactPage() {
       {/* === FORM + MAP === */}
       <div className="grid gap-6 lg:grid-cols-2">
         <Reveal className="rounded-2xl border border-char-800 bg-char-900/60 p-6 backdrop-blur-xl sm:p-8">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt-400">
-            {t("contact.formLabel")}
-          </p>
+          <Eyebrow>{t("contact.formLabel")}</Eyebrow>
           <h2 className="mt-2 font-display text-2xl font-bold text-slate-900">
             <GradientTail text={t("contact.formTitle")} />
           </h2>
@@ -318,13 +315,9 @@ export function ContactPage() {
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={send.isPending}
-                className="w-full rounded-lg bg-volt-ember px-4 py-2.5 font-bold text-char-950 shadow-volt-glow transition hover:-translate-y-0.5 hover:opacity-90 active:translate-y-0 active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50"
-              >
-                {send.isPending ? t("contact.sending") : t("contact.submit")} →
-              </button>
+              <PillButton type="submit" disabled={send.isPending} fullWidth size="lg">
+                {send.isPending ? t("contact.sending") : t("contact.submit")}
+              </PillButton>
             </form>
           )}
         </Reveal>
@@ -334,9 +327,7 @@ export function ContactPage() {
           className="flex flex-col overflow-hidden rounded-2xl border border-char-800 bg-char-900/60 backdrop-blur-xl"
         >
           <div className="p-6 sm:p-8">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt-400">
-              {t("contact.mapLabel")}
-            </p>
+            <Eyebrow>{t("contact.mapLabel")}</Eyebrow>
             <h2 className="mt-2 font-display text-2xl font-bold text-slate-900">
               <GradientTail text={t("contact.mapTitle")} />
             </h2>
@@ -369,9 +360,7 @@ export function ContactPage() {
       <Reveal className="relative isolate overflow-hidden rounded-2xl border border-char-800 bg-char-900/60 p-6 backdrop-blur-xl sm:p-8">
         <VoltGlow subtle flip />
         <div className="relative">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt-400">
-            {t("contact.faqLabel")}
-          </p>
+          <Eyebrow>{t("contact.faqLabel")}</Eyebrow>
           <h2 className="mt-2 font-display text-2xl font-bold text-slate-900">
             <GradientTail text={t("contact.faqTitle")} />
           </h2>
@@ -411,12 +400,9 @@ export function ContactPage() {
             </h2>
             <p className="mt-1 text-char-300">{t("contact.ctaBody")}</p>
           </div>
-          <Link
-            to="/register"
-            className="rounded-lg bg-volt-ember px-7 py-3 font-bold text-char-950 shadow-volt-glow transition hover:-translate-y-0.5 hover:opacity-90 active:translate-y-0"
-          >
-            {t("contact.ctaButton")} →
-          </Link>
+          <PillLink to="/register" size="lg">
+            {t("contact.ctaButton")}
+          </PillLink>
         </div>
       </Reveal>
     </div>

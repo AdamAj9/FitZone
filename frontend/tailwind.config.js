@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Unbounded", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Anton", "Impact", "system-ui", "sans-serif"],
       },
       colors: {
         /* ===== Legacy tokens, remapped onto the Volt palette =====
@@ -153,7 +153,7 @@ export default {
         },
       },
       backgroundImage: {
-        "volt-ember": "linear-gradient(90deg, #B6FF00 0%, #FF6A00 100%)",
+        "volt-ember": "linear-gradient(90deg, #B6FF00 0%, #B6FF00 45%, #FF6A00 100%)",
       },
       boxShadow: {
         "volt-glow": "0 10px 40px -10px rgba(182, 255, 0, 0.45)",

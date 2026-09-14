@@ -59,7 +59,7 @@ function SessionRow({
             type="button"
             onClick={() => onBook(session.id)}
             disabled={busy}
-            className="rounded-md bg-volt-400 px-3 py-1 text-xs font-medium text-char-950 hover:bg-volt-300 disabled:opacity-50"
+            className="rounded-full bg-volt-400 px-3 py-1 text-xs font-medium text-char-950 hover:bg-volt-300 disabled:opacity-50"
           >
             {t("courseDetail.book")}
           </button>
@@ -261,7 +261,7 @@ export function CourseDetailPage() {
           {!user ? (
             <Link
               to="/login"
-              className="mt-4 block w-full rounded-md bg-volt-400 px-4 py-2 text-center font-medium text-char-950 hover:bg-volt-300"
+              className="mt-4 block w-full rounded-full bg-volt-400 px-4 py-2 text-center font-medium text-char-950 hover:bg-volt-300"
             >
               {t("courseDetail.loginToBook")}
             </Link>

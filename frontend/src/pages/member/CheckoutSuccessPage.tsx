@@ -69,7 +69,7 @@ export function CheckoutSuccessPage() {
         {isFailed ? (
           <Link
             to="/plans"
-            className="rounded-md bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
+            className="rounded-full bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
           >
             {t("checkout.retry")}
           </Link>
@@ -77,7 +77,7 @@ export function CheckoutSuccessPage() {
           <>
             <Link
               to="/my-subscription"
-              className="rounded-md bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
+              className="rounded-full bg-volt-400 px-5 py-2 font-medium text-char-950 hover:bg-volt-300"
             >
               {t("mySubscription.title")}
             </Link>

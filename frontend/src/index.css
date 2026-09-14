@@ -72,3 +72,13 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+/* Anton ships a single weight. Without font-synthesis: none the browser fakes
+   bold for every `font-bold` heading, which smears a condensed face. */
+@layer utilities {
+  .font-display {
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-synthesis: none;
+  }
+}
