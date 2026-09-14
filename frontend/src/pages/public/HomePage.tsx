@@ -135,12 +135,12 @@ export function HomePage() {
         {/* Ghost lettering, cropped by the card's right edge. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-[58%] top-[7%] -z-[15] hidden select-none whitespace-nowrap md:block"
+          className="pointer-events-none absolute -right-[2vh] top-[6%] -z-[15] hidden select-none whitespace-nowrap text-right lg:block"
         >
           {GHOST_LINES.map((line) => (
             <span
               key={line}
-              className="block font-display text-[24vh] leading-[0.84] text-white/[0.12]"
+              className="block font-display text-[17vh] leading-[0.84] text-white/[0.12]"
             >
               {line}
             </span>
