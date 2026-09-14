@@ -11,13 +11,20 @@ import { Marquee } from "../../components/ui/Marquee";
 import { Reveal } from "../../components/ui/Reveal";
 import { TiltCard } from "../../components/ui/TiltCard";
 import { GradientTail } from "../../components/ui/GradientTail";
+import { Eyebrow } from "../../components/ui/Eyebrow";
 import { VoltGlow } from "../../components/ui/VoltGlow";
 import { OFFERINGS } from "../../data/offerings";
 import { localizedPlan } from "../../lib/planCatalog";
 import type { Period } from "../../types/subscriptions";
 import { PillLink } from "../../components/ui/PillButton";
 
-const HERO_IMAGE = "/images/hero/hero-volt-ember.webp";
+const HERO_IMAGE = "/images/home/hero-dexafit.webp";
+const ABOUT_IMAGES = ["/images/home/about-1.webp", "/images/home/about-2.webp"];
+const COACH_AVATARS = [
+  "/images/coaches/leo-durand.webp",
+  "/images/coaches/sophie-martin.webp",
+  "/images/coaches/thomas-lefevre.webp",
+];
 const CTA_IMAGE = "/images/hero/hero-secondaire.webp";
 
 type Stat = { value: string; label: string };
@@ -40,6 +47,7 @@ export function HomePage() {
   const [period, setPeriod] = useState<Period>("monthly");
 
   const STATS = t("home.stats", { returnObjects: true }) as Stat[];
+  const GHOST_LINES = t("home.ghostLines", { returnObjects: true }) as string[];
   const STEPS = t("home.steps", { returnObjects: true }) as Step[];
   const TESTIMONIALS = t("home.testimonials.items", {
     returnObjects: true,
@@ -70,50 +78,63 @@ export function HomePage() {
   return (
     <div className="space-y-24 bg-char-950 pb-24">
       <div>
-      {/* === HERO === */}
+      {/* === HERO — DEXAFIT layout: a framed card, copy pinned to the
+          corners, ghost lettering on the right, glowing curved bottom edge === */}
+      <div className="px-3 pt-3 sm:px-5 sm:pt-4">
       <section
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
-        className="group relative isolate flex min-h-[88vh] items-center overflow-hidden text-white md:min-h-[34rem] md:max-h-[92vh] md:aspect-[2.5/1]"
+        className="group relative isolate mx-auto flex min-h-[86vh] max-w-[100rem] flex-col overflow-hidden rounded-[2rem] rounded-b-[3rem] border-b-[3px] border-volt-400 bg-char-900 text-white shadow-[0_24px_50px_-26px_rgba(182,255,0,0.7)] md:h-[calc(100vh-6rem)] md:max-h-[880px] md:min-h-[620px]"
       >
+        <img
+          src={HERO_IMAGE}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 -z-20 h-full w-full animate-kenburns object-cover object-[62%_28%]"
+        />
         <div
-          className="absolute inset-0 -z-20 animate-kenburns bg-cover bg-[position:44%_top] bg-no-repeat md:bg-top"
-          style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
+          className="absolute inset-0 -z-10 bg-gradient-to-r from-char-950/90 via-char-950/45 to-char-950/5"
           aria-hidden
         />
         <div
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-char-950/92 via-char-950/55 to-char-950/10"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-char-950/85 via-transparent to-char-950/40"
           aria-hidden
         />
-        {/* Mobile only: the crop puts the models right behind the copy, so we
-            add a flat scrim to keep the headline readable. */}
-        <div className="absolute inset-0 -z-10 bg-char-950/45 md:hidden" aria-hidden />
-        <div
-          className="absolute inset-x-0 bottom-0 -z-10 h-3/4"
-          style={{
-            background:
-              "linear-gradient(to top, #111412 0%, rgba(17,20,18,0.95) 7%, rgba(10,12,11,0.84) 18%, rgba(8,10,9,0.64) 34%, rgba(8,10,9,0.4) 52%, rgba(8,10,9,0.19) 72%, rgba(8,10,9,0.05) 88%, rgba(8,10,9,0) 100%)",
-          }}
-          aria-hidden
-        />
+        {/* Mobile: the athlete sits behind the copy, so darken the whole frame. */}
+        <div className="absolute inset-0 -z-10 bg-char-950/40 md:hidden" aria-hidden />
         <div
           className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(182,255,0,0.18), rgba(255,106,0,0.12) 45%, transparent 70%)",
+              "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(182,255,0,0.16), transparent 65%)",
           }}
           aria-hidden
         />
 
-        {/* Wider than the navbar container from 2xl up: on very large screens
-            the centred max-w-7xl pushed the copy onto the athletes' torsos. */}
-        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:py-28 2xl:max-w-[100rem]">
-          <Reveal className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-volt-400/30 bg-white/5 px-3 py-1 text-xs font-medium text-volt-100 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-volt-400"></span>
-              {t("home.badge")}
+        {/* Ghost lettering, cropped by the card's right edge. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-4 top-[7%] -z-10 hidden select-none text-right md:block"
+        >
+          {GHOST_LINES.map((line) => (
+            <span
+              key={line}
+              className="block font-display text-[9vw] leading-[0.86] text-white/[0.07] xl:text-[8.5rem]"
+            >
+              {line}
             </span>
-            <h1 className="mt-6 font-display text-4xl font-bold leading-tight md:text-6xl">
+          ))}
+        </div>
+
+        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-6 pb-12 pt-10 sm:px-10 lg:pb-16 lg:pt-14 2xl:max-w-[92rem]">
+          <Reveal>
+            <p className="max-w-sm indent-12 text-sm leading-relaxed text-char-200 md:text-base">
+              {t("home.subtitle")}
+            </p>
+          </Reveal>
+
+          <div>
+            <h1 className="font-display text-5xl leading-[0.95] sm:text-6xl lg:text-[5.5rem]">
               <AnimatedWords
                 words={t("home.titleLine1")
                   .split(" ")
@@ -130,9 +151,6 @@ export function HomePage() {
                 ]}
               />
             </h1>
-            <p className="mt-5 max-w-lg text-lg text-char-200 md:text-xl">
-              {t("home.subtitle")}
-            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <PillLink to="/register" size="lg">
                 {t("home.ctaStart")}
@@ -141,22 +159,14 @@ export function HomePage() {
                 {t("home.ctaPlans")}
               </PillLink>
             </div>
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-char-300">
-              <div className="flex items-center gap-2">
-                <span className="text-amber-400">★★★★★</span>
-                <span>{t("home.ratingValue")} {t("home.ratingText")}</span>
-              </div>
-              <span className="hidden h-4 w-px bg-white/15 md:block" />
-              <span className="hidden md:inline">{t("home.noCommitment")}</span>
-            </div>
-          </Reveal>
+          </div>
         </div>
-
       </section>
+      </div>
 
       {/* === MARQUEE === */}
       <Marquee
-        className="bg-char-900 py-4 text-white"
+        className="mt-10 bg-char-900 py-4 text-white"
         items={OFFERINGS.map((group) => (
           <span key={group.key} className="flex items-center gap-3 font-display text-lg uppercase tracking-wide">
             <span aria-hidden>{group.icon}</span>
@@ -169,6 +179,70 @@ export function HomePage() {
           it, so the strip needs a soft bottom edge to match. */}
       <div className="h-20 bg-gradient-to-b from-char-900 to-char-950" aria-hidden />
       </div>
+
+      {/* === À PROPOS — DEXAFIT "About us": rating column, two photos, copy === */}
+      <section className="mx-auto max-w-7xl px-4">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_2.2fr] lg:gap-14">
+          <Reveal className="flex flex-col justify-between gap-10">
+            <Eyebrow>{t("home.about.label")}</Eyebrow>
+            <div>
+              <p className="font-display text-7xl leading-none text-white">
+                {t("home.about.ratingScore")}
+              </p>
+              <p className="mt-2 tracking-widest text-volt-400" aria-hidden>
+                ★★★★★
+              </p>
+              <p className="mt-1 text-sm text-char-400">{t("home.about.ratingLabel")}</p>
+              {/* The real coaches, not stock avatars. */}
+              <div className="mt-5 flex items-center">
+                {COACH_AVATARS.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className={`h-11 w-11 rounded-full border-2 border-char-950 object-cover object-top ${
+                      i > 0 ? "-ml-3" : ""
+                    }`}
+                  />
+                ))}
+                <span
+                  aria-hidden
+                  className="-ml-3 flex h-11 w-11 items-center justify-center rounded-full border-2 border-char-950 bg-volt-400 text-lg font-bold text-char-950"
+                >
+                  +
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          <div>
+            <Reveal>
+              <h2 className="max-w-3xl font-display text-4xl leading-[0.95] text-white md:text-6xl">
+                <GradientTail text={t("home.about.title")} />
+              </h2>
+            </Reveal>
+            <div className="mt-10 grid items-end gap-5 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.1fr]">
+              {ABOUT_IMAGES.map((src, i) => (
+                <Reveal key={src} delay={i * 120}>
+                  <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className="aspect-[4/5] w-full rounded-2xl object-cover ring-1 ring-char-800"
+                  />
+                </Reveal>
+              ))}
+              <Reveal delay={260} className="sm:col-span-2 lg:col-span-1">
+                <p className="text-char-300">{t("home.about.body")}</p>
+                <PillLink to="/coaches" className="mt-6">
+                  {t("home.about.cta")}
+                </PillLink>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* === TRUST STATS — full-bleed dark separator band === */}
       <section className="relative isolate w-full overflow-hidden bg-char-900 py-16">

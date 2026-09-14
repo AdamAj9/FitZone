@@ -115,7 +115,20 @@
     "ctaBottomTitle": "Ready to walk through the door?",
     "ctaBottomSubtitle": "Free sign-up. Pick your plan, book your first session, let's go.",
     "ctaCreateAccount": "Create my account",
-    "ctaMeetCoaches": "Meet the coaches"
+    "ctaMeetCoaches": "Meet the coaches",
+    "ghostLines": [
+      "Push",
+      "your",
+      "limits"
+    ],
+    "about": {
+      "label": "About us",
+      "title": "Consistency creates change",
+      "body": "More than a gym: a place built for progress. From your first session to advanced training, our spaces and coaches support you every step of the way.",
+      "ratingScore": "4.8",
+      "ratingLabel": "Member satisfaction",
+      "cta": "Meet the team"
+    }
   },
   "footer": {
     "description": "Your all-in-one gym: fitness, pool, tennis, padel, spa, coworking — all under one roof.",

@@ -115,7 +115,20 @@
     "ctaBottomTitle": "Klaar om binnen te stappen?",
     "ctaBottomSubtitle": "Gratis registratie. Kies uw formule, boek uw eerste sessie, en u kunt starten.",
     "ctaCreateAccount": "Account aanmaken",
-    "ctaMeetCoaches": "Maak kennis met de coaches"
+    "ctaMeetCoaches": "Maak kennis met de coaches",
+    "ghostLines": [
+      "Verleg",
+      "je",
+      "grenzen"
+    ],
+    "about": {
+      "label": "Over ons",
+      "title": "Regelmaat brengt verandering",
+      "body": "Meer dan een sportschool: een plek gebouwd om vooruit te gaan. Van je eerste training tot gevorderde voorbereiding begeleiden onze ruimtes en coaches je bij elke stap.",
+      "ratingScore": "4,8",
+      "ratingLabel": "Tevredenheid van leden",
+      "cta": "Ontdek het team"
+    }
   },
   "footer": {
     "description": "Uw allround fitnessclub: fitness, zwembad, tennis, padel, hamam, coworking — allemaal onder één dak.",

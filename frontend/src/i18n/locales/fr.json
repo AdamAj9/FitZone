@@ -115,7 +115,20 @@
     "ctaBottomTitle": "Prêt à passer la porte ?",
     "ctaBottomSubtitle": "Inscription gratuite. Choisis ta formule, réserve ta première séance, c'est parti.",
     "ctaCreateAccount": "Créer mon compte",
-    "ctaMeetCoaches": "Rencontrer les coachs"
+    "ctaMeetCoaches": "Rencontrer les coachs",
+    "ghostLines": [
+      "Repousse",
+      "tes",
+      "limites"
+    ],
+    "about": {
+      "label": "À propos",
+      "title": "La régularité crée le changement",
+      "body": "Plus qu’une salle de sport : un lieu pensé pour progresser. Du premier entraînement à la préparation avancée, nos espaces et nos coachs vous accompagnent à chaque étape.",
+      "ratingScore": "4,8",
+      "ratingLabel": "Satisfaction des membres",
+      "cta": "Découvrir l’équipe"
+    }
   },
   "footer": {
     "description": "Votre salle de sport généraliste : fitness, piscine, tennis, padel, hammam, coworking — tout sous un même toit.",
