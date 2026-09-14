@@ -93,19 +93,22 @@ export function HomePage() {
         onMouseMove={handleHeroMouseMove}
         className="group relative isolate flex min-h-[86vh] flex-col overflow-hidden rounded-[2rem] rounded-b-[3rem] bg-char-900 text-white shadow-[0_26px_50px_-26px_rgba(182,255,0,0.75),-14px_0_40px_-30px_rgba(182,255,0,0.55),14px_0_40px_-30px_rgba(182,255,0,0.55)] md:h-[calc(100vh-5.25rem)] md:min-h-[620px]"
       >
+        {/* From lg up the photo is shown whole (contain, anchored right) so the
+            bar and the athlete stay in frame on wide screens instead of being
+            zoomed into the face. The strip it leaves on the left is filled by
+            a blurred copy of the same photo, and the sharp one feathers into
+            it — so there is no seam and no empty band. Phones keep cover. */}
         <img
           src={HERO_IMAGE}
           alt=""
           aria-hidden
-          className="absolute inset-0 -z-20 h-full w-full animate-kenburns object-cover object-[62%_28%]"
+          className="absolute inset-0 -z-30 hidden h-full w-full scale-110 object-cover blur-2xl brightness-[0.55] lg:block"
         />
-        <div
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-char-950/90 via-char-950/45 to-char-950/5"
+        <img
+          src={HERO_IMAGE}
+          alt=""
           aria-hidden
-        />
-        <div
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-char-950/85 via-transparent to-char-950/40"
-          aria-hidden
+          className="hero-feather absolute inset-0 -z-20 h-full w-full object-cover object-[60%_30%] lg:inset-auto lg:right-0 lg:top-0 lg:w-auto lg:max-w-none"
         />
         {/* Mobile: the athlete sits behind the copy, so darken the whole frame. */}
         <div className="absolute inset-0 -z-10 bg-char-950/40 md:hidden" aria-hidden />

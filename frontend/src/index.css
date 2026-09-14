@@ -82,3 +82,12 @@
     font-synthesis: none;
   }
 }
+
+/* Home hero, lg and up: feathers the left edge of the contained photo into
+   the blurred copy behind it. */
+@media (min-width: 1024px) {
+  .hero-feather {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 32%);
+    mask-image: linear-gradient(to right, transparent 0%, black 32%);
+  }
+}
