@@ -128,6 +128,31 @@
       "ratingScore": "4.8",
       "ratingLabel": "Member satisfaction",
       "cta": "Meet the team"
+    },
+    "programs": {
+      "label": "Our programs",
+      "title": "Programs for every fitness level",
+      "cta": "Browse classes",
+      "items": [
+        {
+          "level": "beginner",
+          "tag": "Beginner",
+          "title": "Build the foundations",
+          "desc": "Technique, mobility and confidence: learn the right moves at your own pace."
+        },
+        {
+          "level": "intermediate",
+          "tag": "Intermediate",
+          "title": "Level up",
+          "desc": "Structure your sessions to gain strength and endurance."
+        },
+        {
+          "level": "advanced",
+          "tag": "Advanced",
+          "title": "Go all the way",
+          "desc": "Heavy loads, intensity and tracking to push past your limits."
+        }
+      ]
     }
   },
   "footer": {

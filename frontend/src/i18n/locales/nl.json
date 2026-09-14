@@ -128,6 +128,31 @@
       "ratingScore": "4,8",
       "ratingLabel": "Tevredenheid van leden",
       "cta": "Ontdek het team"
+    },
+    "programs": {
+      "label": "Onze programma’s",
+      "title": "Programma’s voor elk niveau",
+      "cta": "Bekijk de lessen",
+      "items": [
+        {
+          "level": "beginner",
+          "tag": "Beginner",
+          "title": "De basis leggen",
+          "desc": "Techniek, mobiliteit en zelfvertrouwen: leer de juiste bewegingen in je eigen tempo."
+        },
+        {
+          "level": "intermediate",
+          "tag": "Gemiddeld",
+          "title": "Een stap verder",
+          "desc": "Structureer je trainingen om kracht en uithoudingsvermogen op te bouwen."
+        },
+        {
+          "level": "advanced",
+          "tag": "Gevorderd",
+          "title": "Tot het uiterste",
+          "desc": "Zware gewichten, intensiteit en opvolging om je grenzen te verleggen."
+        }
+      ]
     }
   },
   "footer": {

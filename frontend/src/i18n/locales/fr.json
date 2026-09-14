@@ -128,6 +128,31 @@
       "ratingScore": "4,8",
       "ratingLabel": "Satisfaction des membres",
       "cta": "Découvrir l’équipe"
+    },
+    "programs": {
+      "label": "Nos programmes",
+      "title": "Des programmes pour chaque niveau",
+      "cta": "Voir les cours",
+      "items": [
+        {
+          "level": "beginner",
+          "tag": "Débutant",
+          "title": "Poser les bases",
+          "desc": "Technique, mobilité et confiance : apprendre les bons gestes à son rythme."
+        },
+        {
+          "level": "intermediate",
+          "tag": "Intermédiaire",
+          "title": "Passer un cap",
+          "desc": "Structurer ses séances pour gagner en force et en endurance."
+        },
+        {
+          "level": "advanced",
+          "tag": "Avancé",
+          "title": "Aller au bout",
+          "desc": "Charges lourdes, intensité et suivi pour dépasser ses limites."
+        }
+      ]
     }
   },
   "footer": {

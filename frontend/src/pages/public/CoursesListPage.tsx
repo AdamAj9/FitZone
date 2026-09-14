@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { coursesApi } from "../../api/courses";
@@ -12,7 +13,13 @@ export function CoursesListPage() {
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [categorySlug, setCategorySlug] = useState("");
-  const [level, setLevel] = useState<CourseLevel | "">("");
+  const [searchParams] = useSearchParams();
+  const initialLevel = searchParams.get("level");
+  const [level, setLevel] = useState<CourseLevel | "">(
+    initialLevel === "beginner" || initialLevel === "intermediate" || initialLevel === "advanced"
+      ? initialLevel
+      : "",
+  );
 
   const categoriesQuery = useQuery({
     queryKey: ["categories"],

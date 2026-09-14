@@ -20,6 +20,12 @@ import { PillLink } from "../../components/ui/PillButton";
 
 const HERO_IMAGE = "/images/home/hero-dexafit.webp";
 const ABOUT_IMAGES = ["/images/home/about-1.webp", "/images/home/about-2.webp"];
+const PROGRAM_IMAGES: Record<string, string> = {
+  beginner: "/images/home/program-beginner.webp",
+  intermediate: "/images/home/program-intermediate.webp",
+  advanced: "/images/home/program-advanced.webp",
+};
+type Program = { level: string; tag: string; title: string; desc: string };
 const COACH_AVATARS = [
   "/images/coaches/leo-durand.webp",
   "/images/coaches/sophie-martin.webp",
@@ -48,6 +54,7 @@ export function HomePage() {
 
   const STATS = t("home.stats", { returnObjects: true }) as Stat[];
   const GHOST_LINES = t("home.ghostLines", { returnObjects: true }) as string[];
+  const PROGRAMS = t("home.programs.items", { returnObjects: true }) as Program[];
   const STEPS = t("home.steps", { returnObjects: true }) as Step[];
   const TESTIMONIALS = t("home.testimonials.items", {
     returnObjects: true,
@@ -80,11 +87,11 @@ export function HomePage() {
       <div>
       {/* === HERO — DEXAFIT layout: a framed card, copy pinned to the
           corners, ghost lettering on the right, glowing curved bottom edge === */}
-      <div className="px-3 pt-3 sm:px-5 sm:pt-4">
+      <div className="px-2 pt-2 sm:px-3 sm:pt-3">
       <section
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
-        className="group relative isolate mx-auto flex min-h-[86vh] max-w-[100rem] flex-col overflow-hidden rounded-[2rem] rounded-b-[3rem] border-b-[3px] border-volt-400 bg-char-900 text-white shadow-[0_24px_50px_-26px_rgba(182,255,0,0.7)] md:h-[calc(100vh-6rem)] md:max-h-[880px] md:min-h-[620px]"
+        className="group relative isolate flex min-h-[86vh] flex-col overflow-hidden rounded-[2rem] rounded-b-[3rem] bg-char-900 text-white shadow-[0_26px_50px_-26px_rgba(182,255,0,0.75),-14px_0_40px_-30px_rgba(182,255,0,0.55),14px_0_40px_-30px_rgba(182,255,0,0.55)] md:h-[calc(100vh-5.25rem)] md:min-h-[620px]"
       >
         <img
           src={HERO_IMAGE}
@@ -160,6 +167,26 @@ export function HomePage() {
               </PillLink>
             </div>
           </div>
+        </div>
+        {/* LED outline: down both sides and along the curved bottom, fading
+            in from the top so the frame reads as lit from below. The glow is
+            a drop-shadow on the wrapper because a mask would clip a
+            box-shadow along with the border. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-20"
+          style={{
+            filter:
+              "drop-shadow(0 0 5px rgba(182,255,0,0.9)) drop-shadow(0 0 16px rgba(182,255,0,0.45))",
+          }}
+        >
+          <div
+            className="absolute inset-0 rounded-[2rem] rounded-b-[3rem] border-[3px] border-t-0 border-volt-400"
+            style={{
+              maskImage: "linear-gradient(to bottom, transparent 6%, black 55%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent 6%, black 55%)",
+            }}
+          />
         </div>
       </section>
       </div>
@@ -241,6 +268,61 @@ export function HomePage() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* === PROGRAMMES PAR NIVEAU === */}
+      <section className="mx-auto max-w-7xl px-4">
+        <Reveal className="text-center">
+          <Eyebrow center>{t("home.programs.label")}</Eyebrow>
+          <h2 className="mx-auto mt-3 max-w-3xl font-display text-4xl leading-[0.95] text-white md:text-6xl">
+            <GradientTail text={t("home.programs.title")} />
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {PROGRAMS.map((program, i) => (
+            <Reveal key={program.level} delay={i * 120}>
+              <Link
+                to={`/courses?level=${program.level}`}
+                className="group relative block overflow-hidden rounded-3xl ring-1 ring-char-800 transition hover:shadow-volt-glow hover:ring-volt-400/60"
+              >
+                <img
+                  src={PROGRAM_IMAGES[program.level]}
+                  alt=""
+                  loading="lazy"
+                  className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-char-950 via-char-950/45 to-transparent"
+                />
+                <span
+                  aria-hidden
+                  className="absolute right-5 top-4 font-display text-6xl text-white/15"
+                >
+                  0{i + 1}
+                </span>
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt-400">
+                    {program.tag}
+                  </p>
+                  <h3 className="mt-2 font-display text-3xl leading-none text-white">
+                    {program.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-char-300">{program.desc}</p>
+                  <span className="mt-5 inline-flex items-center gap-3 font-display text-sm tracking-wide text-white">
+                    {t("home.programs.cta")}
+                    <span
+                      aria-hidden
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-volt-400 text-char-950 transition-transform duration-300 group-hover:-rotate-45"
+                    >
+                      →
+                    </span>
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </section>
 
