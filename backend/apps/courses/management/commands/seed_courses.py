@@ -1,3 +1,6 @@
+import os
+import secrets
+
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
@@ -64,8 +67,23 @@ class Command(BaseCommand):
             action="store_true",
             help="Delete existing courses and categories before seeding.",
         )
+        parser.add_argument(
+            "--password",
+            default=None,
+            help=(
+                "Password for the seeded coach accounts. Falls back to "
+                "SEED_COACH_PASSWORD, then to a generated one printed below."
+            ),
+        )
 
     def handle(self, *args, **options):
+        # Never hardcode this: the repository is public, so a literal here is a
+        # published credential for every deployment that runs the seed.
+        coach_password = options["password"] or os.environ.get("SEED_COACH_PASSWORD")
+        generated = coach_password is None
+        if generated:
+            coach_password = secrets.token_urlsafe(12)
+
         if options["reset"]:
             Course.objects.all().delete()
             Category.objects.all().delete()
@@ -88,7 +106,7 @@ class Command(BaseCommand):
                 },
             )
             if created:
-                user.set_password("Coach-Pass-123!")
+                user.set_password(coach_password)
                 user.save()
             profile = user.coach_profile
             profile.bio = c["bio"]
@@ -96,6 +114,12 @@ class Command(BaseCommand):
             profile.years_of_experience = c["years_of_experience"]
             profile.save()
         self.stdout.write(self.style.SUCCESS(f"Coaches: {User.objects.filter(role=User.Role.COACH).count()}"))
+        if generated:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"Generated coach password (shown once): {coach_password}"
+                )
+            )
 
         for title, cat_name, coach_email, level, duration, capacity, price in COURSES:
             category = Category.objects.get(name=cat_name)
