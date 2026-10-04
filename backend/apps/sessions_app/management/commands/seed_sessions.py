@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 
 from django.core.management.base import BaseCommand
 from django.utils import timezone
@@ -30,11 +30,19 @@ WEEKEND_SLOTS = [time(10, 0), time(11, 30)]
 
 
 class Command(BaseCommand):
-    help = "Seed rooms and a 14-day rolling planning of CourseSession entries."
+    help = (
+        "Seed rooms and a rolling planning of CourseSession entries, either for "
+        "a number of days or up to a given date."
+    )
 
     def add_arguments(self, parser):
         parser.add_argument(
             "--days", type=int, default=14, help="Days of planning to generate."
+        )
+        parser.add_argument(
+            "--until",
+            default=None,
+            help="Fill the planning up to this date (YYYY-MM-DD), overriding --days.",
         )
         parser.add_argument(
             "--reset", action="store_true", help="Delete existing sessions first."
@@ -56,11 +64,22 @@ class Command(BaseCommand):
         tz = timezone.get_current_timezone()
         created = 0
 
+        days = opts["days"]
+        if opts["until"]:
+            until = date.fromisoformat(opts["until"])
+            days = (until - today).days + 1
+            if days <= 0:
+                self.stdout.write(
+                    self.style.WARNING(f"{until} is not in the future; nothing to do.")
+                )
+                return
+            self.stdout.write(f"Filling {days} days, up to {until}.")
+
         for course in Course.objects.filter(is_active=True).select_related("category"):
             room_name = ROOM_BY_CATEGORY.get(course.category.name, "Salle Aurore")
             room = Room.objects.get(name=room_name)
 
-            for day_offset in range(opts["days"]):
+            for day_offset in range(days):
                 day = today + timedelta(days=day_offset)
                 slots = WEEKEND_SLOTS if day.weekday() >= 5 else WEEKDAY_SLOTS
 
