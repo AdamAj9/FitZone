@@ -4,11 +4,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { coursesApi } from "../../api/courses";
+import { CoachPortrait } from "../../components/CoachPortrait";
 import { subscriptionsApi } from "../../api/subscriptions";
 import { AnimatedNumber } from "../../components/ui/AnimatedNumber";
 import { AnimatedWords } from "../../components/ui/AnimatedWords";
 import { Marquee } from "../../components/ui/Marquee";
 import { Reveal } from "../../components/ui/Reveal";
+import { SectionHeading } from "../../components/ui/SectionHeading";
 import { TiltCard } from "../../components/ui/TiltCard";
 import { GradientTail } from "../../components/ui/GradientTail";
 import { Eyebrow } from "../../components/ui/Eyebrow";
@@ -32,7 +34,7 @@ const COACH_AVATARS = [
   "/images/coaches/sophie-martin.webp",
   "/images/coaches/thomas-lefevre.webp",
 ];
-const CTA_IMAGE = "/images/hero/hero-secondaire.webp";
+const CTA_IMAGE = "/images/home/cta-volt.webp";
 
 type Stat = { value: string; label: string };
 type Step = { n: string; title: string; description: string };
@@ -342,9 +344,11 @@ export function HomePage() {
             <div key={s.label} className="text-center">
               <AnimatedNumber
                 value={s.value}
-                className="block bg-volt-ember bg-clip-text font-display text-3xl font-bold text-transparent md:text-4xl"
+                className="block font-display text-4xl leading-none text-white md:text-5xl"
               />
-              <p className="mt-2 text-sm text-char-300">{s.label}</p>
+              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-char-400">
+                {s.label}
+              </p>
             </div>
           ))}
         </Reveal>
@@ -352,22 +356,12 @@ export function HomePage() {
 
       {/* === NOTRE OFFRE / INSTALLATIONS — cards photo full-bleed === */}
       <section className="mx-auto max-w-7xl px-4">
-        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
-              {t("home.offerLabel")}
-            </p>
-            <h2 className="mt-2 font-display text-4xl font-bold text-white">
-              <GradientTail text={t("home.offerTitle")} />
-            </h2>
-          </div>
-          <Link
-            to="/plans"
-            className="text-sm font-semibold text-volt-400 hover:underline"
-          >
-            {t("home.offerSeeAll")} →
-          </Link>
-        </Reveal>
+        <SectionHeading
+          className="mb-10"
+          label={t("home.offerLabel")}
+          title={t("home.offerTitle")}
+          action={{ to: "/plans", label: t("home.offerSeeAll") }}
+        />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[200px]">
           {OFFERINGS.map((group, index) => {
             const isLarge = index === 0;
@@ -426,19 +420,16 @@ export function HomePage() {
       {/* === HOW IT WORKS === */}
       <section className="bg-char-900 py-20 text-white">
         <div className="mx-auto max-w-7xl px-4">
-          <Reveal className="text-center">
-            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
-              {t("home.howItWorksLabel")}
-            </p>
-            <h2 className="mt-2 font-display text-4xl font-bold">
-              {t("home.howItWorksTitle")}
-            </h2>
-          </Reveal>
+          <SectionHeading
+            align="center"
+            label={t("home.howItWorksLabel")}
+            title={t("home.howItWorksTitle")}
+          />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {STEPS.map((s, index) => (
               <Reveal key={s.n} delay={index * 100}>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur transition hover:-translate-y-1 hover:border-volt-400/40">
-                  <p className="bg-volt-ember bg-clip-text font-display text-5xl font-bold text-transparent">
+                  <p className="font-display text-6xl leading-none text-white/15">
                     {s.n}
                   </p>
                   <h3 className="mt-4 text-xl font-semibold">{s.title}</h3>
@@ -453,16 +444,13 @@ export function HomePage() {
       {/* === TARIFS / ABONNEMENTS === */}
       <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
         <VoltGlow subtle />
+        <SectionHeading
+          align="center"
+          label={t("home.pricingLabel")}
+          title={t("home.pricingTitle")}
+          subtitle={t("home.pricingSubtitle")}
+        />
         <Reveal className="text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
-            {t("home.pricingLabel")}
-          </p>
-          <h2 className="mt-2 font-display text-4xl font-bold text-white">
-            <GradientTail text={t("home.pricingTitle")} />
-          </h2>
-          <p className="mt-3 text-char-300">
-            {t("home.pricingSubtitle")}
-          </p>
           <div className="mt-6 inline-flex rounded-full border border-char-800 bg-char-900 p-1">
             <button
               type="button"
@@ -502,7 +490,7 @@ export function HomePage() {
                 }`}
               >
                 {isPremium && (
-                  <span className="absolute -top-3 right-6 rounded-full bg-volt-ember px-3 py-1 text-xs font-bold text-char-950">
+                  <span className="absolute -top-3 right-6 rounded-full bg-volt-400 px-3 py-1 text-xs font-bold text-char-950">
                     ⭐ {t("home.recommended")}
                   </span>
                 )}
@@ -534,9 +522,9 @@ export function HomePage() {
                 </ul>
                 <Link
                   to="/plans"
-                  className={`mt-6 block rounded-lg px-4 py-3 text-center font-medium transition active:scale-[0.97] ${
+                  className={`mt-6 block rounded-full px-4 py-3 text-center font-medium transition active:scale-[0.97] ${
                     isPremium
-                      ? "bg-volt-ember text-char-950 hover:opacity-90"
+                      ? "bg-volt-400 text-char-950 hover:bg-volt-300"
                       : "border border-char-700 text-char-200 hover:bg-white/5"
                   }`}
                 >
@@ -562,22 +550,12 @@ export function HomePage() {
       {/* === COACHS === */}
       <section className="relative isolate mx-auto max-w-7xl overflow-hidden px-4">
         <VoltGlow subtle flip />
-        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
-              {t("home.teamLabel")}
-            </p>
-            <h2 className="mt-2 font-display text-4xl font-bold text-white">
-              <GradientTail text={t("home.teamTitle")} />
-            </h2>
-          </div>
-          <Link
-            to="/coaches"
-            className="text-sm font-semibold text-volt-400 hover:underline"
-          >
-            {t("home.teamSeeAll")} →
-          </Link>
-        </Reveal>
+        <SectionHeading
+          className="mb-10"
+          label={t("home.teamLabel")}
+          title={t("home.teamTitle")}
+          action={{ to: "/coaches", label: t("home.teamSeeAll") }}
+        />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {coachesQuery.data?.results.slice(0, 3).map((coach, index) => (
             <Reveal key={coach.id} delay={index * 100}>
@@ -587,10 +565,7 @@ export function HomePage() {
                 className="group block rounded-2xl border border-char-800 bg-char-900/70 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-volt-400/50 hover:shadow-volt-glow"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-volt-ember text-2xl font-bold text-char-950">
-                    {coach.first_name.charAt(0)}
-                    {coach.last_name.charAt(0)}
-                  </div>
+                  <CoachPortrait coach={coach} className="h-16 w-16 shrink-0 rounded-2xl" />
                   <div>
                     <p className="font-semibold text-white group-hover:text-volt-400">
                       {coach.full_name}
@@ -627,14 +602,11 @@ export function HomePage() {
 
       {/* === TÉMOIGNAGES === */}
       <section className="mx-auto max-w-7xl px-4">
-        <Reveal className="text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-volt-400">
-            {t("home.testimonialsLabel")}
-          </p>
-          <h2 className="mt-2 font-display text-4xl font-bold text-white">
-            {t("home.testimonialsTitle")}
-          </h2>
-        </Reveal>
+        <SectionHeading
+          align="center"
+          label={t("home.testimonialsLabel")}
+          title={t("home.testimonialsTitle")}
+        />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {TESTIMONIALS.map((item, index) => (
             <Reveal key={item.name} delay={index * 100}>
@@ -656,17 +628,17 @@ export function HomePage() {
         <Reveal>
           <div className="relative isolate overflow-hidden rounded-3xl shadow-xl">
             <div
-              className="absolute inset-0 -z-20 bg-cover bg-center grayscale-[55%]"
+              className="absolute inset-0 -z-20 bg-cover bg-center grayscale-[20%]"
               style={{ backgroundImage: `url('${CTA_IMAGE}')` }}
               aria-hidden
             />
             <div
-              className="absolute inset-0 -z-10 bg-gradient-to-br from-char-950/95 via-char-950/88 to-char-950/95"
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-char-950/92 via-char-950/75 to-char-950/92"
               aria-hidden
             />
             <VoltGlow flip />
             <div className="relative px-8 py-16 text-center text-white md:px-12 md:py-20">
-              <h2 className="font-display text-3xl font-bold md:text-5xl">
+              <h2 className="font-display text-4xl leading-[0.95] md:text-6xl">
                 {t("home.ctaBottomTitle")}
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-char-200">
